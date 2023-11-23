@@ -1,4 +1,5 @@
 const Tips = () => {
+
   return (
     <div>
       <h1>Hola soy Tips</h1>
@@ -6,3 +7,4 @@ const Tips = () => {
   );
 };
 export default Tips;
+
