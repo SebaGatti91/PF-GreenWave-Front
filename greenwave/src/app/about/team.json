@@ -1,0 +1,98 @@
+[
+  {
+    "id": "1",
+    "name": "Martin",
+    "lastName": "Bueno",
+    "profession": "Developer",
+    "image": "",
+    "socialMedia": {
+      "linkedin": "",
+      "github": "https://github.com/MBuenoMartinez",
+      "instagram": ""
+    }
+  },
+  {
+    "id": "2",
+    "name": "Sebastian",
+    "lastName": "Gatti",
+    "profession": "Developer",
+    "image": "",
+    "socialMedia": {
+      "linkedin": "",
+      "github": "https://github.com/SebaGatti91",
+      "instagram": ""
+    }
+  },
+  {
+    "id": "3",
+    "name": "Tomas",
+    "lastName": "Silbert",
+    "profession": "Developer",
+    "image": "",
+    "socialMedia": {
+      "linkedin": "",
+      "github": "https://github.com/TomasSilber",
+      "instagram": ""
+    }
+  },
+  {
+    "id": "4",
+    "name": "Lucas",
+    "lastName": "Delgado",
+    "profession": "Developer",
+    "image": "",
+    "socialMedia": {
+      "linkedin": "",
+      "github": "https://github.com/MLucasDelgado",
+      "instagram": ""
+    }
+  },
+  {
+    "id": "5",
+    "name": "Nadir",
+    "lastName": "Ulmi",
+    "profession": "Developer",
+    "image": "",
+    "socialMedia": {
+      "linkedin": "",
+      "github": "https://github.com/nadirulmi",
+      "instagram": ""
+    }
+  },
+  {
+    "id": "6",
+    "name": "Miguel",
+    "lastName": "Cipriano",
+    "profession": "Developer",
+    "image": "",
+    "socialMedia": {
+      "linkedin": "",
+      "github": "https://github.com/MIGUELANGELCIPRIANO",
+      "instagram": ""
+    }
+  },
+  {
+    "id": "7",
+    "name": "Omar",
+    "lastName": "Florez",
+    "profession": "Developer",
+    "image": "",
+    "socialMedia": {
+      "linkedin": "",
+      "github": "https://github.com/D-OmarFlorez",
+      "instagram": ""
+    }
+  },
+  {
+    "id": "8",
+    "name": "Emerson",
+    "lastName": "Montes",
+    "profession": "Developer",
+    "image": "",
+    "socialMedia": {
+      "linkedin": "",
+      "github": "https://github.com/EmerMontes",
+      "instagram": ""
+    }
+  }
+]
