@@ -4,7 +4,7 @@ export default function Home() {
       <section
         className="relative flex flex-col items-center text-cyan-50 w-full h-screen justify-center overflow-hidden"
         style={{
-          backgroundImage: "url('/img/hero.png')",
+          backgroundImage: "url('/images/hero.png')",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -33,7 +33,7 @@ export default function Home() {
           <div className="p-2">
             <img
               className="rounded-lg shadow-2xl"
-              src="/img/recicle.jpg"
+              src="/images/recicle.jpg"
               alt="recycling logo"
               width="400px"
             ></img>
@@ -41,7 +41,7 @@ export default function Home() {
           <div className="p-2">
             <img
               className="rounded-lg shadow-2xl"
-              src="/img/recicle.jpg"
+              src="/images/recicle.jpg"
               alt="recycling logo"
               width="400px"
             ></img>
@@ -49,7 +49,7 @@ export default function Home() {
           <div className="p-2">
             <img
               className="rounded-lg shadow-2xl"
-              src="/img/recicle.jpg"
+              src="/images/recicle.jpg"
               alt="recycling logo"
               width="400px"
             ></img>
@@ -88,7 +88,7 @@ export default function Home() {
           <img
             className="rounded-r-lg"
             style={{ width: "40%" }}
-            src="/img/lamp.jpg"
+            src="/images/lamp.jpg"
             alt=""
           />
         </article>
@@ -102,7 +102,7 @@ export default function Home() {
           <img
             className=" rounded-l-lg"
             style={{ width: "50%" }}
-            src="/img/vases.jpg"
+            src="/images/vases.jpg"
             alt=""
           />
           <section
@@ -125,42 +125,40 @@ export default function Home() {
       </section>
 
       <div className="flex justify-center items-center">
-  <div className="p-2" style={{ overflow: "hidden", width: "300px"}}>
-    <img src="/img/recicle.jpg" alt="Card 1" />
-    <div>
-      <h1 className="font-bold">Card 1</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus neque, laboriosam molestiae enim perferendis
-        consequuntur labore quod? Inventore.
-      </p>
-    </div>
-  </div>
-  <div className="p-2"  style={{ overflow: "hidden", width: "300px" }}>
-    <img src="/img/recicle.jpg" alt="Card 2" />
-    <div>
-      <h1 className="font-bold">Card 2</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus neque, laboriosam molestiae enim perferendis
-        consequuntur labore quod? Inventore.
-      </p>
-    </div>
-  </div>
-  <div className="p-2"  style={{ overflow: "hidden", width: "300px" }}>
-    <img src="/img/recicle.jpg" alt="Card 3" />
-    <div>
-      <h1 className="font-bold">Card 3</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        Voluptatibus neque, laboriosam molestiae enim perferendis
-        consequuntur labore quod? Inventore.
-      </p>
-    </div>
-  </div>
-</div>
-
-
+        <div className="p-2" style={{ overflow: "hidden", width: "300px" }}>
+          <img src="/images/recicle.jpg" alt="Card 1" />
+          <div>
+            <h1 className="font-bold">Card 1</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Voluptatibus neque, laboriosam molestiae enim perferendis
+              consequuntur labore quod? Inventore.
+            </p>
+          </div>
+        </div>
+        <div className="p-2" style={{ overflow: "hidden", width: "300px" }}>
+          <img src="/images/recicle.jpg" alt="Card 2" />
+          <div>
+            <h1 className="font-bold">Card 2</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Voluptatibus neque, laboriosam molestiae enim perferendis
+              consequuntur labore quod? Inventore.
+            </p>
+          </div>
+        </div>
+        <div className="p-2" style={{ overflow: "hidden", width: "300px" }}>
+          <img src="/images/recicle.jpg" alt="Card 3" />
+          <div>
+            <h1 className="font-bold">Card 3</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Voluptatibus neque, laboriosam molestiae enim perferendis
+              consequuntur labore quod? Inventore.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
