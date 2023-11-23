@@ -29,30 +29,138 @@ export default function Home() {
 
       <section className="p-4">
         <h2 className="font-bold text-center text-2xl">¿Why recycling?</h2>
-        <div className="flex p-3">
+        <div className="flex p-3 justify-center">
           <div className="p-2">
             <img
-              className="rounded-lg"
+              className="rounded-lg shadow-2xl"
               src="/img/recicle.jpg"
               alt="recycling logo"
+              width="400px"
             ></img>
           </div>
           <div className="p-2">
             <img
-              className="rounded-lg"
+              className="rounded-lg shadow-2xl"
               src="/img/recicle.jpg"
               alt="recycling logo"
+              width="400px"
             ></img>
           </div>
           <div className="p-2">
             <img
-              className="rounded-lg"
+              className="rounded-lg shadow-2xl"
               src="/img/recicle.jpg"
               alt="recycling logo"
+              width="400px"
             ></img>
           </div>
         </div>
       </section>
+
+      <section className="flex justify-center mt-0 pb-10">
+        <article
+          className="bg-cream text-black  flex"
+          style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
+        >
+          <section
+            className="flex flex-col items-center justify-center rounded-l-lg"
+            style={{ backgroundColor: "#D1D7BF" }}
+          >
+            <h1 className="font-bold text-center px-2 pt-20 text-xl">
+              {" "}
+              EcoLume Lamp
+            </h1>
+
+            <p className="py-6 px-10">
+              The EcoLume Recycled Glass lamp combines style and sustainability
+              in one piece. Created from recycled glass canisters, each lamp is
+              unique, bringing a distinctive elegance to any space. Enjoy warm,
+              conscious lighting with this eco-friendly lamp that beautifies
+              your home while helping to preserve the environment.
+            </p>
+            <p className="">$$$</p>
+
+            <button className="bg-lime-100 rounded-lg p-1 m-5">
+              Add to Card
+            </button>
+          </section>
+
+          <img
+            className="rounded-r-lg"
+            style={{ width: "40%" }}
+            src="/img/lamp.jpg"
+            alt=""
+          />
+        </article>
+      </section>
+
+      <section className="flex justify-center mt-0 pb-10">
+        <article
+          className="bg-cream text-black flex"
+          style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
+        >
+          <img
+            className=" rounded-l-lg"
+            style={{ width: "50%" }}
+            src="/img/vases.jpg"
+            alt=""
+          />
+          <section
+            className="flex flex-col items-center justify-center rounded-r-lg"
+            style={{ backgroundColor: "#D1D7BF" }}
+          >
+            <h1 className="font-bold text-center px-2 pt-20 text-xl">
+              Vases made with jars
+            </h1>
+
+            <p className="py-6 px-10">
+              Canning and jam jars can be reused in so many different ways: to
+              store your homemade preserves or as vases! Let your kids decorate
+              them with paint and use them as gifts or to decorate your home.
+            </p>
+
+            <button className="bg-lime-100 rounded-lg p-1 m-5">See more</button>
+          </section>
+        </article>
+      </section>
+
+      <div className="flex justify-center items-center">
+  <div className="p-2" style={{ overflow: "hidden", width: "300px"}}>
+    <img src="/img/recicle.jpg" alt="Card 1" />
+    <div>
+      <h1 className="font-bold">Card 1</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        Voluptatibus neque, laboriosam molestiae enim perferendis
+        consequuntur labore quod? Inventore.
+      </p>
+    </div>
+  </div>
+  <div className="p-2"  style={{ overflow: "hidden", width: "300px" }}>
+    <img src="/img/recicle.jpg" alt="Card 2" />
+    <div>
+      <h1 className="font-bold">Card 2</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        Voluptatibus neque, laboriosam molestiae enim perferendis
+        consequuntur labore quod? Inventore.
+      </p>
+    </div>
+  </div>
+  <div className="p-2"  style={{ overflow: "hidden", width: "300px" }}>
+    <img src="/img/recicle.jpg" alt="Card 3" />
+    <div>
+      <h1 className="font-bold">Card 3</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        Voluptatibus neque, laboriosam molestiae enim perferendis
+        consequuntur labore quod? Inventore.
+      </p>
+    </div>
+  </div>
+</div>
+
+
     </div>
   );
 }
