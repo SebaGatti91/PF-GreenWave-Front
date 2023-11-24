@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Button from "./Button";
+import Button from "../button/Button";
 import SearchBar from "../searchBar/SearchBar";
 import { usePathname } from "next/navigation";
 

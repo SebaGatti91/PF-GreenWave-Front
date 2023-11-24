@@ -3,7 +3,8 @@ import Card from "../components/card/Card";
 
 const Store = () => {
   return (
-    <div className="container mx-auto p-4">
+    <div>
+    <div className="container mx-auto p-4 ">
       <div className="flex justify-center mb-4">
         <div className="mr-4">
           <label className="mr-2">Filter by: </label>
@@ -27,9 +28,10 @@ const Store = () => {
           </select>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mx-auto">
+    </div>
+    <div className="flex flex-wrap justify-center items-center">
         {products.map((product) => (
-          <div key={product.id} className="flex justify-center">
+          <div key={product.id} className="">
             <Card
               id={product.id}
               name={product.name}
