@@ -5,7 +5,8 @@
     "img": "https://i.imgur.com/r33jzUG.jpeg",
     "status": "activo",
     "price": 500,
-    "description": "Un bolso único y sostenible hecho con cartón reciclado. Este bolso no solo es elegante, sino que también contribuye al cuidado del medio ambiente."
+    "description": "Un bolso único y sostenible hecho con cartón reciclado. Este bolso no solo es elegante, sino que también contribuye al cuidado del medio ambiente.",
+    "raiting": "/images/estrellas.png"
   },
   {
     "id": "2",
