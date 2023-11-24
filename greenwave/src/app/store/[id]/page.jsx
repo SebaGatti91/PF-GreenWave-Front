@@ -1,5 +1,5 @@
 "use client";
-import products from "./products.json";
+import products from "../products.json";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 export default function Detail() {
