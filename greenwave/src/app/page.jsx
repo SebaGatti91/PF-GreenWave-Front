@@ -24,7 +24,7 @@ export default function Home() {
             consectetur adipisicing elit.
           </p>
         </div>
-        <button className="relative z-10 bg-lime-800 hover:hover:bg-hover hover:text-slate-950 rounded-lg p-1">
+        <button className="relative z-10 bg-lime-800 hover:bg-hover hover:text-slate-950 rounded-lg p-1">
           About us
         </button>
       </section>
@@ -112,7 +112,7 @@ export default function Home() {
             <p className="">$$$</p>
 
             <button className="bg-lime-100 rounded-lg p-1 m-5 hover:bg-lime-900 hover:text-lime-50">
-              Add to Card
+              Add to Cart
             </button>
           </section>
 
