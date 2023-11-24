@@ -31,7 +31,7 @@ const Card = ({ id, name, img, price }) => {
           alt={name}
           height={150}
           width={150}
-          className="w-72 h-60 rounded-md"
+          className="w-80 h-60 rounded-md"
         />
       </div>
 
@@ -42,22 +42,6 @@ const Card = ({ id, name, img, price }) => {
           <div className="flex justify-center items-center">
             ⭐️⭐️⭐️⭐️⭐️
           </div>
-          <label className="star-input">
-  <input type="radio" name="star" value="1" />
-  <span className="star"></span>
-
-  <input type="radio" name="star" value="2" />
-  <span className="star"></span>
-
-  <input type="radio" name="star" value="3" />
-  <span className="star"></span>
-
-  <input type="radio" name="star" value="4" />
-  <span className="star"></span>
-
-  <input type="radio" name="star" value="5" />
-  <span className="star"></span>
-</label>
           <button className="p-1 m-2 rounded-lg bg-yellow-500">
             Add to Cart
           </button>
