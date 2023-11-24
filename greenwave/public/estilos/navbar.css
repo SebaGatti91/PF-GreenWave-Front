@@ -1,0 +1,29 @@
+
+.navBar {
+    display: flex;
+    height: 20px;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f9fa;
+  }
+
+  .navBar .logo,
+
+  .navBar .buttons,
+  .navBar .search-bar,
+  .navBar .login-register {
+    margin-right: 10px;
+  }
+
+  .logo{
+    width: 100%;
+    height:100%
+  }
+  .navBar button {
+    margin-right: 10px;
+  }
+  
+  .navBar input[type='text'] {
+    margin-left: 10px;
+  }
+  
