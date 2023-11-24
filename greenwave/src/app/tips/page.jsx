@@ -4,7 +4,7 @@ const Tips = () => {
             <h1
                 className="text-center mt-10 text-4xl font-bold text-shadow-lg"
                 style={{ fontFamily: 'font-serif', textShadow: '2px 1px #535E4A' }}
-            >TIPS FOR HOME
+            >TIP'S FOR HOME
             </h1>
 
             <section
