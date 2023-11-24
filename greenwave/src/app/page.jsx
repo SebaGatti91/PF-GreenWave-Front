@@ -90,12 +90,12 @@ export default function Home() {
 
       <section className="flex justify-center mt-0 pb-10">
         <article
-          className="bg-cream text-black flex row-auto"
+          className=" text-black flex row-auto"
           style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
         >
           <section
             className="flex flex-col items-center justify-center rounded-l-lg"
-            style={{ backgroundColor: "#D1D7BF" }}
+            style={{ backgroundColor: "#C0C8A7" }}
           >
             <h1 className="font-bold text-center px-2 pt-20 text-xl">
               {" "}
