@@ -13,6 +13,7 @@ export default function Detail() {
   }
 
   return (
+
     <div className="flex  justify-center items-center p-7 ">
       <div className="p-7 m-5 border flex flex-col bg-lime-50 rounded-lg shadow-2xl" style={{ width: '65%' }}>
         <div className="flex flex-row">
@@ -54,6 +55,8 @@ export default function Detail() {
             style={{ boxShadow: '4px 4px gray' }}
           />
         </div>
+
+      </div>
       </div>
     </div>
 

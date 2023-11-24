@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const Card = ({ id, name, img, price }) => {
+
+const Card = ({ id, name, img, price, description, showdescription=false, showStars=true, showbuybutton=true}) => {
+
   const [fav, setFav] = useState(false);
 
   const handleFavorite = () => {
@@ -36,12 +38,17 @@ const Card = ({ id, name, img, price }) => {
       </div>
 
       <div className="mt-2 flex-grow-0 flex flex-col items-center">
+
         <h3 className="text-center font-bold">{name}</h3>
         <h3 className="text-green-600  text-center">USD {price}</h3>
         <div>
+        {showStars && (
           <div className="flex justify-center items-center">
             ⭐️⭐️⭐️⭐️⭐️
           </div>
+          )}
+           {showbuybutton && (
+             <div>
           <button className="p-1 m-2 rounded-lg bg-yellow-500">
             Add to Cart
           </button>
@@ -53,7 +60,12 @@ const Card = ({ id, name, img, price }) => {
               🔍
             </button>
           </Link>
+          </div>
+           )}
+
         </div>
+        
+       
       </div>
     </div>
   );
