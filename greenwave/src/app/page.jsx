@@ -74,7 +74,7 @@ export default function Home() {
               alt="Reciclar"
             ></img>
             <div className="cardBody">
-              <h1 className="card-title text-center">
+              <h1 className="cardTitle text-center">
                 Climate Change Mitigation:
               </h1>
               <p className="cardInfo text-center">
