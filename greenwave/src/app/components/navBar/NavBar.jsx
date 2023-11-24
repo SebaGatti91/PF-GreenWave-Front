@@ -3,7 +3,7 @@ import Link from "next/link";
 import Button from "../button/Button";
 import SearchBar from "../searchBar/SearchBar";
 import { usePathname } from "next/navigation";
-import {signIn} from 'next-auth/react'
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const LogoSection = () => (
   <div className="flex items-center">
@@ -24,7 +24,7 @@ const SearchSection = ({ pathname }) => (
   </section>
 );
 
-const NavigationLinks = () => (
+const NavigationLinks = ({session}) => (
   <section className="flex gap-10 items-center">
     <Link
       className="text-xl hover:bg-hover hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
@@ -58,24 +58,48 @@ const NavigationLinks = () => (
       Tips
     </Link>
 
-  <button
-  onClick={() => signIn()} 
-  className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
-  style={{
-    fontFamily: "font-serif",
-    borderRadius: "2em 2em",
-    boxShadow: "2px 3px black",
-    }}
-  >
-  Login
-  </button>
-
-</section>
+    {session?.user ? (
+      <>
+        <p>
+          {session.user.name} {session.user.email}
+        </p>
+        <img
+          src={session.user.image}
+          alt=""
+          className="w-10 h-10 rounded-full"
+        />
+        <button
+          onClick={() => signOut()}
+          className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
+          style={{
+            fontFamily: "font-serif",
+            borderRadius: "2em 2em",
+            boxShadow: "2px 3px black",
+          }}
+        >
+          Logout
+        </button>
+      </>
+    ) : (
+      <button
+        onClick={() => signIn()}
+        className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
+        style={{
+          fontFamily: "font-serif",
+          borderRadius: "2em 2em",
+          boxShadow: "2px 3px black",
+        }}
+      >
+        Login
+      </button>
+    )}
+  </section>
 );
 
 const NavBar = () => {
   const pathname = usePathname();
-
+  const { data: session } = useSession(); //lo envuelve el provider luego
+  console.log(session)
   return (
     <div>
       <nav
@@ -84,7 +108,7 @@ const NavBar = () => {
       >
         <LogoSection />
         <SearchSection pathname={pathname} />
-        <NavigationLinks />
+        <NavigationLinks session={session}/>
       </nav>
     </div>
   );
