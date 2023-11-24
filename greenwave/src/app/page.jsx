@@ -1,8 +1,10 @@
+import "./home.css";
+
 export default function Home() {
   return (
     <div>
       <section
-        className="relative flex flex-col items-center text-cyan-50 w-full h-screen justify-center overflow-hidden"
+        className="relative flex flex-col items-center text-cyan-50 w-full justify-center overflow-hidden heroSection"
         style={{
           backgroundImage: "url('/images/hero.png')",
           backgroundPosition: "center",
@@ -22,7 +24,7 @@ export default function Home() {
             consectetur adipisicing elit.
           </p>
         </div>
-        <button className="relative z-10 bg-lime-800 rounded-lg p-1">
+        <button className="relative z-10 bg-lime-800 hover:hover:bg-hover hover:text-slate-950 rounded-lg p-1">
           About us
         </button>
       </section>
@@ -30,36 +32,65 @@ export default function Home() {
       <section className="p-4">
         <h2 className="font-bold text-center text-2xl">¿Why recycling?</h2>
         <div className="flex p-3 justify-center">
-          <div className="p-2">
+          <div className="card shadow-2xl">
             <img
-              className="rounded-lg shadow-2xl"
+              className="cardImg"
               src="/images/recicle.jpg"
-              alt="recycling logo"
-              width="400px"
+              alt="Reciclar"
             ></img>
+            <div className="cardBody">
+              <h1 className="cardTitle text-center">
+                Conservation of Natural Resources
+              </h1>
+              <p className="cardInfo text-center">
+                Recycling contributes to the conservation of valuable natural
+                resources, such as wood, water and minerals. By reusing
+                materials instead of extracting new resources, we help preserve
+                biodiversity and reduce environmental degradation.
+              </p>
+            </div>
           </div>
-          <div className="p-2">
+          <div className="card shadow-2xl">
             <img
-              className="rounded-lg shadow-2xl"
+              className="cardImg"
               src="/images/recicle.jpg"
-              alt="recycling logo"
-              width="400px"
+              alt="Reciclar"
             ></img>
+            <div className="cardBody">
+              <h1 className="cardTitle text-center">Reducing Landfill Waste</h1>
+              <p className="cardInfo text-center">
+                Recycling helps minimize the amount of waste that ends up in
+                landfills. By giving new life to materials such as paper,
+                plastic and glass, we prevent the accumulation of waste and
+                reduce the need for more landfill space, thus promoting a
+                cleaner environment.
+              </p>
+            </div>
           </div>
-          <div className="p-2">
+          <div className="card shadow-2xl">
             <img
-              className="rounded-lg shadow-2xl"
+              className="cardImg"
               src="/images/recicle.jpg"
-              alt="recycling logo"
-              width="400px"
+              alt="Reciclar"
             ></img>
+            <div className="cardBody">
+              <h1 className="card-title text-center">
+                Climate Change Mitigation:
+              </h1>
+              <p className="cardInfo text-center">
+                Manufacturing with recycled materials consumes less energy than
+                production with raw materials, reducing greenhouse gas emissions
+                and helping to combat climate change by reducing energy
+                consumption in manufacturing processes.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="flex justify-center mt-0 pb-10">
         <article
-          className="bg-cream text-black  flex"
+          className="bg-cream text-black flex row-auto"
           style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
         >
           <section
@@ -80,7 +111,7 @@ export default function Home() {
             </p>
             <p className="">$$$</p>
 
-            <button className="bg-lime-100 rounded-lg p-1 m-5">
+            <button className="bg-lime-100 rounded-lg p-1 m-5 hover:bg-lime-900 hover:text-lime-50">
               Add to Card
             </button>
           </section>
@@ -119,46 +150,12 @@ export default function Home() {
               them with paint and use them as gifts or to decorate your home.
             </p>
 
-            <button className="bg-lime-100 rounded-lg p-1 m-5">See more</button>
+            <button className="bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1 m-5 ">
+              See more
+            </button>
           </section>
         </article>
       </section>
-
-      <div className="flex justify-center items-center">
-        <div className="p-2" style={{ overflow: "hidden", width: "300px" }}>
-          <img src="/images/recicle.jpg" alt="Card 1" />
-          <div>
-            <h1 className="font-bold">Card 1</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatibus neque, laboriosam molestiae enim perferendis
-              consequuntur labore quod? Inventore.
-            </p>
-          </div>
-        </div>
-        <div className="p-2" style={{ overflow: "hidden", width: "300px" }}>
-          <img src="/images/recicle.jpg" alt="Card 2" />
-          <div>
-            <h1 className="font-bold">Card 2</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatibus neque, laboriosam molestiae enim perferendis
-              consequuntur labore quod? Inventore.
-            </p>
-          </div>
-        </div>
-        <div className="p-2" style={{ overflow: "hidden", width: "300px" }}>
-          <img src="/images/recicle.jpg" alt="Card 3" />
-          <div>
-            <h1 className="font-bold">Card 3</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatibus neque, laboriosam molestiae enim perferendis
-              consequuntur labore quod? Inventore.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
