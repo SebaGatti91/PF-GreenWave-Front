@@ -3,6 +3,7 @@ import Link from "next/link";
 import Button from "../button/Button";
 import SearchBar from "../searchBar/SearchBar";
 import { usePathname } from "next/navigation";
+import {signIn} from 'next-auth/react'
 
 const LogoSection = () => (
   <div className="flex items-center">
@@ -57,17 +58,19 @@ const NavigationLinks = () => (
       Tips
     </Link>
 
-    <Button
-      className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
-      style={{
-        fontFamily: "font-serif",
-        borderRadius: "2em 2em",
-        boxShadow: "2px 3px black",
-      }}
-      link={"/login"}
-      text="Login"
-    />
-  </section>
+  <button
+  onClick={() => signIn()} 
+  className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
+  style={{
+    fontFamily: "font-serif",
+    borderRadius: "2em 2em",
+    boxShadow: "2px 3px black",
+    }}
+  >
+  Login
+  </button>
+
+</section>
 );
 
 const NavBar = () => {
