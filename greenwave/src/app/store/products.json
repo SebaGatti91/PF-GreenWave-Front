@@ -6,7 +6,7 @@
     "status": "activo",
     "price": 500,
     "description": "Un bolso único y sostenible hecho con cartón reciclado. Este bolso no solo es elegante, sino que también contribuye al cuidado del medio ambiente.",
-    "raiting": "/images/estrellas.png"
+    "raiting": 5
   },
   {
     "id": "2",
@@ -14,7 +14,8 @@
     "img": "https://i.imgur.com/6MVmzLm.jpeg",
     "status": "activo",
     "price": 100,
-    "description": "Con estos vasos ecológicos hechos de cartón reciclado, cada sorbo es un recordatorio de tu compromiso con un estilo de vida sostenible."
+    "description": "Con estos vasos ecológicos hechos de cartón reciclado, cada sorbo es un recordatorio de tu compromiso con un estilo de vida sostenible.",
+    "raiting": 2.5
   },
   {
     "id": "3",
@@ -22,7 +23,8 @@
     "img": "https://i.imgur.com/QtaUaSx.jpeg",
     "status": "activo",
     "price": 200,
-    "description": "Ilumina tu espacio con estas hermosas lámparas creadas a partir de botellas recicladas. Cada lámpara cuenta una historia única de reutilización y creatividad."
+    "description": "Ilumina tu espacio con estas hermosas lámparas creadas a partir de botellas recicladas. Cada lámpara cuenta una historia única de reutilización y creatividad.",
+    "raiting": 5
   },
   {
     "id": "4",
@@ -30,7 +32,8 @@
     "img": "https://i.imgur.com/LRqxob4.jpeg",
     "status": "activo",
     "price": 600,
-    "description": "Una mesa de centro única y resistente fabricada con madera reciclada. Perfecta para aquellos que buscan muebles con conciencia medioambiental."
+    "description": "Una mesa de centro única y resistente fabricada con madera reciclada. Perfecta para aquellos que buscan muebles con conciencia medioambiental.",
+    "raiting": 3.8
   },
   {
     "id": "5",
@@ -38,7 +41,8 @@
     "img": "https://i.imgur.com/2wqzy8q.jpeg",
     "status": "activo",
     "price": 300,
-    "description": "Esta elegante cadena hecha de metal reciclado es un testimonio de estilo y sostenibilidad. Luce bien y ayuda al planeta."
+    "description": "Esta elegante cadena hecha de metal reciclado es un testimonio de estilo y sostenibilidad. Luce bien y ayuda al planeta.",
+    "raiting": 5
   },
   {
     "id": "6",
@@ -46,7 +50,8 @@
     "img": "https://i.imgur.com/bO2OkwU.jpeg",
     "status": "activo",
     "price": 50,
-    "description": "Estos portavasos hechos con amor y madera reciclada añaden un toque rústico y sostenible a tu espacio. ¡Disfruta de tus bebidas con estilo!"
+    "description": "Estos portavasos hechos con amor y madera reciclada añaden un toque rústico y sostenible a tu espacio. ¡Disfruta de tus bebidas con estilo!",
+    "raiting": 4.4
   },
   {
     "id": "7",
@@ -54,7 +59,8 @@
     "img": "https://i.imgur.com/j3gllxV.jpeg",
     "status": "activo",
     "price": 60,
-    "description": "Organiza tus lápices de manera sostenible con este portalápiz hecho de cartón reciclado. Un accesorio práctico con un toque de conciencia ecológica."
+    "description": "Organiza tus lápices de manera sostenible con este portalápiz hecho de cartón reciclado. Un accesorio práctico con un toque de conciencia ecológica.",
+    "raiting": 4.3
   },
   {
     "id": "8",
@@ -62,6 +68,7 @@
     "img": "https://i.imgur.com/xWotKYE.jpeg",
     "status": "activo",
     "price": 100,
-    "description": "Este servilletero elegante y eco-amigable, elaborado con telas recicladas, añade un toque de sofisticación y sostenibilidad a tu mesa."
+    "description": "Este servilletero elegante y eco-amigable, elaborado con telas recicladas, añade un toque de sofisticación y sostenibilidad a tu mesa.",
+    "raiting": 3.5
   }
 ]

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "../button/Button";
 
-const Card = ({ id, name, img, price }) => {
+const Card = ({ id, name, img, price, description, showdescription=false, showStars=true, showbuybutton=true}) => {
   return (
     <div className="bg-white rounded-md p-4 w-64 flex flex-col items-center">
       <div className="w-8 h-8">
@@ -27,6 +27,10 @@ const Card = ({ id, name, img, price }) => {
       <div className="mt-2 flex-grow-0 flex flex-col items-center">
         <h3 className="text-center">{name}</h3>
         <h3 className="text-green-600 font-bold text-center">USD {price}</h3>
+        {showdescription && (
+          <h3>{description}</h3>
+        )}
+        {showbuybutton && (
         <Button
           className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
           style={{
@@ -37,6 +41,8 @@ const Card = ({ id, name, img, price }) => {
           link={`store/${id}`}
           text="Buy"
         />
+        )}
+        {showStars && (
         <div className="w-24 h-24">
           <Image
             src="/images/estrellas.png"
@@ -48,6 +54,8 @@ const Card = ({ id, name, img, price }) => {
             width={150}
           />
         </div>
+        )}
+       
       </div>
     </div>
   );
