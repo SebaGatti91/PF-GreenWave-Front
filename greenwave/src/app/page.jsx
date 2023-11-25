@@ -1,5 +1,5 @@
 import "./home.css";
-
+import Button from "./components/button/Button";
 export default function Home() {
   return (
     <div>
@@ -24,9 +24,12 @@ export default function Home() {
             consectetur adipisicing elit.
           </p>
         </div>
-        <button className="relative z-10 bg-lime-800 hover:bg-hover hover:text-slate-950 rounded-lg p-1">
-          About us
-        </button>
+
+        <Button
+          link={"/store"}
+          text={"About us"}
+          className="relative z-10 bg-lime-800 hover:bg-hover hover:text-slate-950 rounded-lg p-1"
+        />
       </section>
 
       <section className="p-4">
