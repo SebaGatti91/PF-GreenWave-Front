@@ -1,7 +1,14 @@
+'use client'
 import Card from "../components/card/Card";
 import axios from "axios";
+import { useState } from 'react'
+import Pagination from '../components/pagination/Pagination'
 
 const Store = async () => {
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const productsPerPage = 6
+
   const loadProducts = async () => {
     try {
       const response = await axios.get("http://localhost:3001/products");
@@ -13,6 +20,15 @@ const Store = async () => {
   };
 
   const products = await loadProducts();
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-evenly mb-4">
@@ -83,9 +99,18 @@ const Store = async () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center items-center">
-        {products.map((product) => (
-          <div key={product.id} className="">
+      {products.length ? <div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(products.length / productsPerPage)}
+          onPageChange={paginate}
+        />
+        </div> : <div><p> No existen coincidencias entre los filtros aplicados.</p></div>
+      }
+
+      <div className="flex flex-wrap justify-center items-center mb-3">
+        {currentProducts.map((product) => (
+          <div key={product.id} className=" hover:transform hover:scale-105 transition-transform duration-300">
             <Card
               id={product.id}
               name={product.name}
