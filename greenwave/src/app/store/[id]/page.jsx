@@ -1,17 +1,15 @@
 "use client";
-import axios from "axios"
+import axios from "axios";
 import Image from "next/image";
 
 const loadDetail = async (id) => {
-  
-    const response = await axios.get(`http://localhost:3001/products/${id}`);
-    return response.data;
- 
+  const response = await axios.get(`http://localhost:3001/store/${id}`);
+  return response.data;
 };
 
-export default async function Detail({params}) {
-  const product = await loadDetail(params.id)
-  
+export default async function Detail({ params }) {
+  const product = await loadDetail(params.id);
+
   return (
     <div className="flex  justify-center items-center p-7 ">
       <div
