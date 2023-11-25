@@ -1,5 +1,7 @@
 import "./home.css";
 import Button from "./components/button/Button";
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div>
@@ -16,24 +18,20 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.485)] to-[rgba(0,0,0,0.542)]"></div>
         <h1 className="font-bold text-4xl relative z-10">Green Wave</h1>
         <div className="max-w-screen-md w-full relative z-10">
-          <p className="text-sm text-center p-3">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
-            atque molestias, voluptatibus corrupti perspiciatis esse
-            necessitatibus, facere laudantium maiores magnam velit labore eos
-            nam, sed soluta ipsam quo commodi iure?Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
+          <p className="text-sm text-left p-3">
+            Green Wave emerges with the mission of promoting recycling and ecological sustainability. On our platform, you will have the opportunity to earn money by delivering recyclable products, while at the same time you will be able to explore and purchase crafts made from recycled materials. We are committed to promoting an eco-friendly lifestyle, rewarding your efforts to contribute to the well-being of the planet.
           </p>
         </div>
 
         <Button
           link={"/store"}
-          text={"About us"}
+          text={"Go to store"}
           className="relative z-10 bg-lime-800 hover:bg-hover hover:text-slate-950 rounded-lg p-1"
         />
       </section>
 
       <section className="p-4">
-        <h2 className="font-bold text-center text-2xl">¿Why recycling?</h2>
+        <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>¿Why recycling?</h2>
         <div className="flex p-3 justify-center">
           <div className="card shadow-2xl">
             <img
@@ -90,10 +88,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>Featured product</h2>
       <section className="flex justify-center mt-0 pb-10">
         <article
-          className=" text-black flex row-auto"
+          className=" text-black flex row-auto mt-2"
           style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
         >
           <section
@@ -127,10 +125,10 @@ export default function Home() {
           />
         </article>
       </section>
-
+      <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>Tips</h2>
       <section className="flex justify-center mt-0 pb-10">
         <article
-          className="bg-cream text-black flex"
+          className="bg-cream text-black flex mt-2"
           style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
         >
           <img
@@ -152,10 +150,11 @@ export default function Home() {
               store your homemade preserves or as vases! Let your kids decorate
               them with paint and use them as gifts or to decorate your home.
             </p>
-
-            <button className="bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1 m-5 ">
-              See more
-            </button>
+            <Link href='/tips'>
+              <button className="bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1 m-5 ">
+                See more
+              </button>
+            </Link>
           </section>
         </article>
       </section>
