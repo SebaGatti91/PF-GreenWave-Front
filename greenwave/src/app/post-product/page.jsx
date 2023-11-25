@@ -46,7 +46,7 @@ export default function PostProduct() {
       return "all required fields";
     }
     try {
-      const endPoint = "http://localhost:3001/product";
+      const endPoint = "http://localhost:3001/products";
       const response = await axios.post(endPoint, product);
       if (response.status === 200) {
         return alert("your product has been created");
