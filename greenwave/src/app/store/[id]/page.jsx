@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 
 const loadDetail = async (id) => {
   const response = await axios.get(`http://localhost:3001/store/${id}`);
@@ -46,26 +47,34 @@ export default async function Detail({ params }) {
               {product.description}
             </p>
 
-            <button
-              className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded mt-20"
-              style={{ border: "1px solid gray", borderRadius: "2em 2em" }}
-            >
-              Buy now
-            </button>
-            <button
-              className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded"
-              style={{ border: "1px solid gray", borderRadius: "2em 2em" }}
-            >
-              {" "}
-              🛒 Add to cart
-            </button>
+            <div>
+
+              <button
+                className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded mt-10"
+                style={{ border: "1px solid gray", borderRadius: "2em 2em" }}
+              >
+                Buy now
+              </button>
+              <button
+                className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded"
+                style={{ border: "1px solid gray", borderRadius: "2em 2em" }}
+              >
+                🛒 Add to cart
+              </button>
+            </div>
+            <Link href='/store'>
+              <button
+                className=" hover:bg-green-900 bg-green-700 text-white m-3 px-4 py-1 rounded"
+                style={{ border: "1px solid gray", borderRadius: "2em 2em", width: '50%' }}
+              >
+                Store
+              </button>
+            </Link>
           </div>
         </div>
 
         <div
-          className="flex flex-row  justify-center gap-8 mt-12 mb-8"
-          style={{ width: "57%" }}
-        >
+          className="flex flex-row justify-center w-1/2 gap-8 mt-12 mb-8">
           <Image
             className="p-1 shadow-2xl rounded-lg bg-hover hover:transform hover:scale-110 transition-transform duration-300"
             src={product.image}
