@@ -7,7 +7,7 @@ import { useState } from "react";
 const Card = ({
   id,
   name,
-  img,
+  image,
   price,
   rating,
   description,
@@ -37,7 +37,7 @@ const Card = ({
 
       <div className="flex-grow flex-shrink-0">
         <Image
-          src={img}
+          src={image}
           alt={name}
           height={150}
           width={150}

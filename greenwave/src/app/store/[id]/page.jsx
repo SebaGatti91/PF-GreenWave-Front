@@ -19,7 +19,7 @@ export default async function Detail({ params }) {
         <div className="flex flex-row">
           <Image
             className="p-1 shadow-2xl rounded-lg bg-hover"
-            src={product.img}
+            src={product.image}
             alt={product.name}
             width={500}
             height={500}
@@ -68,7 +68,7 @@ export default async function Detail({ params }) {
         >
           <Image
             className="p-1 shadow-2xl rounded-lg bg-hover hover:transform hover:scale-110 transition-transform duration-300"
-            src={product.img}
+            src={product.image}
             alt={product.name}
             width={200}
             height={250}
@@ -77,7 +77,7 @@ export default async function Detail({ params }) {
 
           <Image
             className="p-1 shadow-2xl rounded-lg bg-hover hover:transform hover:scale-110 transition-transform duration-300"
-            src={product.img}
+            src={product.image}
             alt={product.name}
             width={200}
             height={250}
