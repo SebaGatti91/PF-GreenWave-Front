@@ -25,16 +25,17 @@ const SearchSection = ({ pathname }) => (
 
 const NavigationLinks = ({ session }) => {
   const handleLogout = async () => {
-    await signOut({ callbackUrl: '/' });
+    await signOut({ callbackUrl: "/" });
   };
   return (
     <section className="flex gap-10 items-center">
       <Link
         className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
         style={{
-          fontFamily: "font-serif", ':hover': {
+          fontFamily: "font-serif",
+          ":hover": {
             background:
-              'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
+              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
           },
         }}
         href="/"
@@ -45,9 +46,10 @@ const NavigationLinks = ({ session }) => {
       <Link
         className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
         style={{
-          fontFamily: "font-serif", ':hover': {
+          fontFamily: "font-serif",
+          ":hover": {
             background:
-              'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
+              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
           },
         }}
         href="/about"
@@ -58,9 +60,10 @@ const NavigationLinks = ({ session }) => {
       <Link
         className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
         style={{
-          fontFamily: "font-serif", ':hover': {
+          fontFamily: "font-serif",
+          ":hover": {
             background:
-              'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
+              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
           },
         }}
         href="/store"
@@ -71,9 +74,10 @@ const NavigationLinks = ({ session }) => {
       <Link
         className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
         style={{
-          fontFamily: "font-serif", ':hover': {
+          fontFamily: "font-serif",
+          ":hover": {
             background:
-              'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
+              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
           },
         }}
         href="/tips"
@@ -86,9 +90,10 @@ const NavigationLinks = ({ session }) => {
           <Link
             className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
             style={{
-              fontFamily: "font-serif", ':hover': {
+              fontFamily: "font-serif",
+              ":hover": {
                 background:
-                  'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
+                  "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
               },
             }}
             href="/post-product"
@@ -98,9 +103,10 @@ const NavigationLinks = ({ session }) => {
           <Link
             className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
             style={{
-              fontFamily: "font-serif", ':hover': {
+              fontFamily: "font-serif",
+              ":hover": {
                 background:
-                  'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
+                  "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
               },
             }}
             href="/tips"
@@ -137,11 +143,9 @@ const NavigationLinks = ({ session }) => {
           Login
         </button>
       )}
-
-
     </section>
-  )
-}
+  );
+};
 
 const NavBar = () => {
   const pathname = usePathname();
@@ -150,10 +154,13 @@ const NavBar = () => {
     <div>
       <nav
         className="py-3 items-center text-white flex justify-between"
-        style={{ background: 'linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)' }}
+        style={{
+          background:
+            "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
+        }}
       >
         <LogoSection />
-        <SearchSection pathname={pathname} />
+        {/* <SearchSection pathname={pathname} /> */}
         <NavigationLinks session={session} />
       </nav>
     </div>
