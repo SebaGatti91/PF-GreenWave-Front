@@ -7,6 +7,9 @@ import Pagination from "../components/pagination/Pagination";
 const Store = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
+  const [filterValue, setFilterValue] = useState('Products');
+  const [orderValue, setOrderValue] = useState('Alfabetico');
+
   const productsPerPage = 6;
 
   useEffect(() => {
@@ -34,31 +37,30 @@ const Store = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleOrder = async (event) => {
-    try {
-      const { value } = event.target;
-      const response = await axios.get(
-        `http://localhost:3001/store?sort=${value}`
-      );
-      const { data } = response;
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  const handleFilter = (event) => {
+    setFilterValue(event.target.value);
   };
 
-  const handleFilter = async (event) => {
-    try {
-      const { value } = event.target;
-      const response = await axios.get(
-        `http://localhost:3001/store?filter=${value}`
-      );
-      const { data } = response;
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  const handleOrder = (event) => {
+    setOrderValue(event.target.value);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/store?filter=${filterValue}&sort=${orderValue}`
+        );
+        const { data } = response;
+        setProducts(data);
+        setCurrentPage(1);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [filterValue, orderValue]); 
 
   return (
     <div className="container mx-auto p-4">
@@ -165,7 +167,7 @@ const Store = () => {
             <Card
               id={product.id}
               name={product.name}
-              img={product.img}
+              image={product.image}
               price={product.price}
               rating={product.rating}
             />
