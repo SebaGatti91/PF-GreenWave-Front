@@ -2,7 +2,7 @@
 import Link from "next/link";
 import SearchBar from "../searchBar/SearchBar";
 import { usePathname } from "next/navigation";
-import { signIn, signOut, useSession } from "next-auth/react";
+import ButtonAuth from "../buttonAuth/ButtonAuth";
 
 const LogoSection = () => (
   <div className="flex items-center">
@@ -80,9 +80,6 @@ const NavigationLinks = ({ session }) => {
       >
         Tips
       </Link>
-
-      {session?.user ? (
-        <>
           <Link
             className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
             style={{
@@ -107,45 +104,13 @@ const NavigationLinks = ({ session }) => {
           >
             Donation
           </Link>
-          <img
-            src={session.user.image}
-            alt=""
-            className="w-10 h-10 rounded-full"
-          />
-          <button
-            onClick={() => handleLogout()}
-            className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
-            style={{
-              fontFamily: "font-serif",
-              borderRadius: "2em 2em",
-              boxShadow: "2px 3px black",
-            }}
-          >
-            Logout
-          </button>
-        </>
-      ) : (
-        <button
-          onClick={() => signIn()}
-          className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
-          style={{
-            fontFamily: "font-serif",
-            borderRadius: "2em 2em",
-            boxShadow: "2px 3px black",
-          }}
-        >
-          Login
-        </button>
-      )}
-
-
+          <ButtonAuth />
     </section>
   )
 }
 
 const NavBar = () => {
   const pathname = usePathname();
-  const { data: session } = useSession(); //lo envuelve el provider luego
   return (
     <div>
       <nav
@@ -154,7 +119,7 @@ const NavBar = () => {
       >
         <LogoSection />
         <SearchSection pathname={pathname} />
-        <NavigationLinks session={session} />
+        <NavigationLinks />
       </nav>
     </div>
   );
