@@ -9,9 +9,11 @@ export default function PostProduct() {
   const [errors, setErrors] = useState({});
   const [product, setProduct] = useState({
     name: "",
-    img: "",
+    image: "",
     status: "",
     price: "",
+    rating: "",
+    materials: "",
     description: "",
   });
   const [file, setFile] = useState(null);
@@ -25,8 +27,8 @@ export default function PostProduct() {
     }
     if (e.target.name === "imgFile") {
       setFile(e.target.files[0]);
-      newProduct = { ...product, [e.target.name]: e.target.value, img: "" };
-    } else if (e.target.name === "img") {
+      newProduct = { ...product, [e.target.name]: e.target.value, image: "" };
+    } else if (e.target.name === "image") {
       newProduct = { ...product, [e.target.name]: e.target.value };
       setFile(null);
     } else {
@@ -53,9 +55,11 @@ export default function PostProduct() {
       }
       setProduct({
         name: "",
-        img: "",
+        image: "",
         status: "",
         price: "",
+        rating: "",
+        materials: "",
         description: "",
       });
       setFile(null);
@@ -99,6 +103,24 @@ export default function PostProduct() {
               />
             </div>
             <div className="mb-4">
+              <label className="block mb-2">Rating</label>
+              <input
+                type="text"
+                name="rating"
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2">Materials</label>
+              <input
+                type="text"
+                name="materials"
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
               <label className="block mb-2">Precio</label>
               <div className="flex">
                 <span className="bg-gray-200 p-2 border border-r-0 border-gray-300 rounded-l">
@@ -120,7 +142,7 @@ export default function PostProduct() {
               <label className="block mb-2">agrega una imagen</label>
               <input
                 type="text"
-                name="img"
+                name="image"
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded"
               />
@@ -163,7 +185,7 @@ export default function PostProduct() {
           <Card
             id={product.id}
             name={product.name}
-            img={product?.img || image}
+            image={product?.image || image}
             price={product.price}
             description={product.description}
             showStars={false}
