@@ -3,33 +3,39 @@ import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
+import axios from "axios";
 
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      name: "Sign in",
-      credentials: {
-        email: { label: "Email", type: "email", placeholder: "example@example.com" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-
+      authorize: async (credentials, req) => {
+        // Verificar que se proporcionaron credenciales
         if (!credentials || !credentials.email || !credentials.password) {
-          return null;
+          return Promise.resolve(null); // O puedes manejar el error de otra manera si lo prefieres
         }
 
-        // Hacer aquí la solicitud a la base de datos y verificar las credenciales
-        // const dbUser = await yourDatabaseQuery(credentials.email, credentials.password);
+        try {
+          const response = await axios.get("http://localhost:3001/users", {
+            params: {
+              email: credentials.email,
+              password: credentials.password,
+            },
+          });
 
-        // Verificación de la contraseña, recuerda encriptar las contraseñas usando bcrypt
-        // if (!comparePasswords(credentials.password, dbUser.password)) {
-        //   return null;
-        // }
-
-        return { email: credentials.email}
+          if (response.status === 200) {
+            const user = response.data;
+            return Promise.resolve(user);
+          } else {
+            // Mostrar el mensaje de error recibido desde el backend
+            return Promise.resolve({ error: response.data.message });
+          }
+        } catch (error) {
+          // Mostrar el mensaje de error capturado durante la solicitud al backend
+          console.error("Error during user validation:", error.message);
+          return Promise.resolve(null);
+        }
       },
     }),
-
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -44,21 +50,6 @@ const handler = NextAuth({
     }),
   ],
 
-  // callbacks: {
-  //   async session({ session, token }) {
-  //     // Agregar información del token a la sesión
-  //     session.user = token;
-  //     return session;
-  //   },
-  //   // async getProviders({ providers }) {
-  //   //   // Devuelve la lista de proveedores disponibles
-  //   //   return providers;
-  //   // },
-    async signIn({ user, account, profile, email, credentials }) {
-      // Redirige a la página de inicio después de iniciar sesión con éxito
-      return Promise.resolve('/'); // Puedes cambiar '/' por la ruta deseada
-    },
-  // },
   pages: {
     signIn: "/login",
   },

@@ -1,22 +1,37 @@
 "use client";
-
-import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
   const [errors, setErrors] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  // Si el usuario ya está autenticado, redirigir a la página de inicio
+  useEffect(() => {
+    if (session?.user) {
+      router.replace("/");
+    }
+  }, [session, router]);
 
   const handleSignInWithProvider = async (providerId) => {
-    // Si el proveedor es "credentials", realiza el inicio de sesión con email y password
     if (providerId === "credentials") {
-      const responseNextAuth = await signIn(providerId, { email, password, redirect: false });
+      const responseNextAuth = await signIn(providerId, {
+        email,
+        password,
+        redirect: false,
+      });
 
       if (responseNextAuth?.error) {
-        setErrors(responseNextAuth.error.split(","));
-        return;
+        // Establece manualmente el mensaje de error deseado
+        setErrors("Error de inicio de sesión");
+      } else {
+        // Éxito en la autorización con credenciales
+        setErrors(""); // Limpiar errores
       }
     } else {
       // Si el proveedor es otro, realiza el inicio de sesión normal
@@ -24,10 +39,10 @@ const LoginPage = () => {
 
       if (responseNextAuth?.error) {
         setErrors(responseNextAuth.error.split(","));
-        return;
+      } else {
+        setErrors(""); // Limpiar errores
       }
     }
-    // No necesitas redireccionar aquí, la redirección puede ser manejada por el callback de signIn (ver)
   };
 
   return (
@@ -56,23 +71,32 @@ const LoginPage = () => {
         </button>
       </div>
       {errors && (
-        <div className={`${styles.alert} alert-danger mt-2`}>
+        <div
+          className={`${styles.alert} ${styles.errorText} alert-danger mt-2`}
+        >
           <ul className={styles.alertList}>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
+            <li>{errors}</li>
           </ul>
         </div>
       )}
       <p className={styles.orText}>- - - OR - - -</p>
       <div className={styles.providers}>
-        <button className={styles.providerButton} onClick={() => handleSignInWithProvider("google")}>
+        <button
+          className={styles.providerButton}
+          onClick={() => handleSignInWithProvider("google")}
+        >
           Sign in with Google
         </button>
-        <button className={styles.providerButton} onClick={() => handleSignInWithProvider("github")}>
+        <button
+          className={styles.providerButton}
+          onClick={() => handleSignInWithProvider("github")}
+        >
           Sign in with GitHub
         </button>
-        <button className={styles.providerButton} onClick={() => handleSignInWithProvider("facebook")}>
+        <button
+          className={styles.providerButton}
+          onClick={() => handleSignInWithProvider("facebook")}
+        >
           Sign in with Facebook
         </button>
         {/* Agrega más botones para otros proveedores si es necesario */}
@@ -82,4 +106,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
