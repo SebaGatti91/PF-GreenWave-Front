@@ -131,8 +131,6 @@ const NavBar = () => {
       >
         <LogoSection />
         {/* <SearchSection pathname={pathname} /> */}
-        <NavigationLinks />
-        {/* <SearchSection pathname={pathname} /> */}
         <NavigationLinks session={session} />
       </nav>
     </div>
