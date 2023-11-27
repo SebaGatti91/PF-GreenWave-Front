@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const getProduct = async (newName) => {
   try {
-    const response = await axios.get(`http://localhost:3001/products/name?name=${newName}`);
+    const response = await axios.get(`http://localhost:3001/store?name=${newName}`);
     const { data } = response;
     return data;
   } catch (error) {
