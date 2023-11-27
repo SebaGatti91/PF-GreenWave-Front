@@ -1,0 +1,81 @@
+/* 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+button {
+  --hover: 0;
+  --button-bg: hsla(
+  	calc(272 - 7 * var(--hover)),
+  	calc(100% - 8% * var(--hover)),
+  	calc(21% + 7% * var(--hover)),
+  	0.8
+  );
+  --button-border: hsl(
+  	calc(267 - 11 * var(--hover)),
+  	calc(90% - 1% * var(--hover)),
+  	58%
+  );
+  --button-label: hsl(272, 90%, 92%);
+  --button-steam: hsl(277, 66%, 49%);
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  padding: 1rem 2.5rem;
+  background-color: var(--button-bg);
+  border: 0.2rem solid var(--button-border);
+  border-radius: 3rem;
+  color: var(--button-label);
+  font: 500 clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem)/1 "Inter", sans-serif;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  transition: background 0.25s linear, scale 0.25s linear;
+  scale: calc(1 + 0.1 * var(--hover));
+  -webkit-mask: linear-gradient(180deg, transparent -33%, black 56%, black 100%, transparent 75%), linear-gradient(90deg, transparent -33%, black 56%, black 100%, transparent 75%);
+          mask: linear-gradient(180deg, transparent -33%, black 56%, black 100%, transparent 75%), linear-gradient(90deg, transparent -33%, black 56%, black 100%, transparent 75%);
+}
+button .steam {
+  pointer-events: none;
+  display: inline-flex;
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 200%;
+  filter: url(#goo);
+}
+button .steam span {
+  opacity: 0;
+  display: block;
+  position: absolute;
+  inset-inline-start: -50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 6em 4em var(--button-steam), 0 0 0.6em 0.3em #fff;
+}
+button:hover {
+  --hover: 1;
+  transition: background 0.46s var(--ease), scale 0.46s var(--ease);
+}
+
+:root {
+  --bg: hsl(0, 0%, 10%);
+}
+
+html,
+body {
+  font-size: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  background-color: var(--bg);
+  width: 100vw;
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+@supports (height: 100dvh) {
+  body {
+    height: 100dvh;
+  }
+} */

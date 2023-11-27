@@ -1,0 +1,84 @@
+@font-face {
+    font-family: 'fatBold';
+    src: url(../fonts/GasoekOne-Regular.ttf);
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    width: auto;
+    height: 85vh;
+    background: white;
+    background-image: url(https://plantillasdememes.com/img/plantillas/yo-habia-ponido-mis-cosas-aqui01561772726.png);
+   background-repeat: no-repeat;
+   background-position-x: right;
+  }
+
+
+    .background-clip-text {
+  font-size: 10em;
+  font-family: 'fatBold';
+  background: url('../images/galaxy.jpg');
+  background-position: fixed;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  
+  }
+  .message{
+    font-size: 3em;
+  }
+  .mi-clase {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    display: inline-block;
+    border-radius: 0.25rem;
+    background-color: #38b2ac;
+    height: 3.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.5;
+    color: #ffffff;
+  
+    box-shadow: 0 4px 9px -4px #54b4d3;
+  
+    transition: all 0.15s ease-in-out;
+  
+  }
+  .mi-clase:hover {
+    background-color: #4fd1c5;
+    box-shadow: 0 8px 9px -4px rgba(84, 180, 211, 0.3), 0 4px 18px 0 rgba(84, 180, 211, 0.2);
+  }
+  .mi-clase:focus {
+    background-color: #4fd1c5;
+    box-shadow: 0 8px 9px -4px rgba(84, 180, 211, 0.3), 0 4px 18px 0 rgba(84, 180, 211, 0.2);
+    outline: none;
+  }
+  .mi-clase:active {
+    background-color: #319795;
+    box-shadow: 0 8px 9px -4px rgba(84, 180, 211, 0.3), 0 4px 18px 0 rgba(84, 180, 211, 0.2);
+  }
+  .mi-clase.dark {
+    box-shadow: 0 4px 9px -4px rgba(84, 180, 211, 0.5);
+  }
+  .mi-clase.dark:hover {
+    box-shadow: 0 8px 9px -4px rgba(84, 180, 211, 0.2), 0 4px 18px 0 rgba(84, 180, 211, 0.1);
+  }
+  .mi-clase.dark:focus {
+    box-shadow: 0 8px 9px -4px rgba(84, 180, 211, 0.2), 0 4px 18px 0 rgba(84, 180, 211, 0.1);
+  }
+  .mi-clase.dark:active {
+    box-shadow: 0 8px 9px -4px rgba(84, 180, 211, 0.2), 0 4px 18px 0 rgba(84, 180, 211, 0.1);
+  }
+  .content{
+    margin-left: 10em;
+  }
