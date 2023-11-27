@@ -12,7 +12,7 @@ export default async function Detail({ params }) {
   const product = await loadDetail(params.id);
 
   return (
-    <div className="flex  justify-center items-center p-7 ">
+    <div className="flex justify-center items-center p-7 ">
       <div
         className="p-7 m-5 border flex flex-col bg-lime-50 rounded-lg shadow-2xl"
         style={{ width: "65%" }}
