@@ -113,7 +113,7 @@ const NavigationLinks = ({session}) => (
       <ButtonAuth />
     </section>
   );
-};
+
 
 const NavBar = () => {
   const pathname = usePathname();
