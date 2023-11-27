@@ -7,36 +7,36 @@ import Pagination from "../components/pagination/Pagination";
 const Store = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
-  const [filterValue, setFilterValue] = useState('Products');
-  const [orderValue, setOrderValue] = useState('Alfabetico');
+  const [filterValue, setFilterValue] = useState("Products");
+  const [orderValue, setOrderValue] = useState("Alfabetico");
+  const [filterValueName, setFilterValueName] = useState("");
 
   const productsPerPage = 6;
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/store");
-        const { data } = response;
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    loadProducts();
-  }, []);
-
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/store?filter=${filterValue}&sort=${orderValue}&name=${filterValueName}`
+      );
+      const { data } = response;
+      setProducts(data);
+      setCurrentPage(1);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, [filterValue, orderValue]);
+
+  const handleFilterName = (event) => {
+    setFilterValueName(event.target.value);
+  };
+
+  const handleSearch = () => {
+    fetchData();
+  };
   const handleFilter = (event) => {
     setFilterValue(event.target.value);
   };
@@ -45,26 +45,52 @@ const Store = () => {
     setOrderValue(event.target.value);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/store?filter=${filterValue}&sort=${orderValue}`
-        );
-        const { data } = response;
-        setProducts(data);
-        setCurrentPage(1);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-    fetchData();
-  }, [filterValue, orderValue]);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   return (
     <div className="container mx-auto p-4">
+      <div className="flex justify-center p-4">
+        <input
+          type="text"
+          placeholder="Search..."
+          style={{ borderRadius: "1em 0 0 1em", width: "400px" }}
+          className="text-black px-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-center"
+          value={filterValueName}
+          onChange={handleFilterName}
+        />
+        <button
+          type="button"
+          onClick={handleSearch}
+          style={{
+            borderRadius: "0 1em 1em 0",
+            padding: "1.5px",
+            borderLeft: "1px solid gray",
+            paddingRight: "10px",
+            paddingLeft: "5px",
+          }}
+          className="bg-white text-white rounded-r focus:outline-none focus:ring focus:border-blue-300"
+        >
+          &#128269;
+        </button>
+      </div>
       <div className="flex justify-evenly mb-4">
+        {/* <input
+          type="text"
+          onChange={handleFilterName}
+          value={filterValueName}
+          placeholder="Search by name"
+        />
+        <button onClick={handleSearch}>Search</button> */}
+
         {/* <div className="mr-4">
           <select
             className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"

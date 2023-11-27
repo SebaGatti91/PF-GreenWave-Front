@@ -4,19 +4,22 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import styles from "./LoginPage.module.css";
 
+
 const LoginPage = () => {
   const [errors, setErrors] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSignInWithProvider = async (providerId) => {
-    // Si el proveedor es "credentials", realiza el inicio de sesión con email y password
     if (providerId === "credentials") {
+      // Si el proveedor es "credentials", realiza el inicio de sesión con email y password
       const responseNextAuth = await signIn(providerId, { email, password, redirect: false });
 
       if (responseNextAuth?.error) {
         setErrors(responseNextAuth.error.split(","));
-        return;
+      } else {
+        // Éxito en la autorización con credenciales
+        setErrors(""); // Limpiar errores
       }
     } else {
       // Si el proveedor es otro, realiza el inicio de sesión normal
@@ -24,7 +27,9 @@ const LoginPage = () => {
 
       if (responseNextAuth?.error) {
         setErrors(responseNextAuth.error.split(","));
-        return;
+      } else {
+        // Éxito en la autorización con otros proveedores
+        setErrors(""); // Limpiar errores
       }
     }
     // No necesitas redireccionar aquí, la redirección puede ser manejada por el callback de signIn (ver)
@@ -82,4 +87,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
