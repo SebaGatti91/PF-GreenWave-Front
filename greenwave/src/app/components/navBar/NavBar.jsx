@@ -127,7 +127,7 @@ const NavBar = () => {
         }}
       >
         <LogoSection />
-        <SearchSection pathname={pathname} />
+        {/* <SearchSection pathname={pathname} /> */}
         <NavigationLinks />
       </nav>
     </div>
