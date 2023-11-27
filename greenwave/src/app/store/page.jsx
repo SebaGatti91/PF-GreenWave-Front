@@ -1,69 +1,246 @@
-// import products from "./products.json";
+"use client";
 import Card from "../components/card/Card";
-import axios from "axios"
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Pagination from "../components/pagination/Pagination";
 
+const Store = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [filterValue, setFilterValue] = useState("Products");
+  const [filterValueMaterial, setFilterValueMaterial] = useState("Materials");
+  const [orderValue, setOrderValue] = useState("Alfabetico");
+  const [filterValueName, setFilterValueName] = useState("");
 
-const Store = async () => {
-  
-  const loadProducts = async () => {
+  const productsPerPage = 6;
+
+  const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/products");
+      let url = 'http://localhost:3001/store?';
+
+      // Agregar el filtro de materiales solo si no es 'Materials'
+      if (filterValueMaterial !== 'Materials') {
+        url += `material=${filterValueMaterial}&`;
+      }
+
+      // Agregar el filtro de rating solo si no es 'Products'
+      if (filterValue !== 'Products') {
+        url += `filter=${filterValue}&`;
+      }
+
+      // Agregar el filtro de orden solo si no es 'Alfabetico' o 'Price'
+      if (orderValue !== 'Alfabetico' && orderValue !== 'Price') {
+        url += `sort=${orderValue}&`;
+      }
+
+      // Agregar el filtro de nombre solo si no está vacío
+      if (filterValueName.trim() !== '') {
+        url += `name=${filterValueName}&`;
+      }
+
+      const response = await axios.get(url);
       const { data } = response;
-      return data;
+      console.log(data);
+      setProducts(data);
+      setCurrentPage(1);
     } catch (error) {
-      throw Error(error)
+      console.error('Error fetching data:', error);
     }
   };
 
-  const products = await loadProducts();
+  useEffect(() => {
+    fetchData();
+  }, [filterValue, orderValue, filterValueMaterial]);
+
+  const handleFilterName = (event) => {
+    setFilterValueName(event.target.value);
+  };
+
+  const handleSearch = () => {
+    fetchData();
+  };
+  const handleFilter = (event) => {
+    setFilterValue(event.target.value);
+  };
+
+  const handleOrder = (event) => {
+    setOrderValue(event.target.value);
+  };
+
+  const handleMaterials = (event) => {
+    const selectedMaterial = event.target.value;
+    if (selectedMaterial === 'Materials') {
+      setFilterValueMaterial(selectedMaterial);
+      setFilterValue('Products'); // Restaurar el valor predeterminado para el filtro general
+      fetchData(); // Volver a obtener datos
+    } else {
+      setFilterValueMaterial(selectedMaterial);
+    }
+  };
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
   return (
     <div className="container mx-auto p-4">
+      <div className="flex justify-center p-4">
+        <input
+          type="text"
+          placeholder="Search..."
+          style={{ borderRadius: "1em 0 0 1em", width: "400px" }}
+          className="text-black px-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-center"
+          value={filterValueName}
+          onChange={handleFilterName}
+        />
+        <button
+          type="button"
+          onClick={handleSearch}
+          style={{
+            borderRadius: "0 1em 1em 0",
+            padding: "1.5px",
+            borderLeft: "1px solid gray",
+            paddingRight: "10px",
+            paddingLeft: "5px",
+          }}
+          className="bg-white text-white rounded-r focus:outline-none focus:ring focus:border-blue-300"
+        >
+          &#128269;
+        </button>
+      </div>
       <div className="flex justify-evenly mb-4">
+
+        <select
+          onChange={handleMaterials}
+          className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
+          style={{ borderRadius: "1em 1em" }}>
+          <option className="text-center" value="Materials">
+            Materials
+          </option>
+          <option className="text-center" value="wood">
+            Wood
+          </option>
+          <option className="text-center" value="glass">
+            Glass
+          </option>
+          <option className="text-center" value="paper and Cardboard">
+            Paper and Cardboard
+          </option>
+          <option className="text-center" value="plastic">
+            Plastic
+          </option>
+          <option className="text-center" value="metals">
+            Metals
+          </option>
+          <option className="text-center" value="electronics">
+            Electronics
+          </option>
+          <option className="text-center" value="textiles">
+            Textiles
+          </option>
+        </select>
+
         <div className="mr-4">
-          <select className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer" style={{ borderRadius: '1em 1em' }}>
-            <option className="text-center" value="Products">Materials</option>
-            <option className="text-center" value="Rating">Cardboard</option>
-            <option className="text-center" value="Materials">Wood</option>
+          <select
+            onChange={handleFilter}
+            className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
+            style={{ borderRadius: "1em 1em" }}
+          >
+            <option className="text-center" value="Products">
+              Rating
+            </option>
+            <option className="text-center" value="1">
+              1
+            </option>
+            <option className="text-center" value="2">
+              2
+            </option>
+            <option className="text-center" value="3">
+              3
+            </option>
+            <option className="text-center" value="4">
+              4
+            </option>
+            <option className="text-center" value="5">
+              5
+            </option>
           </select>
         </div>
-  
         <div className="mr-4">
-          <select className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer" style={{ borderRadius: '1em 1em' }}>
-            <option className="text-center" value="Products">Rating</option>
-            <option className="text-center" value="Rating">Ascendent</option>
-            <option className="text-center" value="Materials">Descendent</option>
-          </select>
-        </div>
-        <div className="mr-4">
-          <select className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer" style={{ borderRadius: '1em 1em' }}>
-            <option className="text-center" value="Alfabetico">Order</option>
-            <option className="text-center" value="Ascendent">Ascendent</option>
-            <option className="text-center" value="Descendent">Descendent</option>
+          <select
+            onChange={handleOrder}
+            className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
+            style={{ borderRadius: "1em 1em" }}
+          >
+            <option className="text-center" value="Alfabetico">
+              Order Alfabetic
+            </option>
+            <option className="text-center" value="nameAsc">
+              Ascendent
+            </option>
+            <option className="text-center" value="nameDesc">
+              Descendent
+            </option>
           </select>
         </div>
         <div>
-          <select className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer" style={{ borderRadius: '1em 1em' }}>
-            <option className="text-center" value="Price">Price</option>
-            <option className="text-center" value="Ascendent">Ascendent</option>
-            <option className="text-center" value="Descendent">Descendent</option>
+          <select
+            onChange={handleOrder}
+            className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
+            style={{ borderRadius: "1em 1em" }}
+          >
+            <option className="text-center" value="Price">
+              Price
+            </option>
+            <option className="text-center" value="priceAsc">
+              Ascendent
+            </option>
+            <option className="text-center" value="priceDesc">
+              Descendent
+            </option>
           </select>
         </div>
       </div>
-  
-      <div className="flex flex-wrap justify-center items-center">
-        {products.map((product) => (
-          <div key={product.id} className="">
+
+      {products.length ? (
+        <div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(products.length / productsPerPage)}
+            onPageChange={paginate}
+          />
+        </div>
+      ) : (
+        <div>
+          <p> No existen coincidencias entre los filtros aplicados.</p>
+        </div>
+      )}
+
+      <div className="flex flex-wrap justify-center items-center mb-3">
+        {currentProducts.map((product) => (
+          <div
+            key={product.id}
+          // className=" hover:transform hover:scale-105 transition-transform duration-300"
+          >
             <Card
               id={product.id}
               name={product.name}
-              img={product.img}
+              image={product.image}
               price={product.price}
+              rating={product.rating}
             />
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Store;

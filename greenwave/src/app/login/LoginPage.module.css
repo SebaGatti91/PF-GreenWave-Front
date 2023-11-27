@@ -1,0 +1,83 @@
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.alert {
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.alertList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.orText {
+  text-align: center;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.providers {
+  display: flex;
+  flex-direction: column;
+}
+
+.providerButton {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.providerButton:hover {
+  background-color: #3c78d8;
+}
+
+/* Estilo para el mensaje de error */
+.errorText {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: bold; /* Agrega negrita al mensaje de error */
+}
