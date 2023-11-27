@@ -188,7 +188,7 @@ const Store = () => {
         {currentProducts.map((product) => (
           <div
             key={product.id}
-            className=" hover:transform hover:scale-105 transition-transform duration-300"
+            // className=" hover:transform hover:scale-105 transition-transform duration-300"
           >
             <Card
               id={product.id}
