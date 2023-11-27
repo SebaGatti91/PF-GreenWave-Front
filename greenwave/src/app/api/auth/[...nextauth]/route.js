@@ -54,10 +54,10 @@ const handler = NextAuth({
   //   //   // Devuelve la lista de proveedores disponibles
   //   //   return providers;
   //   // },
-    async signIn({ user, account, profile, email, credentials }) {
-      // Redirige a la página de inicio después de iniciar sesión con éxito
-      return Promise.resolve('/'); // Puedes cambiar '/' por la ruta deseada
-    },
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   // Redirige a la página de inicio después de iniciar sesión con éxito
+    //   return Promise.resolve('/'); // Puedes cambiar '/' por la ruta deseada
+    // },
   // },
   pages: {
     signIn: "/login",

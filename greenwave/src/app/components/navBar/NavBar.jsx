@@ -23,10 +23,7 @@ const SearchSection = ({ pathname }) => (
   </section>
 );
 
-const NavigationLinks = ({ session }) => {
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: '/' });
-  };
+const NavigationLinks = () => {
   return (
     <section className="flex gap-10 items-center">
       <Link
@@ -80,31 +77,7 @@ const NavigationLinks = ({ session }) => {
       >
         Tips
       </Link>
-          <Link
-            className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-            style={{
-              fontFamily: "font-serif", ':hover': {
-                background:
-                  'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
-              },
-            }}
-            href="/post-product"
-          >
-            Post
-          </Link>
-          <Link
-            className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-            style={{
-              fontFamily: "font-serif", ':hover': {
-                background:
-                  'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
-              },
-            }}
-            href="/tips"
-          >
-            Donation
-          </Link>
-          <ButtonAuth />
+      <ButtonAuth />
     </section>
   )
 }
