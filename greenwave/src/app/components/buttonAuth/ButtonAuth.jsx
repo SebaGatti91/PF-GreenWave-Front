@@ -56,7 +56,7 @@ export default function ButtonAuth() {
             Donation
           </Link>
           <img
-            src={session.user.image}
+            src={session.user.image || '../../../../public/images/user.png'}
             alt=""
             className="w-10 h-10 rounded-full"
           />
