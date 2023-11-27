@@ -11,7 +11,7 @@ const validatePost = (post) => {
       errors.name = 'Name exceeds 35 characters';
     }
     
-    if(!post.imgFile && !post.img){
+    if(!post.imgFile && !post.image){
       errors.image = 'must provided a Url or select valid file'
     }
     if (!post.description) {
