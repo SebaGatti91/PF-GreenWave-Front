@@ -34,7 +34,7 @@ const NavigationLinks = ({session}) => (
             'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
         },
       }}
-      href="/"
+      href="/homepage"
     >
       Home
     </Link>
