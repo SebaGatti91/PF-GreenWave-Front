@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import "../../public/estilos/splash.css";
 import Head from "next/head";
+import Link from 'next/link';
 
 export default function Splash() {
   useEffect(() => {
@@ -51,12 +52,14 @@ export default function Splash() {
               <img className="logo" src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"></img>
               <h1 className="title">Green wave</h1>
               <p className="description">Deja una huella en tu mundo</p>
+              <Link href='/homepage'>
               <button
                 className='button flex items-center justify-center text-sm border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
                 href="/homepage"
-              >
+                >
                 Entrar
               </button>
+              </Link>
               
               <div className="flex justify-center" style={{marginTop: '50px'}}>
                 <a href="#section" className="flecha">
