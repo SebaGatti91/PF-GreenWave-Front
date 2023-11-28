@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import {useState } from "react";
+import { CartContext } from './CartContext';
+
 
 const Card = ({
   id,
@@ -10,12 +12,13 @@ const Card = ({
   image,
   price,
   rating,
-  description,
-  showdescription = false,
+  
   showStars = true,
   showbuybutton = true,
 }) => {
   const [fav, setFav] = useState(false);
+  const [cart, setCart] = useContext(CartContext);
+  
 
   const handleFavorite = () => {
     if (fav) {
@@ -57,7 +60,7 @@ const Card = ({
           )}
           {showbuybutton && (
             <div>
-              <button className="p-1 m-2 rounded-lg bg-yellow-500">
+              <button onClick={addToCart} className="p-1 m-2 rounded-lg bg-yellow-500">
                 Add to Cart
               </button>
               <Link href={`/store/${id}`}>
