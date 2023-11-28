@@ -9,6 +9,7 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "estag.fimagenes.com",
       "m.media-amazon.com",
+      "www.serzen.mx"
     ],
   },
 };
