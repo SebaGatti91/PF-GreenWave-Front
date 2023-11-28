@@ -225,7 +225,7 @@ const Store = () => {
 
       <div className="flex flex-wrap justify-center items-center mb-3">
         {currentProducts.map((product) => (
-          <div
+          <div className="hover:transform hover:scale-105 transition-transform duration-300"
             key={product.id}
           // className=" hover:transform hover:scale-105 transition-transform duration-300"
           >

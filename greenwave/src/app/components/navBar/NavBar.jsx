@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import SearchBar from "../searchBar/SearchBar";
 import { usePathname } from "next/navigation";
 import ButtonAuth from "../buttonAuth/ButtonAuth";
 import { useSession } from "next-auth/react";
+
 
 const LogoSection = () => (
   <div className="flex items-center">
@@ -16,12 +16,6 @@ const LogoSection = () => (
       />
     </Link>
   </div>
-);
-
-const SearchSection = ({ pathname }) => (
-  <section className="flex justify-center items-center mx-auto">
-    {pathname === "/store" && <SearchBar />}
-  </section>
 );
 
 const NavigationLinks = ({ session }) => {

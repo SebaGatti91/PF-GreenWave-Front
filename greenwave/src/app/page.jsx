@@ -18,7 +18,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.485)] to-[rgba(0,0,0,0.542)]"></div>
         <h1 className="font-bold text-4xl relative z-10">Green Wave</h1>
         <div className="max-w-screen-md w-full relative z-10">
-          <p className="text-sm text-left p-3">
+          <p className="text-center text-lg p-3">
             Green Wave emerges with the mission of promoting recycling and ecological sustainability. On our platform, you will have the opportunity to earn money by delivering recyclable products, while at the same time you will be able to explore and purchase crafts made from recycled materials. We are committed to promoting an eco-friendly lifestyle, rewarding your efforts to contribute to the well-being of the planet.
           </p>
         </div>
@@ -31,7 +31,7 @@ export default function Home() {
       </section>
 
       <section className="p-4">
-        <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>¿Why recycling?</h2>
+        <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)', width: '80%' }}>¿Why recycling?</h2>
         <div className="flex p-3 justify-center">
           <div className="card shadow-2xl">
             <img
@@ -88,8 +88,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>Featured product</h2>
-      <section className="flex justify-center mt-0 pb-10">
+      <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)', width: '80%' }}>Featured product</h2>
+      <section className="flex justify-center mt-0 pb-10 m-4 pt-4" style={{marginInline: 'auto', width: '90%'}}>
         <article
           className=" text-black flex row-auto mt-2"
           style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
@@ -98,21 +98,22 @@ export default function Home() {
             className="flex flex-col items-center justify-center rounded-l-lg"
             style={{ backgroundColor: "#C0C8A7" }}
           >
-            <h1 className="font-bold text-center px-2 pt-20 text-xl">
+            <h1 className="font-bold text-center px-2 pt-10 text-2xl">
               {" "}
               EcoLume Lamp
             </h1>
 
-            <p className="py-6 px-10">
+            <p className="text-left text-xl pt-2 ml-0" style={{width: '90%'}}>$ 250</p>
+            <p className="py-6 px-10 text-lg">
               The EcoLume Recycled Glass lamp combines style and sustainability
               in one piece. Created from recycled glass canisters, each lamp is
               unique, bringing a distinctive elegance to any space. Enjoy warm,
               conscious lighting with this eco-friendly lamp that beautifies
               your home while helping to preserve the environment.
             </p>
-            <p className="">$$$</p>
 
-            <button className="bg-lime-100 rounded-lg p-1 m-5 hover:bg-lime-900 hover:text-lime-50">
+            <button className="bg-lime-100 rounded-lg p-1 m-5 hover:bg-lime-900 hover:text-lime-50"
+            style={{border: '1px solid green'}}>
               Add to Cart
             </button>
           </section>
@@ -125,33 +126,34 @@ export default function Home() {
           />
         </article>
       </section>
-      <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>Tips</h2>
-      <section className="flex justify-center mt-0 pb-10">
+      <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)', width: '80%' }}>Tips</h2>
+      <section className="flex justify-center pb-10 m-4 pt-4" style={{marginInline: 'auto', width: '90%'}}>
         <article
           className="bg-cream text-black flex mt-2"
           style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
         >
           <img
             className=" rounded-l-lg"
-            style={{ width: "50%" }}
+            style={{ width: "60%" }}
             src="/images/vases.jpg"
             alt=""
           />
           <section
             className="flex flex-col items-center justify-center rounded-r-lg"
-            style={{ backgroundColor: "#D1D7BF" }}
+            style={{ backgroundColor: "#C0C8A7" }}
           >
-            <h1 className="font-bold text-center px-2 pt-20 text-xl">
+            <h1 className="font-bold text-center px-2 pt-10 text-2xl">
               Vases made with jars
             </h1>
 
-            <p className="py-6 px-10">
+            <p className="py-6 px-10 text-lg">
               Canning and jam jars can be reused in so many different ways: to
               store your homemade preserves or as vases! Let your kids decorate
               them with paint and use them as gifts or to decorate your home.
             </p>
             <Link href='/tips'>
-              <button className="bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1 m-5 ">
+              <button className="bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1 m-5"
+              style={{border: '1px solid green'}}>
                 See more
               </button>
             </Link>

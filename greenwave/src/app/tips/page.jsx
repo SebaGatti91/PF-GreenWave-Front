@@ -11,19 +11,19 @@ const Tips = () => {
                 className="flex justify-center mt-12 pb-10">
                 <article
                     className="text-black flex shadow-2xl"
-                    style={{ width: '90%', height: '60vh', backgroundColor: "#D1D7BF" }}>
+                    style={{ width: '85%', height: '60vh', backgroundColor: "#D1D7BF" }}>
 
                     <section>
                         <h1
-                            className="font-bold text-center px-2 pt-20 text-xl"
+                            className="font-bold text-center px-2 pt-20 text-2xl"
                         >Pallets as furniture and garden decoration
                         </h1>
 
-                        <p className="py-6 px-16">
+                        <p className="py-6 px-16 text-lg">
                             A few years ago pallets were not used for anything, but lately they are being given a lot of use in homes and even sold in decoration stores.
                         </p>
 
-                        <p className="py-6 px-16">
+                        <p className="py-6 px-16 text-lg">
                             There are countless things that can be done with them, from a table, benches for the garden, hang one on the wall and use it as a shelf or as a vertical planter...
                         </p>
                     </section>
@@ -40,48 +40,48 @@ const Tips = () => {
                 className="flex justify-center mt-12 pb-10">
                 <article
                     className="text-black  flex shadow-2xl"
-                    style={{ width: '90%', height: '60vh', backgroundColor: "#D1D7BF" }}>
+                    style={{ width: '85%', height: '60vh', backgroundColor: "#D1D7BF" }}>
 
                     <img
                         className="hover:transform hover:scale-110 transition-transform duration-300"
-                        style={{ width: '55%' }}
+                        style={{ width: '60%' }}
                         src="/images/mesa-comedor.jpg"
                         alt=""
                     />
                     <section>
                         <h1
-                            className="font-bold text-center px-2 pt-20 text-xl"
+                            className="font-bold text-center px-2 pt-20 text-2xl"
                         >Pallets as furniture and garden decoration
                         </h1>
 
-                        <p className="py-6 px-16">
+                        <p className="py-6 px-16 text-lg">
                             A few years ago pallets were not used for anything, but lately they are being given a lot of use in homes and even sold in decoration stores.
                         </p>
 
-                        <p className="py-6 px-16">
+                        <p className="py-6 px-16 text-lg">
                             There are countless things that can be done with them, from a table, benches for the garden, hang one on the wall and use it as a shelf or as a vertical planter...
                         </p>
                     </section>
                 </article>
             </section>
-
+            
             <section
                 className="flex justify-center mt-12 pb-10">
                 <article
-                    className="text-black  flex shadow-2xl"
-                    style={{ width: '90%', height: '60vh', backgroundColor: "#D1D7BF" }}>
+                    className="text-black flex shadow-2xl"
+                    style={{ width: '85%', height: '60vh', backgroundColor: "#D1D7BF" }}>
 
                     <section>
                         <h1
-                            className="font-bold text-center px-2 pt-20 text-xl"
+                            className="font-bold text-center px-2 pt-20 text-2xl"
                         >Pallets as furniture and garden decoration
                         </h1>
 
-                        <p className="py-6 px-16">
+                        <p className="py-6 px-16 text-lg">
                             A few years ago pallets were not used for anything, but lately they are being given a lot of use in homes and even sold in decoration stores.
                         </p>
 
-                        <p className="py-6 px-16">
+                        <p className="py-6 px-16 text-lg">
                             There are countless things that can be done with them, from a table, benches for the garden, hang one on the wall and use it as a shelf or as a vertical planter...
                         </p>
                     </section>
@@ -97,31 +97,32 @@ const Tips = () => {
             <section
                 className="flex justify-center mt-12 pb-10">
                 <article
-                    className="text-black  flex shadow-2xl mb-10"
-                    style={{ width: '90%', height: '60vh', backgroundColor: "#D1D7BF" }}>
+                    className="text-black  flex shadow-2xl"
+                    style={{ width: '85%', height: '60vh', backgroundColor: "#D1D7BF" }}>
 
                     <img
                         className="hover:transform hover:scale-110 transition-transform duration-300"
-                        style={{ width: '55%' }}
+                        style={{ width: '60%' }}
                         src="/images/mesa-comedor.jpg"
                         alt=""
                     />
                     <section>
                         <h1
-                            className="font-bold text-center px-2 pt-20 text-xl"
+                            className="font-bold text-center px-2 pt-20 text-2xl"
                         >Pallets as furniture and garden decoration
                         </h1>
 
-                        <p className="py-6 px-16">
+                        <p className="py-6 px-16 text-lg">
                             A few years ago pallets were not used for anything, but lately they are being given a lot of use in homes and even sold in decoration stores.
                         </p>
 
-                        <p className="py-6 px-16">
+                        <p className="py-6 px-16 text-lg">
                             There are countless things that can be done with them, from a table, benches for the garden, hang one on the wall and use it as a shelf or as a vertical planter...
                         </p>
                     </section>
                 </article>
             </section>
+            
 
         </div>
     )
