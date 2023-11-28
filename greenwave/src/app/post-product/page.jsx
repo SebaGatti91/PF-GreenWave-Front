@@ -1,31 +1,28 @@
 "use client";
-import Swal from "sweetalert2";
 import { Formik } from "formik";
-import React, { createContext } from "react";
-import axios from "axios";
+import React, { createContext, useState, useEffect } from "react";
+import {
+  materialsApi,
+  submitForm,
+} from "../components/materialsApi/useMaterialsApi";
 
-const materialsApi = async () => {
-  const response = await axios.get(`http://localhost:3001/materials/`);
-  return response.data;
-};
+export default function PostProduct() {
+  const [file, setFile] = useState(null);
+  const [materials, setMaterials] = useState([]);
+  const[imageUrl, setImageUrl] = useState(null)
 
-const submitForm = async (values) => {
-  try {
-    const response = await axios.post("http://localhost:3001/products", values);
-    if (response.status === 200) {
-      return Swal.fire({
-        icon: "success",
-        title: "Product Posted Successfully",
-        text: "Your product has been successfully posted.",
-      });
-    }
-  } catch (error) {
-    throw Error(error);
-  }
-};
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      try {
+        const materialsData = await materialsApi();
+        setMaterials(materialsData);
+      } catch (error) {
+        throw Error("Error fetching materials:", error);
+      }
+    };
 
-export default async function PostProduct() {
-  const materials = await materialsApi();
+    fetchMaterials();
+  }, []);
 
   return (
     <div>
@@ -47,61 +44,73 @@ export default async function PostProduct() {
           let errors = {};
           //validations for name
           if (!values.name) {
-            errors.name = "Por favor ingresa un nombre";
-          } else if (!/^[a-zA-Z\s]{3,30}$/.test(values.name)) {
-            errors.name = "Debe contener de 3 a 30 letras";
+            errors.name = "Please enter the name of your product";
+          } else if (!/^[a-zA-ZñÑ\s]{3,30}$/.test(values.name)) {
+            errors.name = "Can only contain from 3 to 30 letters";
           }
 
           //validations for price
           if (!values.price) {
-            errors.price = "Por favor ingresa el costo del producto";
+            errors.price = "Please enter the cost of the product";
           } else if (!/^\d{1,5}$/.test(values.price)) {
-            errors.price = "Solo debe contener numeros de hasta 5 cifras";
+            errors.price = "Must only contain numbers up to 5 digits";
           }
 
           //validations for stock
           if (!values.stock) {
-            errors.stock = "Por favor ingresa el stock del producto";
+            errors.stock = "Please enter the stock of the product";
           } else if (!/^\d{1,5}$/.test(values.stock)) {
-            errors.stock = "Solo debe contener numeros de hasta 5 cifras";
+            errors.stock = "Must only contain numbers up to 5 digits";
           }
 
-          //validation temporal for rrating
+          //validation temporal for rating
           if (!values.rating) {
-            errors.rating = "Por favor ingresa el rating del producto";
+            errors.rating = "Please enter the product rating";
           } else if (!/^[1-5]$/.test(values.rating)) {
-            errors.rating = "Solo debe contener numeros del 1 al 5";
+            errors.rating = "Must only contain numbers from 1 to 5";
           }
 
           //validations for description
           if (!values.description) {
             errors.description =
-              "Por favor ingresa una descripcion del producto";
-          } else if (!/^[a-zA-Z\s]{1,300}$/.test(values.description)) {
-            errors.description =
-              "Solo debe contener letras y hasta 300 caracteres";
+              "Please enter a product description";
+          } else if (!/^[a-zA-ZñÑ\s]{1,300}$/.test(values.description)) {
+            errors.description = "Must contain only letters and up to 300 characters";
           }
 
-          //validation for image
-          if (
-            !/^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/.test(
-              values.image
-            )
-          ) {
-            errors.image = "Only URL image";
+          if(!values.image){
+            errors.image=
+            "Please enter an image"
           }
+
 
           return errors;
         }}
-        onSubmit={(values, { resetForm }) => {
-          submitForm(values)
-            .then(() => {
-              resetForm();
-              console.log("formulario enviado");
-            })
-            .catch((error) => {
-              console.error("Error al enviar el formulario:", error);
+        onSubmit={async (values, { resetForm }) => {
+          try {
+            const formData = new FormData();
+            formData.append("image", file);
+
+            const response = await fetch("/api/upload", {
+              method: "POST",
+              body: formData,
             });
+
+            const data = await response.json();
+            console.log(data)
+            setImageUrl(data.url)
+            values.image = data.url;
+            
+            submitForm(values)
+              .then(() => {
+                resetForm();
+              })
+              .catch((error) => {
+               throw Error(error)
+              });
+          } catch (error) {
+            throw Error(error)
+          }
         }}
       >
         {({
@@ -116,6 +125,7 @@ export default async function PostProduct() {
             <form
               onSubmit={handleSubmit}
               className="w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-4 p-4"
+              encType="multipart/form-data"
             >
               <div className="mb-4 w-full">
                 <label htmlFor="name" className="font-semibold mb-2">
@@ -247,13 +257,14 @@ export default async function PostProduct() {
                   Add your URL image:
                 </label>
                 <input
-                  type="url"
+                  type="file"
                   id="image"
                   name="image"
-                  value={values.image}
-                  onChange={handleChange}
+                  onChange={(event) => {
+                    handleChange(event);
+                    setFile(event.target.files[0]);
+                  }}
                   onBlur={handleBlur}
-                  placeholder=" https://image.jpg"
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
                 {touched.image && errors.image && (
@@ -270,11 +281,14 @@ export default async function PostProduct() {
               </button>
             </form>
             <div className="w-2/5 bg-lime-200">
-              <img
+          
+              {
+                imageUrl ? <img src={imageUrl} className="w-full h-full object-cover"/> : <img
                 src="./images/recicle.jpg"
                 alt=""
                 className="w-full h-full object-cover"
               />
+              }
             </div>
           </div>
         )}
