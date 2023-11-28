@@ -3,7 +3,7 @@ import Card from "../components/card/Card";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Pagination from "../components/pagination/Pagination";
-
+import DropDownMenu from "../components/dropDownMenu/DropDownMenu";
 const Store = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
@@ -11,30 +11,33 @@ const Store = () => {
   const [filterValueMaterial, setFilterValueMaterial] = useState("Materials");
   const [orderValue, setOrderValue] = useState("Alfabetico");
   const [filterValueName, setFilterValueName] = useState("");
+  const [totalFilteredProducts, setTotalFilteredProducts] = useState([]);
+  const [filtersActive, setFiltersActive] = useState(false);
+  const [ordersActive, setOrdersActive] = useState(false);
 
   const productsPerPage = 6;
 
   const fetchData = async () => {
     try {
-      let url = 'http://localhost:3001/store?';
+      let url = "http://localhost:3001/store?";
 
       // Agregar el filtro de materiales solo si no es 'Materials'
-      if (filterValueMaterial !== 'Materials') {
+      if (filterValueMaterial !== "Materials") {
         url += `material=${filterValueMaterial}&`;
       }
 
       // Agregar el filtro de rating solo si no es 'Products'
-      if (filterValue !== 'Products') {
+      if (filterValue !== "Products") {
         url += `filter=${filterValue}&`;
       }
 
       // Agregar el filtro de orden solo si no es 'Alfabetico' o 'Price'
-      if (orderValue !== 'Alfabetico' && orderValue !== 'Price') {
+      if (orderValue !== "Alfabetico" && orderValue !== "Price") {
         url += `sort=${orderValue}&`;
       }
 
       // Agregar el filtro de nombre solo si no está vacío
-      if (filterValueName.trim() !== '') {
+      if (filterValueName.trim() !== "") {
         url += `name=${filterValueName}&`;
       }
 
@@ -42,9 +45,15 @@ const Store = () => {
       const { data } = response;
       console.log(data);
       setProducts(data);
+      setTotalFilteredProducts(data);
+      setFiltersActive(
+        filterValue !== "Products" || filterValueName.trim() !== ""
+      );
+      setOrdersActive(orderValue !== "Alfabetico" && orderValue !== "Price");
+
       setCurrentPage(1);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -67,11 +76,22 @@ const Store = () => {
     setOrderValue(event.target.value);
   };
 
+  const handleClearFilters = () => {
+    // Restablecer estados de filtros y ordenamientos
+    setFilterValue("Products");
+    setFilterValueMaterial("Materials");
+    setOrderValue("Alfabetico");
+    setFilterValueName("");
+
+    // Volver a obtener datos
+    fetchData();
+  };
+
   const handleMaterials = (event) => {
     const selectedMaterial = event.target.value;
-    if (selectedMaterial === 'Materials') {
+    if (selectedMaterial === "Materials") {
       setFilterValueMaterial(selectedMaterial);
-      setFilterValue('Products'); // Restaurar el valor predeterminado para el filtro general
+      setFilterValue("Products"); // Restaurar el valor predeterminado para el filtro general
       fetchData(); // Volver a obtener datos
     } else {
       setFilterValueMaterial(selectedMaterial);
@@ -90,12 +110,23 @@ const Store = () => {
   );
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex justify-center p-4">
+    <div className="container mx-auto p-4 relative">
+      <div className="absolute top-4 left-0 ">
+        <DropDownMenu
+          handleMaterials={handleMaterials}
+          handleFilter={handleFilter}
+          handleOrder={handleOrder}
+          handleClearFilters={handleClearFilters}
+        />
+      </div>
+      <div className="absolute top -0 left-52">
         <input
           type="text"
           placeholder="Search..."
-          style={{ borderRadius: "1em 0 0 1em", width: "400px" }}
+          style={{
+            borderRadius: "1em 0 0 1em",
+            width: "250px",
+          }}
           className="text-black px-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-center"
           value={filterValueName}
           onChange={handleFilterName}
@@ -115,119 +146,15 @@ const Store = () => {
           &#128269;
         </button>
       </div>
-      <div className="flex justify-evenly mb-4">
 
-        <select
-          onChange={handleMaterials}
-          className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
-          style={{ borderRadius: "1em 1em" }}>
-          <option className="text-center" value="Materials">
-            Materials
-          </option>
-          <option className="text-center" value="wood">
-            Wood
-          </option>
-          <option className="text-center" value="glass">
-            Glass
-          </option>
-          <option className="text-center" value="paper and Cardboard">
-            Paper and Cardboard
-          </option>
-          <option className="text-center" value="plastic">
-            Plastic
-          </option>
-          <option className="text-center" value="metals">
-            Metals
-          </option>
-          <option className="text-center" value="electronics">
-            Electronics
-          </option>
-          <option className="text-center" value="textiles">
-            Textiles
-          </option>
-        </select>
-
-        <div className="mr-4">
-          <select
-            onChange={handleFilter}
-            className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
-            style={{ borderRadius: "1em 1em" }}
-          >
-            <option className="text-center" value="Products">
-              Rating
-            </option>
-            <option className="text-center" value="1">
-              1
-            </option>
-            <option className="text-center" value="2">
-              2
-            </option>
-            <option className="text-center" value="3">
-              3
-            </option>
-            <option className="text-center" value="4">
-              4
-            </option>
-            <option className="text-center" value="5">
-              5
-            </option>
-          </select>
-        </div>
-        <div className="mr-4">
-          <select
-            onChange={handleOrder}
-            className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
-            style={{ borderRadius: "1em 1em" }}
-          >
-            <option className="text-center" value="Alfabetico">
-              Order Alfabetic
-            </option>
-            <option className="text-center" value="nameAsc">
-              Ascendent
-            </option>
-            <option className="text-center" value="nameDesc">
-              Descendent
-            </option>
-          </select>
-        </div>
-        <div>
-          <select
-            onChange={handleOrder}
-            className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
-            style={{ borderRadius: "1em 1em" }}
-          >
-            <option className="text-center" value="Price">
-              Price
-            </option>
-            <option className="text-center" value="priceAsc">
-              Ascendent
-            </option>
-            <option className="text-center" value="priceDesc">
-              Descendent
-            </option>
-          </select>
-        </div>
-      </div>
-
-      {products.length ? (
-        <div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(products.length / productsPerPage)}
-            onPageChange={paginate}
-          />
-        </div>
-      ) : (
-        <div>
-          <p> No existen coincidencias entre los filtros aplicados.</p>
-        </div>
-      )}
-
-      <div className="flex flex-wrap justify-center items-center mb-3">
+      <div
+        className="flex flex-wrap justify-center items-center mb-3"
+        style={{ marginTop: "30px" }}
+      >
         {currentProducts.map((product) => (
           <div
             key={product.id}
-          // className=" hover:transform hover:scale-105 transition-transform duration-300"
+            // className=" hover:transform hover:scale-105 transition-transform duration-300"
           >
             <Card
               id={product.id}
@@ -239,6 +166,21 @@ const Store = () => {
           </div>
         ))}
       </div>
+      {products.length ? (
+        <div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(
+              totalFilteredProducts.length / productsPerPage
+            )}
+            onPageChange={paginate}
+          />
+        </div>
+      ) : (
+        <div>
+          <p> No existen coincidencias entre los filtros aplicados.</p>
+        </div>
+      )}
     </div>
   );
 };

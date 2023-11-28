@@ -35,11 +35,11 @@ const LoginPage = () => {
       } catch (error) {
         console.error("Error al crear el usuario en el backend", error);
       }
-      router.replace("/"); // Redirigir solo después de la creación de usuario
+      router.replace("/homepage"); // Redirigir solo después de la creación de usuario
     };
 
     if (session?.user && !userCreation) {
-      setUserCreation(true); 
+      setUserCreation(true);
       createUserAndRedirect();
     }
   }, [session]);
