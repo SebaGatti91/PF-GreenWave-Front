@@ -9,6 +9,9 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "estag.fimagenes.com",
       "m.media-amazon.com",
+      "th.bing.com",
+      "ww2.freelogovectors.net",
+      "upload.wikimedia.org"
     ],
   },
 };
