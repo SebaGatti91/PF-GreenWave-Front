@@ -1,163 +1,185 @@
-import "./home.css";
-import Button from "./components/button/Button";
-import Link from "next/link";
+'use client'
+import React, { useEffect } from 'react';
+import "../../public/estilos/splash.css";
+import Head from "next/head";
 
-export default function Home() {
+export default function Splash() {
+  useEffect(() => {
+    const arrow = document.querySelector('.flecha');
+    const video = document.querySelector('#video');
+    const section = document.querySelector('#section');
+
+    arrow.addEventListener('click', (e) => {
+      e.preventDefault();
+      section.scrollIntoView({ behavior: 'smooth' });
+    });
+
+  
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.style.opacity = '0.5';
+          video.style.backgroundColor = 'black';
+        } else {
+          video.style.opacity = '1';
+          video.style.backgroundColor = 'transparent';
+        }
+      });
+    });
+    
+    observer.observe(section);
+  }, []);
+
   return (
-    <div>
-      <section
-        className="relative flex flex-col items-center text-cyan-50 w-full justify-center overflow-hidden heroSection"
-        style={{
-          backgroundImage: "url('/images/hero.png')",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.485)] to-[rgba(0,0,0,0.542)]"></div>
-        <h1 className="font-bold text-4xl relative z-10">Green Wave</h1>
-        <div className="max-w-screen-md w-full relative z-10">
-          <p className="text-sm text-left p-3">
-            Green Wave emerges with the mission of promoting recycling and ecological sustainability. On our platform, you will have the opportunity to earn money by delivering recyclable products, while at the same time you will be able to explore and purchase crafts made from recycled materials. We are committed to promoting an eco-friendly lifestyle, rewarding your efforts to contribute to the well-being of the planet.
-          </p>
-        </div>
-
-        <Button
-          link={"/store"}
-          text={"Go to store"}
-          className="relative z-10 bg-lime-800 hover:bg-hover hover:text-slate-950 rounded-lg p-1"
+    <>
+      <div className="box">
+        <video
+          id="video"
+          src="https://static.vecteezy.com/system/resources/previews/007/659/424/mp4/light-shining-down-in-nature-video.mp4"
+          alt="Una imagen bonita"
+          autoPlay="autoplay"
+          loop={true}
+          muted={true}
         />
-      </section>
 
-      <section className="p-4">
-        <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>¿Why recycling?</h2>
-        <div className="flex p-3 justify-center">
-          <div className="card shadow-2xl">
-            <img
-              className="cardImg"
-              src="/images/recicle.jpg"
-              alt="Reciclar"
-            ></img>
-            <div className="cardBody">
-              <h1 className="cardTitle text-center">
-                Conservation of Natural Resources
-              </h1>
-              <p className="cardInfo text-center">
-                Recycling contributes to the conservation of valuable natural
-                resources, such as wood, water and minerals. By reusing
-                materials instead of extracting new resources, we help preserve
-                biodiversity and reduce environmental degradation.
-              </p>
-            </div>
-          </div>
-          <div className="card shadow-2xl">
-            <img
-              className="cardImg"
-              src="/images/recicle.jpg"
-              alt="Reciclar"
-            ></img>
-            <div className="cardBody">
-              <h1 className="cardTitle text-center">Reducing Landfill Waste</h1>
-              <p className="cardInfo text-center">
-                Recycling helps minimize the amount of waste that ends up in
-                landfills. By giving new life to materials such as paper,
-                plastic and glass, we prevent the accumulation of waste and
-                reduce the need for more landfill space, thus promoting a
-                cleaner environment.
-              </p>
-            </div>
-          </div>
-          <div className="card shadow-2xl">
-            <img
-              className="cardImg"
-              src="/images/recicle.jpg"
-              alt="Reciclar"
-            ></img>
-            <div className="cardBody">
-              <h1 className="cardTitle text-center">
-                Climate Change Mitigation:
-              </h1>
-              <p className="cardInfo text-center">
-                Manufacturing with recycled materials consumes less energy than
-                production with raw materials, reducing greenhouse gas emissions
-                and helping to combat climate change by reducing energy
-                consumption in manufacturing processes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>Featured product</h2>
-      <section className="flex justify-center mt-0 pb-10">
-        <article
-          className=" text-black flex row-auto mt-2"
-          style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
-        >
-          <section
-            className="flex flex-col items-center justify-center rounded-l-lg"
-            style={{ backgroundColor: "#C0C8A7" }}
-          >
-            <h1 className="font-bold text-center px-2 pt-20 text-xl">
-              {" "}
-              EcoLume Lamp
-            </h1>
-
-            <p className="py-6 px-10">
-              The EcoLume Recycled Glass lamp combines style and sustainability
-              in one piece. Created from recycled glass canisters, each lamp is
-              unique, bringing a distinctive elegance to any space. Enjoy warm,
-              conscious lighting with this eco-friendly lamp that beautifies
-              your home while helping to preserve the environment.
-            </p>
-            <p className="">$$$</p>
-
-            <button className="bg-lime-100 rounded-lg p-1 m-5 hover:bg-lime-900 hover:text-lime-50">
-              Add to Cart
-            </button>
-          </section>
-
-          <img
-            className="rounded-r-lg"
-            style={{ width: "40%" }}
-            src="/images/lamp.jpg"
-            alt=""
-          />
-        </article>
-      </section>
-      <h2 className="font-bold text-2xl shadow-2xl mt-5 mb-5 py-2 w-3/4 text-center" style={{ marginInline: 'auto', boxShadow: '0px 10px 10px -6px rgba(0, 0, 0, 0.75)' }}>Tips</h2>
-      <section className="flex justify-center mt-0 pb-10">
-        <article
-          className="bg-cream text-black flex mt-2"
-          style={{ width: "90%", height: "60vh", borderRadius: "2em 0 0 2em" }}
-        >
-          <img
-            className=" rounded-l-lg"
-            style={{ width: "50%" }}
-            src="/images/vases.jpg"
-            alt=""
-          />
-          <section
-            className="flex flex-col items-center justify-center rounded-r-lg"
-            style={{ backgroundColor: "#D1D7BF" }}
-          >
-            <h1 className="font-bold text-center px-2 pt-20 text-xl">
-              Vases made with jars
-            </h1>
-
-            <p className="py-6 px-10">
-              Canning and jam jars can be reused in so many different ways: to
-              store your homemade preserves or as vases! Let your kids decorate
-              them with paint and use them as gifts or to decorate your home.
-            </p>
-            <Link href='/tips'>
-              <button className="bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1 m-5 ">
-                See more
+        <Head>
+          <title>GreenWave</title>
+        </Head>
+        <div className="container">
+          <main className="flex flex-row md:w-1/2 ">
+            <div className="content">
+              <img className="logo" src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"></img>
+              <h1 className="title">Green wave</h1>
+              <p className="description">Deja una huella en tu mundo</p>
+              <button
+                className='button flex items-center justify-center text-sm border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
+                href="/homepage"
+              >
+                Entrar
               </button>
-            </Link>
-          </section>
-        </article>
-      </section>
-    </div>
+              
+              <div className="flex justify-center" style={{marginTop: '50px'}}>
+                <a href="#section" className="flecha">
+                  ↓
+                </a>
+              </div>
+
+            </div>
+          </main>
+        </div>
+      </div>
+      <div className='seccion' id="section">
+        
+<section className="flex justify-center mt-12 pb-10 ">
+          <article
+           
+            className="text-black flex shadow-2xl overflow-hidden"
+            style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
+          >
+            <section>
+              <h1 className="font-bold text-center px-2 pt-20 text-xl">
+                Awareness Through Recycling
+              </h1>
+
+              <p className="py-6 px-16">
+                In recent years, recycling has emerged as a simple yet powerful
+                way for every individual to impact the health of our planet. By
+                reusing materials, we reduce the demand for new resources and
+                decrease the amount of waste that ends up in our landfills and
+                oceans.
+              </p>
+
+              <p className="py-6 px-16">
+                But recycling is more than just a practice - it's a mindset.
+                It's about recognizing the value in our resources and making a
+                conscious effort to extend their lifecycle. It's a small step
+                that, when taken by many, can lead to significant change.
+              </p>
+            </section>
+              <img
+                className="hover:transform hover:scale-110 transition-transform duration-300"
+                style={{ width: "40%" }}
+                src="https://i.pinimg.com/564x/9d/95/ca/9d95ca131195dab6a2f317c6e3600a90.jpg"
+                alt="recycle"
+              />
+          </article>
+         
+          
+        </section>
+        <section className="flex justify-center mt-12 pb-10">
+          <article 
+            className="text-black flex shadow-2xl overflow-hidden scroll-y"
+            style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
+          >
+               <img
+                className="hover:transform hover:scale-110 transition-transform duration-300"
+                style={{ width: "40%" }}
+                src="https://i.pinimg.com/564x/48/8e/f1/488ef1d1fcc91a8afd1ed585644f1a25.jpg"
+                alt="ong"
+              />
+            <section>
+              <h1 className="font-bold text-center px-2 pt-20 text-xl">
+                Supporting Non-Profit Organizations
+              </h1>
+
+              <p className="py-6 px-16">
+                There are countless non-profit organizations dedicated to
+                protecting the environment and combating climate change. These
+                organizations conduct research, advocate for policy changes, and
+                work on the ground to protect our ecosystems.
+              </p>
+
+              <p className="py-6 px-16">
+                By supporting these organizations, we can contribute to their
+                efforts and help amplify their impact. Whether it's through
+                donations, volunteering, or simply spreading the word about
+                their work, every bit of support counts.
+              </p>
+            </section>
+           
+          </article>
+          
+          
+        </section>
+
+        <section className="flex justify-center mt-12 pb-10">
+          <article
+          
+            className="text-black flex shadow-2xl overflow-hidden"
+            style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
+          >
+            <section>
+              <h1 className="font-bold text-center px-2 pt-20 text-xl">
+                The Importance of Protecting Our Environment
+              </h1>
+
+              <p className="py-6 px-16">
+                Imagine a plastic bag floating in the ocean. It may seem
+                insignificant in the grand scheme of things, but it represents a
+                much larger issue. That plastic bag could end up in the stomach
+                of a sea creature, or it could break down into microplastics
+                that contaminate our water and food.
+              </p>
+
+              <p className="py-6 px-16">
+                This is just one example of why it's crucial to protect our
+                environment. Our actions have far-reaching consequences, and
+                it's our responsibility to minimize our impact. By making
+                conscious choices, we can help preserve our planet for future
+                generations.
+              </p>
+            </section>
+              <img
+                className="hover:transform hover:scale-110 transition-transform duration-300 "
+                style={{ width: "40%" }}
+                src="https://i.pinimg.com/564x/1d/74/18/1d7418c65e30dcc84014a93c76c4f2d7.jpg"
+                alt="plastic iceberg"
+                />
+          </article>
+          
+         
+        </section>
+      </div>
+    </>
   );
 }
