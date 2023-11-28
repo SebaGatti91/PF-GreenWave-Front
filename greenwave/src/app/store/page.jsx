@@ -15,7 +15,6 @@ const Store = () => {
   const [totalFilteredProducts, setTotalFilteredProducts] = useState([]);
   const [filtersActive, setFiltersActive] = useState(false);
   const [ordersActive, setOrdersActive] = useState(false);
-
   const productsPerPage = 6;
 
   const fetchData = async () => {
