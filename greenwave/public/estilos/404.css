@@ -2,7 +2,7 @@
     font-family: 'fatBold';
     src: url(../fonts/GasoekOne-Regular.ttf);
 }
-.container {
+.containers {
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -79,6 +79,6 @@
   .mi-clase.dark:active {
     box-shadow: 0 8px 9px -4px rgba(84, 180, 211, 0.2), 0 4px 18px 0 rgba(84, 180, 211, 0.1);
   }
-  .content{
+  .contenido{
     margin-left: 10em;
   }
