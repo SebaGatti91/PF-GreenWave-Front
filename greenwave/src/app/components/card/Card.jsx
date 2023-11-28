@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useCart } from "../cart/cartContext";
 
 const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
