@@ -2,6 +2,8 @@
 const nextConfig = {
   images: {
     domains: [
+      "",
+      'res.cloudinary.com',
       "i.imgur.com",
       "i.pinimg.com",
       "www.kienyke.com",
@@ -9,6 +11,7 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "estag.fimagenes.com",
       "m.media-amazon.com",
+      "www.serzen.mx",
     ],
   },
 };
