@@ -9,7 +9,6 @@ import {
 export default function PostProduct() {
   const [file, setFile] = useState(null);
   const [materials, setMaterials] = useState([]);
-  const[imageUrl, setImageUrl] = useState(null)
 
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -17,7 +16,7 @@ export default function PostProduct() {
         const materialsData = await materialsApi();
         setMaterials(materialsData);
       } catch (error) {
-        throw Error("Error fetching materials:", error);
+        throw Error(error.message);
       }
     };
 
@@ -98,7 +97,6 @@ export default function PostProduct() {
 
             const data = await response.json();
             console.log(data)
-            setImageUrl(data.url)
             values.image = data.url;
             
             submitForm(values)
@@ -282,13 +280,11 @@ export default function PostProduct() {
             </form>
             <div className="w-2/5 bg-lime-200">
           
-              {
-                imageUrl ? <img src={imageUrl} className="w-full h-full object-cover"/> : <img
+            <img
                 src="./images/recicle.jpg"
                 alt=""
                 className="w-full h-full object-cover"
               />
-              }
             </div>
           </div>
         )}
