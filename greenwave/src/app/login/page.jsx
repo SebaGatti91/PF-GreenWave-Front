@@ -2,21 +2,47 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+import axios from "axios"; // Asegúrate de importar axios
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
   const [errors, setErrors] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
   const { data: session } = useSession();
 
-  // Si el usuario ya está autenticado, redirigir a la página de inicio
+  // Utiliza un estado para rastrear si ya se ha ejecutado la lógica de creación de usuario
+  const [userCreation, setUserCreation] = useState(false);
+
   useEffect(() => {
-    if (session?.user) {
-      router.replace("/homepage");
+    const createUserAndRedirect = async () => {
+      try {
+        const { email, image, name } = session.user;
+
+        // Verificar si el correo electrónico está presente
+        if (!email) {
+          console.error("Error: Email is missing in user data");
+          return;
+        }
+
+        // Construir la URL con parámetros de consulta
+        const url = `http://localhost:3001/users?email=${encodeURIComponent(
+          email
+        )}&image=${encodeURIComponent(image)}&name=${encodeURIComponent(name)}`;
+
+        // Realizar la petición al backend usando axios
+        await axios.post(url);
+        setUserCreation(true); // Marcar que la creación de usuario ha terminado
+      } catch (error) {
+        console.error("Error al crear el usuario en el backend", error);
+      }
+      router.replace("/"); // Redirigir solo después de la creación de usuario
+    };
+
+    if (session?.user && !userCreation) {
+      setUserCreation(true); 
+      createUserAndRedirect();
     }
-  }, [session, router]);
+  }, [session]);
 
   const handleSignInWithProvider = async (providerId) => {
     if (providerId === "credentials") {
@@ -49,23 +75,9 @@ const LoginPage = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>Login</h1>
       <div>
-        <input
-          type="email"
-          placeholder="example@example.com"
-          className={styles.input}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className={styles.input}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
         <button
           className={styles.button}
-          onClick={() => handleSignInWithProvider("credentials")}
+          onClick={() => handleSignInWithProvider("auth0")}
         >
           Sign in with Email and Password
         </button>
