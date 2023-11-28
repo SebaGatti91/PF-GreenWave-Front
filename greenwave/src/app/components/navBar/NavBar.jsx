@@ -61,35 +61,6 @@ const NavigationLinks = ({ session }) => (
       Store
     </Link>
 
-    <Link
-      className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-      style={{
-        fontFamily: "font-serif",
-        ":hover": {
-          background:
-            "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-        },
-      }}
-      href="/tips"
-    >
-      Tips
-    </Link>
-    {session?.user && (
-      <Link
-        className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-        style={{
-          fontFamily: "font-serif",
-          ":hover": {
-            background:
-              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-          },
-        }}
-        href="/post-product"
-      >
-        Post
-      </Link>
-    )}
-    {session?.user && (
       <Link
         className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
         style={{
@@ -101,15 +72,47 @@ const NavigationLinks = ({ session }) => (
         }}
         href="/tips"
       >
-        Donation
+        Tips
       </Link>
-    )}
-    <ButtonAuth />
-  </section>
-);
+      {session?.user && (
+        <Link
+          className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+          style={{
+            fontFamily: "font-serif",
+            ":hover": {
+              background:
+                "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
+            },
+          }}
+          href="/post-product"
+        >
+          Post
+        </Link>
+      )}
+      {session?.user && (
+        <div>
+          {console.log("User:", session.user)} {/* Agrega este console log */}
+          <Link
+            className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+            style={{
+              fontFamily: "font-serif",
+              ":hover": {
+                background:
+                  "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
+              },
+            }}
+            href="/tips"
+          >
+            Donation
+          </Link>
+        </div>
+      )}
+      <ButtonAuth />
+    </section>
+  );
 
 const NavBar = () => {
-  const pathname = usePathname();
+  const pathname = usePathname;
   const { data: session } = useSession();
   return (
     <div>
