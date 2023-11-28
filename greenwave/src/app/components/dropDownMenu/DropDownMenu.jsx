@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-const DropDownMenu = ({ handleMaterials, handleFilter, handleOrder }) => {
+const DropDownMenu = ({
+  handleMaterials,
+  handleFilter,
+  handleOrder,
+  handleClearFilters,
+}) => {
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
@@ -77,6 +82,13 @@ const DropDownMenu = ({ handleMaterials, handleFilter, handleOrder }) => {
           <option value="priceDesc">Descendent</option>
         </select>
       </div>
+      <button
+        onClick={handleClearFilters}
+        className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer rounded"
+        style={{ width: "130px", listStyle: "none" }}
+      >
+        Clear Filters
+      </button>
     </details>
   );
 };

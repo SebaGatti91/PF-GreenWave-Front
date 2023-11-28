@@ -14,7 +14,7 @@ const LoginPage = () => {
   // Si el usuario ya está autenticado, redirigir a la página de inicio
   useEffect(() => {
     if (session?.user) {
-      router.replace("/");
+      router.replace("/homepage");
     }
   }, [session, router]);
 

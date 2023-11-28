@@ -1,32 +1,31 @@
-'use client'
-import React, { useEffect } from 'react';
+"use client";
+import React, { useEffect } from "react";
 import "../../public/estilos/splash.css";
 import Head from "next/head";
-
+import Button from "./components/button/Button";
 export default function Splash() {
   useEffect(() => {
-    const arrow = document.querySelector('.flecha');
-    const video = document.querySelector('#video');
-    const section = document.querySelector('#section');
+    const arrow = document.querySelector(".flecha");
+    const video = document.querySelector("#video");
+    const section = document.querySelector("#section");
 
-    arrow.addEventListener('click', (e) => {
+    arrow.addEventListener("click", (e) => {
       e.preventDefault();
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ behavior: "smooth" });
     });
 
-  
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          video.style.opacity = '0.5';
-          video.style.backgroundColor = 'black';
+          video.style.opacity = "0.5";
+          video.style.backgroundColor = "black";
         } else {
-          video.style.opacity = '1';
-          video.style.backgroundColor = 'transparent';
+          video.style.opacity = "1";
+          video.style.backgroundColor = "transparent";
         }
       });
     });
-    
+
     observer.observe(section);
   }, []);
 
@@ -48,31 +47,35 @@ export default function Splash() {
         <div className="container">
           <main className="flex flex-row md:w-1/2 ">
             <div className="content">
-              <img className="logo" src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"></img>
+              <img
+                className="logo"
+                src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"
+              ></img>
               <h1 className="title">Green wave</h1>
               <p className="description">Deja una huella en tu mundo</p>
-              <button
-                className='button flex items-center justify-center text-sm border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
-                href="/homepage"
+              <Button
+                link={"/homepage"}
+                className={
+                  'button flex items-center justify-center text-sm border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
+                }
+                text={"Start"}
+              />
+
+              <div
+                className="flex justify-center"
+                style={{ marginTop: "50px" }}
               >
-                Entrar
-              </button>
-              
-              <div className="flex justify-center" style={{marginTop: '50px'}}>
                 <a href="#section" className="flecha">
                   ↓
                 </a>
               </div>
-
             </div>
           </main>
         </div>
       </div>
-      <div className='seccion' id="section">
-        
-<section className="flex justify-center mt-12 pb-10 ">
+      <div className="seccion" id="section">
+        <section className="flex justify-center mt-12 pb-10 ">
           <article
-           
             className="text-black flex shadow-2xl overflow-hidden"
             style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
           >
@@ -96,27 +99,25 @@ export default function Splash() {
                 that, when taken by many, can lead to significant change.
               </p>
             </section>
-              <img
-                className="hover:transform hover:scale-110 transition-transform duration-300"
-                style={{ width: "40%" }}
-                src="https://i.pinimg.com/564x/9d/95/ca/9d95ca131195dab6a2f317c6e3600a90.jpg"
-                alt="recycle"
-              />
+            <img
+              className="hover:transform hover:scale-110 transition-transform duration-300"
+              style={{ width: "40%" }}
+              src="https://i.pinimg.com/564x/9d/95/ca/9d95ca131195dab6a2f317c6e3600a90.jpg"
+              alt="recycle"
+            />
           </article>
-         
-          
         </section>
         <section className="flex justify-center mt-12 pb-10">
-          <article 
+          <article
             className="text-black flex shadow-2xl overflow-hidden scroll-y"
             style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
           >
-               <img
-                className="hover:transform hover:scale-110 transition-transform duration-300"
-                style={{ width: "40%" }}
-                src="https://i.pinimg.com/564x/48/8e/f1/488ef1d1fcc91a8afd1ed585644f1a25.jpg"
-                alt="ong"
-              />
+            <img
+              className="hover:transform hover:scale-110 transition-transform duration-300"
+              style={{ width: "40%" }}
+              src="https://i.pinimg.com/564x/48/8e/f1/488ef1d1fcc91a8afd1ed585644f1a25.jpg"
+              alt="ong"
+            />
             <section>
               <h1 className="font-bold text-center px-2 pt-20 text-xl">
                 Supporting Non-Profit Organizations
@@ -136,15 +137,11 @@ export default function Splash() {
                 their work, every bit of support counts.
               </p>
             </section>
-           
           </article>
-          
-          
         </section>
 
         <section className="flex justify-center mt-12 pb-10">
           <article
-          
             className="text-black flex shadow-2xl overflow-hidden"
             style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
           >
@@ -169,15 +166,13 @@ export default function Splash() {
                 generations.
               </p>
             </section>
-              <img
-                className="hover:transform hover:scale-110 transition-transform duration-300 "
-                style={{ width: "40%" }}
-                src="https://i.pinimg.com/564x/1d/74/18/1d7418c65e30dcc84014a93c76c4f2d7.jpg"
-                alt="plastic iceberg"
-                />
+            <img
+              className="hover:transform hover:scale-110 transition-transform duration-300 "
+              style={{ width: "40%" }}
+              src="https://i.pinimg.com/564x/1d/74/18/1d7418c65e30dcc84014a93c76c4f2d7.jpg"
+              alt="plastic iceberg"
+            />
           </article>
-          
-         
         </section>
       </div>
     </>

@@ -12,6 +12,8 @@ const Store = () => {
   const [orderValue, setOrderValue] = useState("Alfabetico");
   const [filterValueName, setFilterValueName] = useState("");
   const [totalFilteredProducts, setTotalFilteredProducts] = useState([]);
+  const [filtersActive, setFiltersActive] = useState(false);
+  const [ordersActive, setOrdersActive] = useState(false);
 
   const productsPerPage = 6;
 
@@ -44,6 +46,11 @@ const Store = () => {
       console.log(data);
       setProducts(data);
       setTotalFilteredProducts(data);
+      setFiltersActive(
+        filterValue !== "Products" || filterValueName.trim() !== ""
+      );
+      setOrdersActive(orderValue !== "Alfabetico" && orderValue !== "Price");
+
       setCurrentPage(1);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -69,6 +76,17 @@ const Store = () => {
     setOrderValue(event.target.value);
   };
 
+  const handleClearFilters = () => {
+    // Restablecer estados de filtros y ordenamientos
+    setFilterValue("Products");
+    setFilterValueMaterial("Materials");
+    setOrderValue("Alfabetico");
+    setFilterValueName("");
+
+    // Volver a obtener datos
+    fetchData();
+  };
+
   const handleMaterials = (event) => {
     const selectedMaterial = event.target.value;
     if (selectedMaterial === "Materials") {
@@ -92,15 +110,16 @@ const Store = () => {
   );
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="absolute top-13 left-3 ">
+    <div className="container mx-auto p-4 relative">
+      <div className="absolute top-4 left-0 ">
         <DropDownMenu
           handleMaterials={handleMaterials}
           handleFilter={handleFilter}
           handleOrder={handleOrder}
+          handleClearFilters={handleClearFilters}
         />
       </div>
-      <div className="absolute top-8 left-52">
+      <div className="absolute top -0 left-52">
         <input
           type="text"
           placeholder="Search..."
