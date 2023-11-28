@@ -26,6 +26,22 @@ const handler = NextAuth({
     })
   ],
 
+  // callbacks: {
+  //   async session({ session, token }) {
+  //     // Agregar información del token a la sesión
+  //     session.user = token;
+  //     return session;
+  //   },
+  //   // async getProviders({ providers }) {
+  //   //   // Devuelve la lista de proveedores disponibles
+  //   //   return providers;
+  //   // },
+    async signIn({ user, account, profile, email, credentials }) {
+      // Redirige a la página de inicio después de iniciar sesión con éxito
+      return Promise.resolve('/'); // Puedes cambiar '/' por la ruta deseada
+    },
+  // },
+
   pages: {
     signIn: "/login",
   },

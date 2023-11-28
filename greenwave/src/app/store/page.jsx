@@ -8,6 +8,7 @@ const Store = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [filterValue, setFilterValue] = useState("Products");
+  const [filterValueMaterial, setFilterValueMaterial] = useState("Materials");
   const [orderValue, setOrderValue] = useState("Alfabetico");
   const [filterValueName, setFilterValueName] = useState("");
 
@@ -15,20 +16,41 @@ const Store = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/store?filter=${filterValue}&sort=${orderValue}&name=${filterValueName}`
-      );
+      let url = 'http://localhost:3001/store?';
+
+      // Agregar el filtro de materiales solo si no es 'Materials'
+      if (filterValueMaterial !== 'Materials') {
+        url += `material=${filterValueMaterial}&`;
+      }
+
+      // Agregar el filtro de rating solo si no es 'Products'
+      if (filterValue !== 'Products') {
+        url += `filter=${filterValue}&`;
+      }
+
+      // Agregar el filtro de orden solo si no es 'Alfabetico' o 'Price'
+      if (orderValue !== 'Alfabetico' && orderValue !== 'Price') {
+        url += `sort=${orderValue}&`;
+      }
+
+      // Agregar el filtro de nombre solo si no está vacío
+      if (filterValueName.trim() !== '') {
+        url += `name=${filterValueName}&`;
+      }
+
+      const response = await axios.get(url);
       const { data } = response;
+      console.log(data);
       setProducts(data);
       setCurrentPage(1);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error('Error fetching data:', error);
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, [filterValue, orderValue]);
+  }, [filterValue, orderValue, filterValueMaterial]);
 
   const handleFilterName = (event) => {
     setFilterValueName(event.target.value);
@@ -43,6 +65,17 @@ const Store = () => {
 
   const handleOrder = (event) => {
     setOrderValue(event.target.value);
+  };
+
+  const handleMaterials = (event) => {
+    const selectedMaterial = event.target.value;
+    if (selectedMaterial === 'Materials') {
+      setFilterValueMaterial(selectedMaterial);
+      setFilterValue('Products'); // Restaurar el valor predeterminado para el filtro general
+      fetchData(); // Volver a obtener datos
+    } else {
+      setFilterValueMaterial(selectedMaterial);
+    }
   };
 
   const paginate = (pageNumber) => {
@@ -83,30 +116,36 @@ const Store = () => {
         </button>
       </div>
       <div className="flex justify-evenly mb-4">
-        {/* <input
-          type="text"
-          onChange={handleFilterName}
-          value={filterValueName}
-          placeholder="Search by name"
-        />
-        <button onClick={handleSearch}>Search</button> */}
 
-        {/* <div className="mr-4">
-          <select
-            className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
-            style={{ borderRadius: "1em 1em" }}
-          >
-            <option className="text-center" value="Products">
-              Materials
-            </option>
-            <option className="text-center" value="Rating">
-              Cardboard
-            </option>
-            <option className="text-center" value="Materials">
-              Wood
-            </option>
-          </select>
-        </div> */}
+        <select
+          onChange={handleMaterials}
+          className="py-1 px-2 bg-hover hover:bg-boton hover:cursor-pointer"
+          style={{ borderRadius: "1em 1em" }}>
+          <option className="text-center" value="Materials">
+            Materials
+          </option>
+          <option className="text-center" value="wood">
+            Wood
+          </option>
+          <option className="text-center" value="glass">
+            Glass
+          </option>
+          <option className="text-center" value="paper and Cardboard">
+            Paper and Cardboard
+          </option>
+          <option className="text-center" value="plastic">
+            Plastic
+          </option>
+          <option className="text-center" value="metals">
+            Metals
+          </option>
+          <option className="text-center" value="electronics">
+            Electronics
+          </option>
+          <option className="text-center" value="textiles">
+            Textiles
+          </option>
+        </select>
 
         <div className="mr-4">
           <select
@@ -188,7 +227,7 @@ const Store = () => {
         {currentProducts.map((product) => (
           <div
             key={product.id}
-            // className=" hover:transform hover:scale-105 transition-transform duration-300"
+          // className=" hover:transform hover:scale-105 transition-transform duration-300"
           >
             <Card
               id={product.id}
