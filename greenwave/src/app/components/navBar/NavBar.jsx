@@ -97,7 +97,7 @@ const NavigationLinks = ({session}) => (
       )}
       {session?.user && (
         <div>
-          {console.log("User:", session.user)} {/* Agrega este console log */}
+          {/* {console.log("User:", session.user)} Agrega este console log */}
           <Link
             className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
             style={{
