@@ -3,9 +3,9 @@ import Link from "next/link";
 export default function Custom404() {
 
   return (
-  <div>
-    <div className="container">
-      <div className="content">
+  
+    <div className="containers">
+      <div className="contenido">
       <div>
       <p className="background-clip-text">Oops!</p>
       </div>
@@ -19,6 +19,6 @@ export default function Custom404() {
     </div>
     </div>
     </div>
-    </div>
+   
   );
 }

@@ -24,22 +24,20 @@ const SearchSection = ({ pathname }) => (
   </section>
 );
 
-const NavigationLinks = ({ session }) => {
-  return (
-    <section className="flex gap-10 items-center">
-      <Link
-        className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-        style={{
-          fontFamily: "font-serif",
-          ":hover": {
-            background:
-              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-          },
-        }}
-        href="/"
-      >
-        Home
-      </Link>
+const NavigationLinks = ({session}) => (
+  <section className="flex gap-10 items-center">
+    <Link
+      className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+      style={{
+        fontFamily: "font-serif", ':hover': {
+          background:
+            'linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)',
+        },
+      }}
+      href="/homepage"
+    >
+      Home
+    </Link>
 
       <Link
         className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
@@ -115,7 +113,7 @@ const NavigationLinks = ({ session }) => {
       <ButtonAuth />
     </section>
   );
-};
+
 
 const NavBar = () => {
   const pathname = usePathname();
