@@ -2,7 +2,8 @@
 import React, { useEffect } from "react";
 import "../../public/estilos/splash.css";
 import Head from "next/head";
-import Button from "./components/button/Button";
+import Link from 'next/link';
+
 export default function Splash() {
   useEffect(() => {
     const arrow = document.querySelector(".flecha");
@@ -53,18 +54,16 @@ export default function Splash() {
               ></img>
               <h1 className="title">Green wave</h1>
               <p className="description">Deja una huella en tu mundo</p>
-              <Button
-                link={"/homepage"}
-                className={
-                  'button flex items-center justify-center text-sm border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
-                }
-                text={"Start"}
-              />
-
-              <div
-                className="flex justify-center"
-                style={{ marginTop: "50px" }}
-              >
+              <Link href='/homepage'>
+              <button
+                className='button flex items-center justify-center text-sm border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
+                href="/homepage"
+                >
+                Entrar
+              </button>
+              </Link>
+              
+              <div className="flex justify-center" style={{marginTop: '50px'}}>
                 <a href="#section" className="flecha">
                   ↓
                 </a>
