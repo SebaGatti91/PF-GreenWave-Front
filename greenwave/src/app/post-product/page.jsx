@@ -1,219 +1,284 @@
 "use client";
 import Swal from "sweetalert2";
-import { useState } from "react";
-import validatePost from "./validation";
-import Card from "../components/card/Card";
-import image from "../../../public/images/Green-Wave.png";
-import "../../../public/estilos/postbutton.css";
+import { Formik } from "formik";
+import React, { createContext } from "react";
 import axios from "axios";
-export default function PostProduct() {
-  const [errors, setErrors] = useState({});
-  const [product, setProduct] = useState({
-    name: "",
-    image: "",
-    status: "",
-    price: "",
-    rating: "",
-    materials: "",
-    description: "",
-  });
-  const [file, setFile] = useState(null);
-  const handleChange = (e) => {
-    let newProduct;
-    if (e.target.name === "price") {
-      const price = parseFloat(e.target.value);
-      if (!isNaN(price)) {
-        newProduct = { ...product, price: price.toFixed(2) + "$" };
-      }
-    }
-    if (e.target.name === "imgFile") {
-      setFile(e.target.files[0]);
-      newProduct = { ...product, [e.target.name]: e.target.value, image: "" };
-    } else if (e.target.name === "image") {
-      newProduct = { ...product, [e.target.name]: e.target.value };
-      setFile(null);
-    } else {
-      newProduct = { ...product, [e.target.name]: e.target.value };
-    }
-    setProduct(newProduct);
-    const validateErrors = validatePost(newProduct);
-    setErrors(validateErrors);
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const materialsApi = async () => {
+  const response = await axios.get(`http://localhost:3001/materials/`);
+  return response.data;
+};
 
-    const validationErrors = validatePost(product);
-    setErrors(validationErrors);
-    if (Object.keys(validationErrors).length !== 0) {
-      return "all required fields";
-    }
-    try {
-      const endPoint = "http://localhost:3001/products";
-      const response = await axios.post(endPoint, product);
-      if (response.status === 200) {
-        return Swal.fire({
-          title: "Your product has been published!",
-          icon: "success"
-        });
-      }
-      setProduct({
-        name: "",
-        image: "",
-        status: "",
-        price: "",
-        rating: "",
-        materials: "",
-        description: "",
+const submitForm = async (values) => {
+  try {
+    const response = await axios.post("http://localhost:3001/products", values);
+    if (response.status === 200) {
+      return Swal.fire({
+        icon: "success",
+        title: "Product Posted Successfully",
+        text: "Your product has been successfully posted.",
       });
-      setFile(null);
-      setErrors(null);
-    } catch (error) {
-      setErrors(error.message);
     }
-  };
-  console.log(product);
+  } catch (error) {
+    throw Error(error);
+  }
+};
+
+export default async function PostProduct() {
+  const materials = await materialsApi();
 
   return (
     <div>
-      <h2 className="text-2xl font-bold m-2 text-center">Publish your product</h2>
-      <div className="form m-2 flex justify-center items-center">
-        <div className="flex gap-3 items-center">
-          <div className="w-3/4">
+      <h2 className="text-2xl font-bold m-2 text-center">
+        Publish your product
+      </h2>
+
+      <Formik
+        initialValues={{
+          name: "",
+          price: "",
+          stock: "",
+          materials: "",
+          rating: "",
+          description: "",
+          image: "",
+        }}
+        validate={(values) => {
+          let errors = {};
+          //validations for name
+          if (!values.name) {
+            errors.name = "Por favor ingresa un nombre";
+          } else if (!/^[a-zA-Z\s]{3,30}$/.test(values.name)) {
+            errors.name = "Debe contener de 3 a 30 letras";
+          }
+
+          //validations for price
+          if (!values.price) {
+            errors.price = "Por favor ingresa el costo del producto";
+          } else if (!/^\d{1,5}$/.test(values.price)) {
+            errors.price = "Solo debe contener numeros de hasta 5 cifras";
+          }
+
+          //validations for stock
+          if (!values.stock) {
+            errors.stock = "Por favor ingresa el stock del producto";
+          } else if (!/^\d{1,5}$/.test(values.stock)) {
+            errors.stock = "Solo debe contener numeros de hasta 5 cifras";
+          }
+
+          //validation temporal for rrating
+          if (!values.rating) {
+            errors.rating = "Por favor ingresa el rating del producto";
+          } else if (!/^[1-5]$/.test(values.rating)) {
+            errors.rating = "Solo debe contener numeros del 1 al 5";
+          }
+
+          //validations for description
+          if (!values.description) {
+            errors.description =
+              "Por favor ingresa una descripcion del producto";
+          } else if (!/^[a-zA-Z\s]{1,300}$/.test(values.description)) {
+            errors.description =
+              "Solo debe contener letras y hasta 300 caracteres";
+          }
+
+          //validation for image
+          if (
+            !/^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/.test(
+              values.image
+            )
+          ) {
+            errors.image = "Only URL image";
+          }
+
+          return errors;
+        }}
+        onSubmit={(values, { resetForm }) => {
+          submitForm(values)
+            .then(() => {
+              resetForm();
+              console.log("formulario enviado");
+            })
+            .catch((error) => {
+              console.error("Error al enviar el formulario:", error);
+            });
+        }}
+      >
+        {({
+          handleChange,
+          values,
+          handleSubmit,
+          handleBlur,
+          errors,
+          touched,
+        }) => (
+          <div className="flex">
             <form
-              className="bg-custom-green text-black rounded-lg p-8 max-w-lg mx-auto"
               onSubmit={handleSubmit}
+              className="w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-4 p-4"
             >
-              <div className="flex gap-3">
-                <div className="mb-4">
-                  <label className="block mb-2">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Recycled lamp.."
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded"
-                  />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm italic">{errors.name}</p>
-                  )}
-                </div>
-                <div className="mb-4">
-                  <label className="block mb-2">Status</label>
-                  <input
-                    type="text"
-                    name="status"
-                    placeholder="New"
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded"
-                  />
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <div className="mb-4">
-                  <label className="block mb-2">Rating</label>
-                  <input
-                    type="text"
-                    name="rating"
-                    placeholder="4"
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block mb-2">Materials</label>
-                  <input
-                    type="text"
-                    name="materials"
-                    placeholder="Glass, plastic.."
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded"
-                  />
-                </div>
-              </div>
-              <div className="flex">
-                <div className="mb-4">
-                  <label className="block mb-2">Price</label>
-                  <div className="flex">
-                    <span className="bg-gray-200 p-2 border border-r-0 border-gray-300 rounded-l">
-                      $
-                    </span>
-                    <input
-                      type="number"
-                      placeholder="$$$"
-                      min="0"
-                      name="price"
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-r"
-                    />
-                  </div>
-                  {errors.price && (
-                    <p className="text-red-500 text-sm italic">
-                      {errors.price}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">Add an image</label>
-                <input
-                  type="text"
-                  name="image"
-                  placeholder="https://image.jpg"
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
-                />
-                {errors.image && (
-                  <p className="text-red-500 text-sm italic">{errors.image}</p>
-                )}
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">
-                Or select an image to upload:
+              <div className="mb-4 w-full">
+                <label htmlFor="name" className="font-semibold mb-2">
+                  Name
                 </label>
                 <input
-                  type="file"
-                  name="imgFile"
+                  type="text"
+                  id="name"
+                  value={values.name}
                   onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="name"
+                  placeholder=" Recycled lamp.."
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">Description</label>
-                <textarea
-                  name="description"
-                  onChange={handleChange}
-                  placeholder="..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
-                ></textarea>
-                {errors.description && (
-                  <p className="text-red-500 text-sm italic">
-                    {errors.description}
-                  </p>
+                {touched.name && errors.name && (
+                  <div className="font-medium text-xs text-orange-700">
+                    {errors.name}
+                  </div>
                 )}
               </div>
-              <div className="flex justify-center">
-                <button id="button" className=" bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1">
-                  <span>Publish</span>
-                </button>
+              <div className="flex gap-3">
+                <div className="mb-4 w-full">
+                  <label htmlFor="price" className="font-semibold mb-2">
+                    Price
+                  </label>
+                  <input
+                    type="text"
+                    id="price"
+                    value={values.price}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    name="price"
+                    placeholder=" $$$"
+                    className="w-full px-3 py-2 border border-gray-300 rounded"
+                  />
+                  {touched.price && errors.price && (
+                    <div className="font-medium text-xs text-orange-700">
+                      {errors.price}
+                    </div>
+                  )}
+                </div>
+                <div className="mb-4 w-full">
+                  <label htmlFor="stock" className="mb-2 font-semibold">
+                    Stock
+                  </label>
+                  <input
+                    type="text"
+                    id="stock"
+                    value={values.stock}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    name="stock"
+                    placeholder=" 5"
+                    className="w-full px-3 py-2 border border-gray-300 rounded"
+                  />
+                  {touched.stock && errors.stock && (
+                    <div className="font-medium text-xs text-orange-700">
+                      {errors.stock}
+                    </div>
+                  )}
+                </div>
               </div>
+              <div className="mb-4 w-full">
+                <label htmlFor="materials" className="font-semibold mb-2">
+                  Materials
+                </label>
+                <select
+                  name="materials"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                >
+                  <option value={values.materials} disabled>
+                    Select Material
+                  </option>
+                  {materials.map((material) => (
+                    <option key={material.id} value={material.name}>
+                      {material.name}
+                    </option>
+                  ))}
+                </select>
+                {touched.materials && errors.materials && (
+                  <div className="font-medium text-xs text-orange-700">
+                    {errors.materials}
+                  </div>
+                )}
+              </div>
+              <div className="mb-4 w-full">
+                <label htmlFor="name" className="font-semibold mb-2">
+                  Rating
+                </label>
+                <input
+                  type="text"
+                  id="rating"
+                  value={values.rating}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="rating"
+                  placeholder=" 3 "
+                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                />
+                {touched.rating && errors.rating && (
+                  <div className="font-medium text-xs text-orange-700">
+                    {errors.rating}
+                  </div>
+                )}
+              </div>
+              <div className="mb-4 flex flex-col w-full">
+                <label htmlFor="description" className="font-semibold mb-2">
+                  Description
+                </label>
+                <textarea
+                  name="description"
+                  value={values.description}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder=" ..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                ></textarea>
+                {touched.description && errors.description && (
+                  <div className="font-medium text-xs text-orange-700">
+                    {errors.description}
+                  </div>
+                )}
+              </div>
+              <div className="mb-4 w-full">
+                <label htmlFor="image" className="font-semibold mb-2">
+                  Add your URL image:
+                </label>
+                <input
+                  type="url"
+                  id="image"
+                  name="image"
+                  value={values.image}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder=" https://image.jpg"
+                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                />
+                {touched.image && errors.image && (
+                  <div className="font-medium text-xs text-orange-700">
+                    {errors.image}
+                  </div>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="bg-green-600 w-full text-white py-2 px-4 rounded hover:bg-green-700"
+              >
+                Post
+              </button>
             </form>
+            <div className="w-2/5 bg-lime-200">
+              <img
+                src="./images/recicle.jpg"
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-          <div className="w-1/2 h-200">
-            <Card
-              id={product.id}
-              name={product.name}
-              image={product?.image || image}
-              price={product.price}
-              rating={product.rating}
-              description={product.description}
-              showStars={false}
-              showbuybutton={false}
-              showdescription={true}
-            />
-          </div>
-        </div>
-      </div>
+        )}
+      </Formik>
     </div>
   );
 }
