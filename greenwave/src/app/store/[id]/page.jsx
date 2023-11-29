@@ -166,7 +166,7 @@ export default function Detail({ params }) {
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
           <div className="bg-white p-8 rounded-lg" style={{ width: '50%' }}>
             {/* Pasa los detalles del producto al componente PostProduct para la edición */}
-            <PostProduct initialValues={product}/>
+            <PostProduct initialValues={product} isOff={false} />
 
             <button
               className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"

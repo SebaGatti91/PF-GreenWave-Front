@@ -1,17 +1,16 @@
 "use client";
-import axios from "axios"
+import axios from "axios";
 import Swal from "sweetalert2";
 import { Formik } from "formik";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import React, { createContext, useState, useEffect } from "react";
 import {
   materialsApi,
   submitForm,
 } from "../components/materialsApi/useMaterialsApi";
 
-export default function PostProduct({ initialValues}) {
-
-  const router = useRouter()
+export default function PostProduct({ initialValues, isOff = true }) {
+  const router = useRouter();
   const [file, setFile] = useState(null);
   const [materials, setMaterials] = useState([]);
 
@@ -37,14 +36,14 @@ export default function PostProduct({ initialValues}) {
       </h2>
 
       <Formik
-         initialValues={{
-          name: initialValues ? initialValues.name : '',
-          price: initialValues ? initialValues.price : '',
-          stock: initialValues ? initialValues.stock : '',
-          materials: initialValues ? initialValues.materials : '',
-          rating: initialValues ? initialValues.rating : '',
-          description: initialValues ? initialValues.description : '',
-          image: initialValues ? initialValues.image : '',
+        initialValues={{
+          name: initialValues ? initialValues.name : "",
+          price: initialValues ? initialValues.price : "",
+          stock: initialValues ? initialValues.stock : "",
+          materials: initialValues ? initialValues.materials : "",
+          rating: initialValues ? initialValues.rating : "",
+          description: initialValues ? initialValues.description : "",
+          image: initialValues ? initialValues.image : "",
         }}
         validate={(values) => {
           let errors = {};
@@ -91,46 +90,50 @@ export default function PostProduct({ initialValues}) {
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          console.log(values)
+          console.log(values);
           try {
             const formData = new FormData();
             formData.append("image", file);
 
-            const url = initialValues && initialValues.id
-            ? `http://localhost:3001/products/${initialValues.id}`  
-            : '/api/upload';  // URL para la publicación
+            const url =
+              initialValues && initialValues.id
+                ? `http://localhost:3001/products/${initialValues.id}`
+                : "/api/upload"; // URL para la publicación
 
-          // Cambia el método de la solicitud según si es una edición o una publicación
-          const method = initialValues && initialValues.id ? 'PUT' : 'POST';
-          if(method === "PUT"){
-            try {
-              const response = await axios.put(`http://localhost:3001/products/${initialValues.id}`, values);
-              console.log(initialValues.id)
-              if (response.status === 200) {
-                return Swal.fire({
-                  icon: "success",
-                  title: "Product edited Successfully",
-                  text: "Your product has been successfully posted.",
-                });
+            // Cambia el método de la solicitud según si es una edición o una publicación
+            const method = initialValues && initialValues.id ? "PUT" : "POST";
+            if (method === "PUT") {
+              try {
+                const response = await axios.put(
+                  `http://localhost:3001/products/${initialValues.id}`,
+                  values
+                );
+                console.log(initialValues.id);
+                if (response.status === 200) {
+                  return Swal.fire({
+                    icon: "success",
+                    title: "Product edited Successfully",
+                    text: "Your product has been successfully posted.",
+                  });
+                }
+              } catch (error) {
+                throw Error(error);
               }
-            } catch (error) {
-              throw Error(error);
             }
-          }
 
-          const response = await fetch(url, {
-            method,
-            body: formData,
-          });
+            const response = await fetch(url, {
+              method,
+              body: formData,
+            });
 
             const data = await response.json();
             console.log(data);
             values.image = data.url;
 
             submitForm(values, initialValues && initialValues.id)
-            .then(() => {
-              resetForm();
-            })
+              .then(() => {
+                resetForm();
+              })
               .catch((error) => {
                 throw Error(error);
               });
@@ -300,23 +303,24 @@ export default function PostProduct({ initialValues}) {
                 )}
               </div>
               <button
-              onClick={()=>{
-                router.push("/profile")
-              }}
+                onClick={() => {
+                  router.push("/profile");
+                }}
                 type="submit"
                 className="bg-green-600 w-full text-white py-2 px-4 rounded hover:bg-green-700"
               >
-                 {initialValues && initialValues.id ? 'Update' : 'Post'}
+                {initialValues && initialValues.id ? "Update" : "Post"}
               </button>
             </form>
-
-            <div className="w-2/5 bg-lime-200">
-              <img
-                src="./images/recicle.jpg"
-                alt=""
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {isOff && (
+              <div className="w-2/5 bg-lime-200">
+                <img
+                  src="./images/recicle.jpg"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
           </div>
         )}
       </Formik>

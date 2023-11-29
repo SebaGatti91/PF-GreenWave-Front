@@ -96,7 +96,7 @@ const NavigationLinks = ({ session, totalItems }) => (
           style={{
             backgroundColor: "white",
             color:
-              "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
+              "green",
             borderRadius: "100%",
             width: "22px",
             textAlign: "center",
