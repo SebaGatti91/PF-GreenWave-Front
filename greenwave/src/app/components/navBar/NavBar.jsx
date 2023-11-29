@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import ButtonAuth from "../buttonAuth/ButtonAuth";
 import { useSession } from "next-auth/react";
 import { AddToCartIcon } from "../icons/Icons";
-
+import { CartContext } from "../cart/cartContext";
+import { useContext } from "react";
 const LogoSection = () => (
   <div className="flex items-center">
     <Link className="" href="/">
@@ -25,7 +26,7 @@ const SearchSection = ({ pathname }) => (
   </section>
 );
 
-const NavigationLinks = ({ session }) => (
+const NavigationLinks = ({ session, totalItems }) => (
   <section className="flex gap-10 items-center">
     <Link
       className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300 "
@@ -82,11 +83,17 @@ const NavigationLinks = ({ session }) => (
     >
       Tips
     </Link>
-    <Link href='/store/buycart' className="hover:cursor-pointer hover:transform hover:scale-110 transition-transform duration-300">
-      <AddToCartIcon />
+    <Link
+      href="/store/buycart"
+      className="hover:cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
+    >
+      <div className="flex items-center gap-2">
+        <AddToCartIcon />
+        {totalItems}
+      </div>
     </Link>
-    <div className="mr-5">
 
+    <div className="mr-5">
       <ButtonAuth />
     </div>
   </section>
@@ -95,6 +102,13 @@ const NavigationLinks = ({ session }) => (
 const NavBar = () => {
   const pathname = usePathname;
   const { data: session } = useSession();
+
+  const { cart } = useContext(CartContext);
+
+  const totalItems = cart.reduce((acc, product) => {
+    const count = typeof product.count === "number" ? product.count : 0;
+    return acc + count;
+  }, 0);
   return (
     <div>
       <nav
@@ -106,7 +120,7 @@ const NavBar = () => {
       >
         <LogoSection />
         {/* <SearchSection pathname={pathname} /> */}
-        <NavigationLinks session={session} />
+        <NavigationLinks session={session} totalItems={totalItems} />
       </nav>
     </div>
   );

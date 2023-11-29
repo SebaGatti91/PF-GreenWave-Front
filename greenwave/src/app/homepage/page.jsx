@@ -1,6 +1,6 @@
 import "./home.css";
 import Link from "next/link";
-
+import Button from "../components/button/Button";
 export default function Home() {
   return (
     <div>
@@ -18,17 +18,31 @@ export default function Home() {
         <h1 className="font-bold text-4xl relative z-10">Green Wave</h1>
         <div className="max-w-screen-md w-full relative z-10">
           <p className="text-center p-3 text-lg">
-            Green Wave emerges with the mission of promoting recycling and ecological sustainability. On our platform, you will have the opportunity to earn money by delivering recyclable products, while at the same time you will be able to explore and purchase crafts made from recycled materials. We We are committed to promoting an eco-friendly lifestyle, rewarding your efforts to contribute to the well-being of the planet.
+            Green Wave emerges with the mission of promoting recycling and
+            ecological sustainability. On our platform, you will have the
+            opportunity to earn money by delivering recyclable products, while
+            at the same time you will be able to explore and purchase crafts
+            made from recycled materials. We We are committed to promoting an
+            eco-friendly lifestyle, rewarding your efforts to contribute to the
+            well-being of the planet.
           </p>
         </div>
-        <button className="relative z-10 px-3 bg-lime-800 hover:bg-hover hover:text-slate-950 rounded-lg p-1">
-          Store
-        </button>
+        <Button
+          link={"/store"}
+          text={"Store"}
+          className={
+            "relative z-10 px-3 bg-lime-800 hover:bg-hover hover:text-slate-950 rounded-lg p-1"
+          }
+        />
       </section>
 
       <section className="p-4">
-        <h2 className="font-bold text-center text-2xl py-5 mb-6 shadow-2xl"
-          style={{ width: "82%", marginInline: 'auto' }}>¿Why recycling?</h2>
+        <h2
+          className="font-bold text-center text-2xl py-5 mb-6 shadow-2xl"
+          style={{ width: "82%", marginInline: "auto" }}
+        >
+          ¿Why recycling?
+        </h2>
         <div className="flex p-3 justify-center">
           <div className="card shadow-2xl">
             <img
@@ -86,8 +100,11 @@ export default function Home() {
         </div>
       </section>
 
-      <h2 className="font-bold text-center text-2xl py-5 mb-10 shadow-2xl"
-        style={{ width: "82%", marginInline: 'auto' }}>Featured Product
+      <h2
+        className="font-bold text-center text-2xl py-5 mb-10 shadow-2xl"
+        style={{ width: "82%", marginInline: "auto" }}
+      >
+        Featured Product
       </h2>
       <section className="flex justify-center mt-0 pb-10">
         <article
@@ -109,7 +126,7 @@ export default function Home() {
               conscious lighting with this eco-friendly lamp that beautifies
               your home while helping to preserve the environment.
             </p>
-            <Link href='/store'>
+            <Link href="/store">
               <button className="bg-lime-100 rounded-lg p-1 m-5 hover:bg-lime-900 hover:text-lime-50">
                 See more
               </button>
@@ -125,8 +142,11 @@ export default function Home() {
         </article>
       </section>
 
-      <h2 className="font-bold text-center text-2xl py-5 mb-10 shadow-2xl"
-        style={{ width: "82%", marginInline: 'auto' }}>Tips for house
+      <h2
+        className="font-bold text-center text-2xl py-5 mb-10 shadow-2xl"
+        style={{ width: "82%", marginInline: "auto" }}
+      >
+        Tips for house
       </h2>
       <section className="flex justify-center mt-0 pb-10">
         <article
@@ -153,7 +173,7 @@ export default function Home() {
               them with paint and use them as gifts or to decorate your home.
             </p>
 
-            <Link href='/tips'>
+            <Link href="/tips">
               <button className="bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1 m-5 ">
                 See more
               </button>
