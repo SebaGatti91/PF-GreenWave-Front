@@ -4,7 +4,6 @@ import SearchBar from "../searchBar/SearchBar";
 import { usePathname } from "next/navigation";
 import ButtonAuth from "../buttonAuth/ButtonAuth";
 import { useSession } from "next-auth/react";
-import { AddToCartIcon } from "../icons/Icons";
 import { CartContext } from "../cart/cartContext";
 import { useContext } from "react";
 const LogoSection = () => (
@@ -87,13 +86,28 @@ const NavigationLinks = ({ session, totalItems }) => (
       href="/store/buycart"
       className="hover:cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
     >
-      <div className="flex items-center gap-2">
-        <AddToCartIcon />
-        {totalItems}
+      <div className="flex items-center gap-4">
+        <img
+          src="/images/shoppingCart.png"
+          alt="shoppingCartImage"
+          style={{ width: "30px", height: "30px" }}
+        />
+        <div
+          style={{
+            backgroundColor: "white",
+            color:
+              "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
+            borderRadius: "100%",
+            width: "22px",
+            textAlign: "center",
+          }}
+        >
+          {totalItems}
+        </div>
       </div>
     </Link>
 
-    <div className="mr-5">
+    <div className="mr-8 mt-2">
       <ButtonAuth />
     </div>
   </section>
