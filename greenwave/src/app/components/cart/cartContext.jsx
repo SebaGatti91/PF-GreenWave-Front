@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 // Creamos un contexto para el carrito
@@ -6,32 +6,31 @@ export const CartContext = createContext();
 
 // Creaoms un proveedor de contexto para encapsular la lógica del carrito
 export const CartProvider = ({ children }) => {
-
   //creamos una localstorage para persistencia de datos
   const [cart, setCart] = useState(() => {
-
-    const localData = localStorage.getItem('cart');
+    const localData =
+      typeof window !== "undefined" ? localStorage.getItem("cart") : null;
     return localData ? JSON.parse(localData) : [];
   });
-  
+  console.log(cart);
   //mira el estado y agrega prouducts
-  useEffect(()=>{
-    localStorage.setItem('cart', JSON.stringify(cart));
-  },[cart])
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   //si existe no agrega, pero sino, lo agrega
   const addToCart = (product) => {
-    const cartIndex = cart.findIndex(item => item.id === product.id);
+    const cartIndex = cart.findIndex((item) => item.id === product.id);
 
     if (cartIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart[cartIndex] = {
         ...updatedCart[cartIndex],
-        count: updatedCart[cartIndex].count + 1
+        count: updatedCart[cartIndex].count + 1,
       };
       setCart(updatedCart);
     } else {
       const newCartItem = { ...product, count: 1 };
-      setCart(prevCart => [...prevCart, newCartItem]);
+      setCart((prevCart) => [...prevCart, newCartItem]);
     }
   };
 
@@ -46,7 +45,6 @@ export const CartProvider = ({ children }) => {
   };
 
   const countDownCart = (productId) => {
-   
     console.log(productId);
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -58,7 +56,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (productId) => {
-    const updatedCart = cart.filter(item => item.id !== productId);
+    const updatedCart = cart.filter((item) => item.id !== productId);
     setCart(updatedCart);
   };
 
@@ -67,7 +65,16 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, countDownCart, countUpCart }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        countDownCart,
+        countUpCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

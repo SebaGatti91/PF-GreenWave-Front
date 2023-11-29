@@ -37,13 +37,7 @@ export default function Detail({ params }) {
   };
 
   const addCart = () => {
-    addToCart(
-      params.id,
-      product.name,
-      product.image,
-      product.price,
-      product.rating
-    );
+    addToCart({id:params.id, name:product.name, image:product.image, price:product.price, rating:product.rating});
   };
 
   useEffect(() => {
@@ -106,10 +100,7 @@ export default function Detail({ params }) {
               </button>
               <button
                 className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded"
-                style={{
-                  border: '1px solid gray',
-                  borderRadius: '2em 2em',
-                }}
+                style={{ border: "1px solid gray", borderRadius: "2em 2em" }}
                 onClick={addCart}
               >
                 🛒 Add to cart
