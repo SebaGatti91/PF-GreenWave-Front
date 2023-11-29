@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../cart/cartContext";
+import {useState} from "react"
 
 const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
   const [fav, setFav] = useState(false);

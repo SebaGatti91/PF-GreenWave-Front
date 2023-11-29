@@ -30,7 +30,7 @@ const Cart = () => {
             Add items to your cart
           </h3>
           <Link href='/store' style={{marginInline: 'auto' }}>
-          <button className="bg-lime-900 hover:bg-lime-700 text-lime-50 rounded-lg p-1 m-5 px-4 py-1">
+          <button className="bg-lime-900 hover:bg-lime-700 text-black-50 rounded-lg p-1 m-5 px-4 py-1 elemento">
             Continue Shopping
           </button>
           </Link>
@@ -89,5 +89,6 @@ const Cart = () => {
       )
         
       }
+
 
 export default Cart;

@@ -6,7 +6,7 @@
     z-index: var(--i);
     border: none;
     width: 7em;
-    height: 2em;
+    height: 4em;
     border-radius: 15%;
     transform: scale(calc(1 - var(--j)*.02));
     box-shadow: calc(var(--not-j)*-0.25em) calc(var(--not-j)*-0.25em) 0.25em rgba(252, 252, 252, var(--not-j)), calc(var(--not-j)*0.25em) calc(var(--not-j)*0.25em) 0.25em rgba(210, 218, 230, var(--not-j)), inset calc(var(--j)*0.25em) calc(var(--j)*0.25em) 0.25em rgba(210, 218, 230, var(--j)), inset calc(var(--j)*-0.25em) calc(var(--j)*-0.25em) 0.25em rgba(252, 252, 252, var(--j));
@@ -29,7 +29,7 @@
   .elemento:active {
     --press: 1 ;
   }
-  .element {
+  .elemento {
     background-color: hsl(var(--hue), 100%, 50%);
   }
   .background-clip-text {
