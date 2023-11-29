@@ -109,7 +109,7 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
             })}
         {!cartControlers && (
           <div>
-            <p className="text-center">rating: {rating}</p>
+            <p className="text-center"> {rate}</p>
             <button
               onClick={() => addToCart({ id, name, image, price, rating })}
               className="p-1 m-2 rounded-lg bg-yellow-500"
