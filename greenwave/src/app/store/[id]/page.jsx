@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
 
+
 const loadDetail = async (id) => {
   const response = await axios.get(`http://localhost:3001/store/${id}`);
   return response.data;
@@ -12,11 +13,9 @@ const loadDetail = async (id) => {
 export default async function Detail({ params }) {
   const { addToCart } = useCart();
   const product = await loadDetail(params.id);
-  console.log(product);
-
+ 
   const addCart = () => {
-    console.log(params.id);
-    addToCart(params.id, product.name, product.image, product.price, product.rating);
+    addToCart({id:params.id, name:product.name, image:product.image, price:product.price, rating:product.rating});
   };
   return (
     <div className="flex justify-center items-center p-7 ">
@@ -64,15 +63,7 @@ export default async function Detail({ params }) {
               <button
                 className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded"
                 style={{ border: "1px solid gray", borderRadius: "2em 2em" }}
-                onClick={() =>
-                  addCart({
-                    id: product.id,
-                    name: product.name,
-                    image: product.image,
-                    price: product.price,
-                    rating: product.rating,
-                  })
-                }
+                onClick={addCart}
               >
                 🛒 Add to cart
               </button>

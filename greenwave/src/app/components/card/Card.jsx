@@ -1,16 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { useCart } from "../cart/cartContext";
+import {useEffect, useState} from "react"
 
 const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
   const [fav, setFav] = useState(false);
-  const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
-    useCart();
+  const [rate, setRate] = useState([]);
+  const { cart, addToCart, removeFromCart, countDownCart, countUpCart } = useCart();
 
   const handleFavorite = () => {
     setFav(!fav);
   };
+  const max = 5;
+
+  useEffect(() => {
+    let stars = [];
+    for (let i = 0; i < max; i++) {
+      if (i < rating) {
+        stars.push('⭐');
+      } else {
+        stars.push('☆');
+      }
+    }
+    setRate(stars);
+  }, [rating]);
 
   return (
     <div className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
@@ -96,7 +109,7 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
             })}
         {!cartControlers && (
           <div>
-            <p className="text-center">rating: {rating}</p>
+            <p className="text-center"> {rate}</p>
             <button
               onClick={() => addToCart({ id, name, image, price, rating })}
               className="p-1 m-2 rounded-lg bg-yellow-500"
