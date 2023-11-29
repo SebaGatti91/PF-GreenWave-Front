@@ -54,7 +54,7 @@ export default function ButtonAuth() {
               onClick={toggleMenu}
             />
             {menuVisible && (
-              <div className=" mt-5 space-y-2 bg-black rounded-md shadow-md z-10 absolute">
+              <div className=" mt-5 mr-10 space-y-2 bg-black rounded-md shadow-md z-10 absolute">
                 <div>
                   <Button link={"/favorites"} text={"My favorites"} />
                 </div>
