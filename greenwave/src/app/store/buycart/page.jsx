@@ -1,9 +1,9 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Card from "../../components/card/Card";
 import Link from "next/link";
-
+import '../../../../public/estilos/buycart.css'
 const Cart = () => {
   const { cart } = useContext(CartContext);
 
@@ -35,10 +35,10 @@ const Cart = () => {
           <h3 className="text-center mt-4 text-2xl text-shadow-lg py-1">
             Add items to your cart
           </h3>
-          <Link href="/store" style={{ marginInline: "auto" }}>
-            <button className="bg-lime-900 hover:bg-lime-700 text-lime-50 rounded-lg p-1 m-5 px-4 py-1">
-              Continue Shopping
-            </button>
+          <Link href='/store' style={{marginInline: 'auto' }}>
+          <button className="bg-lime-900 hover:bg-lime-700 text-black-50 rounded-lg p-1 m-5 px-4 py-1 elemento">
+            Continue Shopping
+          </button>
           </Link>
         </div>
       ) : (
@@ -110,7 +110,10 @@ const Cart = () => {
         </div>
       )}
     </div>
-  );
-};
+    
+      )
+        
+      }
+
 
 export default Cart;
