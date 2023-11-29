@@ -102,7 +102,6 @@ export default function Home() {
               EcoLume Lamp
             </h1>
 
-            <p className="">$ 200</p>
             <p className="py-3 px-10 text-lg">
               The EcoLume Recycled Glass lamp combines style and sustainability
               in one piece. Created from recycled glass canisters, each lamp is
@@ -110,14 +109,15 @@ export default function Home() {
               conscious lighting with this eco-friendly lamp that beautifies
               your home while helping to preserve the environment.
             </p>
-
-            <button className="bg-lime-100 rounded-lg p-1 m-5 hover:bg-lime-900 hover:text-lime-50">
-              Add to Cart
-            </button>
+            <Link href='/store'>
+              <button className="bg-lime-100 rounded-lg p-1 m-5 hover:bg-lime-900 hover:text-lime-50">
+                See more
+              </button>
+            </Link>
           </section>
 
           <img
-            className="rounded-r-lg"
+            className="rounded-r-lg hover:transform hover:scale-105 transition-transform duration-300"
             style={{ width: "40%" }}
             src="/images/lamp.jpg"
             alt=""
@@ -134,7 +134,7 @@ export default function Home() {
           style={{ width: "82%", height: "60vh", borderRadius: "2em 0 0 2em" }}
         >
           <img
-            className=" rounded-l-lg"
+            className=" rounded-l-lg hover:transform hover:scale-105 transition-transform duration-300"
             style={{ width: "60%" }}
             src="/images/vases.jpg"
             alt=""

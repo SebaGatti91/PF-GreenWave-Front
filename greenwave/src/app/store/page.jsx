@@ -152,7 +152,7 @@ const Store = () => {
         style={{ marginTop: "30px" }}
       >
         {currentProducts.map((product) => (
-          <div
+          <div className="hover:transform hover:scale-105 transition-transform duration-300"
             key={product.id}
             // className=" hover:transform hover:scale-105 transition-transform duration-300"
           >
