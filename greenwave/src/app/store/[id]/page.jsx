@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from 'next/router'
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,11 @@ const loadDetail = async (id) => {
   return response.data;
 };
 
+const handleEdit = () =>{
+  const router = useRouter();
+  router.push('/post-product');
+}
+
 export default async function Detail({ params }) {
   const { addToCart } = useCart();
   const product = await loadDetail(params.id);
@@ -16,7 +22,13 @@ export default async function Detail({ params }) {
 
   const addCart = () => {
     console.log(params.id);
-    addToCart(params.id, product.name, product.image, product.price, product.rating);
+    addToCart(
+      params.id,
+      product.name,
+      product.image,
+      product.price,
+      product.rating
+    );
   };
   return (
     <div className="flex justify-center items-center p-7 ">
@@ -76,6 +88,20 @@ export default async function Detail({ params }) {
               >
                 🛒 Add to cart
               </button>
+              <div class="flex space-x-4 justify-center">
+                <button class="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded" style={{
+                  borderRadius: "2em 2em",
+            
+                }}>
+                  Delete
+                </button>
+                <button onClick={handleEdit} class="bg-sky-950 hover:bg-blue-700 text-white font-bold m-3 px-4 py-1rounded" style={{
+                  borderRadius: "2em 2em",
+                
+                }}>
+                  Edit
+                </button>
+              </div>
             </div>
             <Link href="/store">
               <button
@@ -86,7 +112,7 @@ export default async function Detail({ params }) {
                   width: "50%",
                 }}
               >
-                Store
+                Back to store
               </button>
             </Link>
           </div>
