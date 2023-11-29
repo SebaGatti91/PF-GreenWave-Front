@@ -34,57 +34,93 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
           <button onClick={handleFavorite}>🤍</button>
         )}
       </div>
-      {cartControlers && (
-        <div className="absolute top-0 left-0 m-2">
-          <button onClick={() => { removeFromCart(id) }}>❎</button>
-        </div>
-      )}
+
       <div className="flex-grow flex-shrink-0">
-        <Image src={image} alt={name} height={150} width={150} className="w-80 h-60 rounded-md" />
+        <Image
+          src={image}
+          alt={name}
+          height={150}
+          width={150}
+          className="w-80 h-60 rounded-md"
+        />
       </div>
+
       <div className="mt-2 flex-grow-0 flex flex-col items-center">
         <h3 className="text-center font-bold">{name}</h3>
         <h3 className="text-green-600 text-center">USD {price}</h3>
-        
-        <div className="flex justify-center items-center">
-          {rate}
-        </div>
-        {cartControlers && cart.filter(item => item.id === id).map((item) => {
-          return (
-            <div >
-              <div className="flex justify-center items-center">
-                <h3>Qty:{item.count}</h3>
-              </div>
-              <div className="flex justify-center items-center">
-                <div>
-                  <button onClick={() => { countDownCart(id) }} style={{ display: item.count > 0 ? 'block' : 'none' }}>-1</button>
-                </div>
-                <div className="flex justify-center items-center">
-                  <div>
-                    <button onClick={() => addToCart({ id, name, image, price, rating })} className="p-1 m-2 rounded-lg bg-yellow-500">
-                      Add to Cart
-                    </button>
-                    <Link href={`/store/${id}`}>
-                      <button className="p-1 bg-yellow-500 rounded-full" style={{ backgroundColor: "rgba(170, 180, 154, 0.5)" }}>
-                        🔍
+
+        {cartControlers &&
+          cart
+            .filter((item) => item.id === id)
+            .map((item) => {
+              return (
+                <div key={item.id}>
+                  <div className="flex flex-col justify-center items-center">
+                    <div className="flex justify-center flex-row items-center">
+                      <button
+                        onClick={() => {
+                          removeFromCart(id);
+                        }}
+                      >
+                        🗑️
                       </button>
-                    </Link>
+
+                      <button
+                        className="px-3 py-1"
+                        onClick={() => {
+                          countDownCart(id);
+                        }}
+                        style={{
+                          display: item.count > 0 ? "block" : "none",
+                          border: "1px solid gray",
+                        }}
+                      >
+                        -
+                      </button>
+                      <h3 className="bg-slate-500 px-3 py-1">{item.count}</h3>
+                      <button
+                        className="px-3 py-1"
+                        onClick={() => {
+                          countUpCart(id);
+                        }}
+                        style={{ border: "1px solid gray" }}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div className="flex justify-center items-center">
+                      <div>
+                        <Link href={`/store/${id}`}>
+                          <button
+                            className="p-1 bg-yellow-500 rounded-full"
+                            style={{
+                              backgroundColor: "rgba(170, 180, 154, 0.5)",
+                            }}
+                          >
+                            🔍
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                    <div></div>
                   </div>
                 </div>
-                <div>
-                  <button onClick={() => { countUpCart(id) }}>+1</button>
-                </div>
-              </div>
-            </div>
-          )
-        })}
+              );
+            })}
         {!cartControlers && (
           <div>
-            <button onClick={() => addToCart({ id, name, image, price, rating })} className="p-1 m-2 rounded-lg bg-yellow-500">
+            <p className="text-center">rating: {rating}</p>
+            <button
+              onClick={() => addToCart({ id, name, image, price, rating })}
+              className="p-1 m-2 rounded-lg bg-yellow-500"
+            >
               Add to Cart
             </button>
             <Link href={`/store/${id}`}>
-              <button className="p-1 bg-yellow-500 rounded-full" style={{ backgroundColor: "rgba(170, 180, 154, 0.5)" }}>
+              <button
+                className="p-1 bg-yellow-500 rounded-full"
+                style={{ backgroundColor: "rgba(170, 180, 154, 0.5)" }}
+              >
                 🔍
               </button>
             </Link>
@@ -96,6 +132,3 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
 };
 
 export default Card;
-
-
-
