@@ -1,10 +1,11 @@
 "use client"
+// RootLayout.jsx
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/navBar/NavBar";
 import { Footer } from "./components/footer/Footer";
 import { Providers } from "./Providers";
-import { usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,29 +15,33 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
+
   return (
     <html lang="en">
-       <head>
+      <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
-        <link rel="icon" href="../../public/images/Green-Wave.png" />
-        </head>
-      
+        <link rel="icon" href="/images/Green-Wave.png" />
+      </head>
+
       <body className={inter.className}>
         <Providers>
-          {pathname !== "/" ? (
+          {pathname === "/" ? (
             <>
-          <NavBar />
-          {children}
-          <Footer />
-          </>
-):(
-  <>
-  {children}
-  </>
-)
-}
+              {children}
+            </>
+          ) : pathname.startsWith("/dashboard") ? (
+            <>
+              {children}
+            </>
+          ) : (
+            <>
+              <NavBar />
+              {children}
+              <Footer />
+            </>
+          )}
         </Providers>
       </body>
     </html>
