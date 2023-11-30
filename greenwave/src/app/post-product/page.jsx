@@ -83,6 +83,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
               "Must contain only letters and up to 300 characters";
           }
 
+          //validation for image
           if (!values.image) {
             errors.image = "Please enter an image";
           } else {
@@ -95,7 +96,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          console.log(values);
+          
           try {
             const formData = new FormData();
             formData.append("image", file);
@@ -103,7 +104,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
             const url =
               initialValues && initialValues.id
                 ? `http://localhost:3001/products/${initialValues.id}`
-                : "/api/upload"; // URL para la publicación
+                : "/api/upload"; 
 
             // Cambia el método de la solicitud según si es una edición o una publicación
             const method = initialValues && initialValues.id ? "PUT" : "POST";
@@ -115,10 +116,11 @@ export default function PostProduct({ initialValues, isOff = true }) {
                 );
                 console.log(initialValues.id);
                 if (response.status === 200) {
+                  router.push(`/profile/`)
                   return Swal.fire({
                     icon: "success",
                     title: "Product edited Successfully",
-                    text: "Your product has been successfully posted.",
+                    text: "Your product has been successfully edited.",
                   });
                 }
               } catch (error) {
@@ -132,7 +134,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
             });
 
             const data = await response.json();
-            console.log(data);
+            
             values.image = data.url;
 
             submitForm(values, initialValues && initialValues.id)
