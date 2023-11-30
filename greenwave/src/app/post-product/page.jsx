@@ -104,7 +104,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
             const url =
               initialValues && initialValues.id
                 ? `http://localhost:3001/products/${initialValues.id}`
-                : "/api/upload"; // URL para la publicación
+                : "/api/upload"; 
 
             // Cambia el método de la solicitud según si es una edición o una publicación
             const method = initialValues && initialValues.id ? "PUT" : "POST";
