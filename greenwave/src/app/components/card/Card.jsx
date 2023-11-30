@@ -3,7 +3,27 @@ import Link from "next/link";
 import { useCart } from "../cart/cartContext";
 import { useEffect, useState } from "react";
 
-const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
+const Card = ({ 
+  id, 
+  name, 
+  image, 
+  price, 
+  rating, 
+  // Estilos
+  cardStyles,
+  imageStyle, 
+  text,
+  textPrice,
+  estrellas,
+  botones,
+  cartControlers = false 
+  }) => {
+
+  const cardContainerStyles = {
+    display: 'flex',
+    ...cardStyles,
+  };
+
   const [fav, setFav] = useState(false);
   const [rate, setRate] = useState([]);
   const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
@@ -26,7 +46,7 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
 
   const renderAddToCartButton = () => (
     <div className="py-2">
-      <p className="text-center"> {rate}</p>
+      <p className="text-center" style={...textPrice}> {rate}</p>
       <button
         onClick={handleAddToCart}
         className="p-1 m-2 rounded-lg mr-2 bg-hover hover:bg-boton"
@@ -43,9 +63,9 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
     const item = cart.find((item) => item.id === id);
 
     return (
-      <div className="flex flex-col justify-center">
-        <p className="text-center py-1"> {rate}</p>
-        <div className="flex justify-center flex-row items-center py-2 mb-2">
+      <div style={cardContainerStyles} className="flex flex-col justify-center">
+        <p className="text-center py-1" style={...estrellas}> {rate}</p>
+        <div style={...botones} className="flex justify-center flex-row items-center py-2 mb-2">
           <button
             className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
             onClick={() => handleRemoveFromCart()}
@@ -92,7 +112,7 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
   }, [rating]);
 
   return (
-    <div className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
+    <div style={cardContainerStyles} className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
       <div className="absolute top-0 right-0 m-2">
         {fav ? (
           <button onClick={handleFavorite}>💚</button>
@@ -102,16 +122,10 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
       </div>
 
       <div className="flex-grow flex-shrink-0">
-        <Image
-          src={image}
-          alt={name}
-          height={150}
-          width={150}
-          className="w-80 h-60 rounded-md"
-        />
+        <Image src={image} alt={name} height={150} width={150} style={...imageStyle} className="w-80 h-60 rounded-md" />
       </div>
 
-      <div className="mt-2 flex-grow-0 flex flex-col items-center">
+      <div style={...text} className="mt-2 flex-grow-0 flex flex-col items-center">
         <h3 className="text-center font-bold">{name}</h3>
         <h3 className="text-green-600 text-center">USD {price}</h3>
 
