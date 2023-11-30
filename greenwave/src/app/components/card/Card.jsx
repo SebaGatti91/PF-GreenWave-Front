@@ -28,21 +28,13 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
       <p className="text-center"> {rate}</p>
       <button
         onClick={handleAddToCart}
-        className="p-1 m-2 rounded-lg mr-2"
-        style={{
-          background:
-            "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
-        }}
+        className="p-1 m-2 rounded-lg mr-2 bg-hover hover:bg-boton"
       >
         Add to Cart
       </button>
       <Link href={`/store/${id}`}>
         <button
-          className="p-1 bg-yellow-500 rounded-full"
-          style={{
-            background:
-              "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
-          }}
+          className="bg-hover hover:bg-boton p-1 rounded-full"
         >
           🔍
         </button>
@@ -58,11 +50,7 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
         <p className="text-center py-1"> {rate}</p>
         <div className="flex justify-center flex-row items-center py-2 mb-2">
           <button
-            className="p-1"
-            style={{
-              background:
-                "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
-            }}
+            className="bg-hover hover:bg-boton p-1 rounded-full"
             onClick={() => handleRemoveFromCart()}>🗑️</button>
           <button
             className="px-3 py-1 ml-2"
@@ -75,11 +63,7 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
             -
           </button>
           <h3
-            style={{
-              background:
-                "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
-            }}
-            className="bg-slate-500 px-3 py-1">{item ? item.count : 0}</h3>
+            className="bg-hover hover:bg-boton px-3 py-1">{item ? item.count : 0}</h3>
           <button
             className="px-3 py-1"
             onClick={() => countUpCart(id)}
