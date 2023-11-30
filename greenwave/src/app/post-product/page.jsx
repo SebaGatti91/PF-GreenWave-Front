@@ -94,6 +94,11 @@ export default function PostProduct({ initialValues, isOff = true }) {
             }
           }
 
+          //validation for materials
+          if (!values.materials || values.materials.length === 0) {
+            errors.materials = "Please select at least one material";
+          }
+
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
