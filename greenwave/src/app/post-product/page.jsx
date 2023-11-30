@@ -99,7 +99,18 @@ export default function PostProduct({ initialValues, isOff = true }) {
           
           try {
             const formData = new FormData();
-            formData.append("image", file);
+            if (file) {
+              formData.append("image", file);
+
+              // Carga la nueva imagen en Cloudinary
+              const cloudinaryResponse = await fetch("/api/upload", {
+                method: "POST",
+                body: formData,
+              });
+
+              const cloudinaryData = await cloudinaryResponse.json();
+              values.image = cloudinaryData.url;
+            }
 
             const url =
               initialValues && initialValues.id
@@ -114,7 +125,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
                   `http://localhost:3001/products/${initialValues.id}`,
                   values
                 );
-                console.log(initialValues.id);
+                console.log(initialValues);
                 if (response.status === 200) {
                   router.push(`/profile/`)
                   return Swal.fire({
