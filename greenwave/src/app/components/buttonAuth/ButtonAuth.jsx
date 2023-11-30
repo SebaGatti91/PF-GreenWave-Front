@@ -54,21 +54,30 @@ export default function ButtonAuth() {
               onClick={toggleMenu}
             />
             {menuVisible && (
-              <div className=" mt-5 mr-10 space-y-2 bg-black rounded-md shadow-md z-10 absolute">
+              <div
+                className=" mt-5 right-0  w-20 space-y-2 absolute"
+                style={{
+                  background:
+                    "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
+                }}
+              >
                 <div>
-                  <Button link={"/favorites"} text={"My favorites"} />
+                  <Button link={"/favorites"} text={"Favorites"} />
                 </div>
 
                 <div>
                   <Button link={"/profile"} text={"Profile"} />
                 </div>
                 <div>
-                  <button onClick={() => handleLogout()}>
-                    Logout
+                  <button
+                    onClick={() => handleLogout()}
+                    className="flex items-center"
+                  >
+                    <span>Logout</span>
                     <img
                       src="/images/logOut.png"
                       alt="logOutImage"
-                      style={{ height: "20px", width: "20px" }}
+                      className="h-5 w-5 ml-2"
                     />
                   </button>
                 </div>
