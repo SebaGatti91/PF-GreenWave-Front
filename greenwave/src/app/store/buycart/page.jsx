@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Card from "../../components/card/Card";
 import Link from "next/link";
-import '../../../../public/estilos/buycart.css'
+
 const Cart = () => {
   const { cart } = useContext(CartContext);
 
@@ -17,6 +17,14 @@ const Cart = () => {
     const price = typeof product.price === "number" ? product.price : 0;
     return acc + count * price;
   }, 0);
+
+  const cartItemStyles = {
+    display: 'flex',
+    flexDirection: 'row',
+    background: '#FFFFFF',
+    minWidth: '97%',
+    height: '200px',
+  };
 
   return (
     <div>
@@ -54,12 +62,12 @@ const Cart = () => {
             Cart Items
           </h1>
           <div className="flex flex-row justify-evenly">
-            <div className="flex flex-col w-1/2 m-12">
+            <div className="flex flex-col w-1/2 m-12 mb-2">
               {cart.map((product, index) => (
                 <div
                   key={index}
-                  className="hover:transform hover:scale-110 transition-transform duration-300 "
-                  style={{ backgroundColor: "#D1D7BF" }}
+                  className="mb-10 bg-slate-500 rounded-lg shadow-2xl"
+                  style={{ backgroundColor: "#D1D7BF"}}
                 >
                   <Card
                     key={product.id}
@@ -67,6 +75,30 @@ const Cart = () => {
                     name={product.name}
                     image={product.image}
                     price={product.price}
+                    cardStyles={cartItemStyles}
+                    imageStyle={{
+                      width: '200px',
+                      height: '150px', 
+                      marginTop: '20px',
+                      marginLeft: '20px',
+                      border: '2px solid gray'
+                    }}
+                    text={{
+                      fontSize: '1.2em',
+                      width: '100%',
+                      textAlign: 'start',
+                      marginTop: '20px',
+                    }}
+                    textPrice={{
+                      marginRigth: '20px'
+                    }}
+                    estrellas={{
+                      display: 'none'
+                    }}
+                    botones={{
+                      marginLeft: '310px',
+                      marginTop: '50px'
+                    }}
                     cartControlers={true}
                   />
                 </div>
@@ -74,7 +106,7 @@ const Cart = () => {
             </div>
 
             <div
-              className="bg-slate-500 w-1/4 m-12 py-2 rounded-xl"
+              className="w-1/4 m-12 py-2 rounded-xl shadow-2xl"
               style={{ backgroundColor: "#D1D7BF", height: "40%" }}
             >
               <div
