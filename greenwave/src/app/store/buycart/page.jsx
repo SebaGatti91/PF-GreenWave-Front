@@ -62,12 +62,6 @@ const Cart = () => {
             Cart Items
           </h1>
 
-          <div className="flex justify-center mt-5">
-            <div className="bg-red-500 hover:bg-red-700 p-1 rounded-md">
-              <button onClick={() => setCart([])}>Clear cart</button>
-            </div>
-          </div>
-
           <div className="flex flex-row justify-evenly">
             <div className="flex flex-col w-1/2 m-12 mb-2">
               {cart.map((product, index) => (
@@ -139,11 +133,16 @@ const Cart = () => {
               </div>
 
               <button
-                className="bg-lime-900 hover:bg-lime-700 text-lime-50 rounded-lg p-1 m-5"
-                style={{ width: "90%" }}
+                className="bg-lime-900 hover:bg-lime-700 text-lime-50 rounded-lg p-1 mt-5 flex justify-center"
+                style={{ width: "90%", marginInline: 'auto' }}
               >
                 Check Out
               </button>
+              <div className="flex justify-center mt-5">
+            <div className="bg-red-500 hover:bg-red-700 p-1 rounded-md text-lime-50 text-center mb-2" style={{ width: "90%" }}>
+              <button onClick={() => setCart([])}>Clear cart</button>
+            </div>
+          </div>
             </div>
           </div>
         </div>
