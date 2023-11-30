@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "../button/Button";
+
 export default function ButtonAuth() {
   const router = useRouter();
   const { data: session, status } = useSession();
