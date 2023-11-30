@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useCart } from '../../components/cart/cartContext';
 import { useState, useEffect } from 'react';
 import PostProduct from '../../post-product/page'; 
-
+import Skeleton from './Skeleton'
 const loadDetail = async (id) => {
   const response = await axios.get(`http://localhost:3001/store/${id}`);
   return response.data;
@@ -16,6 +16,7 @@ export default function Detail({ params }) {
   const { addToCart } = useCart();
   const [isEditing, setIsEditing] = useState(false);
   const [product, setProduct] = useState(null);
+  const [loading, SetLoading] = useState(true)
   const router = useRouter();
 
   const loadProductDetail = async (id) => {
@@ -27,7 +28,11 @@ export default function Detail({ params }) {
       console.error('Error loading product detail:', error);
     }
   };
-
+  useEffect(()=>{
+    setTimeout(()=>{
+     SetLoading(false)
+    },2000)
+  },[])
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -48,7 +53,11 @@ export default function Detail({ params }) {
     // Puedes agregar un indicador de carga aquí
     return null;
   }
-
+if(loading){
+return(
+  <Skeleton/>
+)
+}else{
   return (
     <div className="flex justify-center items-center p-7 ">
       <div
@@ -56,21 +65,21 @@ export default function Detail({ params }) {
         style={{ width: '65%' }}
       >
         <div className="flex flex-row">
-          <Image
+          {<Image
             className="p-1 shadow-2xl rounded-lg bg-hover"
             src={product.image}
             alt={product.name}
             width={500}
             height={500}
             style={{ boxShadow: '4px 6px gray' }}
-          />
+          /> }
 
           <div className="text-center p-3 ml-3">
             <h1
               className="p-3 title-font font-medium"
               style={{ fontFamily: 'font-serif', fontSize: '1.5em' }}
             >
-              {product.name}
+              {product.name }
             </h1>
             <p
               className="font-bold text-left p-1"
@@ -140,8 +149,8 @@ export default function Detail({ params }) {
           </div>
         </div>
 
-        <div className="flex flex-row justify-center w-1/2 gap-8 mt-12 mb-8">
-          <Image
+        {<div className="flex flex-row justify-center w-1/2 gap-8 mt-12 mb-8">
+           <Image
             className="p-1 shadow-2xl rounded-lg bg-hover hover:transform hover:scale-110 transition-transform duration-300"
             src={product.image}
             alt={product.name}
@@ -157,8 +166,9 @@ export default function Detail({ params }) {
             width={200}
             height={250}
             style={{ boxShadow: '4px 4px gray' }}
-          />
+          /> 
         </div>
+        }
       </div>
 
       {/* Modal de edición */}
@@ -181,4 +191,5 @@ export default function Detail({ params }) {
       )}
     </div>
   );
+}
 }

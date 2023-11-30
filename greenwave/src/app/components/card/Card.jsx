@@ -2,14 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../cart/cartContext";
 import {useEffect, useState} from "react"
-
+import React from 'react'
+import SkeletonCard from './SkeletonCard'
 const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
-  const [fav, setFav] = useState(false);
-  const [rate, setRate] = useState([]);
+
+  const [state, setState] = useState({
+    fav: false,
+    rate: [],
+    loading: true});
   const { cart, addToCart, removeFromCart, countDownCart, countUpCart } = useCart();
+  useEffect(()=>{
+    setTimeout(()=>{
+      setState(prevState =>({
+        ...prevState, loading: false
+      }))
+    },2000)
+  },[])
 
   const handleFavorite = () => {
-    setFav(!fav);
+    setState(prevState =>({
+      ...prevState, fav: true
+    }));
   };
   const max = 5;
 
@@ -22,13 +35,23 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
         stars.push('☆');
       }
     }
-    setRate(stars);
+    setState(prevState=>({...prevState, rate: stars}));
   }, [rating]);
 
+  const loader = ()=>{
+    
+    return(
+    <SkeletonCard/>
+      )
+  }
+  if(state.loading){
+return(loader())
+  }
+  else{
   return (
     <div className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
       <div className="absolute top-0 right-0 m-2">
-        {fav ? (
+        {state.fav ? (
           <button onClick={handleFavorite}>💚</button>
         ) : (
           <button onClick={handleFavorite}>🤍</button>
@@ -36,12 +59,14 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
       </div>
 
       <div className="flex-grow flex-shrink-0">
+       
         <Image
           src={image}
           alt={name}
           height={150}
           width={150}
           className="w-80 h-60 rounded-md"
+         
         />
       </div>
 
@@ -109,7 +134,7 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
             })}
         {!cartControlers && (
           <div>
-            <p className="text-center"> {rate}</p>
+            <p className="text-center"> {state.rate}</p>
             <button
               onClick={() => addToCart({ id, name, image, price, rating })}
               className="p-1 m-2 rounded-lg bg-yellow-500"
@@ -130,5 +155,5 @@ const Card = ({ id, name, image, price, rating, cartControlers = false }) => {
     </div>
   );
 };
-
+}
 export default Card;
