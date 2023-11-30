@@ -85,6 +85,11 @@ export default function PostProduct({ initialValues, isOff = true }) {
 
           if (!values.image) {
             errors.image = "Please enter an image";
+          } else {
+            const allowedExtensions = /\.(jpg|jpeg|png)$/i;
+            if (!allowedExtensions.test(values.image)) {
+              errors.image = "Please upload a valid image file (JPG or PNG)";
+            }
           }
 
           return errors;
@@ -283,7 +288,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
               </div>
               <div className="mb-4 w-full">
                 <label htmlFor="image" className="font-semibold mb-2">
-                  Add your URL image:
+                  Upload your image:
                 </label>
                 <input
                   type="file"
@@ -303,9 +308,9 @@ export default function PostProduct({ initialValues, isOff = true }) {
                 )}
               </div>
               <button
-                onClick={() => {
-                  router.push("/profile");
-                }}
+                // onClick={() => {
+                //   router.push("/profile");
+                // }}
                 type="submit"
                 className="bg-green-600 w-full text-white py-2 px-4 rounded hover:bg-green-700"
               >

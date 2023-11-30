@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../components/cart/cartContext';
 import { useState, useEffect } from 'react';
-import PostProduct from '../../post-product/page'; // Asegúrate de importar correctamente el componente PostProduct
+import PostProduct from '../../post-product/page'; 
 
 const loadDetail = async (id) => {
   const response = await axios.get(`http://localhost:3001/store/${id}`);
@@ -163,17 +163,19 @@ export default function Detail({ params }) {
 
       {/* Modal de edición */}
       {isEditing && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
+        <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center">
           <div className="bg-white p-8 rounded-lg" style={{ width: '50%' }}>
             {/* Pasa los detalles del producto al componente PostProduct para la edición */}
             <PostProduct initialValues={product} isOff={false} />
 
+            <div className='flex justify-center'>
             <button
-              className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+              className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
               onClick={closeModal}
             >
               Close
             </button>
+            </div>
           </div>
         </div>
       )}

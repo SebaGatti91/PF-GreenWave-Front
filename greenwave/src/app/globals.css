@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background-color: #E4E7D9;
+:root{
+    --bg: #E4E7D9;
+    --bgDashboard: #151c2c;
+    --bgSoftDashboard: #182237;
+    --textDashboard: white;
+    --textSoftDashboard: #b7bac1
 }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--bg);
+}
+
+
