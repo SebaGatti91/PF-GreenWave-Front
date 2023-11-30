@@ -1,4 +1,3 @@
-// api.js
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -8,7 +7,7 @@ export const materialsApi = async () => {
 };
 
 export const submitForm = async (values) => {
-  console.log(values);
+
   try {
     const response = await axios.post("http://localhost:3001/products", values);
     if (response.status === 200) {
