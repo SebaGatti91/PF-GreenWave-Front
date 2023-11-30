@@ -1,0 +1,69 @@
+.elemento {
+    --i: var(--light, 0);
+    --not-i: calc(1 - var(--i));
+    --j: var(--press, 0);
+    --not-j: calc(1 - var(--j));
+    z-index: var(--i);
+    border: none;
+    width: 7em;
+    height: 4em;
+    border-radius: 15%;
+    transform: scale(calc(1 - var(--j)*.02));
+    box-shadow: calc(var(--not-j)*-0.25em) calc(var(--not-j)*-0.25em) 0.25em rgba(252, 252, 252, var(--not-j)), calc(var(--not-j)*0.25em) calc(var(--not-j)*0.25em) 0.25em rgba(210, 218, 230, var(--not-j)), inset calc(var(--j)*0.25em) calc(var(--j)*0.25em) 0.25em rgba(210, 218, 230, var(--j)), inset calc(var(--j)*-0.25em) calc(var(--j)*-0.25em) 0.25em rgba(252, 252, 252, var(--j));
+    background: #e8e8e8;
+    font-size: 1em;
+    transition: box-shadow 0.3s, transform 0.3s cubic-bezier(0.2, 4, 1, 3);
+    cursor: pointer;
+  }
+  .elemento::after {
+    filter: Contrast(0) Sepia(var(--i)) Hue-Rotate(calc(var(--hue) - 50deg)) Saturate(5) Opacity(calc(var(--i) + .21*var(--not-i))) Drop-Shadow(1px 1px hsla(0, 0%, 100%, var(--not-i)));
+    transition: filter 0.3s;
+    content: attr(data-ico);
+  }
+  .elemento:focus {
+    outline: none;
+  }
+  .elemento:hover, .elemento:focus {
+    --light: 1 ;
+  }
+  .elemento:active {
+    --press: 1 ;
+  }
+  .elemento {
+    background-color: hsl(var(--hue), 100%, 50%);
+  }
+  .background-clip-text {
+    font-size: 10em;
+    font-family: 'fatBold';
+    background: url('../images/galaxy.jpg');
+    background-position: fixed;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
+    }
+    @font-face {
+        font-family: 'fatBold';
+        src: url(../fonts/GasoekOne-Regular.ttf);
+    }
+    .containers {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: flex-start;
+        width: auto;
+        height: 85vh;
+        background: white;
+        background-image: url(https://th.bing.com/th/id/OIG.ZONhEaN9OAyqbvZHC.3t?w=270&h=270&c=6&r=0&o=5&dpr=1.5&pid=ImgGn);
+       background-repeat: no-repeat;
+       background-position-x: right;
+        background-position-x: 70%;
+        
+    }
+      .contenido{
+        margin-left: 10em;
+      }
+  
+    .message{
+      font-size: 2em;
+    }

@@ -1,15 +1,18 @@
 "use client";
+import axios from "axios";
+import Swal from "sweetalert2";
 import { Formik } from "formik";
+import { useRouter } from "next/navigation";
 import React, { createContext, useState, useEffect } from "react";
 import {
   materialsApi,
   submitForm,
 } from "../components/materialsApi/useMaterialsApi";
 
-export default function PostProduct() {
+export default function PostProduct({ initialValues, isOff = true }) {
+  const router = useRouter();
   const [file, setFile] = useState(null);
   const [materials, setMaterials] = useState([]);
-  const[imageUrl, setImageUrl] = useState(null)
 
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -17,7 +20,7 @@ export default function PostProduct() {
         const materialsData = await materialsApi();
         setMaterials(materialsData);
       } catch (error) {
-        throw Error("Error fetching materials:", error);
+        throw Error(error.message);
       }
     };
 
@@ -27,18 +30,20 @@ export default function PostProduct() {
   return (
     <div>
       <h2 className="text-2xl font-bold m-2 text-center">
-        Publish your product
+        {initialValues && initialValues.id
+          ? "Edit Product"
+          : "Publish your product"}
       </h2>
 
       <Formik
         initialValues={{
-          name: "",
-          price: "",
-          stock: "",
-          materials: "",
-          rating: "",
-          description: "",
-          image: "",
+          name: initialValues ? initialValues.name : "",
+          price: initialValues ? initialValues.price : "",
+          stock: initialValues ? initialValues.stock : "",
+          materials: initialValues ? initialValues.materials : "",
+          rating: initialValues ? initialValues.rating : "",
+          description: initialValues ? initialValues.description : "",
+          image: initialValues ? initialValues.image : "",
         }}
         validate={(values) => {
           let errors = {};
@@ -72,44 +77,73 @@ export default function PostProduct() {
 
           //validations for description
           if (!values.description) {
-            errors.description =
-              "Please enter a product description";
+            errors.description = "Please enter a product description";
           } else if (!/^[a-zA-ZñÑ\s]{1,300}$/.test(values.description)) {
-            errors.description = "Must contain only letters and up to 300 characters";
+            errors.description =
+              "Must contain only letters and up to 300 characters";
           }
 
-          if(!values.image){
-            errors.image=
-            "Please enter an image"
+          if (!values.image) {
+            errors.image = "Please enter an image";
+          } else {
+            const allowedExtensions = /\.(jpg|jpeg|png)$/i;
+            if (!allowedExtensions.test(values.image)) {
+              errors.image = "Please upload a valid image file (JPG or PNG)";
+            }
           }
-
 
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
+          console.log(values);
           try {
             const formData = new FormData();
             formData.append("image", file);
 
-            const response = await fetch("/api/upload", {
-              method: "POST",
+            const url =
+              initialValues && initialValues.id
+                ? `http://localhost:3001/products/${initialValues.id}`
+                : "/api/upload"; // URL para la publicación
+
+            // Cambia el método de la solicitud según si es una edición o una publicación
+            const method = initialValues && initialValues.id ? "PUT" : "POST";
+            if (method === "PUT") {
+              try {
+                const response = await axios.put(
+                  `http://localhost:3001/products/${initialValues.id}`,
+                  values
+                );
+                console.log(initialValues.id);
+                if (response.status === 200) {
+                  return Swal.fire({
+                    icon: "success",
+                    title: "Product edited Successfully",
+                    text: "Your product has been successfully posted.",
+                  });
+                }
+              } catch (error) {
+                throw Error(error);
+              }
+            }
+
+            const response = await fetch(url, {
+              method,
               body: formData,
             });
 
             const data = await response.json();
-            console.log(data)
-            setImageUrl(data.url)
+            console.log(data);
             values.image = data.url;
-            
-            submitForm(values)
+
+            submitForm(values, initialValues && initialValues.id)
               .then(() => {
                 resetForm();
               })
               .catch((error) => {
-               throw Error(error)
+                throw Error(error);
               });
           } catch (error) {
-            throw Error(error)
+            throw Error(error);
           }
         }}
       >
@@ -254,7 +288,7 @@ export default function PostProduct() {
               </div>
               <div className="mb-4 w-full">
                 <label htmlFor="image" className="font-semibold mb-2">
-                  Add your URL image:
+                  Upload your image:
                 </label>
                 <input
                   type="file"
@@ -274,22 +308,24 @@ export default function PostProduct() {
                 )}
               </div>
               <button
+                // onClick={() => {
+                //   router.push("/profile");
+                // }}
                 type="submit"
                 className="bg-green-600 w-full text-white py-2 px-4 rounded hover:bg-green-700"
               >
-                Post
+                {initialValues && initialValues.id ? "Update" : "Post"}
               </button>
             </form>
-            <div className="w-2/5 bg-lime-200">
-          
-              {
-                imageUrl ? <img src={imageUrl} className="w-full h-full object-cover"/> : <img
-                src="./images/recicle.jpg"
-                alt=""
-                className="w-full h-full object-cover"
-              />
-              }
-            </div>
+            {isOff && (
+              <div className="w-2/5 bg-lime-200">
+                <img
+                  src="./images/recicle.jpg"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
           </div>
         )}
       </Formik>
