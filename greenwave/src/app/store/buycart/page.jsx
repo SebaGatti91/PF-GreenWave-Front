@@ -4,7 +4,7 @@ import { CartContext } from "../../components/cart/cartContext";
 import Card from "../../components/card/Card";
 import Link from "next/link";
 
-const Cart = () => {
+const Cart = ({id}) => {
   const { cart, setCart } = useContext(CartContext);
 
   const totalItems = cart.reduce((acc, product) => {
@@ -70,6 +70,7 @@ const Cart = () => {
                   className="mb-10 bg-slate-500 rounded-lg shadow-2xl"
                   style={{ backgroundColor: "#D1D7BF"}}
                 >
+                  <Link href={`/store/${product.id}`}>
                   <Card
                     key={product.id}
                     id={product.id}
@@ -101,8 +102,11 @@ const Cart = () => {
                       marginTop: '50px'
                     }}
                     cartControlers={true}
+                    
                   />
+                  </Link>
                 </div>
+                
               ))}
             </div>
 

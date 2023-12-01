@@ -332,7 +332,10 @@ export default function PostProduct({ initialValues, isOff = true }) {
               </div>
               <button
                 type="submit"
-                className="bg-green-600 w-full text-white py-2 px-4 rounded hover:bg-green-700"
+                disabled={loading}
+                className={`w-full py-2 px-4 rounded hover:bg-green-700 ${
+                  loading ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-green-600 text-white'
+                }`}
               >
                 {initialValues && initialValues.id ? "Update" : "Post"}
               </button>
