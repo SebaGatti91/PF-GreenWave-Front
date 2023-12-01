@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,12 +11,15 @@ const loadDetail = async (id) => {
   return response.data;
 };
 
-export default function Detail({ params }) {
-  const { addToCart } = useCart();
+export default function Detail({ params, id }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);
+
   const [loading, SetLoading] = useState(true)
-  const router = useRouter();
+  const { addToCart, cart, countDownCart, countUpCart, removeFromCart } = useCart();
+
+  const item = cart.find((item) => item.id === params.id);
 
   const loadProductDetail = async (id) => {
     try {
@@ -41,8 +43,20 @@ export default function Detail({ params }) {
     setIsEditing(false);
   };
 
-  const addCart = () => {
-    addToCart({id:params.id, name:product.name, image:product.image, price:product.price, rating:product.rating});
+  const handleAddToCart = () => {
+    addToCart({
+      id: params.id,
+      name: product.name,
+      image: product.image,
+      price: product.price,
+      rating: product.rating
+    });
+    setAddedToCart(true);
+  };
+
+  const handleRemoveFromCart = () => {
+    removeFromCart(params.id);
+    setAddedToCart(false); // Cambia el estado a false al hacer clic en el basurero
   };
 
   useEffect(() => {
@@ -98,22 +112,65 @@ return(
             </p>
 
             <div>
-              <button
-                className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded mt-10"
-                style={{
-                  border: '1px solid gray',
-                  borderRadius: '2em 2em',
-                }}
-              >
-                Buy now
-              </button>
-              <button
-                className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded"
-                style={{ border: "1px solid gray", borderRadius: "2em 2em" }}
-                onClick={addCart}
-              >
-                🛒 Add to cart
-              </button>
+              <div className='flex flex-col justify-center items-center'>
+                <button
+                  className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded mt-10"
+                  style={{
+                    border: '1px solid gray',
+                    borderRadius: '2em 2em',
+                  }}
+                >
+                  Buy now
+                </button>
+                <div className="flex justify-center">
+                  {addedToCart ? (
+                    <>
+                      <button
+                        className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
+                        onClick={() => handleRemoveFromCart()}
+                      >
+                        {
+                          <img
+                            src="/images/rubishBeen.png"
+                            alt="rubishBeen"
+                            className="w-7 h-7"
+                          />
+                        }
+                      </button>
+                      <button
+                        className="px-3 py-1 ml-4"
+                        onClick={() => countDownCart(params.id)}
+                        style={{
+                          display: item && item.count > 0 ? "block" : "none",
+                          border: "1px solid gray",
+                        }}
+                      >
+                        -
+                      </button>
+                      <h3 className="bg-hover hover:bg-boton px-3 py-1">
+                        {item ? item.count : 0}
+                      </h3>
+                      <button
+                        className="px-3 py-1"
+                        onClick={() => countUpCart(params.id)}
+                        style={{ border: "1px solid gray" }}
+                      >
+                        +
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      className="hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded"
+                      style={{ border: "1px solid gray", borderRadius: "2em 2em" }}
+                      onClick={handleAddToCart}
+                    >
+                      🛒 Add to cart
+                    </button>
+                  )}
+                </div>
+              </div>
+
+
               <div class="flex space-x-4 justify-center">
                 <button
                   class="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
@@ -179,12 +236,12 @@ return(
             <PostProduct initialValues={product} isOff={false} />
 
             <div className='flex justify-center'>
-            <button
-              className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
-              onClick={closeModal}
-            >
-              Close
-            </button>
+              <button
+                className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
+                onClick={closeModal}
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

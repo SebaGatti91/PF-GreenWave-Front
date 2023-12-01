@@ -154,7 +154,7 @@ return(loader())
       <div style={...text} className="mt-2 flex-grow-0 flex flex-col items-center">
         <h3 className="text-center font-bold">{name}</h3>
         <h3 className="text-green-600 text-center">USD {price}</h3>
-
+          
         {cartControlers
           ? cart
               .filter((item) => item.id === id)
