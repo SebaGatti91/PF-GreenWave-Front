@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios"
 import React, { useContext } from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Card from "../../components/card/Card";
@@ -6,6 +7,36 @@ import Link from "next/link";
 
 const Cart = ({ id }) => {
   const { cart, setCart } = useContext(CartContext);
+  console.log(cart)
+
+  const createPreference = async () => {
+    try {
+      const items = cart?.map((prod) => ({
+        title: prod.name,
+        unit_price: prod.price,
+        quantity: prod.count,
+        currency_id: "ARS"
+      }));
+  
+      if (!items || items.length === 0) {
+        console.error('Cart is empty. Cannot create preference.');
+        return;
+      }
+  
+      const response = await axios.post("http://localhost:3001/mercadoPago", items);
+      console.log(response);
+  
+      // Assuming the response.data is the URL for the MercadoPago preference
+      window.location.href = response.data;
+    } catch (error) {
+      console.error('Error creating preference:', error);
+    }
+  };
+  
+
+  const handleBuy = async() =>{
+    const id = await createPreference()
+    }
 
   const totalItems = cart.reduce((acc, product) => {
     const count = typeof product.count === "number" ? product.count : 0;
@@ -133,6 +164,7 @@ const Cart = ({ id }) => {
               </div>
 
               <button
+              onClick={handleBuy}
                 className="bg-lime-900 hover:bg-lime-700 text-lime-50 rounded-lg p-1 mt-5 flex justify-center"
                 style={{ width: "90%", marginInline: "auto" }}
               >
