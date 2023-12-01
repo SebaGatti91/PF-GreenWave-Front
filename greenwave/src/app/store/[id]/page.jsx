@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../components/cart/cartContext';
 import { useState, useEffect } from 'react';
+
 import PostProduct from '../../post-product/page'; 
 import Skeleton from './Skeleton'
 const loadDetail = async (id) => {
@@ -12,6 +13,10 @@ const loadDetail = async (id) => {
 };
 
 export default function Detail({ params, id }) {
+
+
+
+
   const [isEditing, setIsEditing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);
@@ -30,11 +35,34 @@ export default function Detail({ params, id }) {
       console.error('Error loading product detail:', error);
     }
   };
+
   useEffect(()=>{
     setTimeout(()=>{
      SetLoading(false)
     },2000)
   },[])
+
+
+  const createPreference = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/mercadoPago", [{
+        title: product.name,
+        unit_price: product.price,
+        quantity: 1,
+        currency_id: 'ARS'
+      }])
+      console.log(response.data);
+      window.location.href = response.data
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
+  const handleBuy = async () => {
+    const id = await createPreference()
+    if (id) setPreferenceId(id)
+  }
+
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -114,6 +142,7 @@ return(
             <div>
               <div className='flex flex-col justify-center items-center'>
                 <button
+                  onClick={handleBuy}
                   className=" hover:bg-green-900 bg-green-700 text-white m-3 px-3 py-1 rounded mt-10"
                   style={{
                     border: '1px solid gray',
