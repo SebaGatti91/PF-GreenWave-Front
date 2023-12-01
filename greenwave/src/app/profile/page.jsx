@@ -1,22 +1,23 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useContext} from "react";
 import axios from "axios";
 import Button from "../components/button/Button";
-
+import { GlobalUser} from "../components/users/globalUsers";
 const Profile = () => {
   const { data: session } = useSession();
-  const user = session?.user; // Use optional chaining to prevent errors if session or user is undefined
-  const [userFromDb, setUserFromDb] = useState(null); // Initialize as null for a single user object
-  console.log(userFromDb);
-
-  const fetchData = async () => {
+  const usuario = session?.user; // Use optional chaining to prevent errors if session or user is undefined
+  // const [userFromDb, setUserFromDb] = useState(null); // Initialize as null for a single user object
+  const {user, setUser} = useContext(GlobalUser)
+console.log((user));
+const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/users/${user?.email}`
+        `http://localhost:3001/users/${usuario?.email}`
       );
       const { data } = response;
-      setUserFromDb(data);
+      console.log(data);
+      setUser(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
       // Handle the error, show a message to the user, or redirect as needed.
@@ -29,8 +30,8 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Welcome back {user?.name} !!!</h1>
-      <img src={user?.image} alt={user?.name} />
+      <h1>Welcome back {usuario?.name} !!!</h1>
+      <img src={usuario?.image} alt={usuario?.name} />
       <ul
         className="text-white"
         style={{
