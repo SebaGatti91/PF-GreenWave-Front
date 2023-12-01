@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mercadopago/sdk-react": "^0.0.15",
     "axios": "^1.6.2",
     "cloudinary": "^1.41.0",
     "formik": "^2.4.5",
