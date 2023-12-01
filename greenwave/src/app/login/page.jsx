@@ -16,33 +16,27 @@ const LoginPage = () => {
   useEffect(() => {
     const createUserAndRedirect = async () => {
       try {
-        const { email, image, name } = session.user;
-
-        // Verificar si el correo electrónico está presente
-        if (!email) {
+        if (!session?.user?.email) {
           console.error("Error: Email is missing in user data");
           return;
         }
 
-        // Construir la URL con parámetros de consulta
-        const url = `http://localhost:3001/users?email=${encodeURIComponent(
-          email
-        )}&image=${encodeURIComponent(image)}&name=${encodeURIComponent(name)}`;
+        const url = `http://localhost:3001/users`;
 
-        // Realizar la petición al backend usando axios
-        await axios.post(url);
-        setUserCreation(true); // Marcar que la creación de usuario ha terminado
+        await axios.post(url, session.user);
       } catch (error) {
         console.error("Error al crear el usuario en el backend", error);
+        // Consider setting a more specific error message or logging details
+      } finally {
+        router.replace("/homepage"); // Move redirection here
       }
-      router.replace("/homepage"); // Redirigir solo después de la creación de usuario
     };
 
     if (session?.user && !userCreation) {
       setUserCreation(true);
       createUserAndRedirect();
     }
-  }, [session]);
+  }, [session, userCreation, router]);
 
   const handleSignInWithProvider = async (providerId) => {
     if (providerId === "credentials") {
