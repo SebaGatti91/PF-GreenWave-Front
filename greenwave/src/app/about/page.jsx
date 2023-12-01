@@ -9,7 +9,8 @@ const About = () => {
           src="/images/about.png"
           alt="mision-visionImage"
           width={1000}
-          height={1000}
+          height={0}
+          style={{height: "89vh"}}
           className="w-full"
         />
       </div>
