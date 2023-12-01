@@ -10,6 +10,7 @@ import {
 } from "../components/materialsApi/useMaterialsApi";
 
 export default function PostProduct({ initialValues, isOff = true }) {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [file, setFile] = useState(null);
   const [materials, setMaterials] = useState([]);
@@ -93,13 +94,30 @@ export default function PostProduct({ initialValues, isOff = true }) {
             }
           }
 
+          //validation for materials
+          if (!values.materials || values.materials.length === 0) {
+            errors.materials = "Please select at least one material";
+          }
+
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
           
           try {
+            setLoading(true);
             const formData = new FormData();
-            formData.append("image", file);
+            if (file) {
+              formData.append("image", file);
+
+              // Carga la nueva imagen en Cloudinary
+              const cloudinaryResponse = await fetch("/api/upload", {
+                method: "POST",
+                body: formData,
+              });
+
+              const cloudinaryData = await cloudinaryResponse.json();
+              values.image = cloudinaryData.url;
+            }
 
             const url =
               initialValues && initialValues.id
@@ -114,8 +132,9 @@ export default function PostProduct({ initialValues, isOff = true }) {
                   `http://localhost:3001/products/${initialValues.id}`,
                   values
                 );
-                console.log(initialValues.id);
+                console.log(initialValues);
                 if (response.status === 200) {
+                  setLoading(false);
                   router.push(`/profile/`)
                   return Swal.fire({
                     icon: "success",
@@ -126,6 +145,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
               } catch (error) {
                 throw Error(error);
               }
+          
             }
 
             const response = await fetch(url, {
@@ -137,8 +157,9 @@ export default function PostProduct({ initialValues, isOff = true }) {
             
             values.image = data.url;
 
-            submitForm(values, initialValues && initialValues.id)
+            submitForm(values, initialValues && initialValues.id,)
               .then(() => {
+                setLoading(false);
                 resetForm();
               })
               .catch((error) => {
@@ -310,14 +331,12 @@ export default function PostProduct({ initialValues, isOff = true }) {
                 )}
               </div>
               <button
-                // onClick={() => {
-                //   router.push("/profile");
-                // }}
                 type="submit"
                 className="bg-green-600 w-full text-white py-2 px-4 rounded hover:bg-green-700"
               >
                 {initialValues && initialValues.id ? "Update" : "Post"}
               </button>
+              {loading && <p className="text-lg	italic text-cyan-800 font-medium	">Loading, do not reload the page...</p>}
             </form>
             {isOff && (
               <div className="w-2/5 bg-lime-200">
