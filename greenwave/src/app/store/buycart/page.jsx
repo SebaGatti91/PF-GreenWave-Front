@@ -1,11 +1,41 @@
 "use client";
+import axios from "axios"
 import React, { useContext } from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Card from "../../components/card/Card";
 import Link from "next/link";
 
-const Cart = ({id}) => {
+const Cart = ({ id }) => {
   const { cart, setCart } = useContext(CartContext);
+  console.log(cart)
+
+  const createPreference = async () => {
+    try {
+      const items = cart?.map((prod) => ({
+        title: prod.name,
+        unit_price: prod.price,
+        quantity: prod.count,
+        currency_id: "ARS"
+      }));
+  
+      if (!items || items.length === 0) {
+        console.error('Cart is empty. Cannot create preference.');
+        return;
+      }
+  
+      const response = await axios.post("http://localhost:3001/mercadoPago", items);
+      console.log(response);
+
+      window.location.href = response.data;
+    } catch (error) {
+      console.error('Error creating preference:', error);
+    }
+  };
+  
+
+  const handleBuy = async() =>{
+    const id = await createPreference()
+    }
 
   const totalItems = cart.reduce((acc, product) => {
     const count = typeof product.count === "number" ? product.count : 0;
@@ -19,11 +49,11 @@ const Cart = ({id}) => {
   }, 0);
 
   const cartItemStyles = {
-    display: 'flex',
-    flexDirection: 'row',
-    background: '#FFFFFF',
-    minWidth: '97%',
-    height: '200px',
+    display: "flex",
+    flexDirection: "row",
+    background: "#FFFFFF",
+    minWidth: "97%",
+    height: "200px",
   };
 
   return (
@@ -85,20 +115,20 @@ const Cart = ({id}) => {
                       border: '2px solid gray'
                     }}
                     text={{
-                      fontSize: '1.2em',
-                      width: '100%',
-                      textAlign: 'start',
-                      marginTop: '20px',
+                      fontSize: "1.2em",
+                      width: "100%",
+                      textAlign: "start",
+                      marginTop: "20px",
                     }}
                     textPrice={{
-                      marginRigth: '20px'
+                      marginRigth: "20px",
                     }}
                     estrellas={{
-                      display: 'none'
+                      display: "none",
                     }}
                     botones={{
-                      marginLeft: '310px',
-                      marginTop: '50px'
+                      marginLeft: "310px",
+                      marginTop: "50px",
                     }}
                     cartControlers={true}        
                   />
@@ -133,16 +163,20 @@ const Cart = ({id}) => {
               </div>
 
               <button
+              onClick={handleBuy}
                 className="bg-lime-900 hover:bg-lime-700 text-lime-50 rounded-lg p-1 mt-5 flex justify-center"
-                style={{ width: "90%", marginInline: 'auto' }}
+                style={{ width: "90%", marginInline: "auto" }}
               >
                 Check Out
               </button>
               <div className="flex justify-center mt-5">
-            <div className="bg-red-500 hover:bg-red-700 p-1 rounded-md text-lime-50 text-center mb-2" style={{ width: "90%" }}>
-              <button onClick={() => setCart([])}>Clear cart</button>
-            </div>
-          </div>
+                <div
+                  className="bg-red-500 hover:bg-red-700 p-1 rounded-md text-lime-50 text-center mb-2"
+                  style={{ width: "90%" }}
+                >
+                  <button onClick={() => setCart([])}>Clear cart</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
