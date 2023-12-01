@@ -25,8 +25,7 @@ const Cart = ({ id }) => {
   
       const response = await axios.post("http://localhost:3001/mercadoPago", items);
       console.log(response);
-  
-      // Assuming the response.data is the URL for the MercadoPago preference
+
       window.location.href = response.data;
     } catch (error) {
       console.error('Error creating preference:', error);
