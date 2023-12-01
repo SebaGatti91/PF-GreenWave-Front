@@ -67,10 +67,9 @@ const Cart = ({id}) => {
               {cart.map((product, index) => (
                 <div
                   key={index}
-                  className="mb-10 bg-slate-500 rounded-lg shadow-2xl"
+                  className="mb-10 rounded-lg shadow-2xl"
                   style={{ backgroundColor: "#D1D7BF"}}
                 >
-                  <Link href={`/store/${product.id}`}>
                   <Card
                     key={product.id}
                     id={product.id}
@@ -79,7 +78,7 @@ const Cart = ({id}) => {
                     price={product.price}
                     cardStyles={cartItemStyles}
                     imageStyle={{
-                      width: '200px',
+                      maxWidth: '200px',
                       height: '150px', 
                       marginTop: '20px',
                       marginLeft: '20px',
@@ -101,12 +100,9 @@ const Cart = ({id}) => {
                       marginLeft: '310px',
                       marginTop: '50px'
                     }}
-                    cartControlers={true}
-                    
+                    cartControlers={true}        
                   />
-                  </Link>
-                </div>
-                
+                </div>              
               ))}
             </div>
 
