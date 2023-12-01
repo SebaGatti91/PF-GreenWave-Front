@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../cart/cartContext";
 import { useEffect, useState } from "react";
-
+import React from 'react'
+import SkeletonCard from './SkeletonCard'
 const Card = ({ 
   id, 
   name, 
@@ -24,14 +25,37 @@ const Card = ({
     ...cardStyles,
   };
 
-  const [fav, setFav] = useState(false);
-  const [rate, setRate] = useState([]);
+
+  const [state, setState] = useState({
+    fav: false,
+    rate: [],
+    loading: true});
   const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
     useCart();
+  useEffect(()=>{
+    setTimeout(()=>{
+      setState(prevState =>({
+        ...prevState, loading: false
+      }))
+    },2000)
+  },[])
   const [addedToCart, setAddedToCart] = useState(false);
-
+ const max = 5
+  useEffect(() => {
+    let stars = [];
+    for (let i = 0; i < max; i++) {
+      if (i < rating) {
+        stars.push('⭐');
+      } else {
+        stars.push('☆');
+      }
+    }
+    setState(prevState=>({...prevState, rate: stars}));
+  }, [rating]);
   const handleFavorite = () => {
-    setFav(!fav);
+    setState(prevState =>({
+      ...prevState, fav: true
+    }));
   };
 
   const handleAddToCart = () => {
@@ -46,7 +70,7 @@ const Card = ({
 
   const renderAddToCartButton = () => (
     <div className="py-2">
-      <p className="text-center" style={...textPrice}> {rate}</p>
+      <p className="text-center" style={...textPrice}> {state.rate}</p>
       <button
         onClick={handleAddToCart}
         className="p-1 m-2 rounded-lg mr-2 bg-hover hover:bg-boton"
@@ -64,7 +88,7 @@ const Card = ({
 
     return (
       <div style={cardContainerStyles} className="flex flex-col justify-center">
-        <p className="text-center py-1" style={...estrellas}> {rate}</p>
+        <p className="text-center py-1" style={...estrellas}> {state.rate}</p>
         <div style={...botones} className="flex justify-center flex-row items-center py-2 mb-2">
           <button
             className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
@@ -103,18 +127,20 @@ const Card = ({
     );
   };
 
-  useEffect(() => {
-    let stars = [];
-    for (let i = 0; i < 5; i++) {
-      stars.push(i < rating ? "⭐" : "☆");
-    }
-    setRate(stars);
-  }, [rating]);
-
+  const loader = ()=>{
+    
+    return(
+    <SkeletonCard/>
+      )
+  }
+  if(state.loading){
+return(loader())
+  }
+  else{
   return (
     <div style={cardContainerStyles} className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
       <div className="absolute top-0 right-0 m-2">
-        {fav ? (
+        {state.fav ? (
           <button onClick={handleFavorite}>💚</button>
         ) : (
           <button onClick={handleFavorite}>🤍</button>
@@ -140,5 +166,5 @@ const Card = ({
     </div>
   );
 };
-
+}
 export default Card;
