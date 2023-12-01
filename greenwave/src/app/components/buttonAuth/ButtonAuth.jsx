@@ -1,14 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Button from "../button/Button";
+
 export default function ButtonAuth() {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [menuVisible, setMenuVisible] = useState(false);
+  const pathname = usePathname();
+  const prevPathname = useRef(pathname);
+  useEffect(() => {
+    // Si el pathname cambia, cerrar el menú
+    if (pathname !== prevPathname.current) {
+      setMenuVisible(false);
+    }
+    // Actualizar el pathname anterior
+    prevPathname.current = pathname;
+  }, [pathname]);
 
   if (status === "loading") {
     return <p>Loading...</p>;
@@ -32,14 +42,22 @@ export default function ButtonAuth() {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
-
   const handleOptionClick = (option) => {
-    // Puedes agregar lógica adicional aquí al seleccionar una opción
+    switch (option) {
+      case "favorites":
+        router.push("/favorites");
+        break;
+      case "profile":
+        router.push("/profile");
+        break;
+      case "logout":
+        handleLogout();
+        break;
 
-    // Aquí puedes redirigir o realizar otras acciones según la opción seleccionada
+      default:
+    }
 
-    // Cerrar el menú después de seleccionar una opción
-    return setMenuVisible(false);
+    setMenuVisible(false);
   };
 
   return (
@@ -61,13 +79,12 @@ export default function ButtonAuth() {
                     "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
                 }}
               >
-                <div>
-                  <Button link={"/favorites"} text={"Favorites"} />
-                </div>
-
-                <div>
-                  <Button link={"/profile"} text={"Profile"} />
-                </div>
+                <button onClick={() => handleOptionClick("favorites")}>
+                  Favorites
+                </button>
+                <button onClick={() => handleOptionClick("profile")}>
+                  Profile
+                </button>
                 <div>
                   <button
                     onClick={() => handleLogout()}
