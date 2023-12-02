@@ -12,7 +12,6 @@ export const CartProvider = ({ children }) => {
       typeof window !== "undefined" ? localStorage.getItem("cart") : null;
     return localData ? JSON.parse(localData) : [];
   });
-  console.log(cart);
   //mira el estado y agrega prouducts
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
