@@ -120,9 +120,9 @@ export default function Detail({ params, id }) {
             }
 
             <div className="flex flex-col items-center text-center p-3 ml-3">
-              <div class=" space-x-4 ">
+              <div className=" space-x-4 ">
                 <button
-                  class="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
+                  className="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
                   style={{
                     borderRadius: "2em 2em",
                   }}
@@ -131,7 +131,7 @@ export default function Detail({ params, id }) {
                 </button>
                 <button
                   onClick={handleEdit}
-                  class="bg-sky-950 hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
+                  className="bg-sky-950 hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
                   style={{
                     borderRadius: "2em 2em",
                   }}
