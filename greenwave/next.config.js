@@ -12,7 +12,8 @@ const nextConfig = {
       "estag.fimagenes.com",
       "m.media-amazon.com",
       "www.serzen.mx",
-      "th.bing.com"
+      "th.bing.com",
+     "reqres.in"
     ],
   },
 };
