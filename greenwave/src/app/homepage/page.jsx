@@ -43,7 +43,7 @@ export default function Home() {
         >
           ¿Why recycling?
         </h2>
-        <div className="flex p-3 justify-center">
+        <div className="flex p-3 justify-center flex-wrap">
           <div className="card shadow-2xl">
             <img
               className="cardImg"
