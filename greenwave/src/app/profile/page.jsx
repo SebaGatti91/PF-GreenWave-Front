@@ -1,16 +1,15 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { useEffect, useState , useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Button from "../components/button/Button";
-import { GlobalUser} from "../components/users/globalUsers";
+import { GlobalUser } from "../components/users/globalUsers";
 const Profile = () => {
   const { data: session } = useSession();
-  const usuario = session?.user; // Use optional chaining to prevent errors if session or user is undefined
-  // const [userFromDb, setUserFromDb] = useState(null); // Initialize as null for a single user object
-  const {user, setUser} = useContext(GlobalUser)
-console.log((user));
-const fetchData = async () => {
+  const usuario = session?.user;
+  const { user, setUser } = useContext(GlobalUser);
+
+  const fetchData = async () => {
     try {
       const response = await axios.get(
         `http://localhost:3001/users/${usuario?.email}`
