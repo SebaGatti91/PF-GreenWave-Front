@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import axios from "axios"; // Asegúrate de importar axios
 import styles from "./LoginPage.module.css";
+import {createUser} from "../lib/data"
+
 
 const LoginPage = () => {
   const [errors, setErrors] = useState("");
@@ -14,28 +15,13 @@ const LoginPage = () => {
   const [userCreation, setUserCreation] = useState(false);
 
   useEffect(() => {
-    const createUserAndRedirect = async () => {
-      try {
-        if (!session?.user?.email) {
-          console.error("Error: Email is missing in user data");
-          return;
-        }
-
-        const url = `http://localhost:3001/users`;
-
-        await axios.post(url, session.user);
-      } catch (error) {
-        console.error("Error al crear el usuario en el backend", error);
-        // Consider setting a more specific error message or logging details
-      } finally {
-        router.replace("/homepage"); // Move redirection here
-      }
-    };
 
     if (session?.user && !userCreation) {
       setUserCreation(true);
-      createUserAndRedirect();
+      createUser(session.user);
+      router.replace("/homepage");
     }
+
   }, [session, userCreation, router]);
 
   const handleSignInWithProvider = async (providerId) => {
