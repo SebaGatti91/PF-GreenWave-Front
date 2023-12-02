@@ -49,7 +49,7 @@ const Profile = () => {
           className="flex flex-wrap justify-evenly m-10 p-10"
           style={{ backgroundColor: "#D1D7BF" }}
         >
-          {user.productsCreados.map((product) => (
+          {user.productsCreados?.map((product) => (
             <div key={product.id} className="w-1/2">
               <Link href={`/store/${product.id}`} className="flex items-center">
                 <Image
