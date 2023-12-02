@@ -3,10 +3,11 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./detail.css"
 import PostProduct from "../../post-product/page";
 import Skeleton from "./Skeleton";
+import { GlobalUser } from "../../components/users/globalUsers";
 
 export default function Detail({ params, id }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -29,23 +30,28 @@ export default function Detail({ params, id }) {
     }
   };
 
+
   useEffect(() => {
     setTimeout(() => {
       SetLoading(false);
     }, 2000);
   }, []);
 
+  const { user } = useContext(GlobalUser)
+
   const createPreference = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/mercadoPago", [
-        {
-          title: product.name,
-          unit_price: product.price,
-          quantity: 1,
-          currency_id: "ARS",
-        },
-      ]);
-      console.log(response.data);
+      const response = await axios.post("http://localhost:3001/mercadoPago", {
+        userId: user.id, productId: product.id, items: [
+          {
+            title: product.name,
+            unit_price: product.price,
+            quantity: 1,
+            currency_id: "ARS"
+          },
+        ]
+      });
+      console.log(user);
       window.location.href = response.data;
     } catch (error) {
       throw new Error(error.message);
@@ -166,7 +172,7 @@ export default function Detail({ params, id }) {
                     className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
                     style={{
                       border: "1px solid gray",
-                      
+
                     }}
                   >
                     Buy now
