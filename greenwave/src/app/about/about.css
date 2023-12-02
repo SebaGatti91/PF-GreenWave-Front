@@ -1,0 +1,11 @@
+@media (min-width: 830px) {
+    .responsive{
+       display: none;
+    }
+}
+
+@media (max-width: 830px) {
+    .blocked{
+        display: none;
+    }
+}
