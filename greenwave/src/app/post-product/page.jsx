@@ -3,18 +3,19 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
-import React, { createContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import {
   materialsApi,
   submitForm,
 } from "../components/materialsApi/useMaterialsApi";
+import { GlobalUser } from "../components/users/globalUsers";
 
 export default function PostProduct({ initialValues, isOff = true }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [file, setFile] = useState(null);
   const [materials, setMaterials] = useState([]);
-
+  const { user } = useContext(GlobalUser);
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
@@ -102,13 +103,12 @@ export default function PostProduct({ initialValues, isOff = true }) {
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          
           try {
             setLoading(true);
             const formData = new FormData();
             if (file) {
               formData.append("image", file);
-
+              values.userId = user.id;
               // Carga la nueva imagen en Cloudinary
               const cloudinaryResponse = await fetch("/api/upload", {
                 method: "POST",
@@ -122,7 +122,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
             const url =
               initialValues && initialValues.id
                 ? `http://localhost:3001/products/${initialValues.id}`
-                : "/api/upload"; 
+                : "/api/upload";
 
             // Cambia el método de la solicitud según si es una edición o una publicación
             const method = initialValues && initialValues.id ? "PUT" : "POST";
@@ -135,7 +135,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
                 console.log(initialValues);
                 if (response.status === 200) {
                   setLoading(false);
-                  router.push(`/profile/`)
+                  router.push(`/profile/`);
                   return Swal.fire({
                     icon: "success",
                     title: "Product edited Successfully",
@@ -145,7 +145,6 @@ export default function PostProduct({ initialValues, isOff = true }) {
               } catch (error) {
                 throw Error(error);
               }
-          
             }
 
             const response = await fetch(url, {
@@ -154,10 +153,10 @@ export default function PostProduct({ initialValues, isOff = true }) {
             });
 
             const data = await response.json();
-            
+
             values.image = data.url;
 
-            submitForm(values, initialValues && initialValues.id,)
+            submitForm(values, initialValues && initialValues.id)
               .then(() => {
                 setLoading(false);
                 resetForm();
@@ -334,12 +333,18 @@ export default function PostProduct({ initialValues, isOff = true }) {
                 type="submit"
                 disabled={loading}
                 className={`w-full py-2 px-4 rounded hover:bg-green-700 ${
-                  loading ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-green-600 text-white'
+                  loading
+                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    : "bg-green-600 text-white"
                 }`}
               >
                 {initialValues && initialValues.id ? "Update" : "Post"}
               </button>
-              {loading && <p className="text-lg	italic text-cyan-800 font-medium	">Loading, do not reload the page...</p>}
+              {loading && (
+                <p className="text-lg	italic text-cyan-800 font-medium	">
+                  Loading, do not reload the page...
+                </p>
+              )}
             </form>
             {isOff && (
               <div className="w-2/5 bg-lime-200">
