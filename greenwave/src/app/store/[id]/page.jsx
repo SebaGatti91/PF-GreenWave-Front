@@ -4,19 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../components/cart/cartContext';
 import { useState, useEffect } from 'react';
-
 import PostProduct from '../../post-product/page'; 
 import Skeleton from './Skeleton'
-const loadDetail = async (id) => {
-  const response = await axios.get(`http://localhost:3001/store/${id}`);
-  return response.data;
-};
 
 export default function Detail({ params, id }) {
-
-
-
-
   const [isEditing, setIsEditing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);

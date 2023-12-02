@@ -110,79 +110,87 @@ const Store = () => {
   );
 
   return (
-    <div className="container mx-auto p-4 relative">
-      <div className="absolute top-4 left-0 ">
-        <DropDownMenu
-          handleMaterials={handleMaterials}
-          handleFilter={handleFilter}
-          handleOrder={handleOrder}
-          handleClearFilters={handleClearFilters}
-        />
-      </div>
-      <div className="absolute top -0 left-52">
-        <input
-          type="text"
-          placeholder="Search..."
-          style={{
-            borderRadius: "1em 0 0 1em",
-            width: "250px",
-          }}
-          className="text-black px-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-center"
-          value={filterValueName}
-          onChange={handleFilterName}
-        />
-        <button
-          type="button"
-          onClick={handleSearch}
-          style={{
-            borderRadius: "0 1em 1em 0",
-            padding: "1.5px",
-            borderLeft: "1px solid gray",
-            paddingRight: "10px",
-            paddingLeft: "5px",
-          }}
-          className="bg-white text-white rounded-r focus:outline-none focus:ring focus:border-blue-300"
-        >
-          &#128269;
-        </button>
-      </div>
+    <div className=" mx-auto flex flex-row ">
+      <aside className="flex flex-col bg-hover w-1/4 shadow-2xl" style={{ borderRight: '1px solid gray' }}>
 
-      <div
-        className="flex flex-wrap justify-center items-center mb-3"
-        style={{ marginTop: "30px" }}
-      >
-        {currentProducts.map((product) => (
-          <div
-            className="hover:transform hover:scale-105 transition-transform duration-300"
-            key={product.id}
-            // className=" hover:transform hover:scale-105 transition-transform duration-300"
+        <div className="flex flex-row pb-5 pt-6 px-3 bg-hover" style={{ borderBottom: '1px solid gray' }}>
+          <input
+            type="text"
+            placeholder="Search..."
+            style={{
+              borderRadius: "1em 0 0 1em",
+              width: "250px",
+              border: '1px solid gray'
+            }}
+            className="text-black px-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-center"
+            value={filterValueName}
+            onChange={handleFilterName}
+          />
+          <button
+            type="button"
+            onClick={handleSearch}
+            style={{
+              borderRadius: "0 1em 1em 0",
+              padding: "1.5px",
+              borderLeft: "1px solid gray",
+              paddingRight: "10px",
+              paddingLeft: "5px",
+              border: '1px solid gray'
+            }}
+            className="bg-white text-white rounded-r focus:outline-none focus:ring focus:border-blue-300"
           >
-            <Card
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              image={product.image}
-              price={product.price}
-              rating={product.rating}
-            />
-          </div>
-        ))}
-      </div>
-      {products.length ? (
-        <div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(
-              totalFilteredProducts.length / productsPerPage
-            )}
-            onPageChange={paginate}
+            &#128269;
+          </button>
+        </div>
+
+        <div className="flex flex-col">
+          <DropDownMenu
+            handleMaterials={handleMaterials}
+            handleFilter={handleFilter}
+            handleOrder={handleOrder}
+            handleClearFilters={handleClearFilters}
           />
         </div>
-      ) : (
-        <div>
-          <p> No existen coincidencias entre los filtros aplicados.</p>
+
+      </aside>
+      <main className="flex flex-col justify-center" style={{marginInline: 'auto'}}>
+        <div
+          className="flex flex-wrap justify-center items-center mb-3"
+          style={{ marginTop: "30px" }}
+        >
+          {currentProducts.map((product) => (
+            <div
+              className="hover:transform hover:scale-105 transition-transform duration-300"
+              key={product.id}
+            // className=" hover:transform hover:scale-105 transition-transform duration-300"
+            >
+              <Card
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                image={product.image}
+                price={product.price}
+                rating={product.rating}
+              />
+            </div>
+          ))}
         </div>
-      )}
+        {products.length ? (
+          <div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Math.ceil(
+                totalFilteredProducts.length / productsPerPage
+              )}
+              onPageChange={paginate}
+            />
+          </div>
+        ) : (
+          <div className="h-screen">
+            <p></p>
+          </div>
+        )}
+      </main>
     </div>
   );
 };
