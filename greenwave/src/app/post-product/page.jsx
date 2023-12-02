@@ -160,6 +160,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
               .then(() => {
                 setLoading(false);
                 resetForm();
+                router.push(`/profile/`);
               })
               .catch((error) => {
                 throw Error(error);
