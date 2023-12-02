@@ -3,9 +3,10 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
-import { useState, useEffect } from "react";
-import "./detail.css"
+import { useState, useEffect, useContext } from "react";
+import "./detail.css";
 import PostProduct from "../../post-product/page";
+import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
 const loadDetail = async (id) => {
   const response = await axios.get(`http://localhost:3001/store/${id}`);
@@ -13,6 +14,8 @@ const loadDetail = async (id) => {
 };
 
 export default function Detail({ params, id }) {
+  const { user } = useContext(GlobalUser);
+  console.log(user);
   const [isEditing, setIsEditing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);
@@ -26,7 +29,7 @@ export default function Detail({ params, id }) {
   const loadProductDetail = async (id) => {
     try {
       const response = await axios.get(`http://localhost:3001/store/${id}`);
-      console.log(response.data);
+
       setProduct(response.data);
     } catch (error) {
       console.error("Error loading product detail:", error);
@@ -41,14 +44,18 @@ export default function Detail({ params, id }) {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/mercadoPago", [
-        {
-          title: product.name,
-          unit_price: product.price,
-          quantity: 1,
-          currency_id: "ARS",
-        },
-      ]);
+      const response = await axios.post("http://localhost:3001/mercadoPago", {
+        userId: user.email,
+        productId: product.id,
+        item: [
+          {
+            title: product.name,
+            unit_price: product.price,
+            quantity: 1,
+            currency_id: "ARS",
+          },
+        ],
+      });
       console.log(response.data);
       window.location.href = response.data;
     } catch (error) {
@@ -170,7 +177,6 @@ export default function Detail({ params, id }) {
                     className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
                     style={{
                       border: "1px solid gray",
-                      
                     }}
                   >
                     Buy now

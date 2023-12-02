@@ -3,19 +3,22 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 export const GlobalUser = createContext();
 export const UserGlobal = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    //aqui cargo el localstorage con la informacion que me llega a el estado para la peristencia y lo transormo a Json
-    const localData =
-      typeof window !== "undefined" ? localStorage.getItem("user") : null;
-    return localData ? JSON.parse(localData) : [];
-  });
+  const [user, setUser] = useState(
+    {}
+    //   () => {
+    //   //aqui cargo el localstorage con la informacion que me llega a el estado para la peristencia y lo transormo a Json
+    //   const localData =
+    //     typeof window !== "undefined" ? localStorage.getItem("user") : null;
+    //   return localData ? JSON.parse(localData) : [];
+    // });
+  );
   const fetchData = async () => {
     try {
       const response = await axios.get(
         `http://localhost:3001/users/${user?.email}`
       );
       const { data } = response;
-      console.log(data);
+
       setUser(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -25,20 +28,20 @@ export const UserGlobal = ({ children }) => {
   // cuando el estado del usuario cambia o se modifica, el local storage restituye la informacion
   useEffect(() => {
     fetchData();
-    localStorage.setItem("user", JSON.stringify(user));
-  }, []);
+    // localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   //agrego el usuario al estado
-  const addUser = (usuario) => {
-    setUser(usuario);
-  };
+  // const addUser = (usuario) => {
+  //   setUser(usuario);
+  // };
   //dejo disponble las acciones
   return (
     <GlobalUser.Provider
       value={{
         user,
         setUser,
-        addUser,
+        // addUser,
       }}
     >
       {children}
