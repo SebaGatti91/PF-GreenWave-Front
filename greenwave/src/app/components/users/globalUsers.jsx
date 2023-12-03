@@ -1,44 +1,37 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 export const GlobalUser = createContext();
 export const UserGlobal = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    //aqui cargo el localstorage con la informacion que me llega a el estado para la peristencia y lo transormo a Json
-    const localData =
-      typeof window !== "undefined" ? localStorage.getItem("user") : null;
-    return localData ? JSON.parse(localData) : [];
-  });
+  const { data: session } = useSession();
+  const userData = session?.user;
+  const [user, setUser] = useState({});
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/users/${user?.email}`
+        `http://localhost:3001/users/${userData?.email}`
       );
       const { data } = response;
-      console.log(data);
+
       setUser(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
       // Handle the error, show a message to the user, or redirect as needed.
     }
   };
-  // cuando el estado del usuario cambia o se modifica, el local storage restituye la informacion
-  useEffect(() => {
-    fetchData();
-    localStorage.setItem("user", JSON.stringify(user));
-  }, []);
 
-  //agrego el usuario al estado
-  const addUser = (usuario) => {
-    setUser(usuario);
-  };
-  //dejo disponble las acciones
+  useEffect(() => {
+    if (session?.user) {
+      fetchData();
+    }
+  }, [session?.user]);
+
   return (
     <GlobalUser.Provider
       value={{
         user,
         setUser,
-        addUser,
       }}
     >
       {children}
