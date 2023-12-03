@@ -13,21 +13,10 @@ const Card = ({
   image,
   price,
   rating,
-  // Estilos
-  cardStyles,
-  imageStyle,
-  text,
-  textPrice,
-  estrellas,
-  botones,
   cartControlers = false,
   // function
   setFavorites,
 }) => {
-  const cardContainerStyles = {
-    display: "flex",
-    ...cardStyles,
-  };
 
   const { user } = useContext(GlobalUser);
   const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
@@ -39,6 +28,8 @@ const Card = ({
     loading: true,
   });
 
+  const [addedToCart, setAddedToCart] = useState(false);
+  
   useEffect(() => {
     setTimeout(() => {
       setState((prevState) => ({
@@ -101,6 +92,7 @@ const Card = ({
 
   const handleAddToCart = () => {
     addToCart({ id, name, image, price, rating });
+    setAddedToCart(true)
   };
 
   const handleRemoveFromCart = () => {
@@ -109,18 +101,18 @@ const Card = ({
 
   const renderAddToCartButton = () => (
     <div className="py-2">
-      <p className="text-center" style={textPrice}>
-        {state.rate}
-      </p>
+      <p className="text-center"> {state.rate}</p>
       <button
         onClick={handleAddToCart}
-        className="p-1 m-2 rounded-lg mr-2 bg-hover hover:bg-boton"
+        className="p-1 m-2 rounded-lg mr-2 bg-hover hover:bg-boton flex justify-center"
+        style={{ marginInline: 'auto' }}
       >
-        Add to Cart
+        <img
+          src="/images/shoppingCart.png"
+          alt="shoppingCartImage"
+          style={{ width: "25px", height: "25px" }}
+        />
       </button>
-      <Link href={`/store/${id}`}>
-        <button className="bg-hover hover:bg-boton p-1 rounded-full">🔍</button>
-      </Link>
     </div>
   );
 
@@ -130,14 +122,12 @@ const Card = ({
     return (
       <div
         key={item.id}
-        style={cardContainerStyles}
         className="flex flex-col justify-center"
       >
-        <p className="text-center py-1" style={estrellas}>
+        <p className="text-center py-1">
           {state.rate}
         </p>
         <div
-          style={botones}
           className="flex justify-center flex-row items-center py-2 mb-2"
         >
           <button
@@ -177,16 +167,18 @@ const Card = ({
     );
   };
 
-  const loader = () => <SkeletonCard />;
+  const loader = () => {
 
-  if (state.loading) {
-    return loader();
-  } else {
     return (
-      <div
-        style={cardContainerStyles}
-        className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative"
-      >
+      <SkeletonCard />
+    )
+  }
+  if (state.loading) {
+    return (loader())
+  }
+  else {
+    return (
+      <div className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
         <div className="absolute top-0 right-0 m-2">
           {state.fav ? (
             <button onClick={handleFavorite}>💚</button>
@@ -196,32 +188,29 @@ const Card = ({
         </div>
 
         <div className="flex-grow flex-shrink-0">
-          <Image
-            src={image}
-            alt={name}
-            height={150}
-            width={150}
-            style={imageStyle}
-            className="w-80 h-60 rounded-md"
-          />
+          <Link href={`/store/${id}`} className="flex w-full">
+            <Image src={image} alt={name} height={200} width={150}
+              style={{ height: "200px" }}
+              className="w-80 h-60 rounded-md border-sky-950"
+            />
+          </Link>
         </div>
 
-        <div
-          style={text}
-          className="mt-2 flex-grow-0 flex flex-col items-center"
-        >
+        <div className="mt-2 flex-grow-0 flex flex-col items-center">
           <h3 className="text-center font-bold">{name}</h3>
           <h3 className="text-green-600 text-center">USD {price}</h3>
 
           {cartControlers
             ? cart
-                .filter((item) => item.id === id)
-                .map((item) => renderCartControlButtons())
-            : renderAddToCartButton()}
+              .filter((item) => item.id === id)
+              .map((item) => renderCartControlButtons())
+            : addedToCart
+              ? renderCartControlButtons()
+              : renderAddToCartButton()
+          }
         </div>
       </div>
     );
-  }
-};
-
+  };
+}
 export default Card;

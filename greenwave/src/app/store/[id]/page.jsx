@@ -4,14 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
 import { useState, useEffect, useContext } from "react";
-import "./detail.css";
+import "./detail.css"
 import PostProduct from "../../post-product/page";
 import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
-const loadDetail = async (id) => {
-  const response = await axios.get(`http://localhost:3001/store/${id}`);
-  return response.data;
-};
+import { GlobalUser } from "../../components/users/globalUsers";
 
 export default function Detail({ params, id }) {
   const { user } = useContext(GlobalUser);
@@ -36,11 +33,14 @@ export default function Detail({ params, id }) {
     }
   };
 
+
   useEffect(() => {
     setTimeout(() => {
       SetLoading(false);
     }, 2000);
   }, []);
+
+  const { user } = useContext(GlobalUser)
 
   const createPreference = async () => {
     try {

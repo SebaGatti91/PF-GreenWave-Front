@@ -90,7 +90,7 @@ const NavigationLinks = ({ session, totalItems }) => (
         <img
           src="/images/shoppingCart.png"
           alt="shoppingCartImage"
-          style={{ width: "30px", height: "30px" }}
+          style={{ width: "25px", height: "25px" }}
         />
         <div
           style={{
@@ -98,7 +98,7 @@ const NavigationLinks = ({ session, totalItems }) => (
             color:
               "green",
             borderRadius: "100%",
-            width: "22px",
+            width: "20px",
             textAlign: "center",
           }}
         >
