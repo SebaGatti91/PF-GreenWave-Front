@@ -43,7 +43,6 @@ const Store = () => {
 
       const response = await axios.get(url);
       const { data } = response;
-      console.log(data);
       setProducts(data);
       setTotalFilteredProducts(data);
       setFiltersActive(
@@ -111,16 +110,21 @@ const Store = () => {
 
   return (
     <div className=" mx-auto flex flex-row ">
-      <aside className="flex flex-col bg-hover w-1/4 shadow-2xl" style={{ borderRight: '1px solid gray' }}>
-
-        <div className="flex flex-row pb-5 pt-6 px-3 bg-hover" style={{ borderBottom: '1px solid gray' }}>
+      <aside
+        className="flex flex-col bg-hover w-1/4 shadow-2xl"
+        style={{ borderRight: "1px solid gray" }}
+      >
+        <div
+          className="flex flex-row pb-5 pt-6 px-3 bg-hover"
+          style={{ borderBottom: "1px solid gray" }}
+        >
           <input
             type="text"
             placeholder="Search..."
             style={{
               borderRadius: "1em 0 0 1em",
               width: "250px",
-              border: '1px solid gray'
+              border: "1px solid gray",
             }}
             className="text-black px-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-center"
             value={filterValueName}
@@ -135,7 +139,7 @@ const Store = () => {
               borderLeft: "1px solid gray",
               paddingRight: "10px",
               paddingLeft: "5px",
-              border: '1px solid gray'
+              border: "1px solid gray",
             }}
             className="bg-white text-white rounded-r focus:outline-none focus:ring focus:border-blue-300"
           >
@@ -151,9 +155,11 @@ const Store = () => {
             handleClearFilters={handleClearFilters}
           />
         </div>
-
       </aside>
-      <main className="flex flex-col justify-center" style={{marginInline: 'auto'}}>
+      <main
+        className="flex flex-col justify-center"
+        style={{ marginInline: "auto" }}
+      >
         <div
           className="flex flex-wrap justify-center items-center mb-3"
           style={{ marginTop: "30px" }}
@@ -162,7 +168,7 @@ const Store = () => {
             <div
               className="hover:transform hover:scale-105 transition-transform duration-300"
               key={product.id}
-            // className=" hover:transform hover:scale-105 transition-transform duration-300"
+              // className=" hover:transform hover:scale-105 transition-transform duration-300"
             >
               <Card
                 key={product.id}
