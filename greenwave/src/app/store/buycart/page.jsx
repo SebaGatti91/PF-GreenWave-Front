@@ -58,34 +58,43 @@ const Cart = ({ params }) => {
     );
   };
 
+import { GlobalUser } from "../../components/users/globalUsers";
+const Cart = ({ id }) => {
+  const { cart, setCart } = useContext(CartContext);
+  const { user } = useContext(GlobalUser);
 
   const createPreference = async () => {
     try {
-      const items = cart?.map((prod) => ({
+      const itemsFromCart = cart?.map((prod) => ({
         title: prod.name,
         unit_price: prod.price,
         quantity: prod.count,
-        currency_id: "ARS"
+        currency_id: "ARS",
       }));
 
-      if (!items || items.length === 0) {
-        console.error('Cart is empty. Cannot create preference.');
+      if (!itemsFromCart || itemsFromCart.length === 0) {
+        console.error("Cart is empty. Cannot create preference.");
         return;
       }
 
-      const response = await axios.post("http://localhost:3001/mercadoPago", items);
-      console.log(response);
+      const productsIds = cart.map((prod) => prod.id);
+      const response = await axios.post("http://localhost:3001/mercadoPago", {
+        userId: user.email,
+        productId: productsIds,
+        item: itemsFromCart,
+      });
 
+      setCart([]);
       window.location.href = response.data;
     } catch (error) {
-      console.error('Error creating preference:', error);
+      console.error("Error creating preference:", error);
     }
   };
 
-
   const handleBuy = async () => {
-    const id = await createPreference()
-  }
+    const id = await createPreference();
+    if (id) setPreferenceId(id);
+  };
 
   const totalItems = cart.reduce((acc, product) => {
     const count = typeof product.count === "number" ? product.count : 0;

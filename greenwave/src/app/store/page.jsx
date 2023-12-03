@@ -44,7 +44,6 @@ const Store = () => {
 
       const response = await axios.get(url);
       const { data } = response;
-      console.log(data);
       setProducts(data);
       setTotalFilteredProducts(data);
       setFiltersActive(
@@ -136,7 +135,7 @@ const Store = () => {
               borderLeft: "1px solid gray",
               paddingRight: "10px",
               paddingLeft: "5px",
-              border: '1px solid gray'
+              border: "1px solid gray",
             }}
             className="bg-white text-white rounded-r focus:outline-none focus:ring focus:border-blue-300"
           >
@@ -152,7 +151,6 @@ const Store = () => {
             handleClearFilters={handleClearFilters}
           />
         </div>
-
       </aside>
       <main className="flex flex-col justify-center container" style={{ marginInline: 'auto' }}>
         <div

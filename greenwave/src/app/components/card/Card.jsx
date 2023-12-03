@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../cart/cartContext";
-import { useEffect, useState } from "react";
-import React from 'react'
-import SkeletonCard from './SkeletonCard'
+import { useEffect, useState, useContext } from "react";
+import React from "react";
+import SkeletonCard from "./SkeletonCard";
+import { GlobalUser } from "../users/globalUsers";
+import { fetchAddFavorites, fetchRemoveFavorites } from "../../lib/data";
 
 const Card = ({
   id,
@@ -11,51 +13,98 @@ const Card = ({
   image,
   price,
   rating,
+  // Estilos
+  cardStyles,
+  imageStyle,
+  text,
+  textPrice,
+  estrellas,
+  botones,
   cartControlers = false,
+  // function
+  setFavorites,
 }) => {
+  const cardContainerStyles = {
+    display: "flex",
+    ...cardStyles,
+  };
+
+  const { user } = useContext(GlobalUser);
+  const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
+    useCart();
 
   const [state, setState] = useState({
     fav: false,
     rate: [],
-    loading: true
+    loading: true,
   });
-  const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
-    useCart();
-    
+
   useEffect(() => {
     setTimeout(() => {
-      setState(prevState => ({
-        ...prevState, loading: false
-      }))
-    }, 2000)
-  }, [])
-  const [addedToCart, setAddedToCart] = useState(false);
-  const max = 5
+      setState((prevState) => ({
+        ...prevState,
+        loading: false,
+      }));
+    }, 2000);
+  }, []);
+
   useEffect(() => {
     let stars = [];
+    const max = 5;
+
     for (let i = 0; i < max; i++) {
       if (i < rating) {
-        stars.push('⭐');
+        stars.push("⭐");
       } else {
-        stars.push('☆');
+        stars.push("☆");
       }
     }
-    setState(prevState => ({ ...prevState, rate: stars }));
+
+    setState((prevState) => ({ ...prevState, rate: stars }));
   }, [rating]);
+
+  useEffect(() => {
+    // Recuperar la información de favoritos desde localStorage al cargar el componente
+    const favoritesFromStorage =
+      JSON.parse(localStorage.getItem("favorites")) || [];
+    const isFavorite = favoritesFromStorage.includes(id);
+    setState((prevState) => ({ ...prevState, fav: isFavorite }));
+  }, [id]);
+
   const handleFavorite = () => {
-    setState(prevState => ({
-      ...prevState, fav: true
+    const productId = id;
+
+    setState((prevState) => ({
+      ...prevState,
+      fav: !prevState.fav,
     }));
+
+    const favoritesFromStorage =
+      JSON.parse(localStorage.getItem("favorites")) || [];
+
+    if (state.fav) {
+      // Remover el producto de favoritos y actualizar localStorage
+      const updatedFavorites = favoritesFromStorage.filter(
+        (favId) => favId !== productId
+      );
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
+      fetchRemoveFavorites(user.email, productId, setFavorites);
+    } else {
+      // Agregar el producto a favoritos y actualizar localStorage
+      const updatedFavorites = [...favoritesFromStorage, productId];
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
+      fetchAddFavorites(user.email, productId);
+    }
   };
 
   const handleAddToCart = () => {
     addToCart({ id, name, image, price, rating });
-    setAddedToCart(true);
   };
 
   const handleRemoveFromCart = () => {
     removeFromCart(id);
-    setAddedToCart(false); // Cambia el estado a false al hacer clic en el basurero
   };
 
   const renderAddToCartButton = () => (
@@ -79,11 +128,20 @@ const Card = ({
     const item = cart.find((item) => item.id === id);
 
     return (
-      <div className="flex flex-col justify-center">
-        <p className="text-center py-1"> {state.rate}</p>
-        <div className="flex justify-center flex-row items-center py-2 mb-2">
+      <div
+        key={item.id}
+        style={cardContainerStyles}
+        className="flex flex-col justify-center"
+      >
+        <p className="text-center py-1" style={estrellas}>
+          {state.rate}
+        </p>
+        <div
+          style={botones}
+          className="flex justify-center flex-row items-center py-2 mb-2"
+        >
           <button
-            className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
+            className="bg-red-500 hover:bg-red-700 p-1 rounded-md"
             onClick={() => handleRemoveFromCart()}
           >
             {
