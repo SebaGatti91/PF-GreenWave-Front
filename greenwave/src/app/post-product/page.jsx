@@ -160,6 +160,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
               .then(() => {
                 setLoading(false);
                 resetForm();
+                router.push(`/profile/`);
               })
               .catch((error) => {
                 throw Error(error);
@@ -180,7 +181,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
           <div className="flex">
             <form
               onSubmit={handleSubmit}
-              className="w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-4 p-4"
+              className="w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
               encType="multipart/form-data"
             >
               <div className="mb-4 w-full">
