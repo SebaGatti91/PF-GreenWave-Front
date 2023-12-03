@@ -8,7 +8,6 @@ import "./detail.css"
 import PostProduct from "../../post-product/page";
 import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
-import { GlobalUser } from "../../components/users/globalUsers";
 
 export default function Detail({ params, id }) {
   const { user } = useContext(GlobalUser);
@@ -39,8 +38,6 @@ export default function Detail({ params, id }) {
       SetLoading(false);
     }, 2000);
   }, []);
-
-  const { user } = useContext(GlobalUser)
 
   const createPreference = async () => {
     try {
