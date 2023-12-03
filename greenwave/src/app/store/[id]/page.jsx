@@ -1,18 +1,25 @@
 "use client";
+import { useSession } from "next-auth/react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import "./detail.css"
 import PostProduct from "../../post-product/page";
 import Skeleton from "./Skeleton";
+import { deleteProduct } from "../../lib/data";
+
 const loadDetail = async (id) => {
   const response = await axios.get(`http://localhost:3001/store/${id}`);
   return response.data;
 };
 
 export default function Detail({ params, id }) {
+  const router = useRouter()
+  const { data: session } = useSession();
+  const userAut = session?.user;
   const [isEditing, setIsEditing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);
@@ -55,6 +62,11 @@ export default function Detail({ params, id }) {
       throw new Error(error.message);
     }
   };
+
+  const handleProd = async () =>{
+    await deleteProduct(params.id)
+    router.push("/store")
+  }
 
   const handleBuy = async () => {
     const id = await createPreference();
@@ -120,8 +132,10 @@ export default function Detail({ params, id }) {
             }
 
             <div className="flex flex-col items-center text-center p-3 ml-3">
+              {userAut ? (
               <div className=" space-x-4 ">
                 <button
+                  onClick={handleProd}
                   className="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
                   style={{
                     borderRadius: "2em 2em",
@@ -139,6 +153,7 @@ export default function Detail({ params, id }) {
                   Edit
                 </button>
               </div>
+              ):""}
               <h1
                 className="p-3 title-font font-medium "
                 style={{ fontFamily: "font-serif", fontSize: "2em" }}
@@ -230,7 +245,7 @@ export default function Detail({ params, id }) {
         {/* Modal de edición */}
         {isEditing && (
           <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center">
-            <div className="bg-white p-8 rounded-lg" style={{ width: "50%" }}>
+            <div className="bg-white p-3 rounded-lg" style={{ width: "50%" }}>
               <PostProduct initialValues={product} isOff={false} />
 
               <div className="flex justify-center">

@@ -1,5 +1,4 @@
 const axios = require('axios');
-
 export const fetchUsers = async () => {
   try {
     const url = 'http://localhost:3001/users';
@@ -51,3 +50,12 @@ export const createUser = async (user) => {
     // Consider setting a more specific error message or logging details
   } 
 };
+
+export const deleteProduct = async(id) =>{
+  console.log(id)
+  try {
+    await axios.delete(`http://localhost:3001/products/delete/${id}`)
+  } catch (error) {
+    throw Error(error)
+  }
+}
