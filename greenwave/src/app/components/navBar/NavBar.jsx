@@ -4,7 +4,8 @@ import SearchBar from "../searchBar/SearchBar";
 import { usePathname } from "next/navigation";
 import ButtonAuth from "../buttonAuth/ButtonAuth";
 import { useSession } from "next-auth/react";
-
+import { CartContext } from "../cart/cartContext";
+import { useContext } from "react";
 const LogoSection = () => (
   <div className="flex items-center">
     <Link className="" href="/">
@@ -24,106 +25,108 @@ const SearchSection = ({ pathname }) => (
   </section>
 );
 
-const NavigationLinks = ({ session }) => {
-  return (
-    <section className="flex gap-10 items-center">
-      <Link
-        className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-        style={{
-          fontFamily: "font-serif",
-          ":hover": {
-            background:
-              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-          },
-        }}
-        href="/"
-      >
-        Home
-      </Link>
+const NavigationLinks = ({ session, totalItems }) => (
+  <section className="flex gap-10 items-center">
+    <Link
+      className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300 "
+      style={{
+        fontFamily: "font-serif",
+        ":hover": {
+          background:
+            "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
+        },
+      }}
+      href="/homepage"
+    >
+      Home
+    </Link>
 
-      <Link
-        className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-        style={{
-          fontFamily: "font-serif",
-          ":hover": {
-            background:
-              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-          },
-        }}
-        href="/about"
-      >
-        About
-      </Link>
+    <Link
+      className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+      style={{
+        fontFamily: "font-serif",
+        ":hover": {
+          background:
+            "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
+        },
+      }}
+      href="/about"
+    >
+      About
+    </Link>
 
-      <Link
-        className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-        style={{
-          fontFamily: "font-serif",
-          ":hover": {
-            background:
-              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-          },
-        }}
-        href="/store"
-      >
-        Store
-      </Link>
+    <Link
+      className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+      style={{
+        fontFamily: "font-serif",
+        ":hover": {
+          background:
+            "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
+        },
+      }}
+      href="/store"
+    >
+      Store
+    </Link>
 
-      <Link
-        className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-        style={{
-          fontFamily: "font-serif",
-          ":hover": {
-            background:
-              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-          },
-        }}
-        href="/tips"
-      >
-        Tips
-      </Link>
-      {session?.user && (
-        <Link
-          className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+    <Link
+      className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+      style={{
+        fontFamily: "font-serif",
+        ":hover": {
+          background:
+            "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
+        },
+      }}
+      href="/tips"
+    >
+      Tips
+    </Link>
+    <Link
+      href="/store/buycart"
+      className="hover:cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
+    >
+      <div className="flex items-center gap-4">
+        <img
+          src="/images/shoppingCart.png"
+          alt="shoppingCartImage"
+          style={{ width: "30px", height: "30px" }}
+        />
+        <div
           style={{
-            fontFamily: "font-serif",
-            ":hover": {
-              background:
-                "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-            },
+            backgroundColor: "white",
+            color:
+              "green",
+            borderRadius: "100%",
+            width: "22px",
+            textAlign: "center",
           }}
-          href="/post-product"
         >
-          Post
-        </Link>
-      )}
-      {session?.user && (
-        <Link
-          className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-          style={{
-            fontFamily: "font-serif",
-            ":hover": {
-              background:
-                "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-            },
-          }}
-          href="/tips"
-        >
-          Donation
-        </Link>
-      )}
+          {totalItems}
+        </div>
+      </div>
+    </Link>
+
+    <div className="mr-8 mt-2">
       <ButtonAuth />
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 const NavBar = () => {
-  const pathname = usePathname();
+  const pathname = usePathname;
   const { data: session } = useSession();
+
+  const { cart } = useContext(CartContext);
+
+  const totalItems = cart.reduce((acc, product) => {
+    const count = typeof product.count === "number" ? product.count : 0;
+    return acc + count;
+  }, 0);
   return (
     <div>
       <nav
-        className="py-3 items-center text-white flex justify-between"
+        className="py-3 items-center text-white flex justify-between "
         style={{
           background:
             "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
@@ -131,7 +134,7 @@ const NavBar = () => {
       >
         <LogoSection />
         {/* <SearchSection pathname={pathname} /> */}
-        <NavigationLinks session={session} />
+        <NavigationLinks session={session} totalItems={totalItems} />
       </nav>
     </div>
   );
