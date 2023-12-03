@@ -1,16 +1,17 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
-
+import { GlobalUser } from "../users/globalUsers";
 export default function ButtonAuth() {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [menuVisible, setMenuVisible] = useState(false);
   const pathname = usePathname();
   const prevPathname = useRef(pathname);
+  const { user } = useContext(GlobalUser);
   useEffect(() => {
     // Si el pathname cambia, cerrar el menú
     if (pathname !== prevPathname.current) {
@@ -50,6 +51,9 @@ export default function ButtonAuth() {
       case "profile":
         router.push("/profile");
         break;
+      case "dashboard":
+        router.push("/dashboard");
+        break;
       case "logout":
         handleLogout();
         break;
@@ -85,6 +89,11 @@ export default function ButtonAuth() {
                 <button onClick={() => handleOptionClick("profile")}>
                   Profile
                 </button>
+                {user.admin === true && (
+                  <button onClick={() => handleOptionClick("dashboard")}>
+                    Dashboard
+                  </button>
+                )}
                 <div>
                   <button
                     onClick={() => handleLogout()}

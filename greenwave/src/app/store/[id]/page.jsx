@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
-import "./detail.css"
+import "./detail.css";
 import PostProduct from "../../post-product/page";
 import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
@@ -15,7 +15,7 @@ import { deleteProduct } from "../../lib/data";
 export default function Detail({ params, id }) {
   const { user } = useContext(GlobalUser);
 
-  const router = useRouter()
+  const router = useRouter();
   const { data: session } = useSession();
   const userAut = session?.user;
   const [isEditing, setIsEditing] = useState(false);
@@ -37,7 +37,6 @@ export default function Detail({ params, id }) {
       console.error("Error loading product detail:", error);
     }
   };
-
 
   useEffect(() => {
     setTimeout(() => {
@@ -66,10 +65,10 @@ export default function Detail({ params, id }) {
     }
   };
 
-  const handleProd = async () =>{
-    await deleteProduct(params.id)
-    router.push("/store")
-  }
+  const handleProd = async () => {
+    await deleteProduct(params.id);
+    router.push("/store");
+  };
 
   const handleBuy = async () => {
     const id = await createPreference();
@@ -136,27 +135,29 @@ export default function Detail({ params, id }) {
 
             <div className="flex flex-col items-center text-center p-3 ml-3">
               {userAut ? (
-              <div className=" space-x-4 ">
-                <button
-                  onClick={handleProd}
-                  className="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
-                  style={{
-                    borderRadius: "2em 2em",
-                  }}
-                >
-                  Delete
-                </button>
-                <button
-                  onClick={handleEdit}
-                  className="bg-sky-950 hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
-                  style={{
-                    borderRadius: "2em 2em",
-                  }}
-                >
-                  Edit
-                </button>
-              </div>
-              ):""}
+                <div className=" space-x-4 ">
+                  <button
+                    onClick={handleProd}
+                    className="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
+                    style={{
+                      borderRadius: "2em 2em",
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={handleEdit}
+                    className="bg-sky-950 hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
+                    style={{
+                      borderRadius: "2em 2em",
+                    }}
+                  >
+                    Edit
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
               <h1
                 className="p-3 title-font font-medium "
                 style={{ fontFamily: "font-serif", fontSize: "2em" }}
