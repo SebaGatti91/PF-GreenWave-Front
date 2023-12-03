@@ -10,47 +10,18 @@ const Store = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [filterValue, setFilterValue] = useState("Products");
-  const [filterValueMaterial, setFilterValueMaterial] = useState("Materials");
   const [orderValue, setOrderValue] = useState("Alfabetico");
   const [filterValueName, setFilterValueName] = useState("");
-  const [totalFilteredProducts, setTotalFilteredProducts] = useState([]);
-  const [filtersActive, setFiltersActive] = useState(false);
-  const [ordersActive, setOrdersActive] = useState(false);
+
   const productsPerPage = 6;
 
   const fetchData = async () => {
     try {
-      let url = "http://localhost:3001/store?";
-
-      // Agregar el filtro de materiales solo si no es 'Materials'
-      if (filterValueMaterial !== "Materials") {
-        url += `material=${filterValueMaterial}&`;
-      }
-
-      // Agregar el filtro de rating solo si no es 'Products'
-      if (filterValue !== "Products") {
-        url += `filter=${filterValue}&`;
-      }
-
-      // Agregar el filtro de orden solo si no es 'Alfabetico' o 'Price'
-      if (orderValue !== "Alfabetico" && orderValue !== "Price") {
-        url += `sort=${orderValue}&`;
-      }
-
-      // Agregar el filtro de nombre solo si no está vacío
-      if (filterValueName.trim() !== "") {
-        url += `name=${filterValueName}&`;
-      }
-
-      const response = await axios.get(url);
+      const response = await axios.get(
+        `http://localhost:3001/store?filter=${filterValue}&sort=${orderValue}&name=${filterValueName}`
+      );
       const { data } = response;
       setProducts(data);
-      setTotalFilteredProducts(data);
-      setFiltersActive(
-        filterValue !== "Products" || filterValueName.trim() !== ""
-      );
-      setOrdersActive(orderValue !== "Alfabetico" && orderValue !== "Price");
-
       setCurrentPage(1);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -59,7 +30,7 @@ const Store = () => {
 
   useEffect(() => {
     fetchData();
-  }, [filterValue, orderValue, filterValueMaterial]);
+  }, [filterValue, orderValue]);
 
   const handleFilterName = (event) => {
     setFilterValueName(event.target.value);
@@ -74,28 +45,6 @@ const Store = () => {
 
   const handleOrder = (event) => {
     setOrderValue(event.target.value);
-  };
-
-  const handleClearFilters = () => {
-    // Restablecer estados de filtros y ordenamientos
-    setFilterValue("Products");
-    setFilterValueMaterial("Materials");
-    setOrderValue("Alfabetico");
-    setFilterValueName("");
-
-    // Volver a obtener datos
-    fetchData();
-  };
-
-  const handleMaterials = (event) => {
-    const selectedMaterial = event.target.value;
-    if (selectedMaterial === "Materials") {
-      setFilterValueMaterial(selectedMaterial);
-      setFilterValue("Products"); // Restaurar el valor predeterminado para el filtro general
-      fetchData(); // Volver a obtener datos
-    } else {
-      setFilterValueMaterial(selectedMaterial);
-    }
   };
 
   const paginate = (pageNumber) => {

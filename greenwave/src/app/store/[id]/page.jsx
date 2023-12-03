@@ -242,6 +242,14 @@ export default function Detail({ params, id }) {
                 </div>
               </div>
             </div>
+            <Link href='/store'>
+              <button
+                className=" hover:bg-green-900 bg-green-700 text-white m-3 px-4 py-1 rounded"
+                style={{ border: "1px solid gray", borderRadius: "2em 2em", width: '50%' }}
+              >
+                Store
+              </button>
+            </Link>
           </div>
         </div>
 

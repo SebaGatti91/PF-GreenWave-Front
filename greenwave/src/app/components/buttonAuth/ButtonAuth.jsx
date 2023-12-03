@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useContext } from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { GlobalUser } from "../users/globalUsers";
 export default function ButtonAuth() {
@@ -26,15 +26,15 @@ export default function ButtonAuth() {
   }
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: "/homepage" });
+    await signOut({ callbackUrl: '/' });
   };
 
   const handleLogin = async (provider) => {
     await signIn(provider, {
       onSuccess: async () => {
-        const session = useSession();
+        const session = useSession(); // No se utiliza await aquí
         if (session) {
-          router.push("/homepage");
+          router.push('/');
         }
       },
     });

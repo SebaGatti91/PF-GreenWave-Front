@@ -3,26 +3,23 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import styles from "./LoginPage.module.css";
-import {createUser} from "../lib/data"
-
 
 const LoginPage = () => {
   const [errors, setErrors] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
   const { data: session } = useSession();
 
 
   const [userCreation, setUserCreation] = useState(false);
 
+
   useEffect(() => {
-
-    if (session?.user && !userCreation) {
-      setUserCreation(true);
-      createUser(session.user);
-      router.replace("/homepage");
+    if (session?.user) {
+      router.replace("/");
     }
-
-  }, [session, userCreation, router]);
+  }, [session, router]);
 
   const handleSignInWithProvider = async (providerId) => {
     if (providerId === "credentials") {
@@ -55,9 +52,23 @@ const LoginPage = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>Login</h1>
       <div>
+        <input
+          type="email"
+          placeholder="example@example.com"
+          className={styles.input}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className={styles.input}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button
           className={styles.button}
-          onClick={() => handleSignInWithProvider("auth0")}
+          onClick={() => handleSignInWithProvider("credentials")}
         >
           Sign in with Email and Password
         </button>

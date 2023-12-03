@@ -1,18 +1,22 @@
 "use client";
-import axios from "axios";
 import Swal from "sweetalert2";
-import { Formik } from "formik";
-import { useRouter } from "next/navigation";
-import { useContext, useState, useEffect } from "react";
-import {
-  materialsApi,
-  submitForm,
-} from "../components/materialsApi/useMaterialsApi";
-import { GlobalUser } from "../components/users/globalUsers";
-
-export default function PostProduct({ initialValues, isOff = true }) {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+import { useState } from "react";
+import validatePost from "./validation";
+import Card from "../components/card/Card";
+import image from "../../../public/images/Green-Wave.png";
+import "../../../public/estilos/postbutton.css";
+import axios from "axios";
+export default function PostProduct() {
+  const [errors, setErrors] = useState({});
+  const [product, setProduct] = useState({
+    name: "",
+    image: "",
+    status: "",
+    price: "",
+    rating: "",
+    materials: "",
+    description: "",
+  });
   const [file, setFile] = useState(null);
   const [materials, setMaterials] = useState([]);
   const { user } = useContext(GlobalUser);
@@ -180,6 +184,7 @@ export default function PostProduct({ initialValues, isOff = true }) {
         }) => (
           <div className="flex">
             <form
+              className="bg-custom-green text-black rounded-lg p-8 max-w-lg mx-auto"
               onSubmit={handleSubmit}
               className="w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
               encType="multipart/form-data"
@@ -205,160 +210,110 @@ export default function PostProduct({ initialValues, isOff = true }) {
                 )}
               </div>
               <div className="flex gap-3">
-                <div className="mb-4 w-full">
-                  <label htmlFor="price" className="font-semibold mb-2">
-                    Price
-                  </label>
+                <div className="mb-4">
+                  <label className="block mb-2">Rating</label>
                   <input
                     type="text"
-                    id="price"
-                    value={values.price}
+                    name="rating"
+                    placeholder="4"
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                    name="price"
-                    placeholder=" $$$"
                     className="w-full px-3 py-2 border border-gray-300 rounded"
                   />
-                  {touched.price && errors.price && (
-                    <div className="font-medium text-xs text-orange-700">
-                      {errors.price}
-                    </div>
-                  )}
                 </div>
-                <div className="mb-4 w-full">
-                  <label htmlFor="stock" className="mb-2 font-semibold">
-                    Stock
-                  </label>
+                <div className="mb-4">
+                  <label className="block mb-2">Materials</label>
                   <input
                     type="text"
-                    id="stock"
-                    value={values.stock}
+                    name="materials"
+                    placeholder="Glass, plastic.."
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                    name="stock"
-                    placeholder=" 5"
                     className="w-full px-3 py-2 border border-gray-300 rounded"
                   />
-                  {touched.stock && errors.stock && (
-                    <div className="font-medium text-xs text-orange-700">
-                      {errors.stock}
-                    </div>
-                  )}
                 </div>
               </div>
-              <div className="mb-4 w-full">
-                <label htmlFor="materials" className="font-semibold mb-2">
-                  Materials
-                </label>
-                <select
-                  name="materials"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
-                >
-                  <option value={values.materials} disabled>
-                    Select Material
-                  </option>
-                  {materials.map((material) => (
-                    <option key={material.id} value={material.name}>
-                      {material.name}
-                    </option>
-                  ))}
-                </select>
-                {touched.materials && errors.materials && (
-                  <div className="font-medium text-xs text-orange-700">
-                    {errors.materials}
+              <div className="flex">
+                <div className="mb-4">
+                  <label className="block mb-2">Price</label>
+                  <div className="flex">
+                    <span className="bg-gray-200 p-2 border border-r-0 border-gray-300 rounded-l">
+                      $
+                    </span>
+                    <input
+                      type="number"
+                      placeholder="$$$"
+                      min="0"
+                      name="price"
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-r"
+                    />
                   </div>
-                )}
+                  {errors.price && (
+                    <p className="text-red-500 text-sm italic">
+                      {errors.price}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="mb-4 w-full">
-                <label htmlFor="name" className="font-semibold mb-2">
-                  Rating
-                </label>
+              <div className="mb-4">
+                <label className="block mb-2">Add an image</label>
                 <input
                   type="text"
-                  id="rating"
-                  value={values.rating}
+                  name="image"
+                  placeholder="https://image.jpg"
                   onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="rating"
-                  placeholder=" 3 "
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
-                {touched.rating && errors.rating && (
-                  <div className="font-medium text-xs text-orange-700">
-                    {errors.rating}
-                  </div>
+                {errors.image && (
+                  <p className="text-red-500 text-sm italic">{errors.image}</p>
                 )}
               </div>
-              <div className="mb-4 flex flex-col w-full">
-                <label htmlFor="description" className="font-semibold mb-2">
-                  Description
-                </label>
-                <textarea
-                  name="description"
-                  value={values.description}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder=" ..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
-                ></textarea>
-                {touched.description && errors.description && (
-                  <div className="font-medium text-xs text-orange-700">
-                    {errors.description}
-                  </div>
-                )}
-              </div>
-              <div className="mb-4 w-full">
-                <label htmlFor="image" className="font-semibold mb-2">
-                  Upload your image:
+              <div className="mb-4">
+                <label className="block mb-2">
+                Or select an image to upload:
                 </label>
                 <input
                   type="file"
-                  id="image"
-                  name="image"
-                  onChange={(event) => {
-                    handleChange(event);
-                    setFile(event.target.files[0]);
-                  }}
-                  onBlur={handleBlur}
+                  name="imgFile"
+                  onChange={handleChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
-                {touched.image && errors.image && (
-                  <div className="font-medium text-xs text-orange-700">
-                    {errors.image}
-                  </div>
+              </div>
+              <div className="mb-4">
+                <label className="block mb-2">Description</label>
+                <textarea
+                  name="description"
+                  onChange={handleChange}
+                  placeholder="..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                ></textarea>
+                {errors.description && (
+                  <p className="text-red-500 text-sm italic">
+                    {errors.description}
+                  </p>
                 )}
               </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-full py-2 px-4 rounded hover:bg-green-700 ${
-                  loading
-                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                    : "bg-green-600 text-white"
-                }`}
-              >
-                {initialValues && initialValues.id ? "Update" : "Post"}
-              </button>
-              {loading && (
-                <p className="text-lg	italic text-cyan-800 font-medium	">
-                  Loading, do not reload the page...
-                </p>
-              )}
-            </form>
-            {isOff && (
-              <div className="w-2/5 bg-lime-200">
-                <img
-                  src="./images/recicle.jpg"
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
+              <div className="flex justify-center">
+                <button id="button" className=" bg-lime-100  hover:bg-lime-900 hover:text-lime-50  rounded-lg p-1">
+                  <span>Publish</span>
+                </button>
               </div>
-            )}
+            </form>
           </div>
-        )}
-      </Formik>
+          <div className="w-1/2 h-200">
+            <Card
+              id={product.id}
+              name={product.name}
+              image={product?.image || image}
+              price={product.price}
+              rating={product.rating}
+              description={product.description}
+              showStars={false}
+              showbuybutton={false}
+              showdescription={true}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

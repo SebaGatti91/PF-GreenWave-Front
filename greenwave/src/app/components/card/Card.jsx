@@ -1,11 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useCart } from "../cart/cartContext";
-import { useEffect, useState, useContext } from "react";
-import React from "react";
-import SkeletonCard from "./SkeletonCard";
-import { GlobalUser } from "../users/globalUsers";
-import { fetchAddFavorites, fetchRemoveFavorites } from "../../lib/data";
+import { useState } from "react";
 
 const Card = ({
   id,
@@ -63,30 +60,10 @@ const Card = ({
   }, [id]);
 
   const handleFavorite = () => {
-    const productId = id;
-
-    setState((prevState) => ({
-      ...prevState,
-      fav: !prevState.fav,
-    }));
-
-    const favoritesFromStorage =
-      JSON.parse(localStorage.getItem("favorites")) || [];
-
-    if (state.fav) {
-      // Remover el producto de favoritos y actualizar localStorage
-      const updatedFavorites = favoritesFromStorage.filter(
-        (favId) => favId !== productId
-      );
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-
-      fetchRemoveFavorites(user.email, productId, setFavorites);
+    if (fav) {
+      setFav(false);
     } else {
-      // Agregar el producto a favoritos y actualizar localStorage
-      const updatedFavorites = [...favoritesFromStorage, productId];
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-
-      fetchAddFavorites(user.email, productId);
+      setFav(true);
     }
   };
 
