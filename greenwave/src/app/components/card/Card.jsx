@@ -11,7 +11,7 @@ const Card = ({
   image,
   price,
   rating,
-  cartControlers = false
+  cartControlers = false,
 }) => {
 
   const [state, setState] = useState({
@@ -21,6 +21,7 @@ const Card = ({
   });
   const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
     useCart();
+    
   useEffect(() => {
     setTimeout(() => {
       setState(prevState => ({
@@ -78,7 +79,7 @@ const Card = ({
     const item = cart.find((item) => item.id === id);
 
     return (
-      <div style={cardContainerStyles} className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center">
         <p className="text-center py-1"> {state.rate}</p>
         <div className="flex justify-center flex-row items-center py-2 mb-2">
           <button
@@ -129,7 +130,7 @@ const Card = ({
   }
   else {
     return (
-      <div style={cardContainerStyles} className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
+      <div className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
         <div className="absolute top-0 right-0 m-2">
           {state.fav ? (
             <button onClick={handleFavorite}>💚</button>
@@ -141,8 +142,8 @@ const Card = ({
         <div className="flex-grow flex-shrink-0">
           <Link href={`/store/${id}`} className="flex w-full">
             <Image src={image} alt={name} height={200} width={150}
-              style={{height: "200px" }} 
-              className="w-80 h-60 rounded-md border-sky-950" 
+              style={{ height: "200px" }}
+              className="w-80 h-60 rounded-md border-sky-950"
             />
           </Link>
         </div>
@@ -157,7 +158,8 @@ const Card = ({
               .map((item) => renderCartControlButtons())
             : addedToCart
               ? renderCartControlButtons()
-              : renderAddToCartButton()}
+              : renderAddToCartButton()
+          }
         </div>
       </div>
     );
