@@ -11,7 +11,7 @@ const LoginPage = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  // Utiliza un estado para rastrear si ya se ha ejecutado la lógica de creación de usuario
+
   const [userCreation, setUserCreation] = useState(false);
 
   useEffect(() => {
