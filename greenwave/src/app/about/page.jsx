@@ -1,29 +1,19 @@
 import data from "./team.json";
 import Image from "next/image";
-import "./about.css";
 
 const About = () => {
   return (
     <div className="text-center bg-cream-brown">
-      <div className="mb-4 blocked">
+      <div className="mb-4">
         <Image
           src="/images/about.png"
           alt="mision-visionImage"
           width={1000}
-          height={0}
-          style={{ height: "89vh" }}
+          height={1000}
           className="w-full"
         />
       </div>
       <h1 className="text-3xl font-bold mb-6">About team</h1>
-      <div className="responsive">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
-          voluptatem aut facere saepe, aliquam nisi deleniti. Laboriosam
-          asperiores officia accusamus temporibus nam explicabo, iusto deserunt
-          voluptatem cum ipsam reprehenderit voluptatibus.
-        </p>
-      </div>
       <div className="flex flex-wrap justify-center">
         {data.map((member) => (
           <div key={member.id} className="m-4 max-w-xs bg-white p-4 rounded-md">
