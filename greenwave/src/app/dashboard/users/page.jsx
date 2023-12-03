@@ -64,7 +64,7 @@ const UsersPage = () => {
         <MdSearch />
         <input
           type="text"
-          placeholder="Search by email or ID"
+          placeholder="Search by email "
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className={styles.input}
@@ -122,6 +122,7 @@ const UsersPage = () => {
                   <button
                     className={`${styles.button} ${styles.delete}`}
                     onClick={() => handleDelete(user.id)}
+                    disabled={user.admin}
                   >
                     Ban/Unban
                   </button>

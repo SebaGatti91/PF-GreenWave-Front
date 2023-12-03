@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // RootLayout.jsx
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -28,23 +28,18 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Providers>
           {pathname === "/" ? (
-            <>
-              {children}
-            </>
+            <>{children}</>
           ) : pathname.startsWith("/dashboard") ? (
-            <>
-              {children}
-            </>
+            <>{children}</>
           ) : (
             <div className="flex flex-col h-screen">
-            <NavBar />
-            <div className="flex-grow">
-            {children}
-            <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6569e3c391144160ce309b20,6569da1e6ab8927385562efb</script>
-
+              <NavBar />
+              <div className="flex-grow">
+                {children}
+                {/* <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6569e3c391144160ce309b20,6569da1e6ab8927385562efb</script> */}
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
           )}
         </Providers>
       </body>

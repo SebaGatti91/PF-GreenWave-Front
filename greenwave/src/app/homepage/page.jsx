@@ -1,7 +1,41 @@
+"use client"
 import "./home.css";
+import axios from "axios"
 import Link from "next/link";
 import Button from "../components/button/Button";
+import { GlobalUser } from "../components/users/globalUsers";
+import { useContext, useEffect } from "react";
+import { useSession } from "next-auth/react";
+
+
 export default function Home() {
+
+  const { data: session } = useSession();
+  const {user, setUser} = useContext(GlobalUser)
+  const userData = session?.user
+
+  console.log(user)
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/users/${userData?.email}`
+      );
+      const { data } = response;
+
+      setUser(data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      // Handle the error, show a message to the user, or redirect as needed.
+    }
+  };
+
+  useEffect(() => {
+    if (session?.user) {
+      fetchData();
+    }
+  }, [session?.user]);
+  
   return (
     <div>
       <section
