@@ -1,7 +1,7 @@
 import styles from "../components/dashboard/dashboard.module.css";
 import Card from "../components/dashboard/card/Card";
 import Transactions from "../components/dashboard/transactions/Transactions"
-import Chart from "../components/dashboard/chart/Chart"
+
 
 
 const Dashboard = () => {
