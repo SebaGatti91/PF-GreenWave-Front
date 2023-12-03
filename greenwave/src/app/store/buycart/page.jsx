@@ -4,10 +4,12 @@ import React, { useContext, useState } from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Link from "next/link";
 import Image from "next/image";
+import { GlobalUser } from "../../components/users/globalUsers";
 
-const Cart = ({ params }) => {
-  const { cart, setCart, addToCart, removeFromCart, countDownCart, countUpCart } = useContext(CartContext);
+const Cart = () => {
+  const { cart, setCart, removeFromCart, countDownCart, countUpCart } = useContext(CartContext);
   const [addedToCart, setAddedToCart] = useState(false);
+  const { user } = useContext(GlobalUser);
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId);
@@ -58,10 +60,7 @@ const Cart = ({ params }) => {
     );
   };
 
-import { GlobalUser } from "../../components/users/globalUsers";
-const Cart = ({ id }) => {
-  const { cart, setCart } = useContext(CartContext);
-  const { user } = useContext(GlobalUser);
+ 
 
   const createPreference = async () => {
     try {

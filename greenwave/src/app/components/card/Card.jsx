@@ -13,21 +13,10 @@ const Card = ({
   image,
   price,
   rating,
-  // Estilos
-  cardStyles,
-  imageStyle,
-  text,
-  textPrice,
-  estrellas,
-  botones,
   cartControlers = false,
   // function
   setFavorites,
 }) => {
-  const cardContainerStyles = {
-    display: "flex",
-    ...cardStyles,
-  };
 
   const { user } = useContext(GlobalUser);
   const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
@@ -39,6 +28,8 @@ const Card = ({
     loading: true,
   });
 
+  const [addedToCart, setAddedToCart] = useState(false);
+  
   useEffect(() => {
     setTimeout(() => {
       setState((prevState) => ({
@@ -101,6 +92,7 @@ const Card = ({
 
   const handleAddToCart = () => {
     addToCart({ id, name, image, price, rating });
+    setAddedToCart(true)
   };
 
   const handleRemoveFromCart = () => {
@@ -130,14 +122,12 @@ const Card = ({
     return (
       <div
         key={item.id}
-        style={cardContainerStyles}
         className="flex flex-col justify-center"
       >
-        <p className="text-center py-1" style={estrellas}>
+        <p className="text-center py-1">
           {state.rate}
         </p>
         <div
-          style={botones}
           className="flex justify-center flex-row items-center py-2 mb-2"
         >
           <button
