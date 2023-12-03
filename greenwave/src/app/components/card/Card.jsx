@@ -119,6 +119,9 @@ const Card = ({
   const renderCartControlButtons = () => {
     const item = cart.find((item) => item.id === id);
 
+    if (!item) {
+      return renderAddToCartButton();
+    }
     return (
       <div
         key={item.id}
