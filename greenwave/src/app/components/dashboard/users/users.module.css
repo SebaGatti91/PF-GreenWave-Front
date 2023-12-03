@@ -103,9 +103,3 @@
   border: none;
   color: var(--textDashboard);
 }
-
-.button:disabled,
-.buttonBottom:disabled {
-  opacity: 0.5; /* Reduce la opacidad para indicar que el botón está deshabilitado */
-  cursor: not-allowed; /* Cambia el cursor a 'not-allowed' cuando el botón está deshabilitado */
-}
