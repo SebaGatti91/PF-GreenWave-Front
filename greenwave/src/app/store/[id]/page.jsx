@@ -11,7 +11,6 @@ import PostProduct from "../../post-product/page";
 import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
-
 import { GlobalUser } from "../../components/users/globalUsers";
 
 export default function Detail({ params, id }) {
@@ -46,8 +45,6 @@ export default function Detail({ params, id }) {
       SetLoading(false);
     }, 2000);
   }, []);
-
-  const { user } = useContext(GlobalUser)
 
   const createPreference = async () => {
     try {
