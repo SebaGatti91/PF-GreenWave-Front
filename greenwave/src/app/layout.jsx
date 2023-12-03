@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <Providers>
           {pathname === "/" ? (
             <>{children}</>
-          ) : pathname.startsWith("/dashboard") ? (
+          ) : pathname.startsWith("/dashboard") || pathname === "/banned" ? (
             <>{children}</>
           ) : (
             <div className="flex flex-col h-screen">
