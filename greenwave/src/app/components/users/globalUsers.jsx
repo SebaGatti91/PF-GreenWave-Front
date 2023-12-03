@@ -15,7 +15,7 @@ export const UserGlobal = ({ children }) => {
       {children}
     </GlobalUser.Provider>
   );
-  //hook personalizado para traer las acciones
+  //hook personalizado para traer las acciones 
 };
 export const useUser = () => {
   const context = useContext(GlobalUser);
