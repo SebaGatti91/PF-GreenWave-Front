@@ -122,7 +122,7 @@ const Cart = ({ params }) => {
           </Link>
         </div>
       ) : (
-        <div>
+        <div className="min-h-screen">
           <h1
             className="text-center mt-10 text-4xl font-bold text-shadow-lg shadow-2xl py-1"
             style={{
@@ -134,12 +134,12 @@ const Cart = ({ params }) => {
             Cart Items
           </h1>
 
-          <div className="flex flex-row justify-evenly">
+          <div className="flex flex-row justify-evenly min-h-full">
             <div className="m-12 rounded-lg w-1/2"
-              style={{ backgroundColor: "#D1D7BF", height: '190px' }}>
+              >
               {cart.map((product) => (
                 <div key={product.id} className="flex flex-row justify-between mb-10 shadow-2xl rounded-lg pb-5"
-                  style={{ backgroundColor: "#D1D7BF", height: '190px', border: '1px solid gray' }}>
+                  style={{ backgroundColor: "#D1D7BF", border: '1px solid gray' }}>
                   <div className="flex flex-row">
                     <Link href={`/store/${product.id}`} className="flex items-center">
                       <Image
@@ -159,7 +159,7 @@ const Cart = ({ params }) => {
                     </Link>
                     <div className="flex flex-col text-start p-4">
                       <h3 className="font-bold py-1">{product.name}</h3>
-                      <h3 className="text-green-600 py-3">USD {product.price}</h3>
+                      <h3 className="text-green-600 py-1">USD {product.price}</h3>
                     </div>
                   </div>
 
@@ -171,8 +171,8 @@ const Cart = ({ params }) => {
             </div>
 
             <div
-              className="w-1/4 m-12 py-2 rounded-xl shadow-2xl"
-              style={{ backgroundColor: "#D1D7BF", height: "40%" }}
+              className="w-1/4 m-12 py-2 rounded-xl shadow-2xl pb-3"
+              style={{ backgroundColor: "#D1D7BF", height: "40%", border: '1px solid gray'}}
             >
               <div
                 className="mx-6 pt-8 mb-3 pb-3"
