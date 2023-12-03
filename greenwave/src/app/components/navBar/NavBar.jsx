@@ -69,43 +69,37 @@ const NavigationLinks = ({ session }) => {
         Store
       </Link>
 
-      <Link
-        className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-        style={{
-          fontFamily: "font-serif",
-          ":hover": {
-            background:
-              "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-          },
-        }}
-        href="/tips"
-      >
-        Tips
-      </Link>
-      {session?.user && (
-        <Link
-          className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+    <Link
+      className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+      style={{
+        fontFamily: "font-serif",
+        ":hover": {
+          background:
+            "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
+        },
+      }}
+      href="/tips"
+    >
+      Tips
+    </Link>
+    <Link
+      href="/store/buycart"
+      className="hover:cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
+    >
+      <div className="flex items-center gap-4">
+        <img
+          src="/images/shoppingCart.png"
+          alt="shoppingCartImage"
+          style={{ width: "25px", height: "25px" }}
+        />
+        <div
           style={{
-            fontFamily: "font-serif",
-            ":hover": {
-              background:
-                "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-            },
-          }}
-          href="/post-product"
-        >
-          Post
-        </Link>
-      )}
-      {session?.user && (
-        <Link
-          className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
-          style={{
-            fontFamily: "font-serif",
-            ":hover": {
-              background:
-                "linear-gradient(to right top, #527e7b, #4e8780, #4b9183, #499a84, #4ba384)",
-            },
+            backgroundColor: "white",
+            color:
+              "green",
+            borderRadius: "100%",
+            width: "20px",
+            textAlign: "center",
           }}
           href="/tips"
         >

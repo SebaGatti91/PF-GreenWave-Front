@@ -17,9 +17,20 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <NavBar />
-          {children}
-          <Footer />
+          {pathname === "/" ? (
+            <>{children}</>
+          ) : pathname.startsWith("/dashboard") || pathname === "/banned" ? (
+            <>{children}</>
+          ) : (
+            <div className="flex flex-col h-screen">
+              <NavBar />
+              <div className="flex-grow">
+                {children}
+                {/* <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6569e3c391144160ce309b20,6569da1e6ab8927385562efb</script> */}
+              </div>
+              <Footer />
+            </div>
+          )}
         </Providers>
       </body>
     </html>
