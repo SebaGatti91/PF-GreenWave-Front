@@ -15,7 +15,7 @@ const loadDetail = async (id) => {
 
 export default function Detail({ params, id }) {
   const { user } = useContext(GlobalUser);
-  console.log(user);
+
   const [isEditing, setIsEditing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);

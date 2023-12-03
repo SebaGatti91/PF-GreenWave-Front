@@ -1,41 +1,46 @@
 "use client";
-import axios from "axios"
+import axios from "axios";
 import React, { useContext } from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Card from "../../components/card/Card";
 import Link from "next/link";
-
+import { GlobalUser } from "../../components/users/globalUsers";
 const Cart = ({ id }) => {
   const { cart, setCart } = useContext(CartContext);
-  console.log(cart)
+  const { user } = useContext(GlobalUser);
 
   const createPreference = async () => {
     try {
-      const items = cart?.map((prod) => ({
+      const itemsFromCart = cart?.map((prod) => ({
         title: prod.name,
         unit_price: prod.price,
         quantity: prod.count,
-        currency_id: "ARS"
+        currency_id: "ARS",
       }));
-  
-      if (!items || items.length === 0) {
-        console.error('Cart is empty. Cannot create preference.');
+
+      if (!itemsFromCart || itemsFromCart.length === 0) {
+        console.error("Cart is empty. Cannot create preference.");
         return;
       }
-  
-      const response = await axios.post("http://localhost:3001/mercadoPago", items);
-      console.log(response);
 
+      const productsIds = cart.map((prod) => prod.id);
+      const response = await axios.post("http://localhost:3001/mercadoPago", {
+        userId: user.email,
+        productId: productsIds,
+        item: itemsFromCart,
+      });
+
+      setCart([]);
       window.location.href = response.data;
     } catch (error) {
-      console.error('Error creating preference:', error);
+      console.error("Error creating preference:", error);
     }
   };
-  
 
-  const handleBuy = async() =>{
-    const id = await createPreference()
-    }
+  const handleBuy = async () => {
+    const id = await createPreference();
+    if (id) setPreferenceId(id);
+  };
 
   const totalItems = cart.reduce((acc, product) => {
     const count = typeof product.count === "number" ? product.count : 0;
@@ -98,7 +103,7 @@ const Cart = ({ id }) => {
                 <div
                   key={index}
                   className="mb-10 rounded-lg shadow-2xl"
-                  style={{ backgroundColor: "#D1D7BF"}}
+                  style={{ backgroundColor: "#D1D7BF" }}
                 >
                   <Card
                     key={product.id}
@@ -108,11 +113,11 @@ const Cart = ({ id }) => {
                     price={product.price}
                     cardStyles={cartItemStyles}
                     imageStyle={{
-                      maxWidth: '200px',
-                      height: '150px', 
-                      marginTop: '20px',
-                      marginLeft: '20px',
-                      border: '2px solid gray'
+                      maxWidth: "200px",
+                      height: "150px",
+                      marginTop: "20px",
+                      marginLeft: "20px",
+                      border: "2px solid gray",
                     }}
                     text={{
                       fontSize: "1.2em",
@@ -130,9 +135,9 @@ const Cart = ({ id }) => {
                       marginLeft: "310px",
                       marginTop: "50px",
                     }}
-                    cartControlers={true}        
+                    cartControlers={true}
                   />
-                </div>              
+                </div>
               ))}
             </div>
 
@@ -163,7 +168,7 @@ const Cart = ({ id }) => {
               </div>
 
               <button
-              onClick={handleBuy}
+                onClick={handleBuy}
                 className="bg-lime-900 hover:bg-lime-700 text-lime-50 rounded-lg p-1 mt-5 flex justify-center"
                 style={{ width: "90%", marginInline: "auto" }}
               >
