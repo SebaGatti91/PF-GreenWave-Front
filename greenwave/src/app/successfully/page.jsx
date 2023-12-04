@@ -14,8 +14,11 @@ export default function Sucess() {
         has been a resounding success, and we are thrilled to have you as part
         of our valued customer community.
       </span>
+      <div className="m-2">
+      <img src="/images/Green-Wave.png" alt="greenWave logo"></img>
+      </div>
       <Link href="/homepage">
-        <button className="m-3 bg-transparent border border-black text-black hover:bg-green-600 hover:text-white px-4 py-2 rounded">
+        <button className="m-4 bg-transparent border border-black text-black hover:bg-green-600 hover:text-white px-4 py-2 rounded">
           Back to Home
         </button>
       </Link>
