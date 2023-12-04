@@ -14,6 +14,8 @@ import { deleteProduct } from "../../lib/data";
 
 export default function Detail({ params}) {
 
+  const BackUrl = process.env.BACK
+
   // if (!params) {
   //   // Manejar el caso donde params o id no están presentes
   //   return <div>Error: Missing params or id</div>;
@@ -52,7 +54,7 @@ export default function Detail({ params}) {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("https://greenwave-back.up.railway.app/mercadoPago", {
+      const response = await axios.post( `${BackUrl}/mercadoPago`, {
         userId: user.email,
         productId: product.id,
         item: [
