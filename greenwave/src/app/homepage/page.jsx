@@ -1,25 +1,26 @@
-"use client"
+"use client";
 import "./home.css";
-import axios from "axios"
+import axios from "axios";
 import Link from "next/link";
 import Button from "../components/button/Button";
 import { GlobalUser } from "../components/users/globalUsers";
 import { useContext, useEffect } from "react";
 import { useSession } from "next-auth/react";
-
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-
   const { data: session } = useSession();
-  const {user, setUser} = useContext(GlobalUser)
-  const userData = session?.user
+  const { user, setUser } = useContext(GlobalUser);
+  const userData = session?.user;
+  const router = useRouter();
 
-  console.log(user)
+  console.log(user);
 
   const fetchData = async () => {
+
     try {
       const response = await axios.get(
-        `http://localhost:3001/users/${userData?.email}`
+        `/users/${userData?.email}`
       );
       const { data } = response;
 
@@ -31,11 +32,14 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if(user.status === false){
+      router.replace("/banned");
+    }
     if (session?.user) {
       fetchData();
     }
   }, [session?.user]);
-  
+
   return (
     <div>
       <section

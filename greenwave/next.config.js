@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+require("dotenv").config();
+
 const nextConfig = {
   images: {
     domains: [
@@ -13,9 +15,15 @@ const nextConfig = {
       "m.media-amazon.com",
       "www.serzen.mx",
       "th.bing.com",
-     "reqres.in"
+      "reqres.in"
     ],
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  ...nextConfig,
+  env: {
+    FRONT: process.env.FRONT,
+    BACK: process.env.BACK
+  }
+};

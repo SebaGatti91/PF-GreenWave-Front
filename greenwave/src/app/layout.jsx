@@ -6,6 +6,7 @@ import NavBar from "./components/navBar/NavBar";
 import { Footer } from "./components/footer/Footer";
 import { Providers } from "./Providers";
 import { usePathname } from "next/navigation";
+import axios from "axios"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,8 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+  axios.defaults.baseURL = process.env.BACK
   const pathname = usePathname();
 
   return (
@@ -29,7 +32,7 @@ export default function RootLayout({ children }) {
         <Providers>
           {pathname === "/" ? (
             <>{children}</>
-          ) : pathname.startsWith("/dashboard") ? (
+          ) : pathname.startsWith("/dashboard") || pathname === "/banned" ? (
             <>{children}</>
           ) : (
             <div className="flex flex-col h-screen">
