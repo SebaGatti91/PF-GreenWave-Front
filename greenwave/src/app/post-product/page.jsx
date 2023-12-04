@@ -125,7 +125,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
             const url =
               initialValues && initialValues.id
-                ? `${BackUrl}/${initialValues.id}`
+                ? `${BackUrl}/products/${initialValues.id}`
                 : "/api/upload";
 
             // Cambia el método de la solicitud según si es una edición o una publicación
@@ -133,7 +133,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
             if (method === "PUT") {
               try {
                 const response = await axios.put(
-                  `${BackUrl}/${initialValues.id}`,
+                  `${BackUrl}/products/${initialValues.id}`,
                   values
                 );
                 console.log(initialValues);
