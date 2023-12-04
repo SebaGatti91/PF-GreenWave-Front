@@ -18,7 +18,7 @@ export default function Detail({ params}) {
   //   // Manejar el caso donde params o id no están presentes
   //   return <div>Error: Missing params or id</div>;
   // }
-  
+
   const { user } = useContext(GlobalUser);
 
   const router = useRouter();
@@ -52,7 +52,7 @@ export default function Detail({ params}) {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("/mercadoPago", {
+      const response = await axios.post("https://greenwave-back.up.railway.app/mercadoPago", {
         userId: user.email,
         productId: product.id,
         item: [

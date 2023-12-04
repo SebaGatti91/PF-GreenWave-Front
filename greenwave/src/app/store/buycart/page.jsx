@@ -77,7 +77,7 @@ const Cart = () => {
       }
 
       const productsIds = cart.map((prod) => prod.id);
-      const response = await axios.post("/mercadoPago", {
+      const response = await axios.post("https://greenwave-back.up.railway.app/mercadoPago", {
         userId: user.email,
         productId: productsIds,
         item: itemsFromCart,
