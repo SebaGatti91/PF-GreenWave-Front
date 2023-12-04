@@ -121,7 +121,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
             const url =
               initialValues && initialValues.id
-                ? `/products/${initialValues.id}`
+                ? `https://greenwave-back.up.railway.app/products/${initialValues.id}`
                 : "/api/upload";
 
             // Cambia el método de la solicitud según si es una edición o una publicación
@@ -129,7 +129,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
             if (method === "PUT") {
               try {
                 const response = await axios.put(
-                  `/products/${initialValues.id}`,
+                  `https://greenwave-back.up.railway.app/products/${initialValues.id}`,
                   values
                 );
                 console.log(initialValues);
