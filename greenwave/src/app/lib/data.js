@@ -1,10 +1,10 @@
-const axios = require("axios");
 import Swal from "sweetalert2";
+import axios from "axios";
 
 
 export const fetchUsers = async () => {
   try {
-    const url = "/users";
+    const url = "https://greenwave-back.up.railway.app/users";
     const response = await axios.get(url);
 
     return response.data;
@@ -16,7 +16,7 @@ export const fetchUsers = async () => {
 
 export const fetchProducts = async () => {
   try {
-    const url = "/store";
+    const url = "https://greenwave-back.up.railway.app/store";
     const response = await axios.get(url);
 
     return response.data;
@@ -28,7 +28,7 @@ export const fetchProducts = async () => {
 
 export const banUser = async (userId) => {
   try {
-    const url = `/users/ban/${userId}`;
+    const url = `https://greenwave-back.up.railway.app/users/ban/${userId}`;
     const response = await axios.put(url);
 
     return response.data;
@@ -45,7 +45,7 @@ export const createUser = async (user) => {
       return;
     }
 
-    const url = `/users`;
+    const url = `https://greenwave-back.up.railway.app/users`;
 
     await axios.post(url, user);
   } catch (error) {
@@ -61,9 +61,7 @@ export const fetchUserProducts = async (userId) => {
       return;
     }
 
-    const response = await axios.get(
-      `getUserProducts/${userId}`
-    );
+    const response = await axios.get(`https://greenwave-back.up.railway.app/getUserProducts/${userId}`);
     const { data } = response;
     return data;
   } catch (error) {
@@ -78,7 +76,7 @@ export const fetchAddFavorites = async (userId, productId) => {
       return;
     }
     const data = { userId: userId, productId: productId };
-    const url = `/addFavorites`;
+    const url = `https://greenwave-back.up.railway.app/addFavorites`;
 
     await axios.post(url, data);
   } catch (error) {
@@ -92,7 +90,7 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
       return;
     }
     const data = { userId: userId, productId: productId };
-    const url = `/removeFavorites`;
+    const url = `https://greenwave-back.up.railway.app/removeFavorites`;
 
     await axios.post(url, data);
     setFavorites((prevFavorites) =>
@@ -117,7 +115,6 @@ export const fetchGetFavorites = async (userId) => {
   }
 };
 
-
 export const deleteProduct = async (id) => {
   console.log(id);
   const result = await Swal.fire({
@@ -131,7 +128,7 @@ export const deleteProduct = async (id) => {
   });
   if (result.isConfirmed) {
     try {
-      await axios.delete(`/products/delete/${id}`);
+      await axios.delete(`https://greenwave-back.up.railway.app/products/delete/${id}`);
       Swal.fire({
         title: "Deleted!",
         text: "Your file has been deleted.",
