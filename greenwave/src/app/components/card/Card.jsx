@@ -29,7 +29,7 @@ const Card = ({
   });
 
   const [addedToCart, setAddedToCart] = useState(false);
-  
+
   useEffect(() => {
     setTimeout(() => {
       setState((prevState) => ({
@@ -118,7 +118,10 @@ const Card = ({
 
   const renderCartControlButtons = () => {
     const item = cart.find((item) => item.id === id);
-
+    // para que no se rompa a la hora de tocar el boton de borrar
+    if (!item) {
+      return renderAddToCartButton();
+    }
     return (
       <div
         key={item.id}
