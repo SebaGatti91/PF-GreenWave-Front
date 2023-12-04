@@ -20,7 +20,7 @@ const Store = () => {
 
   const fetchData = async () => {
     try {
-      let url = "http://localhost:3001/store?";
+      let url = "/store?";
 
       // Agregar el filtro de materiales solo si no es 'Materials'
       if (filterValueMaterial !== "Materials") {

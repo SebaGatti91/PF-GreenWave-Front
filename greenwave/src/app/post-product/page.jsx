@@ -10,7 +10,11 @@ import {
 } from "../components/materialsApi/useMaterialsApi";
 import { GlobalUser } from "../components/users/globalUsers";
 
+
 export default function PostProduct({ initialValues = {}, isOff = true }) {
+  
+ const BackUrl = process.env.BACK
+
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [file, setFile] = useState(null);
@@ -121,7 +125,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
             const url =
               initialValues && initialValues.id
-                ? `http://localhost:3001/products/${initialValues.id}`
+                ? `${BackUrl}/products/${initialValues.id}`
                 : "/api/upload";
 
             // Cambia el método de la solicitud según si es una edición o una publicación
@@ -129,7 +133,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
             if (method === "PUT") {
               try {
                 const response = await axios.put(
-                  `http://localhost:3001/products/${initialValues.id}`,
+                  `${BackUrl}/products/${initialValues.id}`,
                   values
                 );
                 console.log(initialValues);
