@@ -16,8 +16,8 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  // axios.defaults.baseURL="http://localhost:3001"
-  axios.defaults.baseURL="https://greenwave-back.up.railway.app/"
+
+  axios.defaults.baseURL = process.env.BACK
   const pathname = usePathname();
 
   return (

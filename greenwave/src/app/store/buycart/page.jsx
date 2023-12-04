@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios"
+import axios from "axios";
 import React, { useContext, useState } from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Link from "next/link";
@@ -9,7 +9,6 @@ import { GlobalUser } from "../../components/users/globalUsers";
 const Cart = () => {
 
   const BackUrl = process.env.BACK;
-  console.log(BackUrl)
 
   const { cart, setCart, removeFromCart, countDownCart, countUpCart } =
     useContext(CartContext);

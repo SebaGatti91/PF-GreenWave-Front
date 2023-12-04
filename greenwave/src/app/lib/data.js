@@ -1,12 +1,11 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 
-  // axios.defaults.baseURL="http://localhost:3001"
-  axios.defaults.baseURL="https://greenwave-back.up.railway.app/"
+const BackUrl = process.env.BACK
 
 export const fetchUsers = async () => {
   try {
-    const url = `${axios.defaults.baseURL}/users`;
+    const url = `${BackUrl}/users`;
     const response = await axios.get(url);
 
     return response.data;
@@ -18,7 +17,7 @@ export const fetchUsers = async () => {
 
 export const fetchProducts = async () => {
   try {
-    const url = `${axios.defaults.baseURL}/store`;
+    const url = `${BackUrl}/store`;
     const response = await axios.get(url);
 
     return response.data;
@@ -30,7 +29,7 @@ export const fetchProducts = async () => {
 
 export const banUser = async (userId) => {
   try {
-    const url = `${axios.defaults.baseURL}/users/ban/${userId}`;
+    const url = `${BackUrl}/users/ban/${userId}`;
     const response = await axios.put(url);
 
     return response.data;
@@ -47,7 +46,7 @@ export const createUser = async (user) => {
       return;
     }
 
-    const url = `${axios.defaults.baseURL}/users`;
+    const url = `${BackUrl}/users`;
 
     await axios.post(url, user);
   } catch (error) {
@@ -63,7 +62,7 @@ export const fetchUserProducts = async (userId) => {
       return;
     }
 
-    const response = await axios.get(`${axios.defaults.baseURL}/getUserProducts/${userId}`);
+    const response = await axios.get(`${BackUrl}/getUserProducts/${userId}`);
     const { data } = response;
     return data;
   } catch (error) {
@@ -78,7 +77,7 @@ export const fetchAddFavorites = async (userId, productId) => {
       return;
     }
     const data = { userId: userId, productId: productId };
-    const url =`${axios.defaults.baseURL}/addFavorites`;
+    const url =`${BackUrl}/addFavorites`;
 
     await axios.post(url, data);
   } catch (error) {
@@ -92,7 +91,7 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
       return;
     }
     const data = { userId: userId, productId: productId };
-    const url = `${axios.defaults.baseURL}/removeFavorites`;
+    const url = `${BackUrl}/removeFavorites`;
 
     await axios.post(url, data);
     setFavorites((prevFavorites) =>
@@ -109,7 +108,7 @@ export const fetchGetFavorites = async (userId) => {
       return;
     }
 
-    const response = await axios.get(`${axios.defaults.baseURL}/getFavs/${userId}`);
+    const response = await axios.get(`${BackUrl}/getFavs/${userId}`);
     const { data } = response;
     return data;
   } catch (error) {
@@ -130,7 +129,7 @@ export const deleteProduct = async (id) => {
   });
   if (result.isConfirmed) {
     try {
-      await axios.delete(`${axios.defaults.baseURL}/products/delete/${id}`);
+      await axios.delete(`${BackUrl}/products/delete/${id}`);
       Swal.fire({
         title: "Deleted!",
         text: "Your file has been deleted.",
