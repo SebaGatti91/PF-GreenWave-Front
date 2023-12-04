@@ -12,7 +12,11 @@ import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 
-export default function Detail({ params, id }) {
+export default function Detail({ params }) {
+  if (!params) {
+    // Manejar el caso donde params o id no están presentes
+    return <div>Error: Missing params or id</div>;
+  }
   const { user } = useContext(GlobalUser);
 
   const router = useRouter();

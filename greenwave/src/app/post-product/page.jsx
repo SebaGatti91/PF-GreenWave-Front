@@ -10,7 +10,7 @@ import {
 } from "../components/materialsApi/useMaterialsApi";
 import { GlobalUser } from "../components/users/globalUsers";
 
-export default function PostProduct({ initialValues, isOff = true }) {
+export default function PostProduct({ initialValues = {}, isOff = true }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [file, setFile] = useState(null);
