@@ -13,8 +13,6 @@ import { GlobalUser } from "../components/users/globalUsers";
 
 export default function PostProduct({ initialValues = {}, isOff = true }) {
   
- const BackUrl = process.env.BACK
-
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [file, setFile] = useState(null);
@@ -125,15 +123,15 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
             const url =
               initialValues && initialValues.id
-                ? `${BackUrl}/products/${initialValues.id}`
-                : "/api/upload";
+                ? `http://localhost:3001/products/${initialValues.id}`
+                : "http://localhost:3001/products/api/upload";
 
             // Cambia el método de la solicitud según si es una edición o una publicación
             const method = initialValues && initialValues.id ? "PUT" : "POST";
             if (method === "PUT") {
               try {
                 const response = await axios.put(
-                  `${BackUrl}/products/${initialValues.id}`,
+                  `http://localhost:3001/products/${initialValues.id}`,
                   values
                 );
                 console.log(initialValues);
