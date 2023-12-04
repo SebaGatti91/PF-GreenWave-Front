@@ -6,6 +6,7 @@ import NavBar from "./components/navBar/NavBar";
 import { Footer } from "./components/footer/Footer";
 import { Providers } from "./Providers";
 import { usePathname } from "next/navigation";
+import axios from "axios"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,8 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // axios.defaults.baseURL="http://localhost:3001"
+  axios.defaults.baseURL="https://greenwave-back.up.railway.app/"
   const pathname = usePathname();
 
   return (

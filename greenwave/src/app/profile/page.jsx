@@ -1,15 +1,30 @@
 "use client";
-import { useSession } from "next-auth/react";
-import { useContext } from "react";
+
+import { useContext, useState, useEffect } from "react";
 import Button from "../components/button/Button";
 import { GlobalUser } from "../components/users/globalUsers";
 import Image from "next/image";
 import Link from "next/link";
-
+import { fetchUserProducts } from "../lib/data";
 const Profile = () => {
-  const { data: session } = useSession();
-  const usuario = session?.user;
   const { user } = useContext(GlobalUser);
+  const [userProducts, setUserProducts] = useState([]);
+
+  useEffect(() => {
+    const userProductsData = async () => {
+      try {
+        const userProductsData = await fetchUserProducts(user?.email);
+        setUserProducts(userProductsData);
+      } catch (error) {
+        console.error("Error fetching userProducts:", error);
+        // Puedes manejar el error de manera apropiada, por ejemplo, mostrando un mensaje al usuario.
+      }
+    };
+
+    if (user?.email) {
+      userProductsData();
+    }
+  }, [user]);
 
   return (
     <div className="flex h-screen">
@@ -42,14 +57,14 @@ const Profile = () => {
       </div>
       <div className="flex-1">
         <div className="flex flex-row justify-evenly">
-          <h1>Welcome back {usuario?.name} !!!</h1>
+          {/* <h1>Welcome back {usuario?.name} !!!</h1> */}
         </div>
         <h2 className="flex flex-row justify-evenly">My Products</h2>
         <div
           className="flex flex-wrap justify-evenly m-10 p-10"
           style={{ backgroundColor: "#D1D7BF" }}
         >
-          {user.productsCreados?.map((product) => (
+          {userProducts?.map((product) => (
             <div key={product.id} className="w-1/2">
               <Link href={`/store/${product.id}`} className="flex items-center">
                 <Image
