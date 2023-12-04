@@ -12,7 +12,13 @@ import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 
-export default function Detail({ params, id }) {
+export default function Detail({ params}) {
+
+  // if (!params) {
+  //   // Manejar el caso donde params o id no están presentes
+  //   return <div>Error: Missing params or id</div>;
+  // }
+  
   const { user } = useContext(GlobalUser);
 
   const router = useRouter();
@@ -30,7 +36,7 @@ export default function Detail({ params, id }) {
 
   const loadProductDetail = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3001/store/${id}`);
+      const response = await axios.get(`/store/${id}`);
 
       setProduct(response.data);
     } catch (error) {
@@ -46,7 +52,7 @@ export default function Detail({ params, id }) {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/mercadoPago", {
+      const response = await axios.post("/mercadoPago", {
         userId: user.email,
         productId: product.id,
         item: [

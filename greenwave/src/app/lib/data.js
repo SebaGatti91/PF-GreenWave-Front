@@ -1,8 +1,10 @@
-const axios = require("axios");
 import Swal from "sweetalert2";
+import axios from "axios";
+
+
 export const fetchUsers = async () => {
   try {
-    const url = "http://localhost:3001/users";
+    const url = "https://greenwave-back.up.railway.app/users";
     const response = await axios.get(url);
 
     return response.data;
@@ -14,7 +16,7 @@ export const fetchUsers = async () => {
 
 export const fetchProducts = async () => {
   try {
-    const url = "http://localhost:3001/store";
+    const url = "https://greenwave-back.up.railway.app/store";
     const response = await axios.get(url);
 
     return response.data;
@@ -26,7 +28,7 @@ export const fetchProducts = async () => {
 
 export const banUser = async (userId) => {
   try {
-    const url = `http://localhost:3001/users/ban/${userId}`;
+    const url = `https://greenwave-back.up.railway.app/users/ban/${userId}`;
     const response = await axios.put(url);
 
     return response.data;
@@ -43,7 +45,7 @@ export const createUser = async (user) => {
       return;
     }
 
-    const url = `http://localhost:3001/users`;
+    const url = `https://greenwave-back.up.railway.app/users`;
 
     await axios.post(url, user);
   } catch (error) {
@@ -51,6 +53,22 @@ export const createUser = async (user) => {
     // Consider setting a more specific error message or logging details
   }
 };
+
+export const fetchUserProducts = async (userId) => {
+  try {
+    if (!userId) {
+      console.error("Error:  Missing  data");
+      return;
+    }
+
+    const response = await axios.get(`https://greenwave-back.up.railway.app/getUserProducts/${userId}`);
+    const { data } = response;
+    return data;
+  } catch (error) {
+    console.error("Error al postear favoritos", error);
+  }
+};
+
 export const fetchAddFavorites = async (userId, productId) => {
   try {
     if (!userId || !productId) {
@@ -58,7 +76,7 @@ export const fetchAddFavorites = async (userId, productId) => {
       return;
     }
     const data = { userId: userId, productId: productId };
-    const url = `http://localhost:3001/addFavorites`;
+    const url = `https://greenwave-back.up.railway.app/addFavorites`;
 
     await axios.post(url, data);
   } catch (error) {
@@ -72,7 +90,7 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
       return;
     }
     const data = { userId: userId, productId: productId };
-    const url = `http://localhost:3001/removeFavorites`;
+    const url = `https://greenwave-back.up.railway.app/removeFavorites`;
 
     await axios.post(url, data);
     setFavorites((prevFavorites) =>
@@ -89,14 +107,13 @@ export const fetchGetFavorites = async (userId) => {
       return;
     }
 
-    const response = await axios.get(`http://localhost:3001/getFavs/${userId}`);
+    const response = await axios.get(`/getFavs/${userId}`);
     const { data } = response;
     return data;
   } catch (error) {
     console.error("Error al obtener favoritos", error);
   }
 };
-
 
 export const deleteProduct = async (id) => {
   console.log(id);
@@ -111,7 +128,7 @@ export const deleteProduct = async (id) => {
   });
   if (result.isConfirmed) {
     try {
-      await axios.delete(`http://localhost:3001/products/delete/${id}`);
+      await axios.delete(`https://greenwave-back.up.railway.app/products/delete/${id}`);
       Swal.fire({
         title: "Deleted!",
         text: "Your file has been deleted.",
