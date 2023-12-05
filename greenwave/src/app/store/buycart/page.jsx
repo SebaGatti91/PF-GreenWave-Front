@@ -1,5 +1,7 @@
 "use client";
-import axios from "axios";
+import axios from "axios"
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Link from "next/link";
@@ -14,6 +16,9 @@ const Cart = () => {
     useContext(CartContext);
   const [addedToCart, setAddedToCart] = useState(false);
   const { user } = useContext(GlobalUser);
+  const { data: session } = useSession();
+  const userAut = session?.user;
+  const router = useRouter()
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId);
@@ -96,8 +101,12 @@ const Cart = () => {
   };
 
   const handleBuy = async () => {
+    if (userAut) {
     const id = await createPreference();
     if (id) setPreferenceId(id);
+  } else {
+    router.push("/login");
+  }
   };
 
   const totalItems = cart.reduce((acc, product) => {
