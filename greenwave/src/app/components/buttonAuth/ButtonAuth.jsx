@@ -89,7 +89,7 @@ export default function ButtonAuth() {
                 <button onClick={() => handleOptionClick("profile")}>
                   Profile
                 </button>
-                {user.admin === true && session?.user && (
+                {user.admin === true && (
                   <button onClick={() => handleOptionClick("dashboard")}>
                     Dashboard
                   </button>
