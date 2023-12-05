@@ -129,7 +129,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
             if (method === "PUT") {
               try {
                 const response = await axios.put(
-                  `https://greenwave-back.up.railway.app/products/${initialValues.id}`,
+                  `https://greenwave-back.up.rail1way.app/products/${initialValues.id}`,
                   values
                 );
                 console.log(initialValues);

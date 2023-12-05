@@ -3,11 +3,12 @@ import { useEffect, useContext, useState } from "react";
 import { GlobalUser } from "../components/users/globalUsers";
 import { fetchGetFavorites } from "../lib/data";
 import Card from "../components/card/Card";
+import Swal from "sweetalert2";
 
 const Favorites = () => {
   const { user } = useContext(GlobalUser);
   const [favorites, setFavorites] = useState([]);
-
+console.log(user);
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
