@@ -123,7 +123,9 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
             }
 
             // Espera a que la imagen se haya subido a Cloudinary antes de continuar
-            await new Promise((resolve) => setTimeout(resolve, 10000)); // Ajusta el tiempo de espera según sea necesario
+            if (values.image !== "") {
+              await new Promise((resolve) => setTimeout(resolve, 10000)); // Ajusta el tiempo de espera según sea necesario
+            }
 
             const url =
               initialValues && initialValues.id
@@ -154,7 +156,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               }
             }
 
-            const response = await fetch(url, {
+            const response = await fetch(`http://localhost3001/products`, {
               method,
               body: formData,
             });
