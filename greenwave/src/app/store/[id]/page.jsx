@@ -8,6 +8,7 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import "./detail.css";
 import PostProduct from "../../post-product/page";
+import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 
@@ -78,15 +79,9 @@ export default function Detail({ params}) {
   };
 
   const handleBuy = async () => {
-    if (userAut) {
-      const id = await createPreference();
-      if (id) setPreferenceId(id);
-    } else {
-      router.push("/login");
-    }
+    const id = await createPreference();
+    if (id) setPreferenceId(id);
   };
-  
-  
 
   const handleEdit = () => {
     setIsEditing(true);

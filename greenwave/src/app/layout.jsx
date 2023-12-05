@@ -6,8 +6,8 @@ import NavBar from "./components/navBar/NavBar";
 import { Footer } from "./components/footer/Footer";
 import { Providers } from "./Providers";
 import { usePathname } from "next/navigation";
-import axios from "axios";
-axios.defaults.baseURL = process.env.BACK;
+import axios from "axios"
+
 const inter = Inter({ subsets: ["latin"] });
 
 const metadata = {
@@ -16,7 +16,8 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  axios.defaults.baseURL = process.env.BACK;
+
+  axios.defaults.baseURL = process.env.BACK
   const pathname = usePathname();
 
   return (
