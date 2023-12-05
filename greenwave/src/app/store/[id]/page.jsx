@@ -11,10 +11,9 @@ import PostProduct from "../../post-product/page";
 import { GlobalUser } from "../../components/users/globalUsers";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
-
-export default function Detail({ params}) {
-
-  const BackUrl = process.env.BACK
+import { GlobalUser } from "../../components/users/globalUsers";
+export default function Detail({ params }) {
+  const BackUrl = process.env.BACK;
 
   // if (!params) {
   //   // Manejar el caso donde params o id no están presentes
@@ -54,7 +53,7 @@ export default function Detail({ params}) {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post( `${BackUrl}/mercadoPago`, {
+      const response = await axios.post(`${BackUrl}/mercadoPago`, {
         userId: user.email,
         productId: product.id,
         item: [
