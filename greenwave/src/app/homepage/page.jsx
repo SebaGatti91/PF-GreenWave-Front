@@ -17,11 +17,8 @@ export default function Home() {
   console.log(user);
 
   const fetchData = async () => {
-
     try {
-      const response = await axios.get(
-        `/users/${userData?.email}`
-      );
+      const response = await axios.get(`/users/${userData?.email}`);
       const { data } = response;
 
       setUser(data);
@@ -32,7 +29,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if(user.status === false){
+    if (user.status === false) {
       router.replace("/banned");
     }
     if (session?.user) {

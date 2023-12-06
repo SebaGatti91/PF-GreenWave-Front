@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const BackUrl = process.env.BACK
+const BackUrl = process.env.BACK;
 
 export const fetchUsers = async () => {
   try {
@@ -77,7 +77,7 @@ export const fetchAddFavorites = async (userId, productId) => {
       return;
     }
     const data = { userId: userId, productId: productId };
-    const url =`${BackUrl}/addFavorites`;
+    const url = `${BackUrl}/addFavorites`;
 
     await axios.post(url, data);
   } catch (error) {
