@@ -1,40 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import StarRatings from 'react-star-ratings';
+import { ProgressBar } from 'react-bootstrap';
+import './reviews.css'
+function ReviewList({ rating, reviewedBy }) {
+  if (!rating || !reviewedBy) {
+    return <div>Cargando...</div>;
+  }
 
-function ReviewList({ productId }) {
-  const [reviews, setReviews] = useState([]);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get(`https://greenwave-back.up.railway.app/${productId}`);
-        if (response.status === 200) {
-          setReviews(response.data);
-        } else {
-          console.log('Error al obtener las reseñas');
-        }
-      } catch (error) {
-        console.error('Error al hacer la petición GET:', error);
-      }
-    };
-
-    fetchReviews();
-  }, [productId]);
-
-  const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
+  const ratingCounts = [0, 0, 0, 0, 0];
+  console.log(ratingCounts);
+  reviewedBy.forEach((review) => {
+    ratingCounts[review.rating - 1]++;
+  });
 
   return (
     <div>
-      <h2>Calificación promedio</h2>
+      <div className='flex flex-row  items-center'>
+      <p className='rate'>{rating}</p>
       <StarRatings
-        rating={averageRating}
+        rating={rating}
         starRatedColor="blue"
         numberOfStars={5}
         name='averageRating'
+        
       />
+      </div>
+      {ratingCounts.map((count, index) => (
+        <div key={index}>
+          <p>{5 - index}⭐</p>
+          <ProgressBar now={(count / reviewedBy.length) * 100} />
+        </div>
+      ))}
       <h2>Reseñas</h2>
-      {reviews.map((review) => (
+      {reviewedBy.map((review) => (
         <div key={review.id}>
           <h3>{review.userEmail}</h3>
           <StarRatings
