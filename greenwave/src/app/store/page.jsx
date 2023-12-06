@@ -110,7 +110,7 @@ const Store = () => {
   );
 
   return (
-    <div className=" mx-auto flex flex-row ">
+    <div className=" mx-auto flex flex-row">
       <aside className="flex flex-col bg-hover shadow-2xl" style={{ borderRight: '1px solid gray', width: '20%' }}>
 
         <div className="flex flex-row pb-5 pt-6 px-3 bg-hover" style={{ borderBottom: '1px solid gray' }}>
@@ -160,7 +160,7 @@ const Store = () => {
           {currentProducts.map((product) => (
             <div key={product.id}
               className="hover:transform hover:scale-105 transition-transform duration-300"
-              style={{ width: '28%', height: '380px' }}
+              style={{ width: '28%'}}
             >
               <Card
                 id={product.id}
