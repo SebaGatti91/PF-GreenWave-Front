@@ -257,8 +257,8 @@ export default function Detail({ params }) {
 
         {/* Modal de edición */}
         {isEditing && (
-          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center">
-            <div className="bg-white p-3 rounded-lg" style={{ width: "50%" }}>
+          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+            <div className="bg-white p-3 rounded-lg h-full" style={{ width: "50%" }}>
               <PostProduct initialValues={product} isOff={false} />
 
               <div className="flex justify-center">
