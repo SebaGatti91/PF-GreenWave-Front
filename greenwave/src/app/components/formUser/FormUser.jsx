@@ -8,10 +8,12 @@ import { useContext } from "react";
 export default function FormUser() {
   const { user, setUser } = useContext(GlobalUser);
   const [file, setFile] = useState(null);
-  console.log(user.id)
+  console.log(user)
 
   return (
     <div>
+      <h1>Hello {user.username}!</h1>
+      <img src={user.image}></img>
       <Formik
         initialValues={{
           username: "",
