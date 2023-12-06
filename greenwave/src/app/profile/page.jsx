@@ -6,6 +6,7 @@ import { GlobalUser } from "../components/users/globalUsers";
 import Image from "next/image";
 import Link from "next/link";
 import { fetchUserProducts } from "../lib/data";
+import FormUser from '../components/formUser/FormUser'
 const Profile = () => {
   const { user } = useContext(GlobalUser);
   const [userProducts, setUserProducts] = useState([]);
@@ -64,6 +65,7 @@ const Profile = () => {
           className="flex flex-wrap justify-evenly m-10 p-10"
           style={{ backgroundColor: "#D1D7BF" }}
         >
+          <FormUser/> 
           {userProducts?.map((product) => (
             <div key={product.id} className="w-1/2">
               <Link href={`/store/${product.id}`} className="flex items-center">

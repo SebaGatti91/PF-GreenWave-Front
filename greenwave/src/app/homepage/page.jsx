@@ -10,26 +10,25 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { data: session } = useSession();
-  const { user, setUser } = useContext(GlobalUser);
-  const userData = session?.user;
+  const { user } = useContext(GlobalUser);
+  // const userData = session?.user;
   const router = useRouter();
 
-  console.log(user);
 
-  const fetchData = async () => {
+  // const fetchData = async () => {
 
-    try {
-      const response = await axios.get(
-        `/users/${userData?.email}`
-      );
-      const { data } = response;
+  //   try {
+  //     const response = await axios.get(
+  //       `/users/${userData?.email}`
+  //     );
+  //     const { data } = response;
 
-      setUser(data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      // Handle the error, show a message to the user, or redirect as needed.
-    }
-  };
+  //     setUser(data);
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //     // Handle the error, show a message to the user, or redirect as needed.
+  //   }
+  // };
 
   useEffect(() => {
     if(user.status === false){
