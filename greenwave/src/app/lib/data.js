@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const BackUrl = process.env.BACK
+const BackUrl = process.env.BACK;
 
 export const fetchUsers = async () => {
   try {
@@ -90,7 +90,7 @@ export const fetchAddFavorites = async (userId, productId) => {
       return;
     }
     const data = { userId: userId, productId: productId };
-    const url =`${BackUrl}/addFavorites`;
+    const url = `${BackUrl}/addFavorites`;
 
     await axios.post(url, data);
   } catch (error) {
@@ -109,7 +109,7 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
     await axios.post(url, data);
     setFavorites((prevFavorites) =>
       prevFavorites.filter((favorite) => favorite.id !== productId)
-    );
+      );
   } catch (error) {
     console.error("Error al postear favoritos", error);
   }
@@ -121,7 +121,7 @@ export const fetchGetFavorites = async (userId) => {
       return;
     }
 
-    const response = await axios.get(`${BackUrl}/getFavs/${userId}`);
+    const response = await axios.get(`${BackUrl}/getfavs/${userId}`);
     const { data } = response;
     return data;
   } catch (error) {

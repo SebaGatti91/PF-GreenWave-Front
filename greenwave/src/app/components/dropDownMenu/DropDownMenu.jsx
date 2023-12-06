@@ -80,9 +80,9 @@ const DropDownMenu = ({
           className="flex justify-center rounded-lg bg-white hover:cursor-pointer pl-4 py-1"
           style={{ marginInline: 'auto', width: '80%', border: '1px solid gray' }}
         >
-          <option value="Price">Price</option>
-          <option value="priceAsc">Ascendent</option>
-          <option value="priceDesc">Descendent</option>
+          <option className="text-center" value="Price">Price</option>
+          <option className="text-center" value="priceAsc">Ascendent</option>
+          <option className="text-center" value="priceDesc">Descendent</option>
         </select>
       </div>
 

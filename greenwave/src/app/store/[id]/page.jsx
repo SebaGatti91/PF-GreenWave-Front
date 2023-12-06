@@ -8,9 +8,11 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import "./detail.css";
 import PostProduct from "../../post-product/page";
+import PostReview from "../../components/postReview/PostReview"
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 import { GlobalUser } from "../../components/users/globalUsers";
+import ReviewList from "../../components/postReview/GetReview"
 export default function Detail({ params }) {
   const BackUrl = process.env.BACK;
 
@@ -18,6 +20,7 @@ export default function Detail({ params }) {
   //   // Manejar el caso donde params o id no están presentes
   //   return <div>Error: Missing params or id</div>;
   // }
+  const { id } = params;
 
   const { user } = useContext(GlobalUser);
 
@@ -27,12 +30,19 @@ export default function Detail({ params }) {
   const [isEditing, setIsEditing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);
+  const [postReview, setPostReview]= useState(false)
 
   const [loading, SetLoading] = useState(true);
   const { addToCart, cart, countDownCart, countUpCart, removeFromCart } =
     useCart();
-
+  const handlepost = () =>{
+    setPostReview(!postReview)
+  }
+ 
+  
   const item = cart.find((item) => item.id === params.id);
+
+  const foundUserProduct = user.posted.find((product) => product.id === id);
 
   const loadProductDetail = async (id) => {
     try {
@@ -92,7 +102,7 @@ export default function Detail({ params }) {
   const closeModal = () => {
     setIsEditing(false);
   };
-
+console.log(product);
   const handleAddToCart = () => {
     addToCart({
       id: params.id,
@@ -121,6 +131,7 @@ export default function Detail({ params }) {
     return <Skeleton />;
   } else {
     return (
+      <div className="flex flex-col">
       <div className="flex justify-center items-center p-7">
         <div className="p-5 border">
           <Link href="/store">
@@ -144,7 +155,7 @@ export default function Detail({ params }) {
             }
 
             <div className="flex flex-col items-center text-center p-3 ml-3">
-              {userAut ? (
+              {user.admin || foundUserProduct ? (
                 <div className=" space-x-4 ">
                   <button
                     onClick={handleProd}
@@ -257,8 +268,8 @@ export default function Detail({ params }) {
 
         {/* Modal de edición */}
         {isEditing && (
-          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center">
-            <div className="bg-white p-3 rounded-lg" style={{ width: "50%" }}>
+          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+            <div className="bg-white p-3 rounded-lg h-full" style={{ width: "50%" }}>
               <PostProduct initialValues={product} isOff={false} />
 
               <div className="flex justify-center">
@@ -272,6 +283,14 @@ export default function Detail({ params }) {
             </div>
           </div>
         )}
+      </div>
+      <div className="flex">
+        <ReviewList  rating={product.rating} reviewedBy={product.Reviews}/>
+        <button onClick={handlepost} className="elemento">add a review</button>
+        {postReview && (
+        <PostReview productId={product.id}/>
+  )}
+        </div>
       </div>
     );
   }
