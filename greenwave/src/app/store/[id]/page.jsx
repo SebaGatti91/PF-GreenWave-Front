@@ -18,6 +18,7 @@ export default function Detail({ params }) {
   //   // Manejar el caso donde params o id no están presentes
   //   return <div>Error: Missing params or id</div>;
   // }
+  const { id } = params;
 
   const { user } = useContext(GlobalUser);
 
@@ -33,6 +34,8 @@ export default function Detail({ params }) {
     useCart();
 
   const item = cart.find((item) => item.id === params.id);
+
+  const foundUserProduct = user.posted.find((product) => product.id === id);
 
   const loadProductDetail = async (id) => {
     try {
@@ -144,7 +147,7 @@ export default function Detail({ params }) {
             }
 
             <div className="flex flex-col items-center text-center p-3 ml-3">
-              {userAut ? (
+              {user.admin || foundUserProduct ? (
                 <div className=" space-x-4 ">
                   <button
                     onClick={handleProd}

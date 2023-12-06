@@ -122,16 +122,6 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               values.image = cloudinaryData.url;
             }
 
-            // Espera a que la imagen se haya subido a Cloudinary antes de continuar
-            if (values.image !== "") {
-              await new Promise((resolve) => setTimeout(resolve, 3000)); // Ajusta el tiempo de espera según sea necesario
-            }
-
-            const url =
-              initialValues && initialValues.id
-                ? `${BackUrl}/products/${initialValues.id}`
-                : "/api/upload";
-
             // Cambia el método de la solicitud según si es una edición o una publicación
             const method = initialValues && initialValues.id ? "PUT" : "POST";
 
@@ -155,14 +145,6 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                 throw Error(error);
               }
             }
-
-            // const response = await fetch(`http://localhost3001/products`, {
-            //   method,
-            //   body: formData,
-            // });
-
-            // const data = await response.json();
-            // values.image = data.url;
 
             submitForm(values, initialValues && initialValues.id)
               .then(() => {
