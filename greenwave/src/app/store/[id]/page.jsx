@@ -10,6 +10,7 @@ import "./detail.css";
 import PostProduct from "../../post-product/page";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
+import { GlobalUser } from "../../components/users/globalUsers";
 
 export default function Detail({ params}) {
 
