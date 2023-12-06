@@ -8,7 +8,7 @@ import { fetchRemoveFavorites, fetchAddFavorites, fetchGetFavorites } from "../l
 const Favorites = () => {
   const { user } = useContext(GlobalUser);
   const [favorites, setFavorites] = useState([]);
-
+console.log(user);
   useEffect(() => {
     const fetchFavorites = async () => {
       try {

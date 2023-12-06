@@ -8,6 +8,7 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   //creamos una localstorage para persistencia de datos
   const [cart, setCart] = useState(() => {
+    
     const localData =
       typeof window !== "undefined" ? localStorage.getItem("cart") : null;
     return localData ? JSON.parse(localData) : [];

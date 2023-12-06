@@ -7,6 +7,7 @@ import { Footer } from "./components/footer/Footer";
 import { Providers } from "./Providers";
 import { usePathname } from "next/navigation";
 import axios from "axios";
+import ChildComponent from './components/childComponent/ChildUser'
 axios.defaults.baseURL = process.env.BACK;
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,8 @@ export default function RootLayout({ children }) {
   axios.defaults.baseURL = process.env.BACK;
   const pathname = usePathname();
 
+  
+
   return (
     <html lang="en">
       <head>
@@ -29,6 +32,7 @@ export default function RootLayout({ children }) {
 
       <body className={inter.className}>
         <Providers>
+          <ChildComponent children={children}>
           {pathname === "/" ? (
             <>{children}</>
           ) : pathname.startsWith("/dashboard") || pathname === "/banned" ? (
@@ -43,6 +47,7 @@ export default function RootLayout({ children }) {
               <Footer />
             </div>
           )}
+          </ChildComponent>
         </Providers>
       </body>
     </html>
