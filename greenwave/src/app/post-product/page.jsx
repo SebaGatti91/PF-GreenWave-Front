@@ -53,7 +53,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           //validations for name
           if (!values.name) {
             errors.name = "Please enter the name of your product";
-          } else if (!/^[a-zA-ZñÑ\s]{3,30}$/.test(values.name)) {
+          } else if (!/^[a-zA-ZñÑ\sáéíóúÁÉÍÓÚ]{3,30}$/.test(values.name)) {
             errors.name = "Can only contain from 3 to 30 letters";
           }
 
@@ -81,9 +81,9 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           //validations for description
           if (!values.description) {
             errors.description = "Please enter a product description";
-          } else if (!/^[a-zA-ZñÑ\s]{1,300}$/.test(values.description)) {
+          } else if (!/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/.test(values.description)) {
             errors.description =
-              "Must contain only letters and up to 300 characters";
+              "Must contain only letters and up to 500 characters";
           }
 
           //validation for image

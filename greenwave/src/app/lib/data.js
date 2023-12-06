@@ -96,7 +96,7 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
     await axios.post(url, data);
     setFavorites((prevFavorites) =>
       prevFavorites.filter((favorite) => favorite.id !== productId)
-    );
+      );
   } catch (error) {
     console.error("Error al postear favoritos", error);
   }
