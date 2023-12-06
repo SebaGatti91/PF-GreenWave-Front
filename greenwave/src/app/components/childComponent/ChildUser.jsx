@@ -13,7 +13,7 @@ const ChildComponent = ({children}) => {
     const pathname = usePathname()
     const fetchData = async () => {
       try {
-        const response = await axios(`/users/${userData?.email}`);
+        const response = await axios(`/users/email/${userData?.email}`);
         const { data } = response;
         setUser(data);
       } catch (error) {
