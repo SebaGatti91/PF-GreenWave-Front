@@ -96,7 +96,7 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
     await axios.post(url, data);
     setFavorites((prevFavorites) =>
       prevFavorites.filter((favorite) => favorite.id !== productId)
-    );
+      );
   } catch (error) {
     console.error("Error al postear favoritos", error);
   }
@@ -108,7 +108,7 @@ export const fetchGetFavorites = async (userId) => {
       return;
     }
 
-    const response = await axios.get(`${BackUrl}/getFavs/${userId}`);
+    const response = await axios.get(`${BackUrl}/getfavs/${userId}`);
     const { data } = response;
     return data;
   } catch (error) {
