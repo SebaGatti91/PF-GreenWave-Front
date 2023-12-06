@@ -12,8 +12,6 @@ export default function FormUser() {
 
   return (
     <div>
-      <h1>Hello {user.username}!</h1>
-      <img src={user.image}></img>
       <Formik
         initialValues={{
           username: "",

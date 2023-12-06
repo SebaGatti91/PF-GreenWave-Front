@@ -2,11 +2,12 @@
 import { GlobalUser } from "../components/users/globalUsers";
 import { useContext, useState, useEffect } from "react";
 import Button from "../components/button/Button";
-
+import FormUser from "../components/formUser/FormUser";
 import Image from "next/image";
 import Link from "next/link";
 
 const Profile = () => {
+  const { user, setUser } = useContext(GlobalUser);
   return (
     <div className="flex h-screen">
       <div className="w-1/6 flex-none h-full">
@@ -41,7 +42,14 @@ const Profile = () => {
       </div>
       <div className="flex-1">
         <div className="flex flex-row justify-evenly">
-          {/* <h1>Welcome back {usuario?.name} !!!</h1> */}
+          <div className="flex flex-col justify-center items-center">
+            <h1>Profile</h1>
+            <h1>Hello {user.username}!</h1>
+            <img src={user.image}></img>
+            <div>
+              <FormUser />
+            </div>
+          </div>
         </div>
 
         <div
