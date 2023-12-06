@@ -9,6 +9,7 @@ import {
   submitForm,
 } from "../components/materialsApi/useMaterialsApi";
 import { GlobalUser } from "../components/users/globalUsers";
+const BackUrl = process.env.BACK;
 
 export default function PostProduct({ initialValues = {}, isOff = true }) {
   const [loading, setLoading] = useState(false);
@@ -106,9 +107,11 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           try {
             setLoading(true);
             const formData = new FormData();
+
             if (file) {
               formData.append("image", file);
               values.userId = user.id;
+
               // Carga la nueva imagen en Cloudinary
               const cloudinaryResponse = await fetch("/api/upload", {
                 method: "POST",
@@ -119,20 +122,26 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               values.image = cloudinaryData.url;
             }
 
+            // Espera a que la imagen se haya subido a Cloudinary antes de continuar
+            if (values.image !== "") {
+              await new Promise((resolve) => setTimeout(resolve, 3000)); // Ajusta el tiempo de espera según sea necesario
+            }
+
             const url =
               initialValues && initialValues.id
-                ? `https://greenwave-back.up.railway.app/products/${initialValues.id}`
+                ? `${BackUrl}/products/${initialValues.id}`
                 : "/api/upload";
 
             // Cambia el método de la solicitud según si es una edición o una publicación
             const method = initialValues && initialValues.id ? "PUT" : "POST";
+
             if (method === "PUT") {
               try {
                 const response = await axios.put(
-                  `https://greenwave-back.up.rail1way.app/products/${initialValues.id}`,
+                  `${BackUrl}/products/${initialValues.id}`,
                   values
                 );
-                console.log(initialValues);
+
                 if (response.status === 200) {
                   setLoading(false);
                   router.push(`/profile/`);
@@ -147,14 +156,13 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               }
             }
 
-            const response = await fetch(url, {
-              method,
-              body: formData,
-            });
+            // const response = await fetch(`http://localhost3001/products`, {
+            //   method,
+            //   body: formData,
+            // });
 
-            const data = await response.json();
-
-            values.image = data.url;
+            // const data = await response.json();
+            // values.image = data.url;
 
             submitForm(values, initialValues && initialValues.id)
               .then(() => {

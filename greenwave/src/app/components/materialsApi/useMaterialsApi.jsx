@@ -1,15 +1,16 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 
+const BackUrl = process.env.BACK;
+
 export const materialsApi = async () => {
-  const response = await axios.get(`https://greenwave-back.up.railway.app/materials`);
+  const response = await axios.get(`${BackUrl}/materials`);
   return response.data;
 };
 
 export const submitForm = async (values) => {
-
   try {
-    const response = await axios.post("https://greenwave-back.up.railway.app/products", values);
+    const response = await axios.post(`${BackUrl}/products`, values);
     if (response.status === 200) {
       return Swal.fire({
         icon: "success",

@@ -1,5 +1,7 @@
 "use client";
 import axios from "axios"
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import { CartContext } from "../../components/cart/cartContext";
 import Link from "next/link";
@@ -7,9 +9,16 @@ import Image from "next/image";
 import { GlobalUser } from "../../components/users/globalUsers";
 
 const Cart = () => {
-  const { cart, setCart, removeFromCart, countDownCart, countUpCart } = useContext(CartContext);
+
+  const BackUrl = process.env.BACK;
+
+  const { cart, setCart, removeFromCart, countDownCart, countUpCart } =
+    useContext(CartContext);
   const [addedToCart, setAddedToCart] = useState(false);
   const { user } = useContext(GlobalUser);
+  const { data: session } = useSession();
+  const userAut = session?.user;
+  const router = useRouter()
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId);
@@ -60,8 +69,6 @@ const Cart = () => {
     );
   };
 
- 
-
   const createPreference = async () => {
     try {
       const itemsFromCart = cart?.map((prod) => ({
@@ -77,11 +84,14 @@ const Cart = () => {
       }
 
       const productsIds = cart.map((prod) => prod.id);
-      const response = await axios.post("https://greenwave-back.up.railway.app/mercadoPago", {
-        userId: user.email,
-        productId: productsIds,
-        item: itemsFromCart,
-      });
+      const response = await axios.post(
+        `${BackUrl}/mercadoPago`,
+        {
+          userId: user.email,
+          productId: productsIds,
+          item: itemsFromCart,
+        }
+      );
 
       setCart([]);
       window.location.href = response.data;
@@ -91,8 +101,12 @@ const Cart = () => {
   };
 
   const handleBuy = async () => {
+    if (userAut) {
     const id = await createPreference();
     if (id) setPreferenceId(id);
+  } else {
+    router.push("/login");
+  }
   };
 
   const totalItems = cart.reduce((acc, product) => {
@@ -143,13 +157,21 @@ const Cart = () => {
           </h1>
 
           <div className="flex flex-row justify-evenly min-h-full">
-            <div className="m-12 rounded-lg w-1/2"
-              >
+            <div className="m-12 rounded-lg w-1/2">
               {cart.map((product) => (
-                <div key={product.id} className="flex flex-row justify-between mb-10 shadow-2xl rounded-lg pb-5"
-                  style={{ backgroundColor: "#D1D7BF", border: '1px solid gray' }}>
+                <div
+                  key={product.id}
+                  className="flex flex-row justify-between mb-10 shadow-2xl rounded-lg pb-5"
+                  style={{
+                    backgroundColor: "#D1D7BF",
+                    border: "1px solid gray",
+                  }}
+                >
                   <div className="flex flex-row">
-                    <Link href={`/store/${product.id}`} className="flex items-center">
+                    <Link
+                      href={`/store/${product.id}`}
+                      className="flex items-center"
+                    >
                       <Image
                         className="w-60 h-40 rounded-md"
                         src={product.image}
@@ -167,20 +189,24 @@ const Cart = () => {
                     </Link>
                     <div className="flex flex-col text-start p-4">
                       <h3 className="font-bold py-1">{product.name}</h3>
-                      <h3 className="text-green-600 py-1">USD {product.price}</h3>
+                      <h3 className="text-green-600 py-1">
+                        USD {product.price}
+                      </h3>
                     </div>
                   </div>
 
-                  <div>
-                    {renderCartControlButtons(product.id)}
-                  </div>
+                  <div>{renderCartControlButtons(product.id)}</div>
                 </div>
               ))}
             </div>
 
             <div
               className="w-1/4 m-12 py-2 rounded-xl shadow-2xl pb-3"
-              style={{ backgroundColor: "#D1D7BF", height: "40%", border: '1px solid gray'}}
+              style={{
+                backgroundColor: "#D1D7BF",
+                height: "40%",
+                border: "1px solid gray",
+              }}
             >
               <div
                 className="mx-6 pt-8 mb-3 pb-3"
