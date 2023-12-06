@@ -53,7 +53,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           //validations for name
           if (!values.name) {
             errors.name = "Please enter the name of your product";
-          } else if (!/^[a-zA-ZñÑ\s]{3,30}$/.test(values.name)) {
+          } else if (!/^[a-zA-ZñÑ\sáéíóúÁÉÍÓÚ]{3,30}$/.test(values.name)) {
             errors.name = "Can only contain from 3 to 30 letters";
           }
 
@@ -81,9 +81,9 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           //validations for description
           if (!values.description) {
             errors.description = "Please enter a product description";
-          } else if (!/^[a-zA-ZñÑ\s]{1,300}$/.test(values.description)) {
+          } else if (!/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/.test(values.description)) {
             errors.description =
-              "Must contain only letters and up to 300 characters";
+              "Must contain only letters and up to 500 characters";
           }
 
           //validation for image
@@ -107,9 +107,11 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           try {
             setLoading(true);
             const formData = new FormData();
+
             if (file) {
               formData.append("image", file);
               values.userId = user.id;
+
               // Carga la nueva imagen en Cloudinary
               const cloudinaryResponse = await fetch("/api/upload", {
                 method: "POST",
@@ -120,6 +122,11 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               values.image = cloudinaryData.url;
             }
 
+            // Espera a que la imagen se haya subido a Cloudinary antes de continuar
+            if (values.image !== "") {
+              await new Promise((resolve) => setTimeout(resolve, 3000)); // Ajusta el tiempo de espera según sea necesario
+            }
+
             const url =
               initialValues && initialValues.id
                 ? `${BackUrl}/products/${initialValues.id}`
@@ -127,13 +134,14 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
             // Cambia el método de la solicitud según si es una edición o una publicación
             const method = initialValues && initialValues.id ? "PUT" : "POST";
+
             if (method === "PUT") {
               try {
                 const response = await axios.put(
                   `${BackUrl}/products/${initialValues.id}`,
                   values
                 );
-                console.log(initialValues);
+
                 if (response.status === 200) {
                   setLoading(false);
                   router.push(`/profile/`);
@@ -148,14 +156,13 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               }
             }
 
-            const response = await fetch(url, {
-              method,
-              body: formData,
-            });
+            // const response = await fetch(`http://localhost3001/products`, {
+            //   method,
+            //   body: formData,
+            // });
 
-            const data = await response.json();
-
-            values.image = data.url;
+            // const data = await response.json();
+            // values.image = data.url;
 
             submitForm(values, initialValues && initialValues.id)
               .then(() => {

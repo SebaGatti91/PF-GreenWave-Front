@@ -1,8 +1,7 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const BackUrl = process.env.BACK
-
+const BackUrl = process.env.BACK;
 
 export const materialsApi = async () => {
   const response = await axios.get(`${BackUrl}/materials`);
@@ -10,7 +9,6 @@ export const materialsApi = async () => {
 };
 
 export const submitForm = async (values) => {
-
   try {
     const response = await axios.post(`${BackUrl}/products`, values);
     if (response.status === 200) {

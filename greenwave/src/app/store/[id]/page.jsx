@@ -11,10 +11,8 @@ import PostProduct from "../../post-product/page";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 import { GlobalUser } from "../../components/users/globalUsers";
-
-export default function Detail({ params}) {
-
-  const BackUrl = process.env.BACK
+export default function Detail({ params }) {
+  const BackUrl = process.env.BACK;
 
   // if (!params) {
   //   // Manejar el caso donde params o id no están presentes
@@ -54,7 +52,7 @@ export default function Detail({ params}) {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post( `${BackUrl}/mercadoPago`, {
+      const response = await axios.post(`${BackUrl}/mercadoPago`, {
         userId: user.email,
         productId: product.id,
         item: [
@@ -86,8 +84,6 @@ export default function Detail({ params}) {
       router.push("/login");
     }
   };
-  
-  
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -261,8 +257,8 @@ export default function Detail({ params}) {
 
         {/* Modal de edición */}
         {isEditing && (
-          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center">
-            <div className="bg-white p-3 rounded-lg" style={{ width: "50%" }}>
+          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+            <div className="bg-white p-3 rounded-lg h-full" style={{ width: "50%" }}>
               <PostProduct initialValues={product} isOff={false} />
 
               <div className="flex justify-center">
