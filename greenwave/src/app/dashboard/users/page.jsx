@@ -114,7 +114,7 @@ const UsersPage = () => {
               </td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/${user.id}`}>
+                  <Link href={`/dashboard/users/${user.email}`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>
