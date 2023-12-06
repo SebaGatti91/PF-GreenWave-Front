@@ -77,36 +77,40 @@ export default function ButtonAuth() {
             />
             {menuVisible && (
               <div
-                className=" mt-5 right-0  w-20 space-y-2 absolute"
+                className="mt-5 right-0 w-40 space-y-2 absolute"
                 style={{
                   background:
-                    "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
+                  "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
+                  zIndex: 1 
                 }}
               >
-                <button onClick={() => handleOptionClick("favorites")}>
-                  Favorites
-                </button>
-                <button onClick={() => handleOptionClick("profile")}>
-                  Profile
-                </button>
-                {user.admin === true && session?.user && (
-                  <button onClick={() => handleOptionClick("dashboard")}>
-                    Dashboard
+                <div className="flex flex-col" style={{border: '1px solid gray'}}>
+                  <button className="py-1 hover:bg-hover text-left pl-3" style={{borderBottom: '1px solid gray'}} onClick={() => handleOptionClick("favorites")}>
+                    Favorites
                   </button>
-                )}
-                <div>
-                  <button
-                    onClick={() => handleLogout()}
-                    className="flex items-center"
-                  >
-                    <span>Logout</span>
-                    <img
-                      src="/images/logOut.png"
-                      alt="logOutImage"
-                      className="h-5 w-5 ml-2"
-                    />
+                  <button className="py-1 hover:bg-hover text-left pl-3" style={{borderBottom: '1px solid gray'}}  onClick={() => handleOptionClick("profile")}>
+                    Profile
                   </button>
+                  {user.admin === true && session?.user && (
+                    <button className="py-1 hover:bg-hover text-left ml-3" onClick={() => handleOptionClick("dashboard")}>
+                      Dashboard
+                    </button>
+                  )}
+                  <div className="text-center flex justify-start pl-3 hover:bg-hover">
+                    <button
+                      onClick={() => handleLogout()}
+                      className="py-1 flex flex-row"
+                    >
+                      <span className="text-left mr-2">Logout</span>
+                      <img
+                        src="/images/logOut.png"
+                        alt="logOutImage"
+                        className="h-5 w-5"
+                      />
+                    </button>
+                  </div>
                 </div>
+
               </div>
             )}
           </div>

@@ -19,16 +19,15 @@ const Card = ({
 }) => {
 
   const { user } = useContext(GlobalUser);
-  const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
-    useCart();
+  const { cart, addToCart, removeFromCart, countDownCart, countUpCart } = useCart();
+
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const [state, setState] = useState({
     fav: false,
     rate: [],
     loading: true,
   });
-
-  const [addedToCart, setAddedToCart] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -181,25 +180,29 @@ const Card = ({
   }
   else {
     return (
-      <div className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col relative">
-        <div className="absolute top-0 right-0 m-2">
-          {state.fav ? (
-            <button onClick={handleFavorite}>💚</button>
-          ) : (
-            <button onClick={handleFavorite}>🤍</button>
-          )}
-        </div>
+      <div className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col" style={{ height: "360px" }}>
+        <div className="relative flex-grow">
+          <div className="absolute top-0 right-0 m-2">
+            {state.fav ? (
+              <button onClick={handleFavorite}>💚</button>
+            ) : (
+              <button onClick={handleFavorite}>🤍</button>
+            )}
+          </div>
 
-        <div className="flex-grow flex-shrink-0">
           <Link href={`/store/${id}`} className="flex w-full">
-            <Image src={image} alt={name} height={200} width={150}
-              style={{ height: "200px" }}
+            <Image
+              src={image}
+              alt={name}
+              height={200}
+              width={150}
+              style={{ height: "200px", border: '1px solid gray' }}
               className="w-80 h-60 rounded-md border-sky-950"
             />
           </Link>
         </div>
 
-        <div className="mt-2 flex-grow-0 flex flex-col items-center">
+        <div className="flex-shrink-0 mt-2 flex flex-col items-center">
           <h3 className="text-center font-bold">{name}</h3>
           <h3 className="text-green-600 text-center">USD {price}</h3>
 
@@ -209,8 +212,7 @@ const Card = ({
               .map((item) => renderCartControlButtons())
             : addedToCart
               ? renderCartControlButtons()
-              : renderAddToCartButton()
-          }
+              : renderAddToCartButton()}
         </div>
       </div>
     );

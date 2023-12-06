@@ -18,7 +18,8 @@ module.exports = {
         'hover': '#AAB49A',
         'boton': '#939A86',
         'clear': '#597A5C',
-        'hover-clear': '#678E6A'
+        'hover-clear': '#678E6A',
+        'button': '#8E9681'
       },
       colors: {
         'custom-green': '#A9B076', 
