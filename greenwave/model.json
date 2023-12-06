@@ -1,0 +1,27 @@
+[
+    {
+      "id": "8056d741-3960-482c-b7c7-ca6543f1f1c4",
+      "userId": null,
+      "name": "Bag with recycled cardboard",
+      "image": "https://i.imgur.com/r33jzUG.jpeg",
+      "stock": 50,
+      "price": 500,
+      "reviews":{
+        "rating":3.5,
+        "review":[{
+            "id": "Userid uuid",
+            "rating": 2.5,
+            "comment":"lorem ipsim... 300 caracteres"
+        },
+        {
+            "id":"Userid uuid",
+            "rating":5,
+            "comment":"lorem ipsim... 300 caracteres"
+        }] 
+      },
+      "description": "A unique and sustainable bag made with recycled cardboard. This bag is not only stylish but also contributes to caring for the environment.",
+      "paused": false,
+      "deleted": false,
+      "Materials": "Paper and Cardboard, Plastic, Textiles"
+    }
+]

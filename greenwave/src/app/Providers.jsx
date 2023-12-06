@@ -6,9 +6,9 @@ import { UserGlobal } from "./components/users/globalUsers";
 export function Providers({ children }) {
   return (
     <SessionProvider>
-      <CartProvider>
-        <UserGlobal>{children}</UserGlobal>
-      </CartProvider>
+          <CartProvider>
+            <UserGlobal>{children}</UserGlobal>
+          </CartProvider>
     </SessionProvider>
   );
 }

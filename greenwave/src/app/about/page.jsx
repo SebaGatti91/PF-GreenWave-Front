@@ -16,14 +16,7 @@ const About = () => {
         />
       </div>
       <h1 className="text-3xl font-bold mb-6">About team</h1>
-      <div className="responsive">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
-          voluptatem aut facere saepe, aliquam nisi deleniti. Laboriosam
-          asperiores officia accusamus temporibus nam explicabo, iusto deserunt
-          voluptatem cum ipsam reprehenderit voluptatibus.
-        </p>
-      </div>
+    
       <div className="flex flex-wrap justify-center">
         {data.map((member) => (
           <div key={member.id} className="m-4 max-w-xs bg-white p-4 rounded-md">
