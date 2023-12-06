@@ -95,10 +95,10 @@ const Favorites = () => {
                   color: '#8E9681', textShadow: '1px 1px gray'
                 }}>$ {favorite.price}</h3>
                 <p className="py-1 w-full" style={{ height: '80px' }}>{favorite.description}</p>
-                <Link href={`/store/${favorite.id}`} className="flex justify-start w-full">
-                  <button className="rounded-lg bg-button hover:bg-hover-clear" style={{
-                    width: '12%'
-                  }}>More</button>
+                <Link href={`/store/${favorite.id}`} 
+                className="w-full text-center bg-button hover:bg-hover-clear rounded-lg flex justify-center"
+                style={{width: '70px'}}>
+                  <button className="rounded-lg">More</button>
                 </Link>
               </div>
             </div>
