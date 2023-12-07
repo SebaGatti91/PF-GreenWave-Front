@@ -73,7 +73,7 @@ export default function ButtonAuth() {
         <>
           <div className="relative inline-block">
             <img
-              src={session.user.image || "../../../../public/images/user.png"}
+              src={user?.image || session?.user.image}
               alt=""
               className="w-10 h-10 rounded-full cursor-pointer"
               onClick={toggleMenu}
