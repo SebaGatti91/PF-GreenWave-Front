@@ -1,9 +1,9 @@
 import { MdSupervisedUserCircle } from "react-icons/md";
 import styles from "./card.module.css";
 
-const Card = ({ item }) => {
+const Card = ({ item, index }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} key={index}>
       <MdSupervisedUserCircle size={24} />
       <div className={styles.texts}>
         <span className={styles.title}>{item.title}</span>
