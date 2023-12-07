@@ -8,7 +8,6 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   //creamos una localstorage para persistencia de datos
   const [cart, setCart] = useState(() => {
-    
     const localData =
       typeof window !== "undefined" ? localStorage.getItem("cart") : null;
     return localData ? JSON.parse(localData) : [];
@@ -34,12 +33,12 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const countUpCart = (productId) => {
-    console.log(productId);
-
+  const countUpCart = (productId, productStock) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === productId ? { ...item, count: item.count + 1 } : item
+        item.id === productId && item.count < productStock && item.count < 10
+          ? { ...item, count: item.count + 1 }
+          : item
       )
     );
   };
