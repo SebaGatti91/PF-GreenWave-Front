@@ -2,9 +2,8 @@
 import React, { createContext, useContext, useState } from "react";
 export const GlobalUser = createContext();
 export const UserGlobal = ({ children }) => {
-
   const [user, setUser] = useState({});
-console.log(user);
+
   return (
     <GlobalUser.Provider
       value={{
