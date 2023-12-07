@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import styles from "./transactions.module.css";
-import { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
+import { fetchUsers } from "../../../lib/data";
 const Transactions = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const fetchDataUser = async () => {
+    const fetchUsersData = async () => {
       try {
         if (users.length === 0) {
           const fetchedUsers = await fetchUsers(); // Asegúrate de que fetchUsers esté definida
@@ -18,28 +18,28 @@ const Transactions = () => {
       }
     };
 
-    fetchDataUser();
+    fetchUsersData();
   }, [users]); // Este efecto se ejecutará cada vez que cambie 'users', lo cual parece correcto en tu caso
-
+  console.log(users);
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Latest Transactions</h2>
       <table className={styles.table}>
         <thead>
           <tr>
-            <td>Image</td>
-            <td>Username</td>
-            <td>Product</td>
-            <td>Amount</td>
+            <th>Image</th>
+            <th>Username</th>
+            <th>Product</th>
+            <th>Amount</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {users?.map((user) => (
             <tr key={user.id}>
               <td>
                 <div className={styles.product}>
                   <Image
-                    src={user.image || "/images/noaproduct.png"}
+                    src={user.image ? user.image : "/images/noavatar.png"}
                     alt=""
                     width={40}
                     height={40}
@@ -49,7 +49,7 @@ const Transactions = () => {
               </td>
               {/* Mapeo de las compras del usuario */}
               <td>{user.username}</td>
-              {user.purchased.map((purchase) => (
+              {user.purchases?.map((purchase) => (
                 <React.Fragment key={purchase.id}>
                   <td>{purchase.name}</td>
                   <td>${purchase.price}</td>
