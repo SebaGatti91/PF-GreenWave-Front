@@ -1,15 +1,13 @@
 "use client"
 import styles from "../components/dashboard/dashboard.module.css";
 import Card from "../components/dashboard/card/Card";
-import Transactions from "../components/dashboard/transactions/Transactions"
-import { fetchUsers,fetchProducts} from "../lib/data";
+import Transactions from "../components/dashboard/transactions/Transactions";
+import { fetchUsers, fetchProducts } from "../lib/data";
 import { useState, useEffect } from "react";
 
-
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);  
+  const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
-
 
   useEffect(() => {
     const fetchDataUser = async () => {
@@ -26,7 +24,6 @@ const Dashboard = () => {
     fetchDataUser();
   }, [users]);
 
-
   useEffect(() => {
     const fetchDataProd = async () => {
       try {
@@ -42,31 +39,22 @@ const Dashboard = () => {
     fetchDataProd();
   }, [products]);
 
-  const usersCard = {
-    title: "Users",
-    number: users.length,
-    change: 10,
-  };
-  const productsCard = {
-    title: "Products",
-    number: products.length,
-    change: -5,
-  };
-  const reciclyngCard= {
-    title: "Reciclyng Points",
-    number: 100,
-    change: 3,
-  };
+  const cardsData = [
+    { title: "Users", number: users.length, change: 10 },
+    { title: "Products", number: products.length, change: -5 },
+    { title: "Recycling Points", number: 100, change: 3 },
+  ];
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
         <div className={styles.cards}>
-          <Card item={usersCard} />
-          <Card item={productsCard} />
-          <Card item={reciclyngCard} />
+          {cardsData.map((item, index) => (
+            <Card key={index} item={item} />
+          ))}
         </div>
-        <Transactions/>
-        {/* <Chart/> */}
+        <Transactions />
+        {/* <Chart /> */}
       </div>
     </div>
   );
