@@ -2,11 +2,21 @@
 import { GlobalUser } from "../components/users/globalUsers";
 import { useContext, useState, useEffect } from "react";
 import Button from "../components/button/Button";
-
+import FormUser from "../components/formUser/FormUser";
 import Image from "next/image";
 import Link from "next/link";
 
 const Profile = () => {
+  const { user, setUser } = useContext(GlobalUser);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const closeModal = () => {
+    setIsEditing(false);
+  };
   return (
     <div className="flex h-screen">
       <div className="w-1/6 flex-none h-full">
@@ -40,14 +50,30 @@ const Profile = () => {
         </div>
       </div>
       <div className="flex-1">
+        <h1
+          className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
+          style={{ width: "100%", marginInline: "auto" }}
+        >
+          Profile
+        </h1>
         <div className="flex flex-row justify-evenly">
-          {/* <h1>Welcome back {usuario?.name} !!!</h1> */}
-        </div>
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-2xl">Hello {user.username}!</h1>
+            <img className="rounded-full w-60 m-2" src={user.image}></img>
+            <button
+              onClick={handleEdit}
+              className="m-2 border border-gray-400 bg-transparent rounded-md px-4 py-2 cursor-pointer"
+            >
+              Edit my profile
+            </button>
 
-        <div
-          className="flex flex-wrap justify-evenly m-10 p-10"
-          style={{ backgroundColor: "#D1D7BF" }}
-        ></div>
+            {isEditing && (
+              <div className="fixed flex justify-center flex-col items-center top-0 bottom-0">
+                <FormUser closeModal={closeModal} />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

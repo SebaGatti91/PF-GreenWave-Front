@@ -4,16 +4,17 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { GlobalUser } from "../users/globalUsers";
 import { useContext } from "react";
+import { useRouter } from "next/navigation";
 
-export default function FormUser() {
+export default function FormUser({ closeModal }) {
+  const router = useRouter();
   const { user, setUser } = useContext(GlobalUser);
   const [file, setFile] = useState(null);
-  console.log(user)
+  const [loading, setLoading] = useState(false);
+  console.log(user);
 
   return (
     <div>
-      <h1>Hello {user.username}!</h1>
-      <img src={user.image}></img>
       <Formik
         initialValues={{
           username: "",
@@ -22,7 +23,10 @@ export default function FormUser() {
         validate={(values) => {
           let errors = {};
           // Validations for username
-          if (values.username && !/^[a-zA-ZñÑ\sáéíóúÁÉÍÓÚ]{3,12}$/.test(values.username)) {
+          if (
+            values.username &&
+            !/^[a-zA-ZñÑ\sáéíóúÁÉÍÓÚ]{3,12}$/.test(values.username)
+          ) {
             errors.username = "Can only contain from 3 to 12 letters";
           }
 
@@ -37,57 +41,63 @@ export default function FormUser() {
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          try {
-            const formData = new FormData();
-
-            if (values.image) {
-              formData.append("image", file);
-
-              const cloudinaryResponse = await fetch("/api/upload", {
-                method: "POST",
-                body: formData,
-              });
-
-              const cloudinaryData = await cloudinaryResponse.json();
-              values.image = cloudinaryData.url;
-            } else {
-              values.image = "";
-            }
-
-            const response = await axios.put(
-              `http://localhost:3001/users/update/${user.id}`,
-              values
-            );
-
-            resetForm();
-
-            if (response.status === 200) {
-              let userUpdate = [];
-
-              if (values.username) {
-                userUpdate.push(`username`);
-              }
-              
+          if (values.username || values.image){
+            try {
+              setLoading(true);
+              const formData = new FormData();
+  
               if (values.image) {
-                userUpdate.push(`image`);
+                formData.append("image", file);
+  
+                const cloudinaryResponse = await fetch("/api/upload", {
+                  method: "POST",
+                  body: formData,
+                });
+  
+                const cloudinaryData = await cloudinaryResponse.json();
+                values.image = cloudinaryData.url;
+              } else {
+                values.image = "";
               }
-              
-              let message = `Your ${userUpdate.join(', ')} has been updated`;
-              
+  
+              const response = await axios.put(
+                `http://localhost:3001/users/update/${user.id}`,
+                values
+              );
+  
+              resetForm();
+  
+              if (response.status === 200) {
+                setLoading(false);
+                let userUpdate = [];
+  
+                if (values.username) {
+                  userUpdate.push(`username`);
+                }
+  
+                if (values.image) {
+                  userUpdate.push(`image`);
+                }
+  
+                let message = `Your ${userUpdate.join(", ")} has been updated`;
+  
+                Swal.fire({
+                  icon: "success",
+                  title: "User modified!",
+                  text: message,
+                });
+                setTimeout(() => location.reload(), 2000);
+              }
+            } catch (error) {
+              console.error("Error al modificar el usuario:", error.message);
               Swal.fire({
-                icon: "success",
-                title: "User modified!",
-                text: message,
+                icon: "error",
+                title: "Error",
+                text: "There was a problem modifying the user, please try again",
               });
             }
-          } catch (error) {
-            console.error("Error al modificar el usuario:", error.message);
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "There was a problem modifying the user, please try again",
-            });
           }
+          
         }}
       >
         {({
@@ -104,8 +114,18 @@ export default function FormUser() {
             encType="multipart/form-data"
           >
             <div className="mb-4 w-full">
-              <h1 className="font-bold text-center">Edit your profile data</h1>
-              <label htmlFor="username">User name:</label>
+              <div className="flex justify-end items-end">
+                <button
+                  style={{ border: "1px solid gray" }}
+                  className=" bg-transparent hover:bg-red-700 text-black px-2 rounded"
+                  onClick={closeModal}
+                >
+                  X
+                </button>
+              </div>
+              <label htmlFor="username" className="font-semibold mb-2">
+                User name:
+              </label>
               <input
                 type="text"
                 name="username"
@@ -122,7 +142,9 @@ export default function FormUser() {
               )}
             </div>
             <div>
-              <label htmlFor="image">Upload your new image:</label>
+              <label htmlFor="image" className="font-semibold mb-2">
+                Upload your new image:
+              </label>
               <input
                 type="file"
                 id="image"
@@ -140,10 +162,25 @@ export default function FormUser() {
                 </div>
               )}
             </div>
-            <div className="mt-3 flex justify-center items-center w-full p-2 rounded text-white bg-green-700">
-              <button className="w-full" type="submit">
+            <div className="mt-3 flex flex-col justify-center items-center w-full p-2 rounded text-white ">
+              <button
+                disabled={loading}
+                className={`w-full py-2 px-4 rounded hover:bg-green-700 ${
+                  loading 
+                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    : "bg-green-600 text-white"
+                }`}
+                type="submit"
+              >
                 Edit
               </button>
+              {loading && (
+                <div>
+                  <p className="text-lg	italic text-cyan-800 font-medium	">
+                    Loading, do not reload the page...
+                  </p>
+                </div>
+              )}
             </div>
           </form>
         )}
