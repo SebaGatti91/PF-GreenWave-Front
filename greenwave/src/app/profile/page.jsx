@@ -60,6 +60,10 @@ const Profile = () => {
           <div className="flex flex-col justify-center items-center">
             <h1 className="text-2xl">Hello {user.username}!</h1>
             <img className="rounded-full w-60 m-2" src={user.image}></img>
+            <p>Phone number: {user.phone}</p>
+            <p>Postal code: {user.postalcode}</p>
+            <p>Adress: {user.adress}</p>
+            
             <button
               onClick={handleEdit}
               className="m-2 border border-gray-400 bg-transparent rounded-md px-4 py-2 cursor-pointer"

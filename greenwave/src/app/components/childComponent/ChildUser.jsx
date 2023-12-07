@@ -17,7 +17,7 @@ const ChildComponent = ({children}) => {
         const { data } = response;
         setUser(data);
       } catch (error) {
-        throw Error("error fetching user data", error);
+        throw Error("error fetching user data", error.message);
       }
     };
   

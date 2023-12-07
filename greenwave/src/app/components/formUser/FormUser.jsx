@@ -19,6 +19,9 @@ export default function FormUser({ closeModal }) {
         initialValues={{
           username: "",
           image: "",
+          phone: "",
+          adress: "",
+          postalcode: "",
         }}
         validate={(values) => {
           let errors = {};
@@ -38,49 +41,77 @@ export default function FormUser({ closeModal }) {
             }
           }
 
+          // Validation for phone
+          if (values.phone) {
+            if (!/^(\+|\d)[0-9]{7,16}$/.test(values.phone)) {
+              errors.phone = "Invalid phone number format. Please enter a valid phone number.";
+            }
+          }
+
+          // Validation for postalcode
+          if (values.postalcode) {
+            if (!/^\d{1,5}$/.test(values.postalcode)) {
+              errors.postalcode = "Must only contain numbers up to 5 digits";
+            }
+          }
+
+          // Validation for postalcode
+          if (values.adress) {
+            if (!/^[\w\s]+ \d+$/.test(values.adress)){
+              errors.adress = "Invalid address format. Please enter a valid address.";
+            }
+          }
+          
+          
+          
+
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          if (values.username || values.image){
+          if (values.username || values.image || values.phone || values.postalcode || values.adress) {
             try {
               setLoading(true);
               const formData = new FormData();
-  
+
               if (values.image) {
                 formData.append("image", file);
-  
+
                 const cloudinaryResponse = await fetch("/api/upload", {
                   method: "POST",
                   body: formData,
                 });
-  
+
                 const cloudinaryData = await cloudinaryResponse.json();
                 values.image = cloudinaryData.url;
               } else {
                 values.image = "";
               }
-  
+
               const response = await axios.put(
                 `http://localhost:3001/users/update/${user.id}`,
                 values
               );
-  
+
               resetForm();
-  
+
               if (response.status === 200) {
                 setLoading(false);
                 let userUpdate = [];
-  
+
                 if (values.username) {
                   userUpdate.push(`username`);
                 }
-  
+
                 if (values.image) {
                   userUpdate.push(`image`);
                 }
-  
+
+                if (values.phone) {
+                  userUpdate.push(`phone`);
+                }
+
                 let message = `Your ${userUpdate.join(", ")} has been updated`;
-  
+
                 Swal.fire({
                   icon: "success",
                   title: "User modified!",
@@ -97,7 +128,6 @@ export default function FormUser({ closeModal }) {
               });
             }
           }
-          
         }}
       >
         {({
@@ -141,6 +171,65 @@ export default function FormUser({ closeModal }) {
                 </div>
               )}
             </div>
+            <div className="flex gap-3">
+                <div className="mb-4 w-full">
+                  <label htmlFor="phone" className="font-semibold mb-2">
+                    Phone
+                  </label>
+                  <input
+                    type="text"
+                    value={values.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    name="phone"
+                    placeholder="48511008"
+                    className="w-full px-3 py-2 border border-gray-300 rounded"
+                  />
+                  {touched.phone && errors.phone && (
+                    <div className="font-medium text-xs text-orange-700">
+                      {errors.phone}
+                    </div>
+                  )}
+                </div>
+                <div className="mb-4 w-full">
+                  <label htmlFor="postalcode" className="mb-2 font-semibold">
+                    Postal code:
+                  </label>
+                  <input
+                    type="text"
+                    value={values.postalcode}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    name="postalcode"
+                    placeholder="5000"
+                    className="w-full px-3 py-2 border border-gray-300 rounded"
+                  />
+                  {touched.postalcode && errors.postalcode && (
+                    <div className="font-medium text-xs text-orange-700">
+                      {errors.postalcode}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="mb-4 w-full">
+              <label htmlFor="adress" className="font-semibold mb-2">
+                Adress:
+              </label>
+              <input
+                type="text"
+                name="adress"
+                value={values.adress}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Fake street 421"
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              ></input>
+              {touched.adress && errors.adress && (
+                <div className="font-medium text-xs text-orange-700">
+                  {errors.adress}
+                </div>
+              )}
+            </div>
             <div>
               <label htmlFor="image" className="font-semibold mb-2">
                 Upload your new image:
@@ -166,7 +255,7 @@ export default function FormUser({ closeModal }) {
               <button
                 disabled={loading}
                 className={`w-full py-2 px-4 rounded hover:bg-green-700 ${
-                  loading 
+                  loading
                     ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                     : "bg-green-600 text-white"
                 }`}
