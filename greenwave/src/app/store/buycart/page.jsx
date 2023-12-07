@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios"
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
@@ -9,7 +9,6 @@ import Image from "next/image";
 import { GlobalUser } from "../../components/users/globalUsers";
 
 const Cart = () => {
-
   const BackUrl = process.env.BACK;
 
   const { cart, setCart, removeFromCart, countDownCart, countUpCart } =
@@ -18,55 +17,11 @@ const Cart = () => {
   const { user } = useContext(GlobalUser);
   const { data: session } = useSession();
   const userAut = session?.user;
-  const router = useRouter()
+  const router = useRouter();
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId);
     setAddedToCart(false); // Cambia el estado a false al hacer clic en el basurero
-  };
-
-  const renderCartControlButtons = (productId) => {
-    const item = cart.find((item) => item.id === productId);
-
-    return (
-      <div className="flex flex-col justify-center">
-        <p className="text-center py-1"></p>
-        <div className="flex justify-center flex-row items-center py-2 mb-2 mt-24">
-          <button
-            className="bg-red-500 hover:bg-red-700 p-1 rounded-md"
-            onClick={() => handleRemoveFromCart(productId)}
-          >
-            {
-              <img
-                src="/images/rubishBeen.png"
-                alt="rubishBeen"
-                className="w-5 h-5"
-              />
-            }
-          </button>
-          <button
-            className="px-2 ml-2"
-            onClick={() => countDownCart(productId)}
-            style={{
-              display: item && item.count > 0 ? "block" : "none",
-              border: "1px solid gray",
-            }}
-          >
-            -
-          </button>
-          <h3 className="bg-hover hover:bg-boton px-2">
-            {item ? item.count : 0}
-          </h3>
-          <button
-            className="px-2 mr-5"
-            onClick={() => countUpCart(productId)}
-            style={{ border: "1px solid gray" }}
-          >
-            +
-          </button>
-        </div>
-      </div>
-    );
   };
 
   const createPreference = async () => {
@@ -84,14 +39,11 @@ const Cart = () => {
       }
 
       const productsIds = cart.map((prod) => prod.id);
-      const response = await axios.post(
-        `${BackUrl}/mercadoPago`,
-        {
-          userId: user.email,
-          productId: productsIds,
-          item: itemsFromCart,
-        }
-      );
+      const response = await axios.post(`${BackUrl}/mercadoPago`, {
+        userId: user.email,
+        productId: productsIds,
+        item: itemsFromCart,
+      });
 
       setCart([]);
       window.location.href = response.data;
@@ -102,11 +54,11 @@ const Cart = () => {
 
   const handleBuy = async () => {
     if (userAut) {
-    const id = await createPreference();
-    if (id) setPreferenceId(id);
-  } else {
-    router.push("/login");
-  }
+      const id = await createPreference();
+      if (id) setPreferenceId(id);
+    } else {
+      router.push("/login");
+    }
   };
 
   const totalItems = cart.reduce((acc, product) => {
@@ -196,8 +148,42 @@ const Cart = () => {
                       </h3>
                     </div>
                   </div>
+                  <div className="flex justify-center flex-row items-center py-2 mb-2 mt-24">
+                    <button
+                      className="bg-red-500 hover:bg-red-700 p-1 rounded-md"
+                      onClick={() => handleRemoveFromCart(product.id)}
+                    >
+                      {
+                        <img
+                          src="/images/rubishBeen.png"
+                          alt="rubishBeen"
+                          className="w-5 h-5"
+                        />
+                      }
+                    </button>
+                    <button
+                      className="px-2 ml-2"
+                      onClick={() => countDownCart(product.id)}
+                      style={{
+                        display:
+                          product && product.count > 0 ? "block" : "none",
+                        border: "1px solid gray",
+                      }}
+                    >
+                      -
+                    </button>
+                    <h3 className="bg-hover hover:bg-boton px-2">
+                      {product ? product.count : 0}
+                    </h3>
 
-                  <div>{renderCartControlButtons(product.id)}</div>
+                    <button
+                      className="px-2 mr-5"
+                      onClick={() => countUpCart(product.id, product.stock)}
+                      style={{ border: "1px solid gray" }}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

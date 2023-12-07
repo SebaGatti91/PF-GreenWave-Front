@@ -3,12 +3,16 @@ import { useEffect, useContext, useState } from "react";
 import { GlobalUser } from "../components/users/globalUsers";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchRemoveFavorites, fetchAddFavorites, fetchGetFavorites } from "../lib/data";
+import {
+  fetchRemoveFavorites,
+  fetchAddFavorites,
+  fetchGetFavorites,
+} from "../lib/data";
 
 const Favorites = () => {
   const { user } = useContext(GlobalUser);
   const [favorites, setFavorites] = useState([]);
-console.log(user);
+
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -23,12 +27,10 @@ console.log(user);
       fetchFavorites();
     }
   }, [user]);
-  console.log(favorites);
 
   const handleToggleFavorite = async (productId) => {
     try {
       const isFavorite = favorites.some((fav) => fav.id === productId);
-      console.log(isFavorite);
 
       if (isFavorite) {
         await fetchRemoveFavorites(user.email, productId, setFavorites);
@@ -43,13 +45,16 @@ console.log(user);
     }
   };
 
-
-
   return (
-    <div className="w-3/4 flex flex-col justify-center" style={{ marginInline: 'auto' }}>
-      <h1 className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
+    <div
+      className="w-3/4 flex flex-col justify-center"
+      style={{ marginInline: "auto" }}
+    >
+      <h1
+        className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
         style={{ width: "100%", marginInline: "auto" }}
-      >My Favourites
+      >
+        My Favorites
       </h1>
       {favorites && favorites.length === 0 ? (
         <p>No favorites found.</p>
@@ -90,15 +95,36 @@ console.log(user);
                 }}
               />
               <div className="flex flex-col text-start p-4">
-                <h3 className="font-bold py-1 text-left text-lg" style={{ width: '100%', textShadow: '1px 1px gray' }}>{favorite.name}</h3>
-                <h3 className="text-green-600 py-1 text-lg" style={{
-                  color: '#8E9681', textShadow: '1px 1px gray'
-                }}>$ {favorite.price}</h3>
-                <p className="py-1 w-full" style={{ height: '80px' }}>{favorite.description}</p>
-                <Link href={`/store/${favorite.id}`} 
-                className="w-full text-center bg-button hover:bg-hover-clear rounded-lg flex justify-center"
-                style={{width: '70px'}}>
-                  <button className="rounded-lg">More</button>
+                <h3
+                  className="font-bold py-1 text-left text-lg"
+                  style={{ width: "100%", textShadow: "1px 1px gray" }}
+                >
+                  {favorite.name}
+                </h3>
+                <h3
+                  className="text-green-600 py-1 text-lg"
+                  style={{
+                    color: "#8E9681",
+                    textShadow: "1px 1px gray",
+                  }}
+                >
+                  $ {favorite.price}
+                </h3>
+                <p className="py-1 w-full" style={{ height: "80px" }}>
+                  {favorite.description}
+                </p>
+                <Link
+                  href={`/store/${favorite.id}`}
+                  className="flex justify-start w-full"
+                >
+                  <button
+                    className="rounded-lg bg-button hover:bg-hover-clear"
+                    style={{
+                      width: "12%",
+                    }}
+                  >
+                    More
+                  </button>
                 </Link>
               </div>
             </div>
