@@ -2,7 +2,7 @@
 import { MdSearch } from "react-icons/md";
 import React, { useState, useEffect } from "react";
 import styles from "../../components/dashboard/users/users.module.css";
-import { fetchUsers, banUser } from "../../lib/data";
+import { fetchUsers} from "../../lib/data";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -42,18 +42,6 @@ const UsersPage = () => {
       user.email.toLowerCase().includes(normalizedSearchTerm) ||
       user.id.toString().includes(normalizedSearchTerm)
     );
-  };
-
-  const handleDelete = async (userId) => {
-    try {
-      await banUser(userId);
-      const updatedUsers = await fetchUsers();
-      setUsers(updatedUsers);
-
-      console.log(`Usuario con ID ${userId} baneado con éxito.`);
-    } catch (error) {
-      console.error(`Error al borrar/banear usuario con ID ${userId}:`, error);
-    }
   };
 
   const filteredUsers = currentUsers.filter(handleSearch);
@@ -110,22 +98,15 @@ const UsersPage = () => {
                   user.admin ? styles.admin : styles.client
                 }`}
               >
-                {user.admin ? "Admin" : "Client"}
+                {user.admin ? "Admin" : "User"}
               </td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/${user.email}`}>
+                  <Link href={`/dashboard/users/${user.id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>
                   </Link>
-                  <button
-                    className={`${styles.button} ${styles.delete}`}
-                    onClick={() => handleDelete(user.id)}
-                    disabled={user.admin}
-                  >
-                    Ban/Unban
-                  </button>
                 </div>
               </td>
             </tr>

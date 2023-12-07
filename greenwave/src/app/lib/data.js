@@ -164,3 +164,15 @@ export const fetchUserById = async (userId) => {
     throw error;
   }
 };
+
+export const fetchPurchases= async (userId) => {
+  try {
+    const response = await axios.get(`${BackUrl}/purchases/${userId}`);
+    const ProductsData = response.data;
+    return ProductsData;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+
