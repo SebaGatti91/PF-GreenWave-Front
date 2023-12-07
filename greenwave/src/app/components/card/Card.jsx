@@ -13,13 +13,14 @@ const Card = ({
   image,
   price,
   rating,
+  stock,
   cartControlers = false,
   // function
   setFavorites,
 }) => {
-
-  const { user } = useContext(GlobalUser);
-  const { cart, addToCart, removeFromCart, countDownCart, countUpCart } = useCart();
+  const { user, setUser } = useContext(GlobalUser);
+  const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
+    useCart();
 
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -90,8 +91,8 @@ const Card = ({
   };
 
   const handleAddToCart = () => {
-    addToCart({ id, name, image, price, rating });
-    setAddedToCart(true)
+    addToCart({ id, name, image, price, rating, stock });
+    setAddedToCart(true);
   };
 
   const handleRemoveFromCart = () => {
@@ -104,7 +105,7 @@ const Card = ({
       <button
         onClick={handleAddToCart}
         className="p-1 m-2 rounded-lg mr-2 bg-hover hover:bg-boton flex justify-center"
-        style={{ marginInline: 'auto' }}
+        style={{ marginInline: "auto" }}
       >
         <img
           src="/images/shoppingCart.png"
@@ -122,16 +123,9 @@ const Card = ({
       return renderAddToCartButton();
     }
     return (
-      <div
-        key={item.id}
-        className="flex flex-col justify-center"
-      >
-        <p className="text-center py-1">
-          {state.rate}
-        </p>
-        <div
-          className="flex justify-center flex-row items-center py-2 mb-2"
-        >
+      <div key={item.id} className="flex flex-col justify-center">
+        <p className="text-center py-1">{state.rate}</p>
+        <div className="flex justify-center flex-row items-center py-2 mb-2">
           <button
             className="bg-red-500 hover:bg-red-700 p-1 rounded-md"
             onClick={() => handleRemoveFromCart()}
@@ -159,7 +153,7 @@ const Card = ({
           </h3>
           <button
             className="px-3 py-1"
-            onClick={() => countUpCart(id)}
+            onClick={() => countUpCart(id, stock)}
             style={{ border: "1px solid gray" }}
           >
             +
@@ -170,23 +164,26 @@ const Card = ({
   };
 
   const loader = () => {
-
-    return (
-      <SkeletonCard />
-    )
-  }
+    return <SkeletonCard />;
+  };
   if (state.loading) {
-    return (loader())
-  }
-  else {
+    return loader();
+  } else {
     return (
-      <div className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col" style={{ height: "360px" }}>
+      <div
+        className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col"
+        style={{ height: "360px" }}
+      >
         <div className="relative flex-grow">
           <div className="absolute top-0 right-0 m-2">
-            {state.fav ? (
-              <button onClick={handleFavorite}>💚</button>
-            ) : (
-              <button onClick={handleFavorite}>🤍</button>
+            {user && Object.keys(user).length !== 0 && (
+              <>
+                {state.fav ? (
+                  <button onClick={handleFavorite}>💚</button>
+                ) : (
+                  <button onClick={handleFavorite}>🤍</button>
+                )}
+              </>
             )}
           </div>
 
@@ -196,7 +193,7 @@ const Card = ({
               alt={name}
               height={200}
               width={150}
-              style={{ height: "200px", border: '1px solid gray' }}
+              style={{ height: "200px", border: "1px solid gray" }}
               className="w-80 h-60 rounded-md border-sky-950"
             />
           </Link>
@@ -208,14 +205,14 @@ const Card = ({
 
           {cartControlers
             ? cart
-              .filter((item) => item.id === id)
-              .map((item) => renderCartControlButtons())
+                .filter((item) => item.id === id)
+                .map((item) => renderCartControlButtons())
             : addedToCart
-              ? renderCartControlButtons()
-              : renderAddToCartButton()}
+            ? renderCartControlButtons()
+            : renderAddToCartButton()}
         </div>
       </div>
     );
-  };
-}
+  }
+};
 export default Card;
