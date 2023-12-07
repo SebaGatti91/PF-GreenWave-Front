@@ -2,6 +2,7 @@
 import { GlobalUser } from "../components/users/globalUsers";
 import { useContext, useState, useEffect } from "react";
 import Button from "../components/button/Button";
+import FormUser from "../components/formUser/FormUser";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -42,6 +43,7 @@ const Profile = () => {
       <div className="flex-1">
         <div className="flex flex-row justify-evenly">
           {/* <h1>Welcome back {usuario?.name} !!!</h1> */}
+          <FormUser />
         </div>
 
         <div
