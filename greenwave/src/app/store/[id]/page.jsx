@@ -42,8 +42,7 @@ export default function Detail({ params }) {
   
   const item = cart.find((item) => item.id === params.id);
 
-  const foundUserProduct = user.posted.find((product) => product.id === id);
-
+  const foundUserProduct = user.posted?.find((product) => product.id === id);
   const loadProductDetail = async (id) => {
     try {
       const response = await axios.get(`/store/${id}`);
@@ -59,7 +58,7 @@ export default function Detail({ params }) {
       SetLoading(false);
     }, 2000);
   }, []);
-
+console.log(product);
   const createPreference = async () => {
     try {
       const response = await axios.post(`${BackUrl}/mercadoPago`, {
@@ -74,7 +73,6 @@ export default function Detail({ params }) {
           },
         ],
       });
-      console.log(response.data);
       window.location.href = response.data;
     } catch (error) {
       throw new Error(error.message);
@@ -102,7 +100,6 @@ export default function Detail({ params }) {
   const closeModal = () => {
     setIsEditing(false);
   };
-console.log(product);
   const handleAddToCart = () => {
     addToCart({
       id: params.id,
