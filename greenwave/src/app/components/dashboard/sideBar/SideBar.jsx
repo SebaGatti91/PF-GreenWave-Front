@@ -95,7 +95,7 @@ const Sidebar = () => {
         <div className={styles.userDetail}>
           <span className={styles.username}>{user.username}</span>
           <span className={styles.userTitle}>
-            {user.admin ? "Administrator" : user}
+            {user.admin ? "Administrator" : "User"}
           </span>
         </div>
       </div>
