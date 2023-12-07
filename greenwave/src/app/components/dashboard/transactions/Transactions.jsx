@@ -37,22 +37,22 @@ const Transactions = () => {
           {users?.map((user) => (
             <tr key={user.id}>
               <td>
-                <div className={styles.product}>
+                <div className={styles.user}>
                   <Image
                     src={user.image ? user.image : "/images/noavatar.png"}
                     alt=""
                     width={40}
                     height={40}
-                    className={styles.productImage}
+                    className={styles.userImage}
                   />
                 </div>
               </td>
               {/* Mapeo de las compras del usuario */}
               <td>{user.username}</td>
               {user.purchases?.map((purchase) => (
-                <React.Fragment key={purchase.id}>
-                  <td>{purchase.name}</td>
-                  <td>${purchase.price}</td>
+                <React.Fragment key={purchase.Product.id}>
+                  <td>{purchase.Product.name}</td>
+                  <td>${purchase.Product.price}</td>
                 </React.Fragment>
               ))}
             </tr>
