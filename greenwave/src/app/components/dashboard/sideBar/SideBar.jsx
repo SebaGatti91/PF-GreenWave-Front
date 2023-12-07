@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
 import MenuLink from "./menuLink/MenuLink";
 import styles from "./sidebar.module.css";
+import { GlobalUser } from "../../users/globalUsers";
+import Link from "next/link";
+import { useContext } from "react";
 import {
   MdDashboard,
   MdSupervisedUserCircle,
@@ -11,9 +15,7 @@ import {
   MdOutlineSettings,
   MdHelpCenter,
   MdNature,
-  MdLogout,
 } from "react-icons/md";
-
 
 const menuItems = [
   {
@@ -44,7 +46,6 @@ const menuItems = [
         path: "/dashboard/transactions",
         icon: <MdAttachMoney />,
       },
- 
     ],
   },
   {
@@ -79,20 +80,23 @@ const menuItems = [
   },
 ];
 
-const Sidebar = async () => {
+const Sidebar = () => {
+  const { user } = useContext(GlobalUser);
   return (
     <div className={styles.container}>
       <div className={styles.user}>
         <Image
           className={styles.userImage}
-          src="/images/noavatar.png"
+          src={user.image || "/images/noavatar.png"}
           alt=""
           width="50"
           height="50"
         />
         <div className={styles.userDetail}>
-          <span className={styles.username}>Sebastián gatti</span>
-          <span className={styles.userTitle}>Administrator</span>
+          <span className={styles.username}>{user.username}</span>
+          <span className={styles.userTitle}>
+            {user.admin ? "Administrator" : user}
+          </span>
         </div>
       </div>
       <ul className={styles.list}>
@@ -105,6 +109,11 @@ const Sidebar = async () => {
           </li>
         ))}
       </ul>
+      <div className={styles.buttons}>
+        <Link href={`/homepage`}>
+          <button className={`${styles.button}`}>Exit</button>
+        </Link>
+      </div> 
     </div>
   );
 };
