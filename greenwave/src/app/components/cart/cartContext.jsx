@@ -33,12 +33,12 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const countUpCart = (productId) => {
-    console.log(productId);
-
+  const countUpCart = (productId, productStock) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === productId ? { ...item, count: item.count + 1 } : item
+        item.id === productId && item.count < productStock && item.count < 10
+          ? { ...item, count: item.count + 1 }
+          : item
       )
     );
   };

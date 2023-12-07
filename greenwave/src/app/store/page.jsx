@@ -110,17 +110,22 @@ const Store = () => {
   );
 
   return (
-    <div className=" mx-auto flex flex-row ">
-      <aside className="flex flex-col bg-hover shadow-2xl" style={{ borderRight: '1px solid gray', width: '20%' }}>
-
-        <div className="flex flex-row pb-5 pt-6 px-3 bg-hover" style={{ borderBottom: '1px solid gray' }}>
+    <div className=" mx-auto flex flex-row">
+      <aside
+        className="flex flex-col bg-hover shadow-2xl"
+        style={{ borderRight: "1px solid gray", width: "20%" }}
+      >
+        <div
+          className="flex flex-row pb-5 pt-6 px-3 bg-hover"
+          style={{ borderBottom: "1px solid gray" }}
+        >
           <input
             type="text"
             placeholder="Search..."
             style={{
               borderRadius: "1em 0 0 1em",
               width: "200px",
-              border: '1px solid gray'
+              border: "1px solid gray",
             }}
             className="text-black px-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-center"
             value={filterValueName}
@@ -152,15 +157,19 @@ const Store = () => {
           />
         </div>
       </aside>
-      <main className="flex flex-col justify-center container" style={{ marginInline: 'auto' }}>
+      <main
+        className="flex flex-col justify-center container"
+        style={{ marginInline: "auto" }}
+      >
         <div
           className="flex flex-wrap gap-8 justify-center items-center mb-3"
           style={{ marginTop: "30px" }}
         >
           {currentProducts.map((product) => (
-            <div key={product.id}
+            <div
+              key={product.id}
               className="hover:transform hover:scale-105 transition-transform duration-300"
-              style={{ width: '28%', height: '380px' }}
+              style={{ width: "28%" }}
             >
               <Card
                 id={product.id}
@@ -168,10 +177,9 @@ const Store = () => {
                 image={product.image}
                 price={product.price}
                 rating={product.rating}
+                stock={product.stock}
               />
             </div>
-
-
           ))}
         </div>
         {products.length ? (
