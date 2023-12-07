@@ -51,6 +51,9 @@ export default function ButtonAuth() {
       case "profile":
         router.push("/profile");
         break;
+        case "post product":
+        router.push("/post-product");
+        break;
       case "dashboard":
         router.push("/dashboard");
         break;
@@ -70,7 +73,7 @@ export default function ButtonAuth() {
         <>
           <div className="relative inline-block">
             <img
-              src={session.user.image || "../../../../public/images/user.png"}
+              src={user?.image || session?.user.image}
               alt=""
               className="w-10 h-10 rounded-full cursor-pointer"
               onClick={toggleMenu}
@@ -90,6 +93,9 @@ export default function ButtonAuth() {
                   </button>
                   <button className="py-1 hover:bg-hover text-left pl-3" style={{borderBottom: '1px solid gray'}}  onClick={() => handleOptionClick("profile")}>
                     Profile
+                  </button>
+                  <button className="py-1 hover:bg-hover text-left pl-3" style={{borderBottom: '1px solid gray'}}  onClick={() => handleOptionClick("post product")}>
+                    Sell a product
                   </button>
                   {user.admin === true && session?.user && (
                     <button className="py-1 hover:bg-hover text-left ml-3" onClick={() => handleOptionClick("dashboard")}>

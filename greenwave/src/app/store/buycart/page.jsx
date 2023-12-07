@@ -119,6 +119,8 @@ const Cart = () => {
                     border: "1px solid gray",
                   }}
                 >
+                 { console.log(product)}
+                 { console.log(cart)}
                   <div className="flex flex-row">
                     <Link
                       href={`/store/${product.id}`}
