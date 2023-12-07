@@ -42,7 +42,7 @@ export default function Detail({ params }) {
   
   const item = cart.find((item) => item.id === params.id);
 
-  const foundUserProduct = user.posted.find((product) => product.id === id);
+  const foundUserProduct = user?.posted.find((product) => product.id === id);
 
   const loadProductDetail = async (id) => {
     try {
