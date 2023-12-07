@@ -87,18 +87,6 @@ const ProductsPage = () => {
               {/* <td>{product.createdAt?.toString().slice(4, 16)}</td> */}
               <td>{product.stock}</td>
               <td>{product.rating}</td>
-              <td>
-                <div className={styles.buttons}>
-                  <Link href={`/dashboard/products/${product.id}`}>
-                    <button className={`${styles.button} ${styles.view}`}>
-                      View
-                    </button>
-                  </Link>
-                    <button className={`${styles.button} ${styles.delete}`}>
-                      Delete
-                    </button>
-                </div>
-              </td>
             </tr>
           ))}
         </tbody>
