@@ -6,9 +6,7 @@ function ReviewList({ rating, reviewedBy }) {
   if (!rating || !reviewedBy) {
     return <div>Cargando...</div>;
   }
-
   const ratingCounts = [0, 0, 0, 0, 0];
-  console.log(ratingCounts);
   reviewedBy.forEach((review) => {
     ratingCounts[review.rating - 1]++;
   });

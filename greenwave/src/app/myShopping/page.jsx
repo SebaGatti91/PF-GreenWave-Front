@@ -2,11 +2,18 @@
 import { fetchPurchases } from "../lib/data";
 import { useState, useEffect, useContext } from "react";
 import { GlobalUser } from "../components/users/globalUsers";
+import ReviewForm from '../components/postReview/GetReview'
 import Image from "next/image";
 import Link from "next/link";
 const myShopping = () => {
   const [myShopping, setMyShopping] = useState();
+  const [showPostReview, setShowPostReview] = useState()
   const { user } = useContext(GlobalUser);
+
+const handleReview = ()=>{
+  setShowPostReview(!showPostReview)
+}
+
   const fetchData = async () => {
     const data = await fetchPurchases(user.id);
     return setMyShopping(data);
@@ -14,7 +21,7 @@ const myShopping = () => {
   useEffect(() => {
     fetchData();
   }, [user]);
-
+console.log(myShopping);
   return (
     <div
       className="w-3/4 flex flex-col justify-center"
@@ -69,6 +76,7 @@ const myShopping = () => {
               <p className="py-1 w-full" style={{ height: "80px" }}>
                 {purchase.description}
               </p>
+              <button className="elemento" onClick={handleReview}>add your Review</button>
               <Link
                 href={`/store/${purchase.id}`}
                 className="flex justify-start w-full"
@@ -82,6 +90,11 @@ const myShopping = () => {
                   More
                 </button>
               </Link>
+              <div>
+                {showPostReview && (
+                  <postReview rating={purchase.rating} review={purchase.review}/>
+                )}
+              </div>
             </div>
           </div>
         </div>
