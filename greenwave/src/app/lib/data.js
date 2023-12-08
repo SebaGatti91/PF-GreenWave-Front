@@ -174,3 +174,21 @@ export const fetchPurchases = async (userId) => {
     throw error;
   }
 };
+
+export const fetchDonation = async (form, resetForm) => {
+  try {
+    const url = `${BackUrl}/donation`;
+    const response = await axios.post(url, form);
+    resetForm();
+    if (response.status === 200) {
+      return Swal.fire({
+        icon: "success",
+        title: "Product edited Successfully",
+        text: "Your product has been successfully edited.",
+      });
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
