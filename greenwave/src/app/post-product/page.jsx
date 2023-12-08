@@ -44,7 +44,6 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           price: initialValues ? initialValues.price : "",
           stock: initialValues ? initialValues.stock : "",
           materials: initialValues ? initialValues.materials : "",
-          rating: initialValues ? initialValues.rating : "",
           description: initialValues ? initialValues.description : "",
           image: initialValues ? initialValues.image : "",
         }}
@@ -69,13 +68,6 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
             errors.stock = "Please enter the stock of the product";
           } else if (!/^\d{1,5}$/.test(values.stock)) {
             errors.stock = "Must only contain numbers up to 5 digits";
-          }
-
-          //validation temporal for rating
-          if (!values.rating) {
-            errors.rating = "Please enter the product rating";
-          } else if (!/^[1-5]$/.test(values.rating)) {
-            errors.rating = "Must only contain numbers from 1 to 5";
           }
 
           //validations for description
@@ -258,26 +250,6 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                 {touched.materials && errors.materials && (
                   <div className="font-medium text-xs text-orange-700">
                     {errors.materials}
-                  </div>
-                )}
-              </div>
-              <div className="mb-4 w-full">
-                <label htmlFor="name" className="font-semibold mb-2">
-                  Rating
-                </label>
-                <input
-                  type="text"
-                  id="rating"
-                  value={values.rating}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="rating"
-                  placeholder=" 3 "
-                  className="w-full px-3 py-2 border border-gray-300 rounded"
-                />
-                {touched.rating && errors.rating && (
-                  <div className="font-medium text-xs text-orange-700">
-                    {errors.rating}
                   </div>
                 )}
               </div>
