@@ -1,30 +1,33 @@
 .container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  height: 63vh;
+  border-radius: 1rem 1rem;
+  background: linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051);
 }
 
 .title {
+  width: 100%;
   font-size: 24px;
   margin-bottom: 20px;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px black;
 }
 
 .button {
-  display: block;
   width: 100%;
-  padding: 10px;
+  padding: 10px 24px;
   margin-bottom: 10px;
-  background-color: #4caf50;
+  background: linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 .button:hover {
-  background-color: #45a049;
+  background: #28565e;
 }
 
 .alert {
@@ -49,9 +52,13 @@
 }
 
 .orText {
+  width: 100%;
   text-align: center;
-  font-size: 16px;
-  margin: 10px 0;
+  font-size: 20px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  color: white;
+  text-shadow: 2px 1px black;
 }
 
 .providers {
@@ -61,18 +68,21 @@
 
 .providerButton {
   width: 100%;
-  padding: 10px;
+  padding: 10px 24px;
   margin-bottom: 10px;
-  background-color: #4285f4;
+  background: linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .providerButton:hover {
-  background-color: #3c78d8;
+  background: #28565e;
 }
 
 /* Estilo para el mensaje de error */
