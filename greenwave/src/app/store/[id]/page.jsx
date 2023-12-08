@@ -8,7 +8,6 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import "./detail.css";
 import PostProduct from "../../post-product/page";
-import PostReview from "../../components/postReview/PostReview";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 import { GlobalUser } from "../../components/users/globalUsers";
@@ -30,14 +29,11 @@ export default function Detail({ params }) {
   const [isEditing, setIsEditing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);
-  const [postReview, setPostReview] = useState(false);
 
   const [loading, SetLoading] = useState(true);
   const { addToCart, cart, countDownCart, countUpCart, removeFromCart } =
     useCart();
-  const handlepost = () => {
-    setPostReview(!postReview);
-  };
+
 
   const item = cart.find((item) => item.id === params.id);
 
@@ -291,7 +287,7 @@ console.log(product);
           <button onClick={handlepost} className="elemento">
             add a review
           </button>
-          {postReview && <PostReview productId={product.id} />}
+
         </div>
       </div>
     );
