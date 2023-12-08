@@ -8,7 +8,6 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import "./detail.css";
 import PostProduct from "../../post-product/page";
-import PostReview from "../../components/postReview/PostReview";
 import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 import { GlobalUser } from "../../components/users/globalUsers";
@@ -30,19 +29,15 @@ export default function Detail({ params }) {
   const [isEditing, setIsEditing] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [product, setProduct] = useState(null);
-  const [postReview, setPostReview] = useState(false);
 
   const [loading, SetLoading] = useState(true);
   const { addToCart, cart, countDownCart, countUpCart, removeFromCart } =
     useCart();
-  const handlepost = () => {
-    setPostReview(!postReview);
-  };
+
 
   const item = cart.find((item) => item.id === params.id);
 
-  const foundUserProduct = user?.posted.find((product) => product.id === id);
-
+  const foundUserProduct = user.posted?.find((product) => product.id === id);
   const loadProductDetail = async (id) => {
     try {
       const response = await axios.get(`/store/${id}`);
@@ -58,7 +53,7 @@ export default function Detail({ params }) {
       SetLoading(false);
     }, 2000);
   }, []);
-
+console.log(product);
   const createPreference = async () => {
     try {
       const response = await axios.post(`${BackUrl}/mercadoPago`, {
@@ -74,7 +69,6 @@ export default function Detail({ params }) {
           },
         ],
       });
-      console.log(response.data);
       window.location.href = response.data;
     } catch (error) {
       throw new Error(error.message);
@@ -102,7 +96,6 @@ export default function Detail({ params }) {
   const closeModal = () => {
     setIsEditing(false);
   };
-  console.log(product);
   const handleAddToCart = () => {
     addToCart({
       id: params.id,
@@ -294,7 +287,7 @@ export default function Detail({ params }) {
           <button onClick={handlepost} className="elemento">
             add a review
           </button>
-          {postReview && <PostReview productId={product.id} />}
+
         </div>
       </div>
     );

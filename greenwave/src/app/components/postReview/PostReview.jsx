@@ -5,6 +5,7 @@ import StarRatings from 'react-star-ratings';
 import { GlobalUser } from '../users/globalUsers';
 import * as Yup from 'yup';
 import Filter from 'bad-words';
+import Swal from "sweetalert2";
 import '../../../../public/estilos/buycart.css'
 
 function ReviewForm({ productId,  }) {
