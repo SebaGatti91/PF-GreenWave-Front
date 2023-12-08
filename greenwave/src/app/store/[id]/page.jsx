@@ -34,7 +34,6 @@ export default function Detail({ params }) {
   const { addToCart, cart, countDownCart, countUpCart, removeFromCart } =
     useCart();
 
-
   const item = cart.find((item) => item.id === params.id);
 
   const foundUserProduct = user.posted?.find((product) => product.id === id);
@@ -53,7 +52,7 @@ export default function Detail({ params }) {
       SetLoading(false);
     }, 2000);
   }, []);
-console.log(product);
+
   const createPreference = async () => {
     try {
       const response = await axios.post(`${BackUrl}/mercadoPago`, {
@@ -172,6 +171,7 @@ console.log(product);
                 ) : (
                   ""
                 )}
+                <h3> Stock: {product.stock}</h3>
                 <h1
                   className="p-3 title-font font-medium "
                   style={{ fontFamily: "font-serif", fontSize: "2em" }}
@@ -254,7 +254,6 @@ console.log(product);
                         </button>
                       )}
                     </div>
-                    <h3> Stock: {product.stock}</h3>
                   </div>
                 </div>
               </div>
@@ -281,10 +280,9 @@ console.log(product);
         </div>
         <div className="flex">
           <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
-          <button onClick={handlepost} className="elemento">
+          {/* <button onClick={handlepost} className="elemento">
             add a review
-          </button>
-
+          </button> */}
         </div>
       </div>
     );

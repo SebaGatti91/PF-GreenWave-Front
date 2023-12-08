@@ -1,14 +1,12 @@
 "use client";
-import axios from "axios";
-import Swal from "sweetalert2";
+
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { useContext, useState, useEffect } from "react";
-
+import { useContext } from "react";
+import { fetchDonation } from "../lib/data";
 import { GlobalUser } from "../components/users/globalUsers";
-const BackUrl = process.env.BACK;
 
-export default function Donation({ initialValues = {}, isOff = true }) {
+export default function Donation() {
   const router = useRouter();
 
   const { user } = useContext(GlobalUser);
@@ -17,20 +15,22 @@ export default function Donation({ initialValues = {}, isOff = true }) {
     <div>
       <Formik
         initialValues={{
-          name: "",
+          userId: user.id,
+          nameMaterial: "",
           quantity: "",
           description: "",
           email: user?.email || "",
-          adress: user?.adress || "",
-          postCode: user?.postCode || "",
+          address: user?.address || "",
+          postalCode: user?.postalCode || "",
+          phone: user?.phone || "",
         }}
         validate={(values) => {
           let errors = {};
-          //validations for name
-          if (!values.name) {
-            errors.name = "Please enter the name of your product";
-          } else if (!/^[a-zA-ZñÑ\s]{3,30}$/.test(values.name)) {
-            errors.name = "Can only contain from 3 to 30 letters";
+          //validations for nameMaterial
+          if (!values.nameMaterial) {
+            errors.nameMaterial = "Please enter the name of material";
+          } else if (!/^[a-zA-ZñÑ\s]{3,30}$/.test(values.nameMaterial)) {
+            errors.nameMaterial = "Can only contain from 3 to 30 letters";
           }
           //validations for quantity
           if (!values.quantity) {
@@ -56,27 +56,36 @@ export default function Donation({ initialValues = {}, isOff = true }) {
           ) {
             errors.email = "Please enter a valid email address";
           }
-          if (!values.adress) {
-            errors.adress = "Please enter a product description";
-          } else if (!/^[a-zA-ZñÑ\s]{1,300}$/.test(values.adress)) {
-            errors.adress =
+          if (!values.address) {
+            errors.address = "Please enter a product description";
+          } else if (!/^[a-zA-ZñÑ\s]{1,300}$/.test(values.address)) {
+            errors.address =
               "Must contain only letters and up to 300 characters";
           }
-          if (!values.postCode) {
-            errors.postCode = "Por favor, ingresa la cantidad del material";
-          } else if (!/^\d+$/.test(values.postCode)) {
-            errors.postCode = "Debe contener solo números";
-          } else if (values.postCode.length > 3) {
-            errors.postCode = "Supera la cantidad establecida";
+          if (!values.postalCode) {
+            errors.postalCode = "Por favor, ingresa la cantidad del material";
+          } else if (!/^\d+$/.test(values.postalCode)) {
+            errors.postalCode = "Debe contener solo números";
+          } else if (values.postalCode.length > 3) {
+            errors.postalCode = "Supera la cantidad establecida";
+          }
+          if (!values.phone) {
+            errors.phone = "Por favor, ingresa la cantidad del material";
+          } else if (!/^\d+$/.test(values.phone)) {
+            errors.phone = "Debe contener solo números";
+          } else if (values.phone.length > 15) {
+            errors.phone = "Supera la cantidad establecida";
           }
           return errors;
         }}
-        // onSubmit={async () => {
-        // const response = await axios.put(
-        //       http://localhost:3001/users/update/${user.id},
-        //       values
-        //     );
-        // }}
+        onSubmit={async (values, { resetForm }) => {
+          try {
+            await fetchDonation(values, resetForm);
+            router.push(`/profile/`);
+          } catch (error) {
+            throw Error(error);
+          }
+        }}
       >
         {({
           handleChange,
@@ -93,22 +102,22 @@ export default function Donation({ initialValues = {}, isOff = true }) {
               encType="multipart/form-data"
             >
               <div className="mb-4 w-full">
-                <label htmlFor="name" className="font-semibold mb-2">
+                <label htmlFor="nameMaterial" className="font-semibold mb-2">
                   Material name
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  value={values.name}
+                  id="nameMaterial"
+                  value={values.nameMaterial}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  name="name"
+                  name="nameMaterial"
                   placeholder=" Plastic....."
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
-                {touched.name && errors.name && (
+                {touched.nameMaterial && errors.nameMaterial && (
                   <div className="font-medium text-xs text-orange-700">
-                    {errors.name}
+                    {errors.nameMaterial}
                   </div>
                 )}
               </div>
@@ -170,49 +179,63 @@ export default function Donation({ initialValues = {}, isOff = true }) {
                 )}
               </div>
               <div className="mb-4 flex flex-col w-full">
-                <label htmlFor="adress" className="font-semibold mb-2">
-                  Adress
+                <label htmlFor="address" className="font-semibold mb-2">
+                  Address
                 </label>
                 <textarea
-                  name="adress"
-                  value={values.adress}
+                  name="address"
+                  value={values.address}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="Berlin, Germany"
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 ></textarea>
-                {touched.adress && errors.adress && (
+                {touched.address && errors.address && (
                   <div className="font-medium text-xs text-orange-700">
-                    {errors.adress}
+                    {errors.address}
                   </div>
                 )}
               </div>
               <div className="mb-4 flex flex-col w-full">
-                <label htmlFor="postCode" className="font-semibold mb-2">
-                  Post Code
+                <label htmlFor="postalCode" className="font-semibold mb-2">
+                  Postal Code
                 </label>
                 <textarea
-                  name="postCode"
-                  value={values.postCode}
+                  name="postalCode"
+                  value={values.postalCode}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="5501"
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 ></textarea>
-                {touched.postCode && errors.postCode && (
+                {touched.postalCode && errors.postalCode && (
                   <div className="font-medium text-xs text-orange-700">
-                    {errors.postCode}
+                    {errors.postalCode}
+                  </div>
+                )}
+              </div>
+              <div className="mb-4 flex flex-col w-full">
+                <label htmlFor="phone" className="font-semibold mb-2">
+                  Phone number
+                </label>
+                <textarea
+                  name="phone"
+                  value={values.phone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="45831195462"
+                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                ></textarea>
+                {touched.phone && errors.phone && (
+                  <div className="font-medium text-xs text-orange-700">
+                    {errors.phone}
                   </div>
                 )}
               </div>
               <button
                 type="submit"
-                disabled={errors}
-                className={`w-full py-2 px-4 rounded hover:bg-green-700 ${
-                  errors
-                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                    : "bg-green-600 text-white"
-                }`}
+                // disabled={errors}
+                className={`w-full py-2 px-4 rounded hover:bg-green-700 `}
               >
                 Donate
               </button>
