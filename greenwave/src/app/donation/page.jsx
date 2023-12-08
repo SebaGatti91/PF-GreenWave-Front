@@ -234,12 +234,8 @@ export default function Donation() {
               </div>
               <button
                 type="submit"
-                disabled={errors}
-                className={`w-full py-2 px-4 rounded hover:bg-green-700 ${
-                  errors
-                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                    : "bg-green-600 text-white"
-                }`}
+                // disabled={errors}
+                className={`w-full py-2 px-4 rounded hover:bg-green-700 `}
               >
                 Donate
               </button>
