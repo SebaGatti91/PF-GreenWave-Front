@@ -39,7 +39,6 @@ export const banUser = async (userId) => {
   }
 };
 
-
 export const setAdminUser = async (userId) => {
   try {
     const url = `${BackUrl}/users/admin/${userId}`;
@@ -109,7 +108,7 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
     await axios.post(url, data);
     setFavorites((prevFavorites) =>
       prevFavorites.filter((favorite) => favorite.id !== productId)
-      );
+    );
   } catch (error) {
     console.error("Error al postear favoritos", error);
   }
@@ -165,14 +164,31 @@ export const fetchUserById = async (userId) => {
   }
 };
 
-export const fetchPurchases= async (userId) => {
+export const fetchPurchases = async (userId) => {
   try {
     const response = await axios.get(`${BackUrl}/purchases/${userId}`);
-    const ProductsData = response.data;
-    return ProductsData;
+    const { data } = response;
+    return data;
   } catch (error) {
     console.error("Error fetching user data:", error);
     throw error;
   }
 };
 
+export const fetchDonation = async (form, resetForm) => {
+  try {
+    const url = `${BackUrl}/donation`;
+    const response = await axios.post(url, form);
+    resetForm();
+    if (response.status === 200) {
+      return Swal.fire({
+        icon: "success",
+        title: "Product edited Successfully",
+        text: "Your product has been successfully edited.",
+      });
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
