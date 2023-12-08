@@ -283,10 +283,8 @@ console.log(product);
           )}
         </div>
         <div className="flex">
-          <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
-          <button onClick={handlepost} className="elemento">
-            add a review
-          </button>
+          <ReviewList rating={product.rating} reviewedBy={product.Reviews} userName={user.email} userImage={user.image}/>
+         
 
         </div>
       </div>
