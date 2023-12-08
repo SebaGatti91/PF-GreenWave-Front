@@ -20,8 +20,8 @@ export default function FormUser({ closeModal }) {
           username: "",
           image: "",
           phone: "",
-          adress: "",
-          postalcode: "",
+          address: "",
+          postalCode: "",
         }}
         validate={(values) => {
           let errors = {};
@@ -49,16 +49,16 @@ export default function FormUser({ closeModal }) {
           }
 
           // Validation for postalcode
-          if (values.postalcode) {
-            if (!/^\d{1,5}$/.test(values.postalcode)) {
-              errors.postalcode = "Must only contain numbers up to 5 digits";
+          if (values.postalCode) {
+            if (!/^\d{1,5}$/.test(values.postalCode)) {
+              errors.postalCode = "Must only contain numbers up to 5 digits";
             }
           }
 
-          // Validation for postalcode
-          if (values.adress) {
-            if (!/^[\w\s]+ \d+$/.test(values.adress)){
-              errors.adress = "Invalid address format. Please enter a valid address.";
+          // Validation for adress
+          if (values.address) {
+            if (!/^[\w\s]+ \d+$/.test(values.address)){
+              errors.address = "Invalid address format. Please enter a valid address.";
             }
           }
           
@@ -68,7 +68,7 @@ export default function FormUser({ closeModal }) {
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          if (values.username || values.image || values.phone || values.postalcode || values.adress) {
+          if (values.username || values.image || values.phone || values.postalCode || values.address) {
             try {
               setLoading(true);
               const formData = new FormData();
@@ -140,7 +140,7 @@ export default function FormUser({ closeModal }) {
         }) => (
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
+            className="flex flex-col rounded-md justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
             encType="multipart/form-data"
           >
             <div className="mb-4 w-full">
@@ -192,41 +192,41 @@ export default function FormUser({ closeModal }) {
                   )}
                 </div>
                 <div className="mb-4 w-full">
-                  <label htmlFor="postalcode" className="mb-2 font-semibold">
+                  <label htmlFor="postalCode" className="mb-2 font-semibold">
                     Postal code:
                   </label>
                   <input
                     type="text"
-                    value={values.postalcode}
+                    value={values.postalCode}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    name="postalcode"
+                    name="postalCode"
                     placeholder="5000"
                     className="w-full px-3 py-2 border border-gray-300 rounded"
                   />
-                  {touched.postalcode && errors.postalcode && (
+                  {touched.postalCode && errors.postalCode && (
                     <div className="font-medium text-xs text-orange-700">
-                      {errors.postalcode}
+                      {errors.postalCode}
                     </div>
                   )}
                 </div>
               </div>
               <div className="mb-4 w-full">
-              <label htmlFor="adress" className="font-semibold mb-2">
-                Adress:
+              <label htmlFor="address" className="font-semibold mb-2">
+                Address:
               </label>
               <input
                 type="text"
-                name="adress"
-                value={values.adress}
+                name="address"
+                value={values.address}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Fake street 421"
                 className="w-full px-3 py-2 border border-gray-300 rounded"
               ></input>
-              {touched.adress && errors.adress && (
+              {touched.address && errors.address && (
                 <div className="font-medium text-xs text-orange-700">
-                  {errors.adress}
+                  {errors.address}
                 </div>
               )}
             </div>

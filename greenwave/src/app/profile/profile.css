@@ -1,0 +1,58 @@
+.card {
+    font-family: "Candara", sans-serif;
+    width: 340px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cardImage {
+    width: 100%;
+    height: 160px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden; 
+  }
+  
+  .profileImage {
+    width: 100%;
+    text-align: center; 
+    margin-top: -60px;
+  }
+  
+  .profileImage img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; 
+    border: 7px solid #fff;
+    object-fit: cover; 
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    transition-property: transform;
+  }
+
+  .profileImage img:hover{
+    transform: scale(1.1);
+  }
+  
+  .cardContent {
+    padding: 20px; 
+    text-align: center; 
+  }
+  
+  .cardContent h3 {
+    font-size: 25px;
+    margin: 0;
+  }
+  
+  .cardContent p {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px; 
+  }
+  
