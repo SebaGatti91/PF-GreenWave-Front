@@ -27,6 +27,7 @@ const Cart = () => {
   const createPreference = async () => {
     try {
       const itemsFromCart = cart?.map((prod) => ({
+        id: prod.id,
         title: prod.name,
         unit_price: prod.price,
         quantity: prod.count,
@@ -119,8 +120,8 @@ const Cart = () => {
                     border: "1px solid gray",
                   }}
                 >
-                 { console.log(product)}
-                 { console.log(cart)}
+                  {console.log(product)}
+                  {console.log(cart)}
                   <div className="flex flex-row">
                     <Link
                       href={`/store/${product.id}`}
