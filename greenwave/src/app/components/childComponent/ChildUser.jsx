@@ -8,11 +8,13 @@ import { useRouter } from 'next/navigation';
 
 const ChildComponent = ({children}) => {
     const router = useRouter()
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const userData = session?.user;
     const { user, setUser } = useContext(GlobalUser);
     const pathname = usePathname()
     const fetchData = async () => {
+
+      if(status === "authenticated"){
       try {
         const response = await axios.get(`/users/email/${userData?.email}`);
         const { data } = response;
@@ -20,7 +22,10 @@ const ChildComponent = ({children}) => {
       } catch (error) {
         throw Error("error fetching user data", error);
       }
-    };
+    }else{
+      console.log('no hay login creado');
+    }
+  }
   
     useEffect(() => {
       if (user.status === false) {
