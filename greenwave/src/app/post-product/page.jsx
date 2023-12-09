@@ -279,6 +279,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   type="file"
                   id="image"
                   name="image"
+                  multiple
                   onChange={(event) => {
                     handleChange(event);
                     setFile(event.target.files[0]);

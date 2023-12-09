@@ -76,22 +76,22 @@ const myShopping = () => {
               <p className="py-1 w-full" style={{ height: "80px" }}>
                 {purchase.description}
               </p>
-              <button className="elemento" onClick={handleReview}>
-                add your Review
+              <button className="rounded-lg bg-button hover:bg-hover-clear mb-4" style={{width: '150px'}} onClick={handleReview}>
+                Add your Review
               </button>
               <Link
-                href={`/store/${purchase.id}`}
-                className="flex justify-start w-full"
-              >
-                <button
-                  className="rounded-lg bg-button hover:bg-hover-clear"
-                  style={{
-                    width: "12%",
-                  }}
+                  href={`/store/${purchase.id}`}
+                  className="flex justify-start w-full"
                 >
-                  More
-                </button>
-              </Link>
+                  <button
+                    className="rounded-lg bg-button hover:bg-hover-clear"
+                    style={{
+                      width: "150px",
+                    }}
+                  >
+                    See more
+                  </button>
+                </Link>
               <div>
                 {showPostReview && <ReviewForm productId={purchase.id} />}
               </div>
