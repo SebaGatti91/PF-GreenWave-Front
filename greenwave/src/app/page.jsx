@@ -35,8 +35,7 @@ export default function Splash() {
       <div className="box">
         <video
           id="video"
-          // src="https://static.vecteezy.com/system/resources/previews/007/659/424/mp4/light-shining-down-in-nature-video.mp4"
-          src="https://v1.pinimg.com/videos/mc/720p/44/7a/67/447a67e815792ec0dfd5b972a929ba98.mp4"
+          src="https://static.vecteezy.com/system/resources/previews/007/659/424/mp4/light-shining-down-in-nature-video.mp4"
           alt="Una imagen bonita"
           autoPlay="autoplay"
           loop={true}

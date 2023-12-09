@@ -5,7 +5,6 @@ import { GlobalUser } from "../components/users/globalUsers";
 import ReviewForm from "../components/postReview/PostReview";
 import Image from "next/image";
 import Link from "next/link";
-import '../../../public/estilos/buycart.css'
 const myShopping = () => {
   const [myShopping, setMyShopping] = useState([]);
   const [showPostReview, setShowPostReview] = useState(false);

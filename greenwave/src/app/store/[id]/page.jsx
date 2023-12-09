@@ -12,7 +12,6 @@ import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 import { GlobalUser } from "../../components/users/globalUsers";
 import ReviewList from "../../components/postReview/GetReview";
-import { log } from "util";
 export default function Detail({ params }) {
   const BackUrl = process.env.BACK;
 
@@ -47,7 +46,6 @@ export default function Detail({ params }) {
       console.error("Error loading product detail:", error);
     }
   };
-  console.log(product);
 
   useEffect(() => {
     setTimeout(() => {
@@ -281,9 +279,10 @@ export default function Detail({ params }) {
           )}
         </div>
         <div className="flex">
-          <ReviewList rating={parseFloat(product.rating)} reviewedBy={product.Reviews} />
-         
-
+          <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
+          {/* <button onClick={handlepost} className="elemento">
+            add a review
+          </button> */}
         </div>
       </div>
     );
