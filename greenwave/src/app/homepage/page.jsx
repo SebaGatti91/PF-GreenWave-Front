@@ -4,7 +4,6 @@ import Link from "next/link";
 import Button from "../components/button/Button";
 
 export default function Home() {
- 
   return (
     <div>
       <section
@@ -109,7 +108,7 @@ export default function Home() {
       >
         Featured Product
       </h2>
-      <section className="flex justify-center mt-0 pb-10">
+      <section className="flex justify-center mt-0 pb-10 responsive">
         <article
           className=" text-black flex row-auto shadow-2xl mb-10"
           style={{ width: "82%", height: "60vh", borderRadius: "2em 0 0 2em" }}
@@ -151,19 +150,13 @@ export default function Home() {
       >
         Tips for house
       </h2>
-      <section className="flex justify-center mt-0 pb-10">
+      <section className="flex justify-center mt-0 pb-10 responsive">
         <article
           className="text-black flex row-auto shadow-2xl mb-10"
           style={{ width: "82%", height: "60vh", borderRadius: "2em 0 0 2em" }}
         >
-          <img
-            className=" rounded-l-lg hover:transform hover:scale-105 transition-transform duration-300"
-            style={{ width: "60%" }}
-            src="/images/vases.jpg"
-            alt=""
-          />
-          <section
-            className="flex flex-col items-center justify-center rounded-r-lg"
+          <div
+            className="flex flex-col items-center justify-center rounded-l-lg"
             style={{ backgroundColor: "#C0C8A7" }}
           >
             <h1 className="font-bold text-center px-2 text-2xl">
@@ -181,7 +174,14 @@ export default function Home() {
                 See more
               </button>
             </Link>
-          </section>
+          </div>
+
+          <img
+            className="rounded-r-lg hover:transform hover:scale-105 transition-transform duration-300"
+            style={{ width: "60%" }}
+            src="/images/vases.jpg"
+            alt="jam jars"
+          />
         </article>
       </section>
     </div>

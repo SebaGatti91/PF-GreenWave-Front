@@ -8,8 +8,6 @@ const UserProfile = ({ params }) => {
   const [userView, setUserView] = useState([]);
   const userId = params.id;
 
-  console.log(userId);
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {

@@ -238,7 +238,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   onBlur={handleBlur}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 >
-                  <option value={values.materials} disabled>
+                  <option value={values.materials} selected disabled>
                     Select Material
                   </option>
                   {materials.map((material) => (
@@ -279,6 +279,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   type="file"
                   id="image"
                   name="image"
+                  multiple
                   onChange={(event) => {
                     handleChange(event);
                     setFile(event.target.files[0]);

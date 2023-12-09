@@ -17,18 +17,20 @@
 
 .table td {
   padding: 10px;
-  text-align: center; 
+  text-align: center;
 }
 
-.user {
+.product {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
-.userImage {
+.productImage {
   border-radius: 50%;
   object-fit: cover;
+  width: 40px; /* Ancho fijo para las imágenes */
+  height: 40px; /* Altura fija para las imágenes */
 }
 
 .buttons {
@@ -36,7 +38,8 @@
   gap: 10px;
 }
 
-.button {
+.button,
+.buttonBottom {
   padding: 5px 10px;
   border-radius: 5px;
   color: var(--text);
@@ -45,11 +48,7 @@
 }
 
 .buttonBottom {
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--text);
   border: 1px solid white;
-  cursor: pointer;
   margin-right: 10px;
   margin-left: 10px;
   background-color: #011c2e;
@@ -77,16 +76,8 @@
   background-color: teal;
 }
 
-.status.banned {
+.status.paused {
   background-color: crimson;
-}
-
-.rol.admin {
-  background-color: orange;
-}
-
-.rol.client {
-  background-color: blue;
 }
 
 .search {
@@ -106,6 +97,6 @@
 
 .button:disabled,
 .buttonBottom:disabled {
-  opacity: 0.5; /* Reduce la opacidad para indicar que el botón está deshabilitado */
-  cursor: not-allowed; /* Cambia el cursor a 'not-allowed' cuando el botón está deshabilitado */
+  opacity: 0.5;
+  cursor: not-allowed;
 }

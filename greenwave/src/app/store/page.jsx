@@ -101,10 +101,12 @@ const Store = () => {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  const filteredProductsByStockOrPoused = products.filter(
+    (product) => product.stock > 0 && !product.paused
+  );
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
+  const currentProducts = filteredProductsByStockOrPoused.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
