@@ -1,7 +1,7 @@
-import React from 'react';
-import StarRatings from 'react-star-ratings';
-import { ProgressBar } from 'react-bootstrap';
-import './reviews.css'
+import React from "react";
+import StarRatings from "react-star-ratings";
+import { ProgressBar } from "react-bootstrap";
+import "./reviews.css";
 function ReviewList({ rating, reviewedBy }) {
   if (!rating || !reviewedBy) {
     return <div>Cargando...</div>;
@@ -13,15 +13,14 @@ function ReviewList({ rating, reviewedBy }) {
 
   return (
     <div>
-      <div className='flex flex-row  items-center'>
-      <p className='rate'>{rating}</p>
-      <StarRatings
-        rating={rating}
-        starRatedColor="blue"
-        numberOfStars={5}
-        name='averageRating'
-        
-      />
+      <div className="flex flex-row  items-center">
+        <p className="rate">{rating}</p>
+        <StarRatings
+          rating={parseFloat(rating)}
+          starRatedColor="blue"
+          numberOfStars={5}
+          name="averageRating"
+        />
       </div>
       {ratingCounts.map((count, index) => (
         <div key={index}>
@@ -37,7 +36,7 @@ function ReviewList({ rating, reviewedBy }) {
             rating={review.rating}
             starRatedColor="blue"
             numberOfStars={5}
-            name='rating'
+            name="rating"
           />
           <p>{review.comment}</p>
         </div>
