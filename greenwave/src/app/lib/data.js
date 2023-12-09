@@ -39,11 +39,23 @@ export const banUser = async (userId) => {
   }
 };
 
+
+export const pauseProduct = async (productId) => {
+  try {
+    const url = `${BackUrl}/products/pause/${productId}`;
+    const response = await axios.put(url);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error al pausar product", error);
+    throw error;
+  }
+};
+
 export const setAdminUser = async (userId) => {
   try {
     const url = `${BackUrl}/users/admin/${userId}`;
     const response = await axios.put(url);
-
     return response.data;
   } catch (error) {
     console.error("Error al banear usuario", error);
@@ -163,6 +175,18 @@ export const fetchUserById = async (userId) => {
     throw error;
   }
 };
+
+export const fetchProductById = async (productId) => {
+  try {
+    const response = await axios.get(`${BackUrl}/store/${productId}`);
+    const productData = response.data;
+    return productData;
+  } catch (error) {
+    console.error("Error fetching product data:", error);
+    throw error;
+  }
+};
+
 
 export const fetchPurchases = async (userId) => {
   try {
