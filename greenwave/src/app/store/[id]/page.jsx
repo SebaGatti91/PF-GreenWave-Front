@@ -102,6 +102,7 @@ export default function Detail({ params }) {
       image: product.image,
       price: product.price,
       rating: product.rating,
+      stock: product.stock
     });
     setAddedToCart(true);
   };
@@ -115,6 +116,8 @@ export default function Detail({ params }) {
     loadProductDetail(params.id);
   }, [params.id]);
 
+
+  console.log(product);
   if (!product) {
     // Puedes agregar un indicador de carga aquí
     return null;
@@ -125,13 +128,14 @@ export default function Detail({ params }) {
     return (
       <div className="flex flex-col">
         <div className="flex justify-center items-center p-7">
-          <div className="p-5 border">
+          <div className="relative p-5 bordercontainer w-4/5 rounded-lg" 
+          style={{background: 'linear-gradient(to right top, #386b67, #407f77, #4a9486, #55a995, #63bea2)'}}>
             <Link href="/store">
               <button
-                className="bg-transparent text-slate-600 m-2 "
+                className="bg-transparent"
                 style={{ borderRadius: "2em 2em" }}
               >
-                <span className="mr-2 ">&#8592;</span> BACK TO STORE
+                <span className="mr-2 text-white ">&#8592;</span> BACK TO STORE
               </button>
             </Link>
             <div className="flex justify-center containerDetail">
@@ -140,38 +144,47 @@ export default function Detail({ params }) {
                   className="p-1 shadow-2xl rounded-lg bg-hover"
                   src={product.image}
                   alt={product.name}
-                  width={380}
-                  height={300}
-                  style={{ boxShadow: "4px 6px gray" }}
+                  width={200}
+                  height={200}
+                  style={{ boxShadow: "4px 6px gray", width: '250px', height: '200px' }}
                 />
               }
 
               <div className="flex flex-col items-center text-center p-3 ml-3">
                 {user.admin || foundUserProduct ? (
-                  <div className=" space-x-4 ">
+                  <div className="absolute top-0 right-0">
                     <button
                       onClick={handleProd}
-                      className="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
+                      className="bg-hover hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
                       style={{
                         borderRadius: "2em 2em",
+                        background: 'linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)'
                       }}
                     >
-                      Delete
+                      <img
+                        src="/images/borrar.png"
+                        alt="borrado"
+                        style={{ width: "22px", height: "22px", }}
+                      />
                     </button>
                     <button
                       onClick={handleEdit}
-                      className="bg-sky-950 hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
+                      className="bg-hover hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
                       style={{
-                        borderRadius: "2em 2em",
+                        borderRadius: "2em 2em", 
+                        background: 'linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)'
                       }}
                     >
-                      Edit
+                      <img
+                        src="/images/editar.png"
+                        alt="borrado"
+                        style={{ width: "22px", height: "22px", }}
+                      />
                     </button>
                   </div>
                 ) : (
                   ""
                 )}
-                <h3> Stock: {product.stock}</h3>
                 <h1
                   className="p-3 title-font font-medium "
                   style={{ fontFamily: "font-serif", fontSize: "2em" }}
@@ -179,8 +192,17 @@ export default function Detail({ params }) {
                   {product.name}
                 </h1>
                 <div>
+
+                <p
+                  className="font-bold leading-relaxed text-left"
+                  style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
+                  >
+                  $ {product.price}
+                </p>
+                </div>
+                <div>
                   <p
-                    className="p-2 m-2 leading-relaxed"
+                    className="p-2 m-2 leading-relaxed text-left"
                     style={{
                       fontFamily: "Open Sans, sans-serif",
                       fontSize: "1.1em",
@@ -190,20 +212,11 @@ export default function Detail({ params }) {
                   </p>
                 </div>
 
-                <p
-                  className="font-bold text-left"
-                  style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
-                >
-                  $ {product.price}
-                </p>
                 <div>
                   <div className="flex justify-center items-center">
                     <button
                       onClick={handleBuy}
                       className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
-                      style={{
-                        border: "1px solid gray",
-                      }}
                     >
                       Buy now
                     </button>
@@ -239,19 +252,23 @@ export default function Detail({ params }) {
                           </h3>
                           <button
                             className="px-3 py-1"
-                            onClick={() => countUpCart(params.id)}
+                            onClick={() => countUpCart(params.id, product.stock)}
                             style={{ border: "1px solid gray" }}
                           >
                             +
                           </button>
                         </>
                       ) : (
+                        <div className="flex flex-row items-center">
+
                         <button
                           className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500 hover:border-green-900"
                           onClick={handleAddToCart}
                         >
                           🛒 Add to cart
                         </button>
+                        <h3 className=" absolute bottom-0 right-0 m-2 px-2 rounded-lg" style={{border: '1px solid #718096'}}> Stock: {product.stock}</h3>
+                          </div>
                       )}
                     </div>
                   </div>
@@ -260,11 +277,11 @@ export default function Detail({ params }) {
             </div>
           </div>
 
-        {/* Modal de edición */}
-        {isEditing && (
-          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
-            <div className="bg-white p-3 rounded-lg">
-              <PostProduct initialValues={product} isOff={false} />
+          {/* Modal de edición */}
+          {isEditing && (
+            <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+              <div className="bg-white p-3 rounded-lg">
+                <PostProduct initialValues={product} isOff={false} />
 
                 <div className="flex justify-center">
                   <button
