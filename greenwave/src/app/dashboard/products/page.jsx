@@ -62,6 +62,7 @@ const ProductsPage = () => {
         <thead>
           <tr>
             <td>Image</td>
+            <td>Status</td>
             <td>Name</td>
             <td>Price</td>
             <td>Stock</td>
@@ -82,11 +83,26 @@ const ProductsPage = () => {
                   />
                 </div>
               </td>
+              <td
+                className={`${styles.status} ${
+                  product.paused ? styles.paused : styles.active
+                }`}
+              >
+                {product.paused ? "Paused" : "Active"}
+              </td>
               <td>{product.name}</td>
               <td>${product.price}</td>
-              {/* <td>{product.createdAt?.toString().slice(4, 16)}</td> */}
               <td>{product.stock}</td>
-              <td>{product.rating}</td>
+              <td>{product.rating}</td>       
+              <td>
+                <div className={styles.buttons}>
+                  <Link href={`/dashboard/products/${product.id}`}>
+                    <button className={`${styles.button} ${styles.view}`}>
+                      View
+                    </button>
+                  </Link>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
