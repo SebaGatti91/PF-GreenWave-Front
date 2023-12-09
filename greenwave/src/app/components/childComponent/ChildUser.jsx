@@ -20,7 +20,7 @@ const ChildComponent = ({children}) => {
         const { data } = response;
         setUser(data);
       } catch (error) {
-        throw Error("error fetching user data", error);
+        throw Error("error fetching user data", error.message);
       }
     }else{
       console.log('no hay login creado');

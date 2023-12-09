@@ -2,18 +2,18 @@
 import { fetchPurchases } from "../lib/data";
 import { useState, useEffect, useContext } from "react";
 import { GlobalUser } from "../components/users/globalUsers";
-import ReviewForm from '../components/postReview/PostReview'
+import ReviewForm from "../components/postReview/PostReview";
 import Image from "next/image";
 import Link from "next/link";
 import '../../../public/estilos/buycart.css'
 const myShopping = () => {
-  const [myShopping, setMyShopping] = useState();
-  const [showPostReview, setShowPostReview] = useState()
+  const [myShopping, setMyShopping] = useState([]);
+  const [showPostReview, setShowPostReview] = useState(false);
   const { user } = useContext(GlobalUser);
 
-const handleReview = ()=>{
-  setShowPostReview(!showPostReview)
-}
+  const handleReview = () => {
+    setShowPostReview(!showPostReview);
+  };
 
   const fetchData = async () => {
     const data = await fetchPurchases(user.id);
@@ -22,7 +22,7 @@ const handleReview = ()=>{
   useEffect(() => {
     fetchData();
   }, [user]);
-console.log(myShopping);
+
   return (
     <div
       className="w-3/4 flex flex-col justify-center"
@@ -77,6 +77,9 @@ console.log(myShopping);
               <p className="py-1 w-full" style={{ height: "80px" }}>
                 {purchase.description}
               </p>
+              <button className="elemento" onClick={handleReview}>
+                add your Review
+              </button>
               <Link
                 href={`/store/${purchase.id}`}
                 className="flex justify-start w-full"
@@ -91,10 +94,7 @@ console.log(myShopping);
                 </button>
               </Link>
               <div>
-              <button className="elemento" style={{height: "50px", marginTop:"20px"}} onClick={handleReview}>add your Review</button>
-                {showPostReview && (
-                  <ReviewForm product={purchase.id}/>               
-                )}
+                {showPostReview && <ReviewForm productId={purchase.id} />}
               </div>
             </div>
           </div>

@@ -98,7 +98,7 @@ export default function ButtonAuth() {
                     Sell a product
                   </button>
                   {user.admin === true && session?.user && (
-                    <button className="py-1 hover:bg-hover text-left ml-3" onClick={() => handleOptionClick("dashboard")}>
+                    <button className="py-1 hover:bg-hover text-left pl-3" onClick={() => handleOptionClick("dashboard")}>
                       Dashboard
                     </button>
                   )}

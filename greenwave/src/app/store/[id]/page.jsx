@@ -34,7 +34,6 @@ export default function Detail({ params }) {
   const { addToCart, cart, countDownCart, countUpCart, removeFromCart } =
     useCart();
 
-
   const item = cart.find((item) => item.id === params.id);
 
   const foundUserProduct = user.posted?.find((product) => product.id === id);
@@ -53,7 +52,7 @@ export default function Detail({ params }) {
       SetLoading(false);
     }, 2000);
   }, []);
-console.log(product);
+
   const createPreference = async () => {
     try {
       const response = await axios.post(`${BackUrl}/mercadoPago`, {
@@ -172,6 +171,7 @@ console.log(product);
                 ) : (
                   ""
                 )}
+                <h3> Stock: {product.stock}</h3>
                 <h1
                   className="p-3 title-font font-medium "
                   style={{ fontFamily: "font-serif", fontSize: "2em" }}
@@ -254,21 +254,17 @@ console.log(product);
                         </button>
                       )}
                     </div>
-                    <h3> Stock: {product.stock}</h3>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Modal de edición */}
-          {isEditing && (
-            <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
-              <div
-                className="bg-white p-3 rounded-lg h-full"
-                style={{ width: "50%" }}
-              >
-                <PostProduct initialValues={product} isOff={false} />
+        {/* Modal de edición */}
+        {isEditing && (
+          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+            <div className="bg-white p-3 rounded-lg">
+              <PostProduct initialValues={product} isOff={false} />
 
                 <div className="flex justify-center">
                   <button
