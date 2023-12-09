@@ -26,7 +26,7 @@ function ReviewForm({ productId,  }) {
       comment: filter.clean(values.comment),
     };
     try {
-      const response = await axios.post(`${Backurl}/review`, reviewData);
+      const response = await axios.post(`${Backurl}/reviews`, reviewData);
   
       if (response.status === 200) {
         return Swal.fire({
