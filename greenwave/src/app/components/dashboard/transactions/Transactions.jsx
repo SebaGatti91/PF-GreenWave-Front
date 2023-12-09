@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./transactions.module.css";
 import React, { useState, useEffect } from "react";
 import { fetchUsers } from "../../../lib/data";
+
 const Transactions = () => {
   const [users, setUsers] = useState([]);
 
@@ -19,8 +20,10 @@ const Transactions = () => {
     };
 
     fetchUsersData();
-  }, [users]); // Este efecto se ejecutará cada vez que cambie 'users', lo cual parece correcto en tu caso
+  }, [users]);
+
   console.log(users);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Latest Transactions</h2>
@@ -35,27 +38,30 @@ const Transactions = () => {
         </thead>
         <tbody>
           {users?.map((user) => (
-            <tr key={user.id}>
-              <td>
-                <div className={styles.user}>
-                  <Image
-                    src={user.image ? user.image : "/images/noavatar.png"}
-                    alt=""
-                    width={40}
-                    height={40}
-                    className={styles.userImage}
-                  />
-                </div>
-              </td>
-              {/* Mapeo de las compras del usuario */}
-              <td>{user.username}</td>
-              {user.purchases?.map((purchase) => (
-                <React.Fragment key={purchase.Product.id}>
-                  <td>{purchase.Product.name}</td>
-                  <td>${purchase.Product.price}</td>
-                </React.Fragment>
-              ))}
-            </tr>
+            // Verifica si user.purchases está vacío
+            user.purchases && user.purchases.length > 0 ? (
+              <tr key={user.id}>
+                <td>
+                  <div className={styles.user}>
+                    <Image
+                      src={user.image ? user.image : "/images/noavatar.png"}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className={styles.userImage}
+                    />
+                  </div>
+                </td>
+                {/* Mapeo de las compras del usuario */}
+                <td>{user.username}</td>
+                {user.purchases.map((purchase) => (
+                  <React.Fragment key={purchase.Product.id}>
+                    <td>{purchase.Product.name}</td>
+                    <td>${purchase.Product.price}</td>
+                  </React.Fragment>
+                ))}
+              </tr>
+            ) : null
           ))}
         </tbody>
       </table>
