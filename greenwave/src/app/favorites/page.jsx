@@ -120,7 +120,7 @@ const Favorites = () => {
                   <button
                     className="rounded-lg bg-button hover:bg-hover-clear"
                     style={{
-                      width: "12%",
+                      width: "80px",
                     }}
                   >
                     More
