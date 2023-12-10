@@ -150,7 +150,7 @@ export default function Detail({ params }) {
                 />
               }
 
-              <div className="flex flex-col items-center text-center p-3 ml-3">
+              <div className="flex flex-col items-center p-3 ml-3">
                 {user.admin || foundUserProduct ? (
                   <div className="absolute top-0 right-0">
                     <button
@@ -185,8 +185,9 @@ export default function Detail({ params }) {
                 ) : (
                   ""
                 )}
+                <div className="flex flex-col justify-start">
                 <h1
-                  className="p-3 title-font font-medium "
+                  className="p-3 title-font font-medium text-center"
                   style={{ fontFamily: "font-serif", fontSize: "2em" }}
                 >
                   {product.name}
@@ -194,7 +195,7 @@ export default function Detail({ params }) {
                 <div>
 
                 <p
-                  className="font-bold leading-relaxed text-left"
+                  className="font-bold leading-relaxed text-left w-full ml-4"
                   style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
                   >
                   $ {product.price}
@@ -211,6 +212,8 @@ export default function Detail({ params }) {
                     {product.description}
                   </p>
                 </div>
+                </div>
+                
 
                 <div>
                   <div className="flex justify-center items-center">
