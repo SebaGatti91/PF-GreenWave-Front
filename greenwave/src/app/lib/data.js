@@ -39,7 +39,6 @@ export const banUser = async (userId) => {
   }
 };
 
-
 export const pauseProduct = async (productId) => {
   try {
     const url = `${BackUrl}/products/pause/${productId}`;
@@ -108,7 +107,7 @@ export const fetchAddFavorites = async (userId, productId) => {
     console.error("Error al postear favoritos", error);
   }
 };
-export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
+export const fetchRemoveFavorites = async (userId, productId) => {
   try {
     if (!userId || !productId) {
       console.error("Error:  Missing  data");
@@ -118,9 +117,6 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
     const url = `${BackUrl}/removeFavorites`;
 
     await axios.post(url, data);
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((favorite) => favorite.id !== productId)
-    );
   } catch (error) {
     console.error("Error al postear favoritos", error);
   }
@@ -187,7 +183,6 @@ export const fetchProductById = async (productId) => {
   }
 };
 
-
 export const fetchPurchases = async (userId) => {
   try {
     const response = await axios.get(`${BackUrl}/purchases/${userId}`);
@@ -214,5 +209,26 @@ export const fetchDonation = async (form, resetForm) => {
   } catch (error) {
     console.error("Error fetching user data:", error);
     throw error;
+  }
+};
+
+export const updateProduct = async (productId, updatedData) => {
+  try {
+    const response = await fetch(`${BackUrl}/products/${productId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update product');
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw new Error(error.message);
   }
 };

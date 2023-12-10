@@ -1,3 +1,4 @@
+import "../homepage/home.css"
 const Tips = () => {
   return (
     <div className="items-center mx-auto">
@@ -13,7 +14,7 @@ const Tips = () => {
         TIP'S FOR HOME
       </h1>
 
-      <section className="flex justify-center mt-12 pb-10">
+      <section className="flex justify-center mt-12 pb-10 responsive">
         <article
           className="text-black flex shadow-2xl rounded-2xl"
           style={{ width: "82%", height: "60vh", backgroundColor: "#D1D7BF" }}
@@ -42,7 +43,7 @@ const Tips = () => {
         </article>
       </section>
 
-      <section className="flex justify-center mt-12 pb-10">
+      <section className="flex justify-center mt-12 pb-10 responsive">
         <article
           className="text-black  flex shadow-2xl rounded-2xl"
           style={{ width: "82%", height: "60vh", backgroundColor: "#D1D7BF" }}
@@ -73,7 +74,7 @@ const Tips = () => {
         </article>
       </section>
 
-      <section className="flex justify-center mt-12 pb-10">
+      <section className="flex justify-center mt-12 pb-10 responsive">
         <article
           className="text-black flex shadow-2xl rounded-lg"
           style={{ width: "82%", height: "60vh", backgroundColor: "#D1D7BF" }}
@@ -99,7 +100,7 @@ const Tips = () => {
         </article>
       </section>
 
-      <section className="flex justify-center mt-12 pb-10">
+      <section className="flex justify-center mt-12 pb-10 responsive">
         <article
           className="text-black  flex shadow-2xl rounded-2xl mb-10"
           style={{ width: "82%", height: "60vh", backgroundColor: "#D1D7BF" }}
