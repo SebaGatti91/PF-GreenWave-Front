@@ -62,7 +62,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <p className="text-center text-lg mb-3">
+      <p className="text-center text-lg mb-3 ">
         © 2023 Company, Inc. All rights reserved.
       </p>
     </div>
