@@ -39,7 +39,6 @@ export const banUser = async (userId) => {
   }
 };
 
-
 export const pauseProduct = async (productId) => {
   try {
     const url = `${BackUrl}/products/pause/${productId}`;
@@ -108,7 +107,7 @@ export const fetchAddFavorites = async (userId, productId) => {
     console.error("Error al postear favoritos", error);
   }
 };
-export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
+export const fetchRemoveFavorites = async (userId, productId) => {
   try {
     if (!userId || !productId) {
       console.error("Error:  Missing  data");
@@ -118,9 +117,6 @@ export const fetchRemoveFavorites = async (userId, productId, setFavorites) => {
     const url = `${BackUrl}/removeFavorites`;
 
     await axios.post(url, data);
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((favorite) => favorite.id !== productId)
-    );
   } catch (error) {
     console.error("Error al postear favoritos", error);
   }
@@ -186,7 +182,6 @@ export const fetchProductById = async (productId) => {
     throw error;
   }
 };
-
 
 export const fetchPurchases = async (userId) => {
   try {
