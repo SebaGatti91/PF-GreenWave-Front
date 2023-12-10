@@ -102,7 +102,7 @@ export default function Detail({ params }) {
       image: product.image,
       price: product.price,
       rating: product.rating,
-      stock: product.stock
+      stock: product.stock,
     });
     setAddedToCart(true);
   };
@@ -116,8 +116,7 @@ export default function Detail({ params }) {
     loadProductDetail(params.id);
   }, [params.id]);
 
-
-  console.log(product);
+  console.log(user);
   if (!product) {
     // Puedes agregar un indicador de carga aquí
     return null;
@@ -128,8 +127,13 @@ export default function Detail({ params }) {
     return (
       <div className="flex flex-col">
         <div className="flex justify-center items-center p-7">
-          <div className="relative p-5 bordercontainer w-4/5 rounded-lg" 
-          style={{background: 'linear-gradient(to right top, #386b67, #407f77, #4a9486, #55a995, #63bea2)'}}>
+          <div
+            className="relative p-5 bordercontainer w-4/5 rounded-lg"
+            style={{
+              background:
+                "linear-gradient(to right top, #386b67, #407f77, #4a9486, #55a995, #63bea2)",
+            }}
+          >
             <Link href="/store">
               <button
                 className="bg-transparent"
@@ -142,11 +146,15 @@ export default function Detail({ params }) {
               {
                 <Image
                   className="p-1 shadow-2xl rounded-lg bg-hover"
-                  src={product.image}
+                  src={product.image[0]}
                   alt={product.name}
                   width={200}
                   height={200}
-                  style={{ boxShadow: "4px 6px gray", width: '250px', height: '200px' }}
+                  style={{
+                    boxShadow: "4px 6px gray",
+                    width: "250px",
+                    height: "200px",
+                  }}
                 />
               }
 
@@ -158,27 +166,29 @@ export default function Detail({ params }) {
                       className="bg-hover hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
                       style={{
                         borderRadius: "2em 2em",
-                        background: 'linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)'
+                        background:
+                          "linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)",
                       }}
                     >
                       <img
                         src="/images/borrar.png"
                         alt="borrado"
-                        style={{ width: "22px", height: "22px", }}
+                        style={{ width: "22px", height: "22px" }}
                       />
                     </button>
                     <button
                       onClick={handleEdit}
                       className="bg-hover hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
                       style={{
-                        borderRadius: "2em 2em", 
-                        background: 'linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)'
+                        borderRadius: "2em 2em",
+                        background:
+                          "linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)",
                       }}
                     >
                       <img
                         src="/images/editar.png"
                         alt="borrado"
-                        style={{ width: "22px", height: "22px", }}
+                        style={{ width: "22px", height: "22px" }}
                       />
                     </button>
                   </div>
@@ -192,13 +202,12 @@ export default function Detail({ params }) {
                   {product.name}
                 </h1>
                 <div>
-
-                <p
-                  className="font-bold leading-relaxed text-left"
-                  style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
+                  <p
+                    className="font-bold leading-relaxed text-left"
+                    style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
                   >
-                  $ {product.price}
-                </p>
+                    $ {product.price}
+                  </p>
                 </div>
                 <div>
                   <p
@@ -211,68 +220,81 @@ export default function Detail({ params }) {
                     {product.description}
                   </p>
                 </div>
+                {product.stock !== 0 &&
+                product.paused !== true &&
+                !foundUserProduct ? (
+                  <div>
+                    <div className="flex justify-center items-center">
+                      <button
+                        onClick={handleBuy}
+                        className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
+                      >
+                        Buy now
+                      </button>
 
-                <div>
-                  <div className="flex justify-center items-center">
-                    <button
-                      onClick={handleBuy}
-                      className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
-                    >
-                      Buy now
-                    </button>
-
-                    <div className="flex justify-center">
-                      {addedToCart ? (
-                        <>
-                          <button
-                            className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
-                            onClick={() => handleRemoveFromCart()}
-                          >
-                            {
-                              <img
-                                src="/images/rubishBeen.png"
-                                alt="rubishBeen"
-                                className="w-7 h-7"
-                              />
-                            }
-                          </button>
-                          <button
-                            className="px-3 py-1 ml-4"
-                            onClick={() => countDownCart(params.id)}
-                            style={{
-                              display:
-                                item && item.count > 0 ? "block" : "none",
-                              border: "1px solid gray",
-                            }}
-                          >
-                            -
-                          </button>
-                          <h3 className="bg-hover hover:bg-boton px-3 py-1">
-                            {item ? item.count : 0}
-                          </h3>
-                          <button
-                            className="px-3 py-1"
-                            onClick={() => countUpCart(params.id, product.stock)}
-                            style={{ border: "1px solid gray" }}
-                          >
-                            +
-                          </button>
-                        </>
-                      ) : (
-                        <div className="flex flex-row items-center">
-
-                        <button
-                          className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500 hover:border-green-900"
-                          onClick={handleAddToCart}
-                        >
-                          🛒 Add to cart
-                        </button>
-                        <h3 className=" absolute bottom-0 right-0 m-2 px-2 rounded-lg" style={{border: '1px solid #718096'}}> Stock: {product.stock}</h3>
+                      <div className="flex justify-center">
+                        {addedToCart ? (
+                          <>
+                            <button
+                              className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
+                              onClick={() => handleRemoveFromCart()}
+                            >
+                              {
+                                <img
+                                  src="/images/rubishBeen.png"
+                                  alt="rubishBeen"
+                                  className="w-7 h-7"
+                                />
+                              }
+                            </button>
+                            <button
+                              className="px-3 py-1 ml-4"
+                              onClick={() => countDownCart(params.id)}
+                              style={{
+                                display:
+                                  item && item.count > 0 ? "block" : "none",
+                                border: "1px solid gray",
+                              }}
+                            >
+                              -
+                            </button>
+                            <h3 className="bg-hover hover:bg-boton px-3 py-1">
+                              {item ? item.count : 0}
+                            </h3>
+                            <button
+                              className="px-3 py-1"
+                              onClick={() =>
+                                countUpCart(params.id, product.stock)
+                              }
+                              style={{ border: "1px solid gray" }}
+                            >
+                              +
+                            </button>
+                          </>
+                        ) : (
+                          <div className="flex flex-row items-center">
+                            <button
+                              className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500 hover:border-green-900"
+                              onClick={handleAddToCart}
+                            >
+                              🛒 Add to cart
+                            </button>
                           </div>
-                      )}
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  ""
+                )}
+                <h3
+                  className={`absolute bottom-0 right-0 m-2 px-2 rounded-lg ${
+                    product.stock > 0 ? "bg-green-500" : "bg-red-500"
+                  }`}
+                  style={{ border: "1px solid #718096" }}
+                >
+                  Stock: {product.stock}
+                </h3>
               </div>
             </div>
           </div>
