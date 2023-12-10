@@ -135,8 +135,8 @@ export default function Detail({ params }) {
     return <Skeleton />;
   } else {
     return (
-      <div className="flex flex-col justify-between lg:flex-row p-6 gap-16">
-        <div className="flex flex-col gap-6 lg:w-4/12 cursor-pointer">
+      <div className="flex flex-col justify-between lg:flex-row md:justify-center md:items-center p-6 gap-12">
+        <div className="flex flex-col gap-5 lg:w-4/12 md:w-2/4 cursor-pointer">
           <img
             src={activeImg}
             alt=""
@@ -146,25 +146,25 @@ export default function Detail({ params }) {
             <img
               src={product?.image}
               alt=""
-              className="w-28 h-28 rounded-md cursor-pointer"
+              className="w-20 h-24 lg:w-28 lg:h-28 rounded-md cursor-pointer"
               onClick={() => setActiveImg(product?.image)}
             />
             <img
               src={images.img2}
               alt=""
-              className="w-28 h-28 rounded-md cursor-pointer"
+              className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
               onClick={() => setActiveImg(images.img2)}
             />
             <img
               src={images.img3}
               alt=""
-              className="w-28 h-28 rounded-md cursor-pointer"
+              className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
               onClick={() => setActiveImg(images.img3)}
             />
             <img
               src={images.img4}
               alt=""
-              className="w-28 h-28 rounded-md cursor-pointer"
+              className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
               onClick={() => setActiveImg(images.img4)}
             />
           </div>
@@ -221,7 +221,7 @@ export default function Detail({ params }) {
                 <div className="flex justify-center items-center">
                   <button
                     onClick={handleBuy}
-                    className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
+                    className="bg-green-800 text-white font-semibold m-2 p-1 px-16 rounded-md h-full"
                   >
                     Buy now
                   </button>
@@ -230,7 +230,7 @@ export default function Detail({ params }) {
                     {addedToCart ? (
                       <>
                         <button
-                          className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
+                          className="bg-red-500 hover:bg-red-700 p-1 rounded-md"
                           onClick={() => handleRemoveFromCart()}
                         >
                           {
@@ -265,7 +265,7 @@ export default function Detail({ params }) {
                     ) : (
                       <div className="flex flex-row items-center">
                         <button
-                          className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500 hover:border-green-900"
+                          className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded-md border border-solid border-gray-500 hover:border-green-900"
                           onClick={handleAddToCart}
                         >
                           🛒 Add to cart
