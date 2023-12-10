@@ -53,6 +53,16 @@ export default function Detail({ params }) {
     }, 2000);
   }, []);
 
+  const [images, setImages] = useState({
+    img1: product?.image,
+    img2: "https://www.purina.co.uk/sites/default/files/styles/ttt_image_510/public/2020-11/Hero-Small-Mobile-cats.jpg?itok=hEnG1ehe",
+    img3: "https://basepaws.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Feyuked2kaujk%2F2F77xf7hNFh7WmsG0SmvLD%2Fed21267ff7171c4cb5c8378edaf64ba9%2Fbofu-shaw-rC--YcGXrOg-unsplash.jpg&w=3840&q=75",
+    img4: "https://static.independent.co.uk/2023/11/15/10/Screenshot%202023-11-15%20at%2010.16.47.jpg?quality=75&width=640&crop=3%3A2%2Csmart&auto=webp",
+  });
+
+  const [activeImg, setActiveImg] = useState(images.img3);
+  console.log(product?.image);
+
   const createPreference = async () => {
     try {
       const response = await axios.post(`${BackUrl}/mercadoPago`, {
@@ -102,204 +112,188 @@ export default function Detail({ params }) {
       image: product.image,
       price: product.price,
       rating: product.rating,
-      stock: product.stock
+      stock: product.stock,
     });
     setAddedToCart(true);
   };
 
   const handleRemoveFromCart = () => {
     removeFromCart(params.id);
-    setAddedToCart(false); // Cambia el estado a false al hacer clic en el basurero
+    setAddedToCart(false);
   };
 
   useEffect(() => {
     loadProductDetail(params.id);
   }, [params.id]);
 
-
   console.log(product);
   if (!product) {
-    // Puedes agregar un indicador de carga aquí
     return null;
   }
+
   if (loading) {
     return <Skeleton />;
   } else {
     return (
-      <div className="flex flex-col">
-        <div className="flex justify-center items-center p-7">
-          <div className="relative p-5 bordercontainer w-4/5 rounded-lg" 
-          style={{background: 'linear-gradient(to right top, #386b67, #407f77, #4a9486, #55a995, #63bea2)'}}>
-            <Link href="/store">
+      <div className="flex flex-col justify-between lg:flex-row p-6 gap-16">
+        <div className="flex flex-col gap-6 lg:w-4/12 cursor-pointer">
+          <img
+            src={activeImg}
+            alt=""
+            className="w-full h-full aspect-square object-cover rounded-xl"
+          />
+          <div className="flex flex-row justify-between h-24">
+            <img
+              src={product?.image}
+              alt=""
+              className="w-28 h-28 rounded-md cursor-pointer"
+              onClick={() => setActiveImg(product?.image)}
+            />
+            <img
+              src={images.img2}
+              alt=""
+              className="w-28 h-28 rounded-md cursor-pointer"
+              onClick={() => setActiveImg(images.img2)}
+            />
+            <img
+              src={images.img3}
+              alt=""
+              className="w-28 h-28 rounded-md cursor-pointer"
+              onClick={() => setActiveImg(images.img3)}
+            />
+            <img
+              src={images.img4}
+              alt=""
+              className="w-28 h-28 rounded-md cursor-pointer"
+              onClick={() => setActiveImg(images.img4)}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          {user.admin || foundUserProduct ? (
+            <div className="flex justify-end">
               <button
-                className="bg-transparent"
-                style={{ borderRadius: "2em 2em" }}
+                onClick={handleProd}
+                className="bg-hover hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
+                style={{
+                  borderRadius: "2em 2em",
+                  background:
+                    "red",
+                }}
               >
-                <span className="mr-2 text-white ">&#8592;</span> BACK TO STORE
-              </button>
-            </Link>
-            <div className="flex justify-center containerDetail">
-              {
-                <Image
-                  className="p-1 shadow-2xl rounded-lg bg-hover"
-                  src={product.image}
-                  alt={product.name}
-                  width={200}
-                  height={200}
-                  style={{ boxShadow: "4px 6px gray", width: '250px', height: '200px' }}
+                <img
+                  src="/images/borrar.png"
+                  alt="borrado"
+                  style={{ width: "22px", height: "22px" }}
                 />
-              }
-
-              <div className="flex flex-col items-center text-center p-3 ml-3">
-                {user.admin || foundUserProduct ? (
-                  <div className="absolute top-0 right-0">
-                    <button
-                      onClick={handleProd}
-                      className="bg-hover hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
-                      style={{
-                        borderRadius: "2em 2em",
-                        background: 'linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)'
-                      }}
-                    >
-                      <img
-                        src="/images/borrar.png"
-                        alt="borrado"
-                        style={{ width: "22px", height: "22px", }}
-                      />
-                    </button>
-                    <button
-                      onClick={handleEdit}
-                      className="bg-hover hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
-                      style={{
-                        borderRadius: "2em 2em", 
-                        background: 'linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)'
-                      }}
-                    >
-                      <img
-                        src="/images/editar.png"
-                        alt="borrado"
-                        style={{ width: "22px", height: "22px", }}
-                      />
-                    </button>
-                  </div>
-                ) : (
-                  ""
-                )}
-                <h1
-                  className="p-3 title-font font-medium "
-                  style={{ fontFamily: "font-serif", fontSize: "2em" }}
-                >
-                  {product.name}
-                </h1>
-                <div>
-
-                <p
-                  className="font-bold leading-relaxed text-left"
-                  style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
+              </button>
+              <button
+                onClick={handleEdit}
+                className="bg-hover hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
+                style={{
+                  borderRadius: "2em 2em",
+                  background:
+                    "linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)",
+                }}
+              >
+                <img
+                  src="/images/editar.png"
+                  alt="borrado"
+                  style={{ width: "22px", height: "22px" }}
+                />
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+          <div>
+            <span className="text-green-700 font-semibold">
+              {product.materials}
+            </span>
+            <h1 className="text-3xl font-bold">{product.name}</h1>
+          </div>
+          <p className="text-gray-600">{product.description}</p>
+          <h4 className="text-lg font-semibold">${product.price}</h4>
+          <p>Stock: {product.stock}</p>
+          <div>
+            <div className="flex flex-col items-center text-center p-3 ml-3">
+              <div>
+                <div className="flex justify-center items-center">
+                  <button
+                    onClick={handleBuy}
+                    className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
                   >
-                  $ {product.price}
-                </p>
-                </div>
-                <div>
-                  <p
-                    className="p-2 m-2 leading-relaxed text-left"
-                    style={{
-                      fontFamily: "Open Sans, sans-serif",
-                      fontSize: "1.1em",
-                    }}
-                  >
-                    {product.description}
-                  </p>
-                </div>
+                    Buy now
+                  </button>
 
-                <div>
-                  <div className="flex justify-center items-center">
-                    <button
-                      onClick={handleBuy}
-                      className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
-                    >
-                      Buy now
-                    </button>
-
-                    <div className="flex justify-center">
-                      {addedToCart ? (
-                        <>
-                          <button
-                            className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
-                            onClick={() => handleRemoveFromCart()}
-                          >
-                            {
-                              <img
-                                src="/images/rubishBeen.png"
-                                alt="rubishBeen"
-                                className="w-7 h-7"
-                              />
-                            }
-                          </button>
-                          <button
-                            className="px-3 py-1 ml-4"
-                            onClick={() => countDownCart(params.id)}
-                            style={{
-                              display:
-                                item && item.count > 0 ? "block" : "none",
-                              border: "1px solid gray",
-                            }}
-                          >
-                            -
-                          </button>
-                          <h3 className="bg-hover hover:bg-boton px-3 py-1">
-                            {item ? item.count : 0}
-                          </h3>
-                          <button
-                            className="px-3 py-1"
-                            onClick={() => countUpCart(params.id, product.stock)}
-                            style={{ border: "1px solid gray" }}
-                          >
-                            +
-                          </button>
-                        </>
-                      ) : (
-                        <div className="flex flex-row items-center">
-
+                  <div className="flex justify-start items-start">
+                    {addedToCart ? (
+                      <>
+                        <button
+                          className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
+                          onClick={() => handleRemoveFromCart()}
+                        >
+                          {
+                            <img
+                              src="/images/rubishBeen.png"
+                              alt="rubishBeen"
+                              className="w-7 h-7"
+                            />
+                          }
+                        </button>
+                        <button
+                          className="px-3 py-1 ml-4"
+                          onClick={() => countDownCart(params.id)}
+                          style={{
+                            display: item && item.count > 0 ? "block" : "none",
+                            border: "1px solid gray",
+                          }}
+                        >
+                          -
+                        </button>
+                        <h3 className="bg-hover hover:bg-boton px-3 py-1">
+                          {item ? item.count : 0}
+                        </h3>
+                        <button
+                          className="px-3 py-1"
+                          onClick={() => countUpCart(params.id, product.stock)}
+                          style={{ border: "1px solid gray" }}
+                        >
+                          +
+                        </button>
+                      </>
+                    ) : (
+                      <div className="flex flex-row items-center">
                         <button
                           className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500 hover:border-green-900"
                           onClick={handleAddToCart}
                         >
                           🛒 Add to cart
                         </button>
-                        <h3 className=" absolute bottom-0 right-0 m-2 px-2 rounded-lg" style={{border: '1px solid #718096'}}> Stock: {product.stock}</h3>
-                          </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
+              {/* Modal de edición */}
+              {isEditing && (
+                <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+                  <div className="bg-white p-3 rounded-lg">
+                    <PostProduct initialValues={product} isOff={false} />
+
+                    <div className="flex justify-center">
+                      <button
+                        className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
+                        onClick={closeModal}
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-
-          {/* Modal de edición */}
-          {isEditing && (
-            <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
-              <div className="bg-white p-3 rounded-lg">
-                <PostProduct initialValues={product} isOff={false} />
-
-                <div className="flex justify-center">
-                  <button
-                    className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
-                    onClick={closeModal}
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="flex">
-          <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
-          {/* <button onClick={handlepost} className="elemento">
-            add a review
-          </button> */}
         </div>
       </div>
     );
