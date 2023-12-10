@@ -158,7 +158,7 @@ export default function Detail({ params }) {
                 />
               }
 
-              <div className="flex flex-col items-center text-center p-3 ml-3">
+              <div className="flex flex-col items-center p-3 ml-3">
                 {user.admin || foundUserProduct ? (
                   <div className="absolute top-0 right-0">
                     <button
@@ -195,135 +195,137 @@ export default function Detail({ params }) {
                 ) : (
                   ""
                 )}
-                <h1
-                  className="p-3 title-font font-medium "
-                  style={{ fontFamily: "font-serif", fontSize: "2em" }}
-                >
-                  {product.name}
-                </h1>
-                <div>
-                  <p
-                    className="font-bold leading-relaxed text-left"
-                    style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
+                <div className="flex flex-col justify-start">
+                  <h1
+                    className="p-3 title-font font-medium text-center"
+                    style={{ fontFamily: "font-serif", fontSize: "2em" }}
                   >
-                    $ {product.price}
-                  </p>
-                </div>
-                <div>
-                  <p
-                    className="p-2 m-2 leading-relaxed text-left"
-                    style={{
-                      fontFamily: "Open Sans, sans-serif",
-                      fontSize: "1.1em",
-                    }}
-                  >
-                    {product.description}
-                  </p>
-                </div>
-                {product.stock !== 0 &&
-                product.paused !== true &&
-                !foundUserProduct ? (
+                    {product.name}
+                  </h1>
                   <div>
-                    <div className="flex justify-center items-center">
-                      <button
-                        onClick={handleBuy}
-                        className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
-                      >
-                        Buy now
-                      </button>
 
-                      <div className="flex justify-center">
-                        {addedToCart ? (
-                          <>
-                            <button
-                              className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
-                              onClick={() => handleRemoveFromCart()}
-                            >
-                              {
-                                <img
-                                  src="/images/rubishBeen.png"
-                                  alt="rubishBeen"
-                                  className="w-7 h-7"
-                                />
-                              }
-                            </button>
-                            <button
-                              className="px-3 py-1 ml-4"
-                              onClick={() => countDownCart(params.id)}
-                              style={{
-                                display:
-                                  item && item.count > 0 ? "block" : "none",
-                                border: "1px solid gray",
-                              }}
-                            >
-                              -
-                            </button>
-                            <h3 className="bg-hover hover:bg-boton px-3 py-1">
-                              {item ? item.count : 0}
-                            </h3>
-                            <button
-                              className="px-3 py-1"
-                              onClick={() =>
-                                countUpCart(params.id, product.stock)
-                              }
-                              style={{ border: "1px solid gray" }}
-                            >
-                              +
-                            </button>
-                          </>
-                        ) : (
-                          <div className="flex flex-row items-center">
-                            <button
-                              className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500 hover:border-green-900"
-                              onClick={handleAddToCart}
-                            >
-                              🛒 Add to cart
-                            </button>
-                          </div>
-                        )}
+                    <p
+                      className="font-bold leading-relaxed text-left w-full ml-4"
+                      style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
+                    >
+                      $ {product.price}
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      className="p-2 m-2 leading-relaxed text-left"
+                      style={{
+                        fontFamily: "Open Sans, sans-serif",
+                        fontSize: "1.1em",
+                      }}
+                    >
+                      {product.description}
+                    </p>
+                  </div>
+                  {product.stock !== 0 &&
+                    product.paused !== true &&
+                    !foundUserProduct ? (
+                    <div>
+                      <div className="flex justify-center items-center">
+                        <button
+                          onClick={handleBuy}
+                          className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
+                        >
+                          Buy now
+                        </button>
+
+                        <div className="flex justify-center">
+                          {addedToCart ? (
+                            <>
+                              <button
+                                className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
+                                onClick={() => handleRemoveFromCart()}
+                              >
+                                {
+                                  <img
+                                    src="/images/rubishBeen.png"
+                                    alt="rubishBeen"
+                                    className="w-7 h-7"
+                                  />
+                                }
+                              </button>
+                              <button
+                                className="px-3 py-1 ml-4"
+                                onClick={() => countDownCart(params.id)}
+                                style={{
+                                  display:
+                                    item && item.count > 0 ? "block" : "none",
+                                  border: "1px solid gray",
+                                }}
+                              >
+                                -
+                              </button>
+                              <h3 className="bg-hover hover:bg-boton px-3 py-1">
+                                {item ? item.count : 0}
+                              </h3>
+                              <button
+                                className="px-3 py-1"
+                                onClick={() =>
+                                  countUpCart(params.id, product.stock)
+                                }
+                                style={{ border: "1px solid gray" }}
+                              >
+                                +
+                              </button>
+                            </>
+                          ) : (
+                            <div className="flex flex-row items-center">
+                              <button
+                                className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500 hover:border-green-900"
+                                onClick={handleAddToCart}
+                              >
+                                🛒 Add to cart
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  ""
-                )}
-                <h3
-                  className={`absolute bottom-0 right-0 m-2 px-2 rounded-lg ${
-                    product.stock > 0 ? "bg-green-500" : "bg-red-500"
-                  }`}
-                  style={{ border: "1px solid #718096" }}
-                >
-                  Stock: {product.stock}
-                </h3>
-              </div>
-            </div>
-          </div>
-
-          {/* Modal de edición */}
-          {isEditing && (
-            <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
-              <div className="bg-white p-3 rounded-lg">
-                <PostProduct initialValues={product} isOff={false} />
-
-                <div className="flex justify-center">
-                  <button
-                    className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
-                    onClick={closeModal}
+                  ) : (
+                    ""
+                  )}
+                  <h3
+                    className={`absolute bottom-0 right-0 m-2 px-2 rounded-lg ${product.stock > 0 ? "bg-green-500" : "bg-red-500"
+                      }`}
+                    style={{ border: "1px solid #718096" }}
                   >
-                    Close
-                  </button>
+                    Stock: {product.stock}
+                  </h3>
                 </div>
               </div>
             </div>
-          )}
-        </div>
-        <div className="flex">
-          <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
-          {/* <button onClick={handlepost} className="elemento">
+
+            {/* Modal de edición */}
+            {isEditing && (
+              <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+                <div className="bg-white p-3 rounded-lg">
+                  <PostProduct initialValues={product} isOff={false} />
+
+                  <div className="flex justify-center">
+                    <button
+                      className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
+                      onClick={closeModal}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="flex">
+            <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
+            {/* <button onClick={handlepost} className="elemento">
             add a review
           </button> */}
+          </div>
         </div>
       </div>
-    );
+    )
   }
 }
