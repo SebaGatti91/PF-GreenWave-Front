@@ -135,8 +135,17 @@ export default function Detail({ params }) {
     return <Skeleton />;
   } else {
     return (
-      <div className="flex flex-col justify-between lg:flex-row md:justify-center md:items-center p-6 gap-12">
+      <div>
+        <div className="flex flex-col justify-between lg:flex-row md:justify-center md:items-center p-6 gap-12">
         <div className="flex flex-col gap-5 lg:w-4/12 md:w-2/4 cursor-pointer">
+        <Link href="/store">
+              <button
+                className="bg-transparent text-gray-600"
+                style={{ borderRadius: "2em 2em" }}
+              >
+                <span className="mr-2 text-gray-600 ">&#8592;</span> BACK TO STORE
+              </button>
+            </Link>
           <img
             src={activeImg}
             alt=""
@@ -174,11 +183,10 @@ export default function Detail({ params }) {
             <div className="flex justify-end">
               <button
                 onClick={handleProd}
-                className="bg-hover hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
+                className="bg-orange-900 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
                 style={{
                   borderRadius: "2em 2em",
-                  background:
-                    "red",
+                 
                 }}
               >
                 <img
@@ -230,7 +238,7 @@ export default function Detail({ params }) {
                     {addedToCart ? (
                       <>
                         <button
-                          className="bg-red-500 hover:bg-red-700 p-1 rounded-md"
+                          className="bg-orange-900 hover:bg-red-700 p-1 rounded-md"
                           onClick={() => handleRemoveFromCart()}
                         >
                           {
@@ -295,6 +303,15 @@ export default function Detail({ params }) {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+      <div className="flex">
+          <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
+          {/* <button onClick={handlepost} className="elemento">
+            add a review
+          </button> */}
+        </div>
+      </div>
       </div>
     );
   }
