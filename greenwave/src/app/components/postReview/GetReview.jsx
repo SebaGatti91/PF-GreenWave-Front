@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import StarRatings from 'react-star-ratings';
-import {Col, ProgressBar } from 'react-bootstrap';
 import users from './users.json'
 import './reviews.css'
 
@@ -29,13 +28,13 @@ function ReviewList({   rating, reviewedBy}) {
   });
 
   return (
-    <div className='flex flex-col ml-20 rounded-lg border-cyan-200 border-4 w-full mr-20 bg-slate-300'>
+    <div className='flex flex-col ml-20 rounded-lg w-full '>
       <div className='flex flex-box items-center  w-full'>
-      <div className='flex flex-col  items-center w-1/2'>
+      <div className='flex flex-col justify-center items-center w-1/3'>
       <p className='rate'>{rating}</p>
       <StarRatings
-        rating={rating}
-        starRatedColor="blue"
+        rating={parseFloat(rating)}
+        starRatedColor="green"
         numberOfStars={5}
         name='averageRating'
         starEmptyColor='white'
@@ -47,11 +46,11 @@ function ReviewList({   rating, reviewedBy}) {
       {ratingCounts.map((count, index) =>{
         return(
         <div key={index}>
+          <p>{1 + index}⭐</p>
           <div className="progress-bar">
             <div className="filler" style={{width: (count / reviewedBy.length) * 100 + '%'}}></div>
           </div>
 
-          <p>{1 + index}⭐</p>
         </div>
       )})}
       </div>
