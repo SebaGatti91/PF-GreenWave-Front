@@ -5,7 +5,11 @@ import { useEffect, useState, useContext } from "react";
 import React from "react";
 import SkeletonCard from "./SkeletonCard";
 import { GlobalUser } from "../users/globalUsers";
-import { fetchAddFavorites, fetchRemoveFavorites } from "../../lib/data";
+import {
+  fetchAddFavorites,
+  fetchGetFavorites,
+  fetchRemoveFavorites,
+} from "../../lib/data";
 
 const Card = ({
   id,
@@ -15,8 +19,6 @@ const Card = ({
   rating,
   stock,
   cartControlers = false,
-  // function
-  setFavorites,
 }) => {
   const { user, setUser } = useContext(GlobalUser);
   const { cart, addToCart, removeFromCart, countDownCart, countUpCart } =
@@ -25,11 +27,12 @@ const Card = ({
   const [addedToCart, setAddedToCart] = useState(false);
 
   const [state, setState] = useState({
-    fav: false,
     rate: [],
     loading: true,
   });
 
+  const [isFav, setIsFav] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   useEffect(() => {
     setTimeout(() => {
       setState((prevState) => ({
@@ -38,6 +41,29 @@ const Card = ({
       }));
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userFavorites = await fetchGetFavorites(user?.id);
+
+      // Verificar si userFavorites es diferente al estado actual de favorites
+      if (!isEqual(userFavorites, favorites)) {
+        setFavorites(userFavorites);
+      }
+    };
+    fetchData();
+
+    favorites?.forEach((fav) => {
+      if (fav.id === id) {
+        setIsFav(true);
+      }
+    });
+  }, [user, favorites, id]);
+
+  // Función para comparar arrays de manera profunda
+  const isEqual = (array1, array2) => {
+    return JSON.stringify(array1) === JSON.stringify(array2);
+  };
 
   useEffect(() => {
     let stars = [];
@@ -54,39 +80,14 @@ const Card = ({
     setState((prevState) => ({ ...prevState, rate: stars }));
   }, [rating]);
 
-  useEffect(() => {
-    // Recuperar la información de favoritos desde localStorage al cargar el componente
-    const favoritesFromStorage =
-      JSON.parse(localStorage.getItem("favorites")) || [];
-    const isFavorite = favoritesFromStorage.includes(id);
-    setState((prevState) => ({ ...prevState, fav: isFavorite }));
-  }, [id]);
-
   const handleFavorite = () => {
     const productId = id;
-
-    setState((prevState) => ({
-      ...prevState,
-      fav: !prevState.fav,
-    }));
-
-    const favoritesFromStorage =
-      JSON.parse(localStorage.getItem("favorites")) || [];
-
-    if (state.fav) {
-      // Remover el producto de favoritos y actualizar localStorage
-      const updatedFavorites = favoritesFromStorage.filter(
-        (favId) => favId !== productId
-      );
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-
-      fetchRemoveFavorites(user.email, productId, setFavorites);
-    } else {
-      // Agregar el producto a favoritos y actualizar localStorage
-      const updatedFavorites = [...favoritesFromStorage, productId];
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-
+    if (isFav === false) {
+      setIsFav(true);
       fetchAddFavorites(user.email, productId);
+    } else {
+      setIsFav(false);
+      fetchRemoveFavorites(user.email, productId);
     }
   };
 
@@ -178,10 +179,10 @@ const Card = ({
           <div className="absolute top-0 right-0 m-2">
             {user && Object.keys(user).length !== 0 && (
               <>
-                {state.fav ? (
-                  <button onClick={handleFavorite}>💚</button>
-                ) : (
+                {!isFav ? (
                   <button onClick={handleFavorite}>🤍</button>
+                ) : (
+                  <button onClick={handleFavorite}>💚</button>
                 )}
               </>
             )}
@@ -189,7 +190,7 @@ const Card = ({
 
           <Link href={`/store/${id}`} className="flex w-full">
             <Image
-              src={image}
+              src={image[0]}
               alt={name}
               height={200}
               width={150}
