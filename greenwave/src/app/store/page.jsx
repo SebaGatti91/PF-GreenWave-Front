@@ -112,14 +112,13 @@ const Store = () => {
   );
 
   return (
-    <div className="mx-auto flex flex-col sm:flex-row"> 
+    <div className="mx-auto flex flex-col sm:flex-row "> 
       <aside
-        className="flex flex-col bg-hover shadow-2xl"
+         className="flex flex-col bg-hover shadow-2xl"
         style={{ borderRight: "1px solid gray" }} 
       >
         <div
-          className="flex flex-row pb-5 pt-6 px-3 bg-hover"
-          style={{ borderBottom: "1px solid gray" }}
+          className="flex justify-center flex-row pb-4 pt-6 px-3 bg-hover"
         >
           <input
             type="text"
@@ -160,16 +159,16 @@ const Store = () => {
         </div>
       </aside>
   
-      <main className="flex flex-col justify-center container" style={{ marginInline: "auto", width: "100%" }}>
+      <main className="flex  flex-col justify-center container" style={{ marginInline: "auto", width: "100%" }}>
         <div
-          className="flex flex-wrap gap-8 justify-center items-center mb-3"
+          className="flex flex-wrap gap-6 justify-center items-center mb-3"
           style={{ marginTop: "30px" }}
         >
           {currentProducts.map((product) => (
             <div
               key={product.id}
-              className="hover:transform hover:scale-105 transition-transform duration-300"
-              style={{ width: "28%" }}
+              // className="hover:transform hover:scale-105 transition-transform duration-300"
+              
             >
               <Card
                 id={product.id}
