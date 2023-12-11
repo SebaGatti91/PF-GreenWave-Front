@@ -25,9 +25,10 @@ const DropDownMenu = ({
     <div
       className="flex flex-col justify-evenly mb-4 pb-8"
     >
-      <div className="pb-7 bg-hover" style={{ borderBottom: '1px solid gray' }}>
+      <div className="pb-2 bg-hover" >
         <div className="flex flex-col">
-          <h3 className="text-left  font-semibold text-lg pl-8 pt-6 pb-3">Materials</h3>
+
+          <h3 className="text-left  font-semibold text-base pl-8 pt-6 pb-3 sm:block hidden">Materials</h3>
           <select
             id="selectedMaterial"
             name="selectedMaterial"
@@ -60,8 +61,8 @@ const DropDownMenu = ({
         </select>
       </div> */}
 
-      <div className="pb-5 bg-hover" style={{ borderBottom: '1px solid gray' }}>
-        <h3 className="text-left font-semibold text-lg pl-8 mt-6 mb-3">Order Alfabetic</h3>
+      <div className="pb-2 bg-hover">
+        <h3 className="text-left font-semibold text-base pl-8 mt-6 mb-3 sm:block hidden">Order Alfabetic</h3>
         <select
           onChange={handleOrder}
           className="flex justify-center rounded-lg bg-white hover:cursor-pointer pl-4 py-1"
@@ -73,8 +74,8 @@ const DropDownMenu = ({
         </select>
       </div>
 
-      <div className="pb-5 bg-hover" style={{ borderBottom: '1px solid gray' }}>
-        <h3 className="text-left font-semibold text-lg pl-8 mt-6 mb-3">Order by price</h3>
+      <div className="pb-5 bg-hover" >
+        <h3 className="text-left font-semibold text-base pl-8 mt-6 mb-3 sm:block hidden">Order by price</h3>
         <select
           onChange={handleOrder}
           className="flex justify-center rounded-lg bg-white hover:cursor-pointer pl-4 py-1"
@@ -86,10 +87,10 @@ const DropDownMenu = ({
         </select>
       </div>
 
-      <div className="bg-hover flex justify-center pb-10">
+      <div className="bg-hover flex justify-center">
         <button
           onClick={handleClearFilters}
-          className="mt-10 py-1 px-2 text-lime-50 hover:text-black bg-clear hover:bg-hover-clear hover:cursor-pointer rounded-xl"
+          className="mt-3 py-1 px-2 text-lime-50 hover:text-black bg-clear hover:bg-hover-clear hover:cursor-pointer rounded-xl"
           style={{ width: "130px", listStyle: "none", marginInline: 'auto' }}
         >
           Clear Filters
