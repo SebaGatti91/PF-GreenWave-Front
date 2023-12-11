@@ -35,7 +35,7 @@ export default function Splash() {
       <div className="box">
         <video
           id="video"
-          src="https://static.vecteezy.com/system/resources/previews/007/659/424/mp4/light-shining-down-in-nature-video.mp4"
+          src="https://v1.pinimg.com/videos/mc/720p/44/7a/67/447a67e815792ec0dfd5b972a929ba98.mp4"
           alt="Una imagen bonita"
           autoPlay="autoplay"
           loop={true}
@@ -56,7 +56,7 @@ export default function Splash() {
               <p className="description">Deja una huella en tu mundo</p>
               <Link href='/homepage'>
               <button
-                className='button flex items-center justify-center text-sm border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
+                className='button items-center justify-center text-xl border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
                 href="/homepage"
                 >
                 Entrar

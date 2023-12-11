@@ -43,7 +43,7 @@ const SearchSection = ({ pathname }) => (
 const NavigationLinks = ({ session, totalItems }) => (
   <section className="flex gap-10 items-center">
     <Link
-      className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300 "
+      className="home text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300 "
       style={{
         fontFamily: "font-serif",
         ":hover": {
@@ -57,7 +57,7 @@ const NavigationLinks = ({ session, totalItems }) => (
     </Link>
 
     <Link
-      className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+      className="about text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
       style={{
         fontFamily: "font-serif",
         ":hover": {
@@ -71,7 +71,7 @@ const NavigationLinks = ({ session, totalItems }) => (
     </Link>
 
     <Link
-      className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+      className="store text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
       style={{
         fontFamily: "font-serif",
         ":hover": {
@@ -85,7 +85,7 @@ const NavigationLinks = ({ session, totalItems }) => (
     </Link>
 
     <Link
-      className="text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
+      className=" tips text-xl  hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300"
       style={{
         fontFamily: "font-serif",
         ":hover": {
@@ -99,7 +99,7 @@ const NavigationLinks = ({ session, totalItems }) => (
     </Link>
     <Link
       href="/store/buycart"
-      className="hover:cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
+      className="buycart hover:cursor-pointer hover:transform hover:scale-110 transition-transform duration-300"
     >
       <div className="flex items-center gap-4">
         <img
