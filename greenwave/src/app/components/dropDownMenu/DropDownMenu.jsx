@@ -23,7 +23,7 @@ const DropDownMenu = ({
 
   return (
     <div
-      className="flex flex-col justify-evenly mb-4 pb-8"  style={{ height: '100vh' }}
+      className="flex flex-col justify-evenly mb-4 pb-8"
     >
       <div className="pb-7 bg-hover" style={{ borderBottom: '1px solid gray' }}>
         <div className="flex flex-col">
@@ -45,7 +45,7 @@ const DropDownMenu = ({
         </div>
       </div>
 
-      <div className="pb-6 bg-hover" style={{ borderBottom: '1px solid gray' }}>
+      {/* <div className="pb-6 bg-hover" style={{ borderBottom: '1px solid gray' }}>
         <h3 className="text-left font-semibold text-lg pl-8 pt-6 pb-3">Rating</h3>
         <select
           onChange={handleFilter}
@@ -58,7 +58,7 @@ const DropDownMenu = ({
           <option value="4" className="text-center">4</option>
           <option value="5" className="text-center">5</option>
         </select>
-      </div>
+      </div> */}
 
       <div className="pb-5 bg-hover" style={{ borderBottom: '1px solid gray' }}>
         <h3 className="text-left font-semibold text-lg pl-8 mt-6 mb-3">Order Alfabetic</h3>
