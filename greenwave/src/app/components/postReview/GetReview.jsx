@@ -50,7 +50,7 @@ console.log(reviewedBy);
         <div key={index}>
           <Col>
           <ProgressBar now={(count / reviewedBy.length)* 100} />
-          </Col>
+         </Col>
           <p>{1 + index}⭐</p>
         </div>
       )})}

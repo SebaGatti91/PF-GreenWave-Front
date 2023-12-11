@@ -49,45 +49,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="container flex justify-center">
-      <div className='relative flex-grow flex p-20 bg-hover mt-12 mb-12 pl-6 pr-3 shadow-2xl rounded-xl'
-        style={{ maxWidth: '400px', background: '#6CA188', border: '1px solid black' }}>
-
-        <div className="absolute top-8 right-20 m-1 bg-hover-clear rounded-xl shadow-2xl border-b-gray-400"
-          style={{ height: '400px', width: '310px', zIndex: '1', transform: 'translateX(100%)', background: '#50816A', border: '1px solid black' }}>
-          {/* Contenido del segundo div */}
-          <h1 className="text-center pt-10 pb-6 text-3xl"
-            style={{ textShadow: '2px 1px aliceblue' }}>Contact Us</h1>
-
-          <div className="flex flex-row items-center ml-4">
-            <img
-              src="/images/ubicacion.png"
-              alt="ubication"
-              style={{ width: "22px", height: "22px" }}
-            />
-            <p className="text-left px-2 py-5 ml-2 text-lg">1234 Elm Street Suite 567 Citytown</p>
+    <div className={ `${styles.container} flex justify-center`}>
+     
+      <div className=' flex-grow flex p-2 backdrop-blur-lg h-[450px] mt-12 max-w-[600px] justify-around mb-12 pb-10  shadow-2xl  rounded-xl'
+        >
+          <div className={styles.log}>
+                  <h1>Atrevete a hacer la diferencia!!</h1>
           </div>
-
-          <div className="flex flex-row items-center ml-4">
-            <img
-              src="/images/correo.png"
-              alt="mail"
-              style={{ width: "22px", height: "22px", }}
-            />
-            <p className="text-left px-2 py-7 ml-2 text-lg">greenwave.page@gmail.com</p>
-          </div>
-
-          <div className="flex flex-row items-center ml-4">
-            <img
-              src="/images/telefono.png"
-              alt="phone"
-              style={{ width: "22px", height: "22px" }}
-            />
-            <p className="text-left px-2 py-8 ml-2 text-lg" >202-555-0128</p>
-          </div>
-        </div>
-
-        <div className="text-center"> {/* Agregado contenedor para centrar */}
+        <div className="text-center mr-10">
           <h1 className={styles.title}>Login</h1>
           <div>
             <button
