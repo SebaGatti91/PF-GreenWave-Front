@@ -102,7 +102,8 @@ export default function Detail({ params }) {
       image: product.image,
       price: product.price,
       rating: product.rating,
-      stock: product.stock
+      stock: product.stock,
+      userId: user?.email
     });
     setAddedToCart(true);
   };
