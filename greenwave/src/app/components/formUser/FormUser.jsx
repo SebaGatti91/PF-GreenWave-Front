@@ -50,14 +50,14 @@ export default function FormUser({ closeModal }) {
 
           // Validation for postalcode
           if (values.postalCode) {
-            if (!/^\d{1,5}$/.test(values.postalCode)) {
-              errors.postalCode = "Must only contain numbers up to 5 digits";
+            if (!/^\d{1,9}(-\d{0,8})?$/.test(values.postalCode)) {
+              errors.postalCode = "Must contain up to 9 digits and an optional hyphen";
             }
           }
 
           // Validation for adress
           if (values.address) {
-            if (!/^[\w\s]+ \d+$/.test(values.address)){
+            if (!/^[\w\s-]+ \d+$/.test(values.address)){
               errors.address = "Invalid address format. Please enter a valid address.";
             }
           }
