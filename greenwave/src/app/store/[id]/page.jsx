@@ -105,6 +105,7 @@ export default function Detail({ params }) {
       price: product.price,
       rating: product.rating,
       stock: product.stock,
+      stock: product.stock,
     });
     setAddedToCart(true);
   };

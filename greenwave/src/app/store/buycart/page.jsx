@@ -129,7 +129,7 @@ const Cart = () => {
                     >
                       <Image
                         className="w-60 h-40 rounded-md"
-                        src={product.image}
+                        src={product.image[0]}
                         alt={product.name}
                         height={150}
                         width={150}
