@@ -115,6 +115,7 @@ export default function FormUser({ closeModal }) {
                 Swal.fire({
                   icon: "success",
                   title: "User modified!",
+                  confirmButtonColor: "#426F66",
                   text: message,
                 });
                 setTimeout(() => location.reload(), 2000);

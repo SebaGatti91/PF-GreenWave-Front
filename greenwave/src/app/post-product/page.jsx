@@ -137,6 +137,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   return Swal.fire({
                     icon: "success",
                     title: "Product edited Successfully",
+                    confirmButtonColor: "#426F66",
                     text: "Your product has been successfully edited.",
                   });
                 }
