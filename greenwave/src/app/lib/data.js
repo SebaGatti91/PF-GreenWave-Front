@@ -202,8 +202,9 @@ export const fetchDonation = async (form, resetForm) => {
     if (response.status === 200) {
       return Swal.fire({
         icon: "success",
-        title: "Product edited Successfully",
-        text: "Your product has been successfully edited.",
+        title: "Donation form submitted!",
+        confirmButtonColor: "#426F66",
+        text: "We will contact you by e-mail with the steps to follow",
       });
     }
   } catch (error) {
