@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 import Pagination from "../components/pagination/Pagination";
 import DropDownMenu from "../components/dropDownMenu/DropDownMenu";
 import Link from "next/link";
+import Swal from "sweetalert2"
+import { useRouter } from "next/navigation";
 
 const Store = () => {
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [filterValue, setFilterValue] = useState("Products");
@@ -50,6 +53,14 @@ const Store = () => {
         filterValue !== "Products" || filterValueName.trim() !== ""
       );
       setOrdersActive(orderValue !== "Alfabetico" && orderValue !== "Price");
+
+      if (data.length === 0) {
+         Swal.fire({
+          title: "Product not found",
+          text: "That product does not exist!",
+          confirmButtonColor: "#426F66",
+        });
+      }
 
       setCurrentPage(1);
     } catch (error) {
