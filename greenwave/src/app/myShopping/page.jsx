@@ -5,7 +5,6 @@ import { GlobalUser } from "../components/users/globalUsers";
 import ReviewForm from "../components/postReview/PostReview";
 import Image from "next/image";
 import Link from "next/link";
-import '../../../public/estilos/buycart.css'
 const myShopping = () => {
   const [myShopping, setMyShopping] = useState([]);
   const [showPostReview, setShowPostReview] = useState(false);
@@ -46,7 +45,7 @@ const myShopping = () => {
           <div className="flex flex-row">
             <Image
               className="w-60 h-40 rounded-md"
-              src={purchase.image}
+              src={purchase.image[0]}
               alt={purchase.name}
               height={150}
               width={150}
@@ -77,9 +76,19 @@ const myShopping = () => {
               <p className="py-1 w-full" style={{ height: "80px" }}>
                 {purchase.description}
               </p>
-              <button className="elemento" onClick={handleReview}>
-                add your Review
-              </button>
+              {purchase.reviewedBy.includes(user.id) ? (
+                <p className="text-sm text-gray-500">
+                  You have already reviewed this product.
+                </p>
+              ) : (
+                <button
+                  className="rounded-lg bg-button hover:bg-hover-clear mb-4"
+                  style={{ width: "150px" }}
+                  onClick={() => handleReview(purchase.id)}
+                >
+                  Add your Review
+                </button>
+              )}
               <Link
                 href={`/store/${purchase.id}`}
                 className="flex justify-start w-full"
@@ -87,10 +96,10 @@ const myShopping = () => {
                 <button
                   className="rounded-lg bg-button hover:bg-hover-clear"
                   style={{
-                    width: "12%",
+                    width: "150px",
                   }}
                 >
-                  More
+                  See more
                 </button>
               </Link>
               <div>

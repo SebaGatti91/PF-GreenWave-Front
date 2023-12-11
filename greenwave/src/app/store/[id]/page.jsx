@@ -12,7 +12,6 @@ import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 import { GlobalUser } from "../../components/users/globalUsers";
 import ReviewList from "../../components/postReview/GetReview";
-import { log } from "util";
 export default function Detail({ params }) {
   const BackUrl = process.env.BACK;
 
@@ -47,13 +46,14 @@ export default function Detail({ params }) {
       console.error("Error loading product detail:", error);
     }
   };
-  console.log(product);
 
   useEffect(() => {
     setTimeout(() => {
       SetLoading(false);
     }, 2000);
   }, []);
+
+  const [activeImg, setActiveImg] = useState(null);
 
   const createPreference = async () => {
     try {
@@ -104,186 +104,224 @@ export default function Detail({ params }) {
       image: product.image,
       price: product.price,
       rating: product.rating,
+      stock: product.stock,
+      stock: product.stock,
     });
     setAddedToCart(true);
   };
 
   const handleRemoveFromCart = () => {
     removeFromCart(params.id);
-    setAddedToCart(false); // Cambia el estado a false al hacer clic en el basurero
+    setAddedToCart(false);
   };
 
   useEffect(() => {
     loadProductDetail(params.id);
   }, [params.id]);
 
+  console.log(product);
   if (!product) {
-    // Puedes agregar un indicador de carga aquí
     return null;
   }
+
   if (loading) {
     return <Skeleton />;
   } else {
     return (
-      <div className="flex flex-col">
-        <div className="flex justify-center items-center p-7">
-          <div className="p-5 border">
+      <div>
+        <div className="flex flex-col justify-between lg:flex-row md:justify-center md:items-center p-6 gap-12">
+          <div className="flex flex-col gap-5 lg:w-4/12 md:w-2/4 cursor-pointer">
             <Link href="/store">
               <button
-                className="bg-transparent text-slate-600 m-2 "
+                className="bg-transparent text-gray-600"
                 style={{ borderRadius: "2em 2em" }}
               >
-                <span className="mr-2 ">&#8592;</span> BACK TO STORE
+                <span className="mr-2 text-gray-600 ">&#8592;</span> BACK TO
+                STORE
               </button>
             </Link>
-            <div className="flex justify-center containerDetail">
-              {
-                <Image
-                  className="p-1 shadow-2xl rounded-lg bg-hover"
-                  src={product.image}
-                  alt={product.name}
-                  width={380}
-                  height={300}
-                  style={{ boxShadow: "4px 6px gray" }}
-                />
-              }
+            <img
+              src={activeImg || product?.image[0]}
+              alt=""
+              className="w-full h-full aspect-square object-cover rounded-xl"
+            />
+            <div className="flex flex-row justify-between h-24">
+              <img
+                src={product?.image[0]}
+                alt=""
+                className="w-20 h-24 lg:w-28 lg:h-28 rounded-md cursor-pointer"
+                onClick={() => setActiveImg(product?.image[0])}
+              />
+              <img
+                src={product?.image[1]}
+                alt=""
+                className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                onClick={() => setActiveImg(product?.image[1])}
+              />
+              <img
+                src={product?.image[2]}
+                alt=""
+                className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                onClick={() => setActiveImg(product?.image[2])}
+              />
+              <img
+                src={product?.image[3]}
+                alt=""
+                className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                onClick={() => setActiveImg(product?.image[3])}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            {user.admin || foundUserProduct ? (
+              <div className="flex justify-end">
+                <button
+                  onClick={handleProd}
+                  className="bg-orange-900 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
+                  style={{
+                    borderRadius: "2em 2em",
+                  }}
+                >
+                  <img
+                    src="/images/borrar.png"
+                    alt="borrado"
+                    style={{ width: "22px", height: "22px" }}
+                  />
+                </button>
+                <button
+                  onClick={handleEdit}
+                  className="bg-hover hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
+                  style={{
+                    borderRadius: "2em 2em",
+                    background:
+                      "linear-gradient(to right top, #445a59, #446463, #446e6d, #427978, #408383)",
+                  }}
+                >
+                  <img
+                    src="/images/editar.png"
+                    alt="borrado"
+                    style={{ width: "22px", height: "22px" }}
+                  />
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+            <div>
+              <span className="text-green-700 font-semibold">
+                {product.materials}
+              </span>
+              <h1 className="text-3xl font-bold">{product.name}</h1>
+            </div>
+            <p className="text-gray-600">{product.description}</p>
+            <h4 className="text-lg font-semibold">${product.price}</h4>
+            <p
+              className={`m-2 rounded-lg ${
+                product.stock > 0 ? "bg-green-500" : "bg-red-500"
+              }`}
+              style={{ border: "1px solid #718096" }}
+            >
+              Stock: {product.stock}
+            </p>
 
+            <div>
               <div className="flex flex-col items-center text-center p-3 ml-3">
-                {user.admin || foundUserProduct ? (
-                  <div className=" space-x-4 ">
-                    <button
-                      onClick={handleProd}
-                      className="bg-orange-800 hover:bg-red-700 text-white font-bold m-3 px-4 py-1 rounded"
-                      style={{
-                        borderRadius: "2em 2em",
-                      }}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      onClick={handleEdit}
-                      className="bg-sky-950 hover:bg-blue-700 text-white font-bold m-3 px-4 py-1 rounded"
-                      style={{
-                        borderRadius: "2em 2em",
-                      }}
-                    >
-                      Edit
-                    </button>
+                {product.stock !== 0 &&
+                product.paused !== true &&
+                !foundUserProduct ? (
+                  <div>
+                    <div className="flex justify-center items-center">
+                      <button
+                        onClick={handleBuy}
+                        className="bg-green-800 text-white font-semibold m-2 p-1 px-16 rounded-md h-full"
+                      >
+                        Buy now
+                      </button>
+
+                      <div className="flex justify-start items-start">
+                        {addedToCart ? (
+                          <>
+                            <button
+                              className="bg-orange-900 hover:bg-red-700 p-1 rounded-md"
+                              onClick={() => handleRemoveFromCart()}
+                            >
+                              {
+                                <img
+                                  src="/images/rubishBeen.png"
+                                  alt="rubishBeen"
+                                  className="w-7 h-7"
+                                />
+                              }
+                            </button>
+                            <button
+                              className="px-3 py-1 ml-4"
+                              onClick={() => countDownCart(params.id)}
+                              style={{
+                                display:
+                                  item && item.count > 0 ? "block" : "none",
+                                border: "1px solid gray",
+                              }}
+                            >
+                              -
+                            </button>
+                            <h3 className="bg-hover hover:bg-boton px-3 py-1">
+                              {item ? item.count : 0}
+                            </h3>
+                            <button
+                              className="px-3 py-1"
+                              onClick={() =>
+                                countUpCart(params.id, product.stock)
+                              }
+                              style={{ border: "1px solid gray" }}
+                            >
+                              +
+                            </button>
+                          </>
+                        ) : (
+                          <div className="flex flex-row items-center">
+                            <button
+                              className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded-md border border-solid border-gray-500 hover:border-green-900"
+                              onClick={handleAddToCart}
+                            >
+                              🛒 Add to cart
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   ""
                 )}
-                <h3> Stock: {product.stock}</h3>
-                <h1
-                  className="p-3 title-font font-medium "
-                  style={{ fontFamily: "font-serif", fontSize: "2em" }}
-                >
-                  {product.name}
-                </h1>
-                <div>
-                  <p
-                    className="p-2 m-2 leading-relaxed"
-                    style={{
-                      fontFamily: "Open Sans, sans-serif",
-                      fontSize: "1.1em",
-                    }}
-                  >
-                    {product.description}
-                  </p>
-                </div>
 
-                <p
-                  className="font-bold text-left"
-                  style={{ fontFamily: "font-serif", fontSize: "1.5em" }}
-                >
-                  $ {product.price}
-                </p>
-                <div>
-                  <div className="flex justify-center items-center">
-                    <button
-                      onClick={handleBuy}
-                      className="hover:text-blue-900 m-2 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500"
-                      style={{
-                        border: "1px solid gray",
-                      }}
-                    >
-                      Buy now
-                    </button>
+                {/* Modal de edición */}
+                {isEditing && (
+                  <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+                    <div className="bg-white p-3 rounded-lg">
+                      <PostProduct initialValues={product} isOff={false} />
 
-                    <div className="flex justify-center">
-                      {addedToCart ? (
-                        <>
-                          <button
-                            className="bg-red-500 hover:bg-red-700 p-1 rounded -md"
-                            onClick={() => handleRemoveFromCart()}
-                          >
-                            {
-                              <img
-                                src="/images/rubishBeen.png"
-                                alt="rubishBeen"
-                                className="w-7 h-7"
-                              />
-                            }
-                          </button>
-                          <button
-                            className="px-3 py-1 ml-4"
-                            onClick={() => countDownCart(params.id)}
-                            style={{
-                              display:
-                                item && item.count > 0 ? "block" : "none",
-                              border: "1px solid gray",
-                            }}
-                          >
-                            -
-                          </button>
-                          <h3 className="bg-hover hover:bg-boton px-3 py-1">
-                            {item ? item.count : 0}
-                          </h3>
-                          <button
-                            className="px-3 py-1"
-                            onClick={() => countUpCart(params.id)}
-                            style={{ border: "1px solid gray" }}
-                          >
-                            +
-                          </button>
-                        </>
-                      ) : (
+                      <div className="flex justify-center">
                         <button
-                          className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded -md border border-solid border-gray-500 hover:border-green-900"
-                          onClick={handleAddToCart}
+                          className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
+                          onClick={closeModal}
                         >
-                          🛒 Add to cart
+                          Close
                         </button>
-                      )}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
-
-        {/* Modal de edición */}
-        {isEditing && (
-          <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
-            <div className="bg-white p-3 rounded-lg">
-              <PostProduct initialValues={product} isOff={false} />
-
-                <div className="flex justify-center">
-                  <button
-                    className=" bg-orange-800 hover:bg-red-700 text-white py-2 px-4 rounded"
-                    onClick={closeModal}
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
-        <div className="flex">
-          <ReviewList rating={parseFloat(product.rating)} reviewedBy={product.Reviews} />
-         
-
+        <div>
+          <div className="flex">
+            <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
+            {/* <button onClick={handlepost} className="elemento">
+            add a review
+          </button> */}
+          </div>
         </div>
       </div>
     );

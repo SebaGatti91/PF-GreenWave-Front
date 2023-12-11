@@ -98,20 +98,26 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
         onSubmit={async (values, { resetForm }) => {
           try {
             setLoading(true);
-            const formData = new FormData();
-
+        
             if (file) {
-              formData.append("image", file);
-              values.userId = user.id;
-
-              // Carga la nueva imagen en Cloudinary
-              const cloudinaryResponse = await fetch("/api/upload", {
-                method: "POST",
-                body: formData,
-              });
-
-              const cloudinaryData = await cloudinaryResponse.json();
-              values.image = cloudinaryData.url;
+              let arr = [];
+        
+              for (let i = 0; i < file.length; i++) {
+                const formData = new FormData();
+                formData.append("image", file[i]);
+                values.userId = user.id;
+        
+                // Carga la nueva imagen en Cloudinary
+                const cloudinaryResponse = await fetch("/api/upload", {
+                  method: "POST",
+                  body: formData,
+                });
+        
+                const cloudinaryData = await cloudinaryResponse.json();
+                arr.push(cloudinaryData.url);
+              }
+        
+              values.image = arr;
             }
 
             // Cambia el método de la solicitud según si es una edición o una publicación
@@ -238,7 +244,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   onBlur={handleBlur}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 >
-                  <option value={values.materials} disabled>
+                  <option value={values.materials} selected disabled>
                     Select Material
                   </option>
                   {materials.map((material) => (
@@ -279,9 +285,10 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   type="file"
                   id="image"
                   name="image"
+                  multiple
                   onChange={(event) => {
                     handleChange(event);
-                    setFile(event.target.files[0]);
+                    setFile(event.target.files);
                   }}
                   onBlur={handleBlur}
                   className="w-full px-3 py-2 border border-gray-300 rounded"

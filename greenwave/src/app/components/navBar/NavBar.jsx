@@ -6,18 +6,33 @@ import ButtonAuth from "../buttonAuth/ButtonAuth";
 import { useSession } from "next-auth/react";
 import { CartContext } from "../cart/cartContext";
 import { useContext } from "react";
-const LogoSection = () => (
-  <div className="flex items-center">
-    <Link className="" href="/">
-      <img
-        className="ml-2"
-        src="/images/Green-Wave.png"
-        alt=""
-        style={{ width: "100px" }}
-      />
-    </Link>
-  </div>
-);
+import Image from "next/image";
+import { GlobalUser } from "../users/globalUsers";
+const LogoSection = () => {
+  const { user } = useContext(GlobalUser);
+  return (
+    <div className="flex items-center flex-row gap-10">
+      <Link className="" href="/">
+        <img
+          className="ml-2"
+          src="/images/Green-Wave.png"
+          alt=""
+          style={{ width: "100px" }}
+        />
+      </Link>
+
+      <Link href={"/profile"} className=" flex flex-row gap-5">
+        <Image
+          src={"/images/ubicacion.png"}
+          alt={"ubicacionImage"}
+          height={30}
+          width={30}
+        />
+        <p>{user?.address ? user?.address : "Insert adress"}</p>
+      </Link>
+    </div>
+  );
+};
 
 const SearchSection = ({ pathname }) => (
   <section className="flex justify-center items-center mx-auto">
@@ -95,8 +110,7 @@ const NavigationLinks = ({ session, totalItems }) => (
         <div
           style={{
             backgroundColor: "white",
-            color:
-              "green",
+            color: "green",
             borderRadius: "100%",
             width: "20px",
             textAlign: "center",
@@ -133,7 +147,7 @@ const NavBar = () => {
         }}
       >
         <LogoSection />
-        {/* <SearchSection pathname={pathname} /> */}
+
         <NavigationLinks session={session} totalItems={totalItems} />
       </nav>
     </div>

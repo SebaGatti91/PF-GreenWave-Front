@@ -82,7 +82,7 @@ const Favorites = () => {
             <div className="flex flex-row">
               <Image
                 className="w-60 h-40 rounded-md"
-                src={favorite.image}
+                src={favorite.image[0]}
                 alt={favorite.name}
                 height={150}
                 width={150}
@@ -120,7 +120,7 @@ const Favorites = () => {
                   <button
                     className="rounded-lg bg-button hover:bg-hover-clear"
                     style={{
-                      width: "12%",
+                      width: "80px",
                     }}
                   >
                     More

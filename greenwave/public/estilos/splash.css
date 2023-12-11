@@ -47,14 +47,14 @@ video {
 .title {
   font-size: 3rem;
   font-weight: bold;
-  color: rgb(36, 93, 74);
+  color: aquamarine;
 }
 
 .description {
   font-size: 2rem;
   margin-top: 1rem;
   font-weight: bold;
-  color: rgb(69, 133, 69);
+  color: rgb(78, 201, 107);
 }
 
 .button {
@@ -63,7 +63,7 @@ video {
   padding: 1rem 2rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: rgb(89, 201, 184);
+  background-color: white;
   color: rgb(255, 255, 255);
   font-size: 1.5rem;
   font-weight: bold;
