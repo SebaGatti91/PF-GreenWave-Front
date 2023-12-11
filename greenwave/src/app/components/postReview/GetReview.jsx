@@ -55,7 +55,10 @@ function ReviewList({   rating, reviewedBy}) {
       )})}
       </div>
       </div>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap" style={{
+       maxHeight: '650px', overflowY: 'scroll'  
+      }
+      }>
       {reviewedBy.map((review) => {
         const created = review.createdAt.slice(0, 10).split('-').reverse().join('-');
         const isCommentExpanded = expandedComments.includes(review.id);
