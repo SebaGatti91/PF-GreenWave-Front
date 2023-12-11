@@ -9,6 +9,7 @@ import LeftMenu from "../components/leftMenu/LeftMenu";
 import "./profile.css";
 import { useSession } from "next-auth/react";
 
+
 const Profile = () => {
   const { user, setUser } = useContext(GlobalUser);
   const [isEditing, setIsEditing] = useState(false);

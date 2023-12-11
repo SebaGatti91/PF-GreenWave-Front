@@ -20,7 +20,9 @@ const ChildComponent = ({children}) => {
       } catch (error) {
         throw Error("error fetching user data", error.message);
       }
+
     };
+  
   
     useEffect(() => {
       if (user.status === false) {

@@ -46,7 +46,7 @@ const Cart = () => {
         item: itemsFromCart,
       });
 
-      setCart([]);
+      //setCart([]);
       window.location.href = response.data;
     } catch (error) {
       console.error("Error creating preference:", error);

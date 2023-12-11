@@ -1,6 +1,27 @@
+"use client";
 import Link from "next/link";
+import { useContext, useEffect } from "react";
+import { CartContext } from "../components/cart/cartContext";
+import { fetchFeedback } from "../lib/data";
 
-export default function Sucess() {
+export default function Success() {
+  const { cart, setCart } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await fetchFeedback(cart);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    
+    fetchData();
+    
+    setCart([]);
+  }, []);
+
   return (
     <div
       className="m-3 flex flex-col justify-center items-center"
@@ -15,7 +36,7 @@ export default function Sucess() {
         of our valued customer community.
       </span>
       <div className="m-2">
-      <img src="/images/Green-Wave.png" alt="greenWave logo"></img>
+        <img src="/images/Green-Wave.png" alt="greenWave logo" />
       </div>
       <Link href="/homepage">
         <button className="m-4 bg-transparent border border-black text-black hover:bg-green-600 hover:text-white px-4 py-2 rounded">
