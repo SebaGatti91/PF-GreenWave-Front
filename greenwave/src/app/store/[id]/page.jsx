@@ -53,16 +53,8 @@ export default function Detail({ params }) {
     }, 2000);
   }, []);
 
-  const [images, setImages] = useState({
-    img1: product?.image,
-    img2: "https://www.purina.co.uk/sites/default/files/styles/ttt_image_510/public/2020-11/Hero-Small-Mobile-cats.jpg?itok=hEnG1ehe",
-    img3: "https://basepaws.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Feyuked2kaujk%2F2F77xf7hNFh7WmsG0SmvLD%2Fed21267ff7171c4cb5c8378edaf64ba9%2Fbofu-shaw-rC--YcGXrOg-unsplash.jpg&w=3840&q=75",
-    img4: "https://static.independent.co.uk/2023/11/15/10/Screenshot%202023-11-15%20at%2010.16.47.jpg?quality=75&width=640&crop=3%3A2%2Csmart&auto=webp",
-  });
-
-  const [activeImg, setActiveImg] = useState(images.img3);
-  console.log(product?.image);
-
+  const [activeImg, setActiveImg] = useState(null);
+ 
   const createPreference = async () => {
     try {
       const response = await axios.post(`${BackUrl}/mercadoPago`, {
@@ -147,34 +139,34 @@ export default function Detail({ params }) {
               </button>
             </Link>
           <img
-            src={activeImg}
+            src={activeImg || product?.image[0]}
             alt=""
             className="w-full h-full aspect-square object-cover rounded-xl"
           />
           <div className="flex flex-row justify-between h-24">
             <img
-              src={product?.image}
+              src={product?.image[0]}
               alt=""
               className="w-20 h-24 lg:w-28 lg:h-28 rounded-md cursor-pointer"
-              onClick={() => setActiveImg(product?.image)}
+              onClick={() => setActiveImg(product?.image[0])}
             />
             <img
-              src={images.img2}
+              src={product?.image[1]}
               alt=""
               className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-              onClick={() => setActiveImg(images.img2)}
+              onClick={() => setActiveImg(product?.image[1])}
             />
             <img
-              src={images.img3}
+              src={product?.image[2]}
               alt=""
               className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-              onClick={() => setActiveImg(images.img3)}
+              onClick={() => setActiveImg(product?.image[2])}
             />
             <img
-              src={images.img4}
+              src={product?.image[3]}
               alt=""
               className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-              onClick={() => setActiveImg(images.img4)}
+              onClick={() => setActiveImg(product?.image[3])}
             />
           </div>
         </div>
