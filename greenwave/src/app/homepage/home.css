@@ -94,3 +94,19 @@
     transform: none;
 }
 }
+
+@media all and (min-width: 320px) {
+  .image {
+    width: 100%;
+    background-image: url('/images/herocopia.png');
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+
+  .section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
