@@ -12,3 +12,17 @@
     color: transparent;
     
     }
+    .progress-bar {
+        width: 100%;
+        background-color: #f3f3f3;
+        border-radius: 13px;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
+      }
+      
+      .filler {
+        height: 20px;
+        background-color: #4caf50;
+        border-radius: 13px;
+        transition: width .5s;
+      }
+      

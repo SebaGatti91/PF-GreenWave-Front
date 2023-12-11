@@ -3,9 +3,8 @@ import StarRatings from 'react-star-ratings';
 import {Col, ProgressBar } from 'react-bootstrap';
 import users from './users.json'
 import './reviews.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
-function ReviewList({ rating, reviewedBy}) {
+function ReviewList({   rating, reviewedBy}) {
 
   const [expandedComments, setExpandedComments] = useState([]);
 
@@ -28,7 +27,7 @@ function ReviewList({ rating, reviewedBy}) {
     ratingCounts[review.rating - 1]++
     usersLength++;
   });
-console.log(reviewedBy);
+
   return (
     <div className='flex flex-col ml-20 rounded-lg border-cyan-200 border-4 w-full mr-20 bg-slate-300'>
       <div className='flex flex-box items-center  w-full'>
@@ -48,9 +47,10 @@ console.log(reviewedBy);
       {ratingCounts.map((count, index) =>{
         return(
         <div key={index}>
-          <Col>
-          <ProgressBar now={(count / reviewedBy.length)* 100} />
-         </Col>
+          <div className="progress-bar">
+            <div className="filler" style={{width: (count / reviewedBy.length) * 100 + '%'}}></div>
+          </div>
+
           <p>{1 + index}⭐</p>
         </div>
       )})}
