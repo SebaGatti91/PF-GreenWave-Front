@@ -1,7 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
 import { useState, useEffect, useContext } from "react";
