@@ -12,8 +12,11 @@ const myShopping = () => {
   const [showPostReview, setShowPostReview] = useState(false);
   const { user } = useContext(GlobalUser);
 
-  const handleReview = () => {
-    setShowPostReview(!showPostReview);
+  const handleReview = (id) => {
+    setShowPostReview((prev)=>({
+      ...prev,
+      [id]:true   
+    }));
   };
 
   const fetchData = async () => {
@@ -80,6 +83,7 @@ const myShopping = () => {
                   <p className="py-1 w-full" style={{ height: "80px" }}>
                     {purchase.description}
                   </p>
+                  
                   {purchase.reviewedBy.includes(user.id) ? (
                     <p className="text-sm text-gray-500">
                       You have already reviewed this product.
@@ -107,7 +111,7 @@ const myShopping = () => {
                     </button>
                   </Link>
                   <div>
-                    {showPostReview && <ReviewForm productId={purchase.id} />}
+                    {showPostReview[purchase.id] && <ReviewForm productId={purchase.id} />}
                   </div>
                 </div>
               </div>
