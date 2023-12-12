@@ -54,15 +54,15 @@ export default function Splash() {
               <h1 className="title">Green wave</h1>
               <p className="description">Deja una huella en tu mundo</p>
               <Link href='/homepage'>
-              <button
-                className='button items-center justify-center text-xl border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
-                href="/homepage"
+                <button
+                  className='button items-center justify-center text-xl border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
+                  href="/homepage"
                 >
-                Entrar
-              </button>
+                  Entrar
+                </button>
               </Link>
-              
-              <div className="flex justify-center" style={{marginTop: '50px'}}>
+
+              <div className="flex justify-center" style={{ marginTop: '50px' }}>
                 <a href="#section" className="flecha">
                   ↓
                 </a>
@@ -72,10 +72,17 @@ export default function Splash() {
         </div>
       </div>
       <div className="seccion" id="section">
+      <h2
+            className="font-bold text-center text-2xl py-5 mb-10 mt-10 shadow-2xl"
+            style={{ width: "90%", marginInline: "auto" }}
+          >
+            Information
+          </h2>
         <section className="flex justify-center mt-12 pb-10 ">
+          
           <article
-            className="text-black flex shadow-2xl overflow-hidden"
-            style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
+            className="text-black flex shadow-2xl articulo overflow-hidden"
+            style={{ width: "90%", height: "60vh", backgroundColor: "#C0C8A7" }}
           >
             <section>
               <h1 className="font-bold text-center px-2 pt-20 text-xl">
@@ -98,7 +105,7 @@ export default function Splash() {
               </p>
             </section>
             <img
-              className="hover:transform hover:scale-110 transition-transform duration-300"
+              className="hover:transform hover:scale-110 transition-transform duration-300 demostracion"
               style={{ width: "40%" }}
               src="https://i.pinimg.com/564x/9d/95/ca/9d95ca131195dab6a2f317c6e3600a90.jpg"
               alt="recycle"
@@ -107,11 +114,11 @@ export default function Splash() {
         </section>
         <section className="flex justify-center mt-12 pb-10">
           <article
-            className="text-black flex shadow-2xl overflow-hidden scroll-y"
-            style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
+            className="text-black flex shadow-2xl articulo overflow-hidden scroll-y"
+            style={{ width: "90%", height: "60vh", backgroundColor: "#C0C8A7" }}
           >
             <img
-              className="hover:transform hover:scale-110 transition-transform duration-300"
+              className="hover:transform hover:scale-110 transition-transform duration-300 demostracion"
               style={{ width: "40%" }}
               src="https://i.pinimg.com/564x/48/8e/f1/488ef1d1fcc91a8afd1ed585644f1a25.jpg"
               alt="ong"
@@ -140,8 +147,8 @@ export default function Splash() {
 
         <section className="flex justify-center mt-12 pb-10">
           <article
-            className="text-black flex shadow-2xl overflow-hidden"
-            style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
+            className="text-black flex shadow-2xl articulo overflow-hidden"
+            style={{ width: "90%", height: "60vh", backgroundColor: "#C0C8A7" }}
           >
             <section>
               <h1 className="font-bold text-center px-2 pt-20 text-xl">
@@ -165,7 +172,7 @@ export default function Splash() {
               </p>
             </section>
             <img
-              className="hover:transform hover:scale-110 transition-transform duration-300 "
+              className="hover:transform hover:scale-110 transition-transform duration-300 demostracion "
               style={{ width: "40%" }}
               src="https://i.pinimg.com/564x/1d/74/18/1d7418c65e30dcc84014a93c76c4f2d7.jpg"
               alt="plastic iceberg"

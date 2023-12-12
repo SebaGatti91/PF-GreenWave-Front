@@ -27,8 +27,8 @@
         padding: 1.5rem 0;
     }
 
-    #pic{
-        margin-right: 1rem;
+    .parrafo{
+        margin-left: 1rem;
     }
 }
 
@@ -53,8 +53,5 @@
         display: flex;
         flex-direction: row !important;
         padding: 0 0;
-    }
-    #pic{
-        margin-right: 0rem;
     }
 }

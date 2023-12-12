@@ -27,12 +27,12 @@ export const Footer = () => {
             href="mailto:greenwave.page@gmail.com"
           >
             
-            <p className="text-left text-lg mr-3">greenwave.page@gmail.com</p>
+            <p className="text-left text-lg mr-3 parrafo">greenwave.page@gmail.com</p>
             <img
               src="/images/correo.png"
               alt="mail"
               style={{ width: "22px", height: "22px" }}
-              id='pic'
+              
             />
           </a>
         </div>
@@ -55,7 +55,7 @@ export const Footer = () => {
 
         <div className="flex flex-row justify-start items-center terminos">
           
-          <p className="mr-3">
+          <p className="mr-3 parrafo">
             <a href="/terms">Terms and Conditions</a> |{" "}
             <a href="/privacy">Privacy Policy</a>
           </p>
@@ -63,7 +63,7 @@ export const Footer = () => {
             src="/images/terminos.png"
             alt="mail"
             style={{ width: "22px", height: "22px" }}
-            id='pic'
+            
           />
         </div>
       </div>
