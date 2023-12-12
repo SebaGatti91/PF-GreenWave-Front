@@ -79,8 +79,8 @@ function ReviewList({ rating, reviewedBy }) {
         </select>
       </label>
       </div>
-      <div className="flex flex-wrap" style={{
-       maxHeight: '650px', overflowY: 'scroll'  
+      <div className="scroll flex flex-wrap" style={{
+       maxHeight: '450px', overflowY: 'auto', display: 'none'
       }
       }>
       {reviewsFiltradas.map((review) => {

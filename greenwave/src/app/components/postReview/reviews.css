@@ -1,28 +1,33 @@
 @font-face {
-    font-family: 'fatBold';
-    src: url(../../../../public/fonts/GasoekOne-Regular.ttf);
+  font-family: "fatBold";
+  src: url(../../../../public/fonts/GasoekOne-Regular.ttf);
 }
 .rate {
-    font-size: 10em;
-    font-family: 'fatBold';
-    background: url('https://i.pinimg.com/564x/86/63/46/86634647ba57dc056496d0d2935dd5cb.jpg');
-    background-position: fixed;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    
-    }
-    .progress-bar {
-        width: 100%;
-        background-color: #f3f3f3;
-        border-radius: 13px;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
-      }
-      
-      .filler {
-        height: 20px;
-        background-color: #4caf50;
-        border-radius: 13px;
-        transition: width .5s;
-      }
-      
+  font-size:8em;
+  font-family: "fatBold";
+  background: url("https://i.pinimg.com/564x/86/63/46/86634647ba57dc056496d0d2935dd5cb.jpg");
+  background-position: fixed;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.progress-bar {
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 13px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.filler {
+  height: 20px;
+  background-color: #4caf50;
+  border-radius: 13px;
+  transition: width 0.5s;
+}
+.scroll {
+  height: 450px;
+  overflow: auto;
+}
+.scroll::-webkit-scrollbar{
+  display: none;
+}
