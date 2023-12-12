@@ -7,6 +7,7 @@ import { CartContext } from "../../components/cart/cartContext";
 import Link from "next/link";
 import Image from "next/image";
 import { GlobalUser } from "../../components/users/globalUsers";
+import './buycart.css'
 
 const Cart = () => {
   const BackUrl = process.env.BACK;
