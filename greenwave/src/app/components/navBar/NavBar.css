@@ -1,91 +1,42 @@
-@media (min-width: 320px) {
-    .logo, .direccion {
-        display: none;
+@media all and (min-width: 320px) {
+    @keyframes slideIn {
+        from {
+            top: -100px;
+            /* Ajusta según sea necesario, valor para la posición inicial fuera de la pantalla */
+        }
+
+        to {
+            top: 86px;
+            /* Valor final para la posición abierta */
+        }
     }
-    
-    .menu {
+
+    .mobile-menu {
+        position: absolute;
+        top: 86px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        transition: top 0.3s ease-in-out;
+        animation: slideIn 0.6s ease-in-out;
+    }
+
+    .imagen {
         width: 10vw;
         padding: 0.5em;
         padding-left: 0.2em;
-        display: block;
-    }
-
-    #contenedor-menu{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    #contenedor-menu #cerrar {
-        display: none;
-        /*Oculta la imagen de cerrado (X)*/
-    }
-
-    #contenedor-menu .enlaces{
-        height: 0; /*cambia altura a 0*/
-        transition: height 1s ease; /*Efecto de transicion*/
-        overflow: hidden; /*Oculta lo que sobresalga*/
-    }
-
-    #contenedor-menu:target #abrir{
-        display: none; /*Oculta la imagen de abierto (hamburguesa)*/
-        /*El target sucede cuando recibe un enlace*/
-    }
-
-    #contenedor-menu.menu-open #cerrar{
-        display: block; /*Muestra la imagen de cerrado (X)*/
-        width: 10vw;
-        padding: 0.5em;
-        padding-left: 0.5em;
-    }
-
-    #contenedor-menu.menu-open #abrir{
-        display: none; /*Muestra la imagen de cerrado (X)*/
-        
-    }
-    
-    #contenedor-menu.menu-open .enlaces{
-        height: 70vw;
-        transition: height 1s ease;
-        display: flex;
-        flex-direction: column !important;
-    }
-
-    #contenedor-menu.menu-closed .enlaces{
-        height: 0;
-        transition: height 1s ease;
-        display: flex;
-        flex-direction: column !important;
-    }
-    .navegacion {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between !important;
     }
 }
 
-@media all and (min-width:1100px) {
-    .logo, .direccion {
-        display: flex;
+@media all and (min-width: 1024px) {
+    .imagen {
+        display: none;
     }
 
-    .menu {
-        display: none !important;
-    }
-
-    #contenedor-menu .enlaces {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        height: 2vw !important;
-    }
-
-    #contenedor-menu .link{
-        padding: 0 20px;
-    }
-
-    #contenedor-menu.menu-closed .enlaces{
-        display: flex;
-        flex-direction: row !important;
+    .mobile-menu {
+        display: none;
     }
 }
