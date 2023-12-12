@@ -6,9 +6,14 @@ import Link from "next/link";
 import Image from "next/image";
 import Button from "../components/button/Button";
 import LeftMenu from "../components/leftMenu/LeftMenu";
+import { pauseProduct } from "../lib/data";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+
 const MyProducts = () => {
   const { user } = useContext(GlobalUser);
   const [userProducts, setUserProducts] = useState([]);
+  const router = useRouter();
   useEffect(() => {
     const userProductsData = async () => {
       try {
@@ -25,6 +30,33 @@ const MyProducts = () => {
     }
   }, [user]);
 
+  const handleActive = async (productId) => {
+    const response = await pauseProduct(productId);
+
+    if (response.status === 200) {
+      router.push(`/profile/`);
+      return Swal.fire({
+        icon: "success",
+        title: "Your product is active!",
+        confirmButtonColor: "#426F66",
+        text: "Now you can see it in the store",
+      });
+    }
+  };
+  const handlePause = async (productId) => {
+    const response = await pauseProduct(productId);
+
+    if (response.status === 200) {
+      router.push(`/profile/`);
+      return Swal.fire({
+        icon: "success",
+        title: "Your product is pause!",
+        confirmButtonColor: "#426F66",
+        text: "You can active it whenever you want",
+      });
+    }
+  };
+
   return (
     <div className="flex flex-row">
       <div>
@@ -37,6 +69,7 @@ const MyProducts = () => {
         >
           My Products
         </h1>
+
         {userProducts && userProducts.length !== 0 ? (
           userProducts?.map((product) => (
             <div
@@ -47,14 +80,36 @@ const MyProducts = () => {
                 border: "1px solid gray",
               }}
             >
+              <div className="absolute top-5">
+                {product && product.approved === true ? (
+                  product.paused === true ? (
+                    <div>
+                      <button onClick={() => handleActive(product.id)}>
+                        Active
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <button onClick={() => handlePause(product.id)}>
+                        Pause
+                      </button>
+                    </div>
+                  )
+                ) : null}
+              </div>
               <div className="absolute top-10 right-0">
+                <label className="mr-20 ">Status:</label>
                 <h3
                   className={`absolute bottom-0 right-0 m-2 px-2 rounded-lg ${
                     product.paused === false ? "bg-green-500" : "bg-red-500"
                   }`}
                   style={{ border: "1px solid #718096" }}
                 >
-                  {product.paused === false ? "Active" : "Pause"}
+                  {product.approved === true
+                    ? product.paused === true
+                      ? "Pause"
+                      : "Active"
+                    : "Pending"}
                 </h3>
               </div>
               <div className="flex flex-row">
