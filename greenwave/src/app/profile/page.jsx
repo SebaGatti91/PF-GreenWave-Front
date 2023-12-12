@@ -43,10 +43,10 @@ const Profile = () => {
               <img src={user?.image || session?.user.image}></img>
             </div>
             <div className="cardContent">
-              <h3>Hello {user.username}!</h3>
-              <p>Phone number: {user.phone}</p>
-              <p>Address: {user.address}</p>
-              <p>Postal code: {user.postalCode}</p>
+              <h3>Hello {user?.username}!</h3>
+              <p>Phone number: {user?.phone}</p>
+              <p>Address: {user?.address}</p>
+              <p>Postal code: {user?.postalCode}</p>
               <button
                 onClick={handleEdit}
                 className="mt-4 border border-gray-400 bg-transparent rounded-md px-4 py-1 cursor-pointer text-black hover:bg-green-700  hover:text-white"

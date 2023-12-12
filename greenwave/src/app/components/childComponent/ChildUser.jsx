@@ -19,7 +19,11 @@ const ChildComponent = ({ children }) => {
       await delay(2000);
       const response = await axios.get(`/users/email/${userData?.email}`);
       const { data } = response;
+      if(data){
       setUser(data);
+      }else{
+        throw Error ('no hay datos disponibles')
+      }
     } catch (error) {
       console.error("Error al obtener los datos del usuario", error.message);
     }

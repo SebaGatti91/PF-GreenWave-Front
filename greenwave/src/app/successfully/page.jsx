@@ -31,9 +31,11 @@ export default function Success() {
         Your purchase has been a success!
       </h1>
       <span className="m-3 block max-w-lg">
+        <p>
         Thank you from the bottom of our hearts for choosing us! Your purchase
         has been a resounding success, and we are thrilled to have you as part
         of our valued customer community.
+        </p>
       </span>
       <div className="m-2">
         <img src="/images/Green-Wave.png" alt="greenWave logo" />
