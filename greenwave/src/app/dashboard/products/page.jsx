@@ -75,7 +75,7 @@ const ProductsPage = () => {
               <td>
                 <div className={styles.product}>
                   <Image
-                    src={product.image || "/images/noaproduct.png"}
+                    src={product.image[0]}
                     alt=""
                     width={40}
                     height={40}
