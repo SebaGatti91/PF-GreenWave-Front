@@ -63,7 +63,7 @@ export default function Splash() {
               </button>
               </Link>
               
-              <div className="flex justify-center" style={{marginTop: '50px'}}>
+              <div className="flex justify-center" style={{marginTop: '10px'}}>
                 <a href="#section" className="flecha">
                   ↓
                 </a>
