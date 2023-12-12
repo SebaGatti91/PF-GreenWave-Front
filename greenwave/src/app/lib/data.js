@@ -233,3 +233,13 @@ export const updateProduct = async (productId, updatedData) => {
     throw new Error(error.message);
   }
 };
+
+export const fetchFeedback = async (cart) => {
+  try {
+  const url =`${BackUrl}/feedback`;
+  await axios.post(url, cart);
+  }catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+}

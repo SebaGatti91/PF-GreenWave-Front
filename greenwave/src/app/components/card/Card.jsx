@@ -92,7 +92,7 @@ const Card = ({
   };
 
   const handleAddToCart = () => {
-    addToCart({ id, name, image, price, rating, stock });
+    addToCart({ id, name, image, price, rating, stock, userId: user?.email});
     setAddedToCart(true);
   };
 

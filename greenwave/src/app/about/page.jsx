@@ -25,7 +25,7 @@ const About = () => {
               alt={member.lastName}
               width={300}
               height={300}
-              className="rounded-full"
+              className=" object-cover rounded-full h-56 w-56 overflow-hidden"
             />
             <h4 className="mt-4 text-lg font-semibold">
               {member.name} {member.lastName}
