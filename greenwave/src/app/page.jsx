@@ -52,7 +52,7 @@ export default function Splash() {
                 src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"
               ></img>
               <h1 className="title">Green wave</h1>
-              <p className="description">Deja una huella en tu mundo</p>
+              <p className="description">Cherish nature, recycle today for a better tomorrow</p>
               <Link href='/homepage'>
               <button
                 className='button items-center justify-center text-xl border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
