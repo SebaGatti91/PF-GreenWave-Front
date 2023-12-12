@@ -220,7 +220,12 @@ export default function Detail({ params }) {
               className={`m-2 rounded-lg ${
                 product.stock > 0 ? "bg-green-500" : "bg-red-500"
               }`}
-              style={{ border: "1px solid #718096" }}
+              style={{
+                maxWidth: "200px", 
+                margin: "0 auto", 
+                border: "1px solid #718096",
+                padding: "7px", 
+              }}
             >
               Stock: {product.stock}
             </p>

@@ -34,19 +34,19 @@ export default function Donation() {
           }
           //validations for quantity
           if (!values.quantity) {
-            errors.quantity = "Por favor, ingresa la cantidad del material";
+            errors.quantity = "Please enter the quantity of the material";
           } else if (!/^\d+$/.test(values.quantity)) {
-            errors.quantity = "Debe contener solo números";
-          } else if (values.quantity.length > 3) {
-            errors.quantity = "Supera la cantidad establecida";
+            errors.quantity = "Must contain only numbers";
+          } else if (values.quantity.length > 4) {
+            errors.quantity = "Exceeds the established quantity";
           }
           //validations for description
           if (!values.description) {
             errors.description = "Please enter a product description";
-          } else if (!/^[a-zA-ZñÑ\s]{1,300}$/.test(values.description)) {
-            errors.description =
-              "Must contain only letters and up to 300 characters";
+          } else if (!/^[\w\s.,;-]{1,250}$/.test(values.description)) {
+            errors.description = "Must contain only letters, commas, periods, hyphens, and be between 30 and 250 characters";
           }
+
           if (!values.email) {
             errors.email = "Please enter an email address";
           } else if (
@@ -56,25 +56,26 @@ export default function Donation() {
           ) {
             errors.email = "Please enter a valid email address";
           }
-          if (!values.address) {
-            errors.address = "Please enter a product description";
-          } else if (!/^[a-zA-ZñÑ\s]{1,300}$/.test(values.address)) {
-            errors.address =
-              "Must contain only letters and up to 300 characters";
+
+          // Validation for adress
+          if (values.address) {
+            if (!/^[\w\s-]+ \d+$/.test(values.address)){
+              errors.address = "Invalid address format. Please enter a valid address.";
+            }
           }
-          if (!values.postalCode) {
-            errors.postalCode = "Por favor, ingresa la cantidad del material";
-          } else if (!/^\d+$/.test(values.postalCode)) {
-            errors.postalCode = "Debe contener solo números";
-          } else if (values.postalCode.length > 3) {
-            errors.postalCode = "Supera la cantidad establecida";
+          
+          // Validation for postalcode
+          if (values.postalCode) {
+            if (!/^\d{1,9}(-\d{0,8})?$/.test(values.postalCode)) {
+              errors.postalCode = "Must contain up to 9 digits and an optional hyphen";
+            }
           }
-          if (!values.phone) {
-            errors.phone = "Por favor, ingresa la cantidad del material";
-          } else if (!/^\d+$/.test(values.phone)) {
-            errors.phone = "Debe contener solo números";
-          } else if (values.phone.length > 15) {
-            errors.phone = "Supera la cantidad establecida";
+
+          // Validation for phone
+          if (values.phone) {
+            if (!/^(\+|\d)[0-9]{7,16}$/.test(values.phone)) {
+              errors.phone = "Invalid phone number format. Please enter a valid phone number.";
+            }
           }
           return errors;
         }}
