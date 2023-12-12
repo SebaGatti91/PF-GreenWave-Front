@@ -25,5 +25,14 @@ module.exports = {
   env: {
     FRONT: process.env.FRONT,
     BACK: process.env.BACK
-  }
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.module.rules.push({
+        test: /\.mp4$/,
+        use: 'file-loader?name=videos/[name].[ext]',
+      });
+    }
+    return config;
+  },
 };

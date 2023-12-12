@@ -1,7 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
 import { useState, useEffect, useContext } from "react";
@@ -220,7 +219,12 @@ export default function Detail({ params }) {
               className={`m-2 rounded-lg ${
                 product.stock > 0 ? "bg-green-500" : "bg-red-500"
               }`}
-              style={{ border: "1px solid #718096" }}
+              style={{
+                maxWidth: "200px", 
+                margin: "0 auto", 
+                border: "1px solid #718096",
+                padding: "7px", 
+              }}
             >
               Stock: {product.stock}
             </p>

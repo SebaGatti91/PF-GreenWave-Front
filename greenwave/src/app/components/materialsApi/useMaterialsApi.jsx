@@ -15,6 +15,7 @@ export const submitForm = async (values) => {
       return Swal.fire({
         icon: "success",
         title: "Product Posted Successfully",
+        confirmButtonColor: "#426F66",
         text: "Your product will be reviewed by an administrator, soon it will be published, check the status from your profile!",
       });
     }
