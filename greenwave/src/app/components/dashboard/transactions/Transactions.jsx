@@ -26,14 +26,16 @@ const Transactions = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Latest Transactions</h2>
+      <h2 className={styles.title}>Transactions by Users</h2>
       <table className={styles.table}>
         <thead>
           <tr>
             <th>Image</th>
             <th>Username</th>
             <th>Product</th>
+            <th>Quantity</th>
             <th>Amount</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +56,9 @@ const Transactions = () => {
                   </td>
                   <td>{user.username}</td>
                   <td>{purchase.Product.name}</td>
+                  <td>{purchase.quantity}</td>
                   <td>${purchase.Product.price}</td>
+                  <td>${purchase.Product.price * purchase.quantity}</td>
                 </tr>
               ))
             ) : null
