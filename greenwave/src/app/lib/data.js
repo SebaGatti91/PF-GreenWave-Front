@@ -85,7 +85,7 @@ export const createUser = async (user) => {
     await axios.post(url, user);
   } catch (error) {
     console.error("Error al crear el usuario en el backend", error);
-    // Consider setting a more specific error message or logging details
+   
   }
 };
 

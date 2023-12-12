@@ -40,9 +40,8 @@ const Dashboard = () => {
   }, [products]);
 
   const cardsData = [
-    { title: "Users", number: users.length, change: 10 },
-    { title: "Products", number: products.length, change: -5 },
-    { title: "Recycling Points", number: 100, change: 3 },
+    { title: "Users", number: users.length},
+    { title: "Products", number: products.length},
   ];
 
   return (
