@@ -56,7 +56,7 @@ function ReviewList({   rating, reviewedBy}) {
       </div>
       </div>
       <div className="flex flex-wrap" style={{
-       maxHeight: '650px', overflowY: 'scroll'  
+       maxHeight: '450px', overflowY: 'scroll'  
       }
       }>
       {reviewedBy.map((review) => {
@@ -84,7 +84,7 @@ function ReviewList({   rating, reviewedBy}) {
                 </label>
                   <p className='ml-14'>{created}</p>
               </div>
-              <div className="comment-container">
+              <div className="comment-container overflow-scroll">
                 <p className={isCommentExpanded ? 'expanded' : 'collapsed'}>{review.comment}</p>
                 {review.comment.length > 100 && (
                   <button onClick={() => toggleExpand(review.id)}>
@@ -92,17 +92,7 @@ function ReviewList({   rating, reviewedBy}) {
                   </button>
                 )}
               </div>
-              <label className="flex justify-between pt-8">
-                <p>¿Te resultó útil esta opinión?</p>
-                <div className="flex justify-center w-40">
-                  <button key={1} style={{ width: "40px", height: "30px", border: "2px solid", borderColor: "grey", borderRadius: "20px", backgroundColor: "ButtonFace" }}>
-                    Sí
-                  </button>
-                  <button key={2} style={{ width: "40px", height: "30px", border: "2px solid", borderColor: "grey", borderRadius: "20px", marginLeft: "10px", backgroundColor: "ButtonFace" }}>
-                    No
-                  </button>
-                </div>
-              </label>
+              
             </div>
           </div>
         );

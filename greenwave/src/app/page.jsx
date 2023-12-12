@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import "../../public/estilos/splash.css";
 import Head from "next/head";
 import Link from 'next/link';
-
 export default function Splash() {
   useEffect(() => {
     const arrow = document.querySelector(".flecha");
@@ -35,7 +34,7 @@ export default function Splash() {
       <div className="box">
         <video
           id="video"
-          src="https://v1.pinimg.com/videos/mc/720p/44/7a/67/447a67e815792ec0dfd5b972a929ba98.mp4"
+          src="/videos/splash.page.mp4"
           alt="Una imagen bonita"
           autoPlay="autoplay"
           loop={true}
