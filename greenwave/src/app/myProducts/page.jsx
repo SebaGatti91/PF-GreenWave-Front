@@ -111,20 +111,20 @@ const MyProducts = () => {
           ))
         ) : (
           <div>
+            <Image
+              className=" rounded-md ml-80"
+              src={"/images/myProducts1.png"}
+              alt={"myProducts"}
+              height={500}
+              width={500}
+              style={{ width: "320px", height: "320px", marginInline: "auto" }}
+            />
             <Button
               link={"/post-product"}
               text={"Sell your product"}
               className={
                 "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 rounded-lg m-5 px-5 py-2 text-lg"
               }
-            />
-            <Image
-              className="w-60 h-40 rounded-md ml-60"
-              src={"/images/myProducts1.png"}
-              alt={"myProducts"}
-              height={500}
-              width={500}
-              style={{ width: "350px", height: "350px", marginInline: "auto" }}
             />
           </div>
         )}

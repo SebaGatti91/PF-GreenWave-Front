@@ -60,20 +60,20 @@ const Favorites = () => {
         </h1>
         {favorites && favorites.length === 0 ? (
           <div>
+            <Image
+              className=" rounded-md"
+              src={"/images/favorites2.png"}
+              alt={"myFavorites"}
+              height={500}
+              width={500}
+              style={{ width: "320px", height: "320px", marginInline: "auto" }}
+            />
             <Button
               link={"/store"}
               text={"Add favorites"}
               className={
                 " bg-lime-800 hover:bg-lime-700 text-black-50 rounded-lg m-5 px-5 py-2 text-lg"
               }
-            />
-            <Image
-              className="w-60 h-40 rounded-md"
-              src={"/images/favorites2.png"}
-              alt={"myFavorites"}
-              height={500}
-              width={500}
-              style={{ width: "400px", height: "400px", marginInline: "auto" }}
             />
           </div>
         ) : (
