@@ -73,10 +73,11 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           //validations for description
           if (!values.description) {
             errors.description = "Please enter a product description";
-          } else if (!/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/.test(values.description)) {
-            errors.description =
-              "Must contain only letters and up to 500 characters";
+          } else if (!/^[\w\s.,;-]{30,250}$/.test(values.description)) {
+            errors.description = "Must contain only letters, commas, periods, hyphens, and be between 30 and 250 characters";
           }
+          
+          
 
           //validation for image
           if (!values.image) {
@@ -136,6 +137,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   return Swal.fire({
                     icon: "success",
                     title: "Product edited Successfully",
+                    confirmButtonColor: "#426F66",
                     text: "Your product has been successfully edited.",
                   });
                 }
