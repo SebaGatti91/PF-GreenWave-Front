@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 import Pagination from "../components/pagination/Pagination";
 import DropDownMenu from "../components/dropDownMenu/DropDownMenu";
 import Link from "next/link";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-
+import Image from "next/image";
 const Store = () => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,14 +53,6 @@ const Store = () => {
         filterValue !== "Products" || filterValueName.trim() !== ""
       );
       setOrdersActive(orderValue !== "Alfabetico" && orderValue !== "Price");
-
-      if (data.length === 0) {
-         Swal.fire({
-          title: "Product not found",
-          text: "That product does not exist!",
-          confirmButtonColor: "#426F66",
-        });
-      }
 
       setCurrentPage(1);
     } catch (error) {
@@ -123,14 +115,12 @@ const Store = () => {
   );
 
   return (
-    <div className="mx-auto flex flex-col sm:flex-row "> 
+    <div className="mx-auto flex flex-col sm:flex-row ">
       <aside
-         className="flex flex-col bg-hover shadow-2xl"
-        style={{ borderRight: "1px solid gray" }} 
+        className="flex flex-col bg-hover shadow-2xl"
+        style={{ borderRight: "1px solid gray" }}
       >
-        <div
-          className="flex justify-center flex-row pb-4 pt-6 px-3 bg-hover"
-        >
+        <div className="flex justify-center flex-row pb-4 pt-6 px-3 bg-hover">
           <input
             type="text"
             placeholder="Search..."
@@ -159,7 +149,7 @@ const Store = () => {
             &#128269;
           </button>
         </div>
-  
+
         <div className="flex flex-col">
           <DropDownMenu
             handleMaterials={handleMaterials}
@@ -169,28 +159,41 @@ const Store = () => {
           />
         </div>
       </aside>
-  
-      <main className="flex  flex-col justify-center container" style={{ marginInline: "auto", width: "100%" }}>
+
+      <main
+        className="flex  flex-col justify-center container"
+        style={{ marginInline: "auto", width: "100%" }}
+      >
         <div
           className="flex flex-wrap gap-6 justify-center items-center mb-3"
           style={{ marginTop: "30px" }}
         >
-          {currentProducts.map((product) => (
-            <div
-              key={product.id}
-              // className="hover:transform hover:scale-105 transition-transform duration-300"
-              
-            >
-              <Card
-                id={product.id}
-                name={product.name}
-                image={product.image}
-                price={product.price}
-                rating={product.rating}
-                stock={product.stock}
-              />
-            </div>
-          ))}
+          {currentProducts && currentProducts.length !== 0 ? (
+            currentProducts.map((product) => (
+              <div
+                key={product.id}
+                // className="hover:transform hover:scale-105 transition-transform duration-300"
+              >
+                <Card
+                  id={product.id}
+                  name={product.name}
+                  image={product.image}
+                  price={product.price}
+                  rating={product.rating}
+                  stock={product.stock}
+                />
+              </div>
+            ))
+          ) : (
+            <Image
+              className=" rounded-md ml-80"
+              src={"/images/store.png"}
+              alt={"store"}
+              height={500}
+              width={500}
+              style={{ width: "320px", height: "320px", marginInline: "auto" }}
+            />
+          )}
         </div>
         {products.length ? (
           <div>
@@ -210,6 +213,6 @@ const Store = () => {
       </main>
     </div>
   );
-        }  
+};
 
 export default Store;

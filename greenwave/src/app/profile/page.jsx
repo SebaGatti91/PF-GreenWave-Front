@@ -5,7 +5,8 @@ import Button from "../components/button/Button";
 import FormUser from "../components/formUser/FormUser";
 import Image from "next/image";
 import Link from "next/link";
-import "./profile.css"
+import LeftMenu from "../components/leftMenu/LeftMenu";
+import "./profile.css";
 import { useSession } from "next-auth/react";
 
 
@@ -22,45 +23,11 @@ const Profile = () => {
     setIsEditing(false);
   };
   return (
-
-    <div className="flex h-screen">
-      <div className="w-1/6 flex-none h-full">
-        <div
-          className="text-white h-full"
-          style={{
-            background:
-              "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051",
-          }}
-        >
-          <ul className="h-full flex flex-col justify-between text-center ">
-            <li>
-              <Button link={"/post-product"} text={"Sell a product"} />
-            </li>
-            <li>
-              <Button link={"/favorites"} text={"My favorites"} />
-            </li>
-            <li>
-              <Button link={"/myShopping"} text={"My shopping"} />
-            </li>
-            <li>
-              <Button link={"/myProducts"} text={"My products"} />
-            </li>
-            {/* <li>
-              <Button link={"/"} text={"My credits"} />
-            </li> */}
-            <li>
-              <Button link={"/donation"} text={"Donate"} />
-            </li>
-          </ul>
-        </div>
+    <div className="flex flex-row">
+      <div>
+        <LeftMenu />
       </div>
-      <div
-        className="flex-1"
-        style={{
-          background: "linear-gradient(0deg, rgba(123,154,50,0.3) 0%, rgba(214,230,178,0.5) 100%)"
-        }}
-
-      >
+      <div className="mr-5 w-4/5" style={{ marginInline: "auto" }}>
         <h1
           className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
           style={{ width: "100%", marginInline: "auto" }}
