@@ -62,7 +62,7 @@ const Favorites = () => {
           <div>
             <Image
               className=" rounded-md"
-              src={"/images/favorites2.png"}
+              src={"/images/favorites.png"}
               alt={"myFavorites"}
               height={500}
               width={500}

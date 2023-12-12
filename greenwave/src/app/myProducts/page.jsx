@@ -113,7 +113,7 @@ const MyProducts = () => {
           <div>
             <Image
               className=" rounded-md ml-80"
-              src={"/images/myProducts1.png"}
+              src={"/images/myProducts.png"}
               alt={"myProducts"}
               height={500}
               width={500}

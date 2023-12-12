@@ -7,7 +7,7 @@ import { Footer } from "./components/footer/Footer";
 import { Providers } from "./Providers";
 import { usePathname } from "next/navigation";
 import axios from "axios";
-import ChildComponent from './components/childComponent/ChildUser'
+import ChildComponent from "./components/childComponent/ChildUser";
 axios.defaults.baseURL = process.env.BACK;
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +20,6 @@ export default function RootLayout({ children }) {
   axios.defaults.baseURL = process.env.BACK;
   const pathname = usePathname();
 
-  
-
   return (
     <html lang="en">
       <head>
@@ -33,20 +31,20 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Providers>
           <ChildComponent children={children}>
-          {pathname === "/" ? (
-            <>{children}</>
-          ) : pathname.startsWith("/dashboard") || pathname === "/banned" ? (
-            <>{children}</>
-          ) : (
-            <div className="flex flex-col h-screen">
-              <NavBar />
-              <div className="flex-grow">
-                {children}
-                <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6569e3c391144160ce309b20,6569da1e6ab8927385562efb</script>
+            {pathname === "/" ? (
+              <>{children}</>
+            ) : pathname.startsWith("/dashboard") || pathname === "/banned" ? (
+              <>{children}</>
+            ) : (
+              <div className="flex flex-col h-screen">
+                <NavBar />
+                <div className="flex-grow">
+                  {children}
+                  {/* <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6569e3c391144160ce309b20,6569da1e6ab8927385562efb</script> */}
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
-          )}
+            )}
           </ChildComponent>
         </Providers>
       </body>
