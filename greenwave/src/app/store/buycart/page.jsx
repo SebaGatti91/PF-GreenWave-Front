@@ -46,7 +46,7 @@ const Cart = () => {
         item: itemsFromCart,
       });
 
-      setCart([]);
+      //setCart([]);
       window.location.href = response.data;
     } catch (error) {
       console.error("Error creating preference:", error);
@@ -109,7 +109,7 @@ const Cart = () => {
             Cart Items
           </h1>
 
-          <div className="flex flex-row justify-evenly min-h-full">
+          <div className="flex flex-col lg:flex-row justify-evenly min-h-full">
             <div className="m-12 rounded-lg w-1/2">
               {cart.map((product) => (
                 <div
@@ -190,7 +190,7 @@ const Cart = () => {
             </div>
 
             <div
-              className="w-1/4 m-12 py-2 rounded-xl shadow-2xl pb-3"
+              className="lg:w-1/4 w-1/2 m-12 py-2 rounded-xl shadow-2xl pb-3"
               style={{
                 backgroundColor: "#D1D7BF",
                 height: "40%",

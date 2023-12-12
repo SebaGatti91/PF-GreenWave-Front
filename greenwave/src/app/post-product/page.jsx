@@ -73,10 +73,11 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           //validations for description
           if (!values.description) {
             errors.description = "Please enter a product description";
-          } else if (!/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/.test(values.description)) {
-            errors.description =
-              "Must contain only letters and up to 500 characters";
+          } else if (!/^[\w\s.,;-]{30,250}$/.test(values.description)) {
+            errors.description = "Must contain only letters, commas, periods, hyphens, and be between 30 and 250 characters";
           }
+          
+          
 
           //validation for image
           if (!values.image) {
@@ -98,20 +99,26 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
         onSubmit={async (values, { resetForm }) => {
           try {
             setLoading(true);
-            const formData = new FormData();
-
+        
             if (file) {
-              formData.append("image", file);
-              values.userId = user.id;
-
-              // Carga la nueva imagen en Cloudinary
-              const cloudinaryResponse = await fetch("/api/upload", {
-                method: "POST",
-                body: formData,
-              });
-
-              const cloudinaryData = await cloudinaryResponse.json();
-              values.image = cloudinaryData.url;
+              let arr = [];
+        
+              for (let i = 0; i < file.length; i++) {
+                const formData = new FormData();
+                formData.append("image", file[i]);
+                values.userId = user.id;
+        
+                // Carga la nueva imagen en Cloudinary
+                const cloudinaryResponse = await fetch("/api/upload", {
+                  method: "POST",
+                  body: formData,
+                });
+        
+                const cloudinaryData = await cloudinaryResponse.json();
+                arr.push(cloudinaryData.url);
+              }
+        
+              values.image = arr;
             }
 
             // Cambia el método de la solicitud según si es una edición o una publicación
@@ -130,6 +137,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   return Swal.fire({
                     icon: "success",
                     title: "Product edited Successfully",
+                    confirmButtonColor: "#426F66",
                     text: "Your product has been successfully edited.",
                   });
                 }
@@ -282,7 +290,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   multiple
                   onChange={(event) => {
                     handleChange(event);
-                    setFile(event.target.files[0]);
+                    setFile(event.target.files);
                   }}
                   onBlur={handleBlur}
                   className="w-full px-3 py-2 border border-gray-300 rounded"

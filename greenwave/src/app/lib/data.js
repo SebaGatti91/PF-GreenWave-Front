@@ -202,8 +202,9 @@ export const fetchDonation = async (form, resetForm) => {
     if (response.status === 200) {
       return Swal.fire({
         icon: "success",
-        title: "Product edited Successfully",
-        text: "Your product has been successfully edited.",
+        title: "Donation form submitted!",
+        confirmButtonColor: "#426F66",
+        text: "We will contact you by e-mail with the steps to follow",
       });
     }
   } catch (error) {
@@ -232,3 +233,13 @@ export const updateProduct = async (productId, updatedData) => {
     throw new Error(error.message);
   }
 };
+
+export const fetchFeedback = async (cart) => {
+  try {
+  const url =`${BackUrl}/feedback`;
+  await axios.post(url, cart);
+  }catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+}

@@ -49,10 +49,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className='p-20 bg-hover mt-12 mb-12 shadow-2xl rounded-xl'
-        style={{ maxWidth: '400px', background: '#6CA188', border: '1px solid black' }}>
-        <div className="text-center"> {/* Agregado contenedor para centrar */}
+    <div className={ `${styles.container} flex justify-center`}>
+     
+      <div className=' flex-grow flex p-2  h-[450px] mt-12 max-w-[300px] justify-around mb-12 pb-10 pl-[50px] bg-neutral-400 items-center shadow-2xl  rounded-xl'
+        >
+          
+        <div className="text-center mr-10">
           <h1 className={styles.title}>Login</h1>
           <div>
             <button

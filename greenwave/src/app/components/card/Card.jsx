@@ -92,7 +92,7 @@ const Card = ({
   };
 
   const handleAddToCart = () => {
-    addToCart({ id, name, image, price, rating, stock });
+    addToCart({ id, name, image, price, rating, stock, userId: user?.email});
     setAddedToCart(true);
   };
 
@@ -195,7 +195,7 @@ const Card = ({
               height={200}
               width={150}
               style={{ height: "200px", border: "1px solid gray" }}
-              className="w-80 h-60 rounded-md border-sky-950"
+              className="w-80 h-60 rounded-t-lg border-sky-950"
             />
           </Link>
         </div>
