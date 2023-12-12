@@ -23,7 +23,7 @@ const Profile = () => {
     setIsEditing(false);
   };
   return (
-    <div className="flex flex-row pb-2">
+    <div className="mx-auto flex flex-col sm:flex-row ">
       <div>
         <LeftMenu />
       </div>
@@ -34,7 +34,7 @@ const Profile = () => {
         >
           Profile
         </h1>
-        <div className="flex justify-center items-center relative">
+        <div className="flex justify-center items-center relative m-3">
           <div className="card">
             <div className="cardImage">
               <img src="/images/hero.png"></img>
