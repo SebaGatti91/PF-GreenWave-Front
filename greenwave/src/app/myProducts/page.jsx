@@ -44,16 +44,27 @@ const MyProducts = () => {
     }
   };
   const handlePause = async (productId) => {
-    const response = await pauseProduct(productId);
-
-    if (response.status === 200) {
-      router.push(`/profile/`);
-      return Swal.fire({
-        icon: "success",
-        title: "Your product is pause!",
-        confirmButtonColor: "#426F66",
-        text: "You can active it whenever you want",
-      });
+    // router.push(`/profile/`);
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Your product will not appear in the store!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, pause it!",
+    });
+    if (result.isConfirmed) {
+      const response = await pauseProduct(productId);
+      if (response.status === 200) {
+        router.push(`/profile/`);
+        return Swal.fire({
+          icon: "success",
+          title: "Your product is pause!",
+          confirmButtonColor: "#426F66",
+          text: "You can active it whenever you want",
+        });
+      }
     }
   };
 
@@ -80,27 +91,34 @@ const MyProducts = () => {
                 border: "1px solid gray",
               }}
             >
-              <div className="absolute top-5">
-                {product && product.approved === true ? (
-                  product.paused === true ? (
-                    <div>
-                      <button onClick={() => handleActive(product.id)}>
-                        Active
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <button onClick={() => handlePause(product.id)}>
-                        Pause
-                      </button>
-                    </div>
-                  )
-                ) : null}
-              </div>
-              <div className="absolute top-10 right-0">
-                <label className="mr-20 ">Status:</label>
+              <div className="absolute top-10 right-0 ">
+                <div
+                  className={`mr-9 5 rounded-lg ${
+                    product.paused === true
+                      ? "hover:bg-green-500"
+                      : "hover:bg-red-500"
+                  }`}
+                  style={{ border: "1px solid #718096" }}
+                >
+                  {product && product.approved === true ? (
+                    product.paused === true ? (
+                      <div>
+                        <button onClick={() => handleActive(product.id)}>
+                          Active
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        <button onClick={() => handlePause(product.id)}>
+                          Pause
+                        </button>
+                      </div>
+                    )
+                  ) : null}
+                </div>
+
                 <h3
-                  className={`absolute bottom-0 right-0 m-2 px-2 rounded-lg ${
+                  className={`absolute bottom-0 right-0 m-7 px-2 rounded-lg ${
                     product.paused === false ? "bg-green-500" : "bg-red-500"
                   }`}
                   style={{ border: "1px solid #718096" }}
