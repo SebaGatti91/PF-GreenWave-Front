@@ -124,7 +124,7 @@ export default function ButtonAuth() {
       ) : (
         <button
           onClick={() => handleLogin()}
-          className="py-1 px-10 mr-10 bg-hover hover:bg-boton"
+          className="py-1 px-8 bg-hover hover:bg-boton"
           style={{
             fontFamily: "font-serif",
             borderRadius: "2em 2em",
