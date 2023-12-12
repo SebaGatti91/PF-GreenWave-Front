@@ -51,11 +51,9 @@ const LoginPage = () => {
   return (
     <div className={ `${styles.container} flex justify-center`}>
      
-      <div className=' flex-grow flex p-2 backdrop-blur-lg h-[450px] mt-12 max-w-[600px] justify-around mb-12 pb-10  shadow-2xl  rounded-xl'
+      <div className=' flex-grow flex p-2  h-[450px] mt-12 max-w-[300px] justify-around mb-12 pb-10 pl-[50px] bg-neutral-400 items-center shadow-2xl  rounded-xl'
         >
-          <div className={styles.log}>
-                  <h1>Atrevete a hacer la diferencia!!</h1>
-          </div>
+          
         <div className="text-center mr-10">
           <h1 className={styles.title}>Login</h1>
           <div>
