@@ -15,9 +15,14 @@ const About = () => {
           className="w-full"
         />
       </div>
-      <h1 className="text-3xl font-bold mb-6">About team</h1>
+      <h2
+        className="font-bold text-center text-2xl py-5 mb-10 mt-5 shadow-2xl"
+        style={{ width: "82%", marginInline: "auto" }}
+      >
+        About Team
+      </h2>
     
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center mb-8">
         {data.map((member) => (
           <div key={member.id} className="m-4 max-w-xs bg-white p-4 rounded-md">
             <Image
