@@ -13,7 +13,25 @@
   margin-top: 10%;
   transform: translateX(50%);
 }
-
+@media only screen and (max-width: 600px){
+  .logo{
+    width: 50px;
+  transform: translateX(30px)
+  }
+  .description{
+    display: none;
+  }
+  .button{
+    height: 40px;
+    width: 90px;
+  }
+}
+.scroll{
+  overflow: auto;
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
 .box {
   position: relative;
   width: 100%;
@@ -37,7 +55,7 @@ video {
 
 .content {
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
@@ -47,7 +65,7 @@ video {
 .title {
   font-size: 3rem;
   font-weight: bold;
-  color: aquamarine;
+  color: rgb(57, 120, 99);
 }
 
 .description {
@@ -63,9 +81,6 @@ video {
   padding: 1rem 2rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: white;
-  color: rgb(255, 255, 255);
-  font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
 }
@@ -84,6 +99,27 @@ video {
   display: flex;
   gap: 1rem;
   transform: translateX(4.5em);
+}
+
+@media all and (min-width: 320px){
+  .articulo{
+    display: flex;
+    flex-direction: column !important;
+    height: auto !important;
+    border-radius: 1rem 1rem;
+  }
+
+  .demostracion{
+    width: 100% !important;
+  }
+}
+
+@media all and (min-width: 1024px){
+  .articulo{
+    display: flex;
+    flex-direction: row !important;
+    height: 380px !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -121,11 +157,7 @@ video {
   height: auto;
   z-index: -1;
 }
-.seccion{
-  background-image: url(https://i.pinimg.com/564x/ee/50/62/ee5062e7f37af59df896fad8328e6202.jpg);
-  background-repeat: repeat;
-  background-size: cover;
-}
+
 .seccion:hover{
   animation: seccion 1s ease-in-out linear;
   

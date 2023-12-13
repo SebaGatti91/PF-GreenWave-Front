@@ -11,7 +11,7 @@ const Transactions = () => {
     const fetchUsersData = async () => {
       try {
         if (users.length === 0) {
-          const fetchedUsers = await fetchUsers(); // Asegúrate de que fetchUsers esté definida
+          const fetchedUsers = await fetchUsers();
           setUsers(fetchedUsers);
         }
       } catch (error) {
@@ -26,41 +26,41 @@ const Transactions = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Latest Transactions</h2>
+      <h2 className={styles.title}>Transactions by Users</h2>
       <table className={styles.table}>
         <thead>
           <tr>
             <th>Image</th>
             <th>Username</th>
             <th>Product</th>
+            <th>Quantity</th>
             <th>Amount</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
           {users?.map((user) => (
-            // Verifica si user.purchases está vacío
             user.purchases && user.purchases.length > 0 ? (
-              <tr key={user.id}>
-                <td>
-                  <div className={styles.user}>
-                    <Image
-                      src={user.image ? user.image : "/images/noavatar.png"}
-                      alt=""
-                      width={40}
-                      height={40}
-                      className={styles.userImage}
-                    />
-                  </div>
-                </td>
-                {/* Mapeo de las compras del usuario */}
-                <td>{user.username}</td>
-                {user.purchases.map((purchase) => (
-                  <React.Fragment key={purchase.Product.id}>
-                    <td>{purchase.Product.name}</td>
-                    <td>${purchase.Product.price}</td>
-                  </React.Fragment>
-                ))}
-              </tr>
+              user.purchases.map((purchase) => (
+                <tr key={`${user.id}-${purchase.Product.id}`}>
+                  <td>
+                    <div className={styles.user}>
+                      <Image
+                        src={user.image ? user.image : "/images/noavatar.png"}
+                        alt=""
+                        width={40}
+                        height={40}
+                        className={styles.userImage}
+                      />
+                    </div>
+                  </td>
+                  <td>{user.username}</td>
+                  <td>{purchase.Product.name}</td>
+                  <td>{purchase.quantity}</td>
+                  <td>${purchase.Product.price}</td>
+                  <td>${purchase.Product.price * purchase.quantity}</td>
+                </tr>
+              ))
             ) : null
           ))}
         </tbody>

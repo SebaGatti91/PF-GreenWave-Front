@@ -1,24 +1,27 @@
-import "../../public/estilos/404.css"
 import Link from "next/link";
+import '../../public/estilos/notFound.css'
+
 export default function Custom404() {
 
   return (
-  
-    <div className="containers">
-      <div className="contenido">
-      <div>
-      <p className="background-clip-text">Oops!</p>
+    <div className="relative flex flex-col justify-center items-center h-screen w-full error">
+      <img
+        src="/images/404.png"
+        id="pic"
+        className="h-screen"
+      />
+      <img
+        src="/images/noencontrado1.png"
+        id="pictu"
+        className="h-screen lg:hidden"
+      />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center mt-14">
+          <Link href="/homepage" className="px-2 py-1 rounded-lg bg-hover hover:bg-hover-clear" style={{ border: '1px solid gray' }}>
+            <button className="mi-clase">Go to Home</button>
+          </Link>
+        </div>
       </div>
-      
-      <div className="message">
-        <h1>yo habia ponido<br></br> mi pagina aqui!! <br></br> 4♻️4 error </h1>
-      <h1></h1>
-      <Link href="/">
-      <button className="mi-clase">Go to HomePage</button>
-      </Link>
     </div>
-    </div>
-    </div>
-   
   );
 }

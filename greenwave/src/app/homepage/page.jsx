@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <section
-        className="relative flex flex-col items-center text-cyan-50 w-full justify-center overflow-hidden heroSection"
+        className="relative image flex flex-col items-center text-cyan-50 w-full justify-center overflow-hidden heroSection"
         style={{
           backgroundImage: "url('/images/hero.png')",
           backgroundPosition: "center",
@@ -16,7 +16,7 @@ export default function Home() {
           backgroundAttachment: "fixed",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.485)] to-[rgba(0,0,0,0.542)]"></div>
+        <div className="absolute section inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.485)] to-[rgba(0,0,0,0.542)]"></div>
         <h1 className="font-bold text-4xl relative z-10">Green Wave</h1>
         <div className="max-w-screen-md w-full relative z-10">
           <p className="text-center p-3 text-lg">
