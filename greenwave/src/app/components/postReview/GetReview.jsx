@@ -5,7 +5,7 @@ import "./reviews.css";
 
 function ReviewList({ rating, reviewedBy }) {
   const [expandedComments, setExpandedComments] = useState([]);
-  const [filterRate, setFilterRate] = useState('')
+  const [filterRate, setFilterRate] = useState("");
 
   if (!rating || !reviewedBy) {
     return <div>Cargando...</div>;
@@ -20,14 +20,16 @@ function ReviewList({ rating, reviewedBy }) {
       }
     });
   };
-  const handleSelect = (e) =>{
-    setFilterRate(e.target.value)
-  }
-  let reviewsFiltradas
-  if(filterRate === ''){
-    reviewsFiltradas = reviewedBy 
-  }else{
-   reviewsFiltradas = reviewedBy.filter(review => review.rating == filterRate);
+  const handleSelect = (e) => {
+    setFilterRate(e.target.value);
+  };
+  let reviewsFiltradas;
+  if (filterRate === "") {
+    reviewsFiltradas = reviewedBy;
+  } else {
+    reviewsFiltradas = reviewedBy.filter(
+      (review) => review.rating == filterRate
+    );
   }
   let usersLength = 0;
   const ratingCounts = [0, 0, 0, 0, 0];
@@ -35,10 +37,9 @@ function ReviewList({ rating, reviewedBy }) {
     ratingCounts[review.rating - 1]++;
     usersLength++;
   });
-  console.log(reviewedBy);
 
   return (
-    <div className="flex flex-col ml-20 rounded-lg w-full ">
+    <div className="flex flex-col ml-20 rounded-lg md:w-full ">
       <div>
   <div className="flex flex-col md:flex-row items-center w-full">
     <div className="flex flex-col justify-center items-center w-full md:w-1/3">

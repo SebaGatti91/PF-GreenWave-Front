@@ -69,11 +69,11 @@ const MyProducts = () => {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col sm:flex-row">
       <div>
         <LeftMenu />
       </div>
-      <div className="mr-5 w-4/5" style={{ marginInline: "auto" }}>
+      <div className=" w-4/5" style={{ marginInline: "auto" }}>
         <h1
           className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
           style={{ width: "100%", marginInline: "auto" }}
@@ -85,24 +85,23 @@ const MyProducts = () => {
           userProducts?.map((product) => (
             <div
               key={product.id}
-              className="relative flex flex-row justify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5 hover:transform hover:scale-105 transition-transform duration-300"
+              className="flex flex-col lg:flex-row justify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5"
               style={{
                 backgroundColor: "#D1D7BF",
                 border: "1px solid gray",
               }}
             >
-              <div className="absolute top-10 right-0 ">
+              <div className="">
                 <div
                   className={`mr-9 5 rounded-lg ${
                     product.paused === true
                       ? "hover:bg-green-500"
                       : "hover:bg-red-500"
                   }`}
-                  style={{ border: "1px solid #718096" }}
                 >
                   {product && product.approved === true ? (
                     product.paused === true ? (
-                      <div>
+                      <div className="">
                         <button onClick={() => handleActive(product.id)}>
                           Active
                         </button>
@@ -118,10 +117,9 @@ const MyProducts = () => {
                 </div>
 
                 <h3
-                  className={`absolute bottom-0 right-0 m-7 px-2 rounded-lg ${
+                  className={`m-7 px-2 text-center rounded-lg ${
                     product.paused === false ? "bg-green-500" : "bg-red-500"
                   }`}
-                  style={{ border: "1px solid #718096" }}
                 >
                   {product.approved === true
                     ? product.paused === true
@@ -130,7 +128,7 @@ const MyProducts = () => {
                     : "Pending"}
                 </h3>
               </div>
-              <div className="flex flex-row">
+              <div className="flex flex-col justify-center items-center sm:flex-row">
                 <Image
                   className="w-60 h-40 rounded-md"
                   src={product.image[0]}
@@ -138,16 +136,14 @@ const MyProducts = () => {
                   height={150}
                   width={150}
                   style={{
-                    maxWidth: "200px",
                     height: "150px",
                     marginTop: "20px",
-                    marginLeft: "20px",
                     border: "2px solid gray",
                   }}
                 />
-                <div className="flex flex-col text-start p-4">
+                <div className="flex flex-col  p-4">
                   <h3
-                    className="font-bold py-1 text-left text-lg"
+                    className="font-bold py-1 text-center text-lg"
                     style={{ width: "100%", textShadow: "1px 1px gray" }}
                   >
                     {product.name}

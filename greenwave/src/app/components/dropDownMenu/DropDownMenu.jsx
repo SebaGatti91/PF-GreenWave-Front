@@ -62,15 +62,15 @@ const DropDownMenu = ({
       </div> */}
 
       <div className="pb-2 bg-hover">
-        <h3 className="text-left font-semibold text-base pl-8 mt-6 mb-3 sm:block hidden">Order Alfabetic</h3>
+        <h3 className="text-left font-semibold text-base pl-8 mt-6 mb-3 sm:block hidden">Alphabetical Order</h3>
         <select
           onChange={handleOrder}
           className="flex justify-center rounded-lg bg-white hover:cursor-pointer pl-4 py-1"
           style={{ marginInline: 'auto', width: '80%', border: '1px solid gray' }}
         >
-          <option value="Alfabetico" className="text-center">Order Alfabetic</option>
-          <option value="nameAsc" className="text-center">Ascendent</option>
-          <option value="nameDesc" className="text-center">Descendent</option>
+          <option value="Alfabetico" className="text-center">Alphabetical</option>
+          <option value="nameAsc" className="text-center">Ascending</option>
+          <option value="nameDesc" className="text-center">Descending</option>
         </select>
       </div>
 
@@ -82,8 +82,8 @@ const DropDownMenu = ({
           style={{ marginInline: 'auto', width: '80%', border: '1px solid gray' }}
         >
           <option className="text-center" value="Price">Price</option>
-          <option className="text-center" value="priceAsc">Ascendent</option>
-          <option className="text-center" value="priceDesc">Descendent</option>
+          <option className="text-center" value="priceAsc">Ascending</option>
+          <option className="text-center" value="priceDesc">Descending</option>
         </select>
       </div>
 
