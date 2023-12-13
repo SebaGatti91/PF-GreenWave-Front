@@ -156,7 +156,9 @@ export default function Detail({ params }) {
                 height={500}
                 width={500}
               />
-              {product.image[1] && product.image[2] && product.image[3] ? (
+              {product.image[1] !== "" &&
+              product.image[2] !== "" &&
+              product.image[3] !== "" ? (
                 <div>
                   <Image
                     src={product?.image[1]}
