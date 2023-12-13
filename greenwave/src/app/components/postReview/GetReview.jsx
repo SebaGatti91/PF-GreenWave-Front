@@ -35,14 +35,13 @@ function ReviewList({ rating, reviewedBy }) {
     ratingCounts[review.rating - 1]++;
     usersLength++;
   });
+  console.log(reviewedBy);
 
   return (
-    <div className="flex flex-col ml-20 rounded-lg  md:w-full">
+    <div className="flex flex-col ml-20 rounded-lg w-full ">
       <div>
-      <div className="flex flex-box items-center w-full md:w-full">
-        {/*falta mandar las barritas de progreso para abajo*/}
-        <div className="flex flex-col justify-center items-center w-full md:w-1/2">
-          
+      <div className="flex flex-box items-center  w-full">
+        <div className="flex flex-col justify-center items-center w-1/3">
           <p className="rate">{rating}</p>
           <StarRatings
             rating={parseFloat(rating)}
@@ -53,7 +52,7 @@ function ReviewList({ rating, reviewedBy }) {
           />
           <h5 className="mt-4">{usersLength} reseñas</h5>
         </div>
-        <div className="flex flex-col  w-1/3 mt-10 md:w-full md:flex-col">
+        <div className="flex flex-col w-1/2 mt-10 ">
           {ratingCounts.map((count, index) => {
             return (
               <div key={index}>
@@ -80,15 +79,17 @@ function ReviewList({ rating, reviewedBy }) {
         </select>
       </label>
       </div>
-      <div className="scroll flex flex-wrap">
-        <div className="flex flex-wrap md:justify-left">
+      <div className="scroll flex flex-wrap" style={{
+       maxHeight: '450px', overflowY: 'auto', display: 'none'
+      }
+      }>
       {reviewsFiltradas.map((review) => {
         const created = review.createdAt.slice(0, 10).split('-').reverse().join('-');
         const isCommentExpanded = expandedComments.includes(review.id);
         const RandomUser = users[Math.floor(Math.random()* users.length)]
         return (
-          <div key={review.id} className="w-full ml-[-10px] p-2 md:w-1/3  ">
-            <div className="bg-white rounded-lg mt-2 p-4 h-full">
+          <div key={review.id} className="w-1/3 p-2">
+            <div className="bg-white rounded-lg mt-2 p-4">
               <div className="flex flex-col">
                 <label className="flex justify-left">
                   <img src={review.image || "https://i.pinimg.com/564x/4b/2d/35/4b2d35ecc28064419c2c0b59ad2e3cc2.jpg"} alt="user" className="rounded-full overflow-hidden w-10 h-10 mr-5" />
@@ -119,7 +120,6 @@ function ReviewList({ rating, reviewedBy }) {
           </div>
         );
       })}
-      </div>
     </div>
     </div>
   );
