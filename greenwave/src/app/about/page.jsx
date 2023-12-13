@@ -16,7 +16,7 @@ const About = () => {
         />
       </div>
       <h1 className="text-3xl font-bold mb-6">About team</h1>
-    
+
       <div className="flex flex-wrap justify-center">
         {data.map((member) => (
           <div key={member.id} className="m-4 max-w-xs bg-white p-4 rounded-md">
@@ -44,14 +44,6 @@ const About = () => {
                 <Image
                   src="/images/github.png"
                   alt="githubImage"
-                  width={40}
-                  height={40}
-                />
-              </a>
-              <a href={member.socialMedia.instagram} target="_blank">
-                <Image
-                  src="/images/instagram.png"
-                  alt="instagramImage"
                   width={40}
                   height={40}
                 />

@@ -156,7 +156,7 @@ const Cart = () => {
                     >
                       {
                         <img
-                          src="/images/rubishBeen.png"
+                          src="/images/borrar.png"
                           alt="rubishBeen"
                           className="w-5 h-5"
                         />

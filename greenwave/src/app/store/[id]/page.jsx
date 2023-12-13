@@ -252,12 +252,12 @@ export default function Detail({ params }) {
                 !foundUserProduct ? (
                   <div>
                     <div className="flex justify-center items-center">
-                      <button
+                      {/* <button
                         onClick={handleBuy}
                         className="bg-green-800 text-white font-semibold m-2 p-1 px-16 rounded-md h-full"
                       >
                         Buy now
-                      </button>
+                      </button> */}
 
                       <div className="flex justify-start items-start">
                         {addedToCart ? (
@@ -268,7 +268,7 @@ export default function Detail({ params }) {
                             >
                               {
                                 <img
-                                  src="/images/rubishBeen.png"
+                                  src="/images/borrar.png"
                                   alt="rubishBeen"
                                   className="w-7 h-7"
                                 />
@@ -338,7 +338,10 @@ export default function Detail({ params }) {
         </div>
         <div>
           <div className="flex">
-            <ReviewList rating={product?.rating} reviewedBy={product?.Reviews} />
+            <ReviewList
+              rating={product?.rating}
+              reviewedBy={product?.Reviews}
+            />
             {/* <button onClick={handlepost} className="elemento">
             add a review
           </button> */}

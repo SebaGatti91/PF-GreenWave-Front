@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
                 <NavBar />
                 <div className="flex-grow">
                   {children}
-                  <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6569e3c391144160ce309b20,6569da1e6ab8927385562efb</script>
+                  {/* <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6569e3c391144160ce309b20,6569da1e6ab8927385562efb</script> */}
                 </div>
                 <Footer />
               </div>
