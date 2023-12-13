@@ -16,7 +16,7 @@
 @media only screen and (max-width: 600px){
   .logo{
     width: 50px;
-  transform: translateX(30px)
+  transform: translateX(50%)
   }
   .description{
     display: none;
@@ -60,6 +60,7 @@ video {
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
+  
 }
 
 .title {
