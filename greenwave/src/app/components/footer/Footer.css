@@ -1,0 +1,57 @@
+@media all and (min-width: 320px){
+
+    .contenedor{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        padding: 1em 0;
+    }
+
+    .pie{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        text-align: left;
+        align-items: start;
+    }
+
+    .email{
+        display: flex;
+        flex-direction: row-reverse !important;
+        padding-top: 1.5rem ;
+    }
+
+    .terminos{
+        display: flex;
+        flex-direction: row-reverse !important;
+        padding: 1.5rem 0;
+    }
+
+    .parrafo{
+        margin-left: 1rem;
+    }
+}
+
+@media all and (min-width: 1024px) {
+   .contenedor{
+    padding: 0 0;
+   }
+    .pie{
+        display: flex;
+        flex-direction: row;
+        padding: 0rem 0rem !important;
+        align-items: center;
+    }
+
+    .email{
+        display: flex;
+        flex-direction: row !important;
+        padding-top: 0;
+    }
+
+    .terminos{
+        display: flex;
+        flex-direction: row !important;
+        padding: 0 0;
+    }
+}

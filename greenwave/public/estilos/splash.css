@@ -101,6 +101,27 @@ video {
   transform: translateX(4.5em);
 }
 
+@media all and (min-width: 320px){
+  .articulo{
+    display: flex;
+    flex-direction: column !important;
+    height: auto !important;
+    border-radius: 1rem 1rem;
+  }
+
+  .demostracion{
+    width: 100% !important;
+  }
+}
+
+@media all and (min-width: 1024px){
+  .articulo{
+    display: flex;
+    flex-direction: row !important;
+    height: 380px !important;
+  }
+}
+
 @media (max-width: 768px) {
   .title {
     font-size: 2rem;
@@ -136,11 +157,7 @@ video {
   height: auto;
   z-index: -1;
 }
-.seccion{
-  background-image: url(https://i.pinimg.com/564x/ee/50/62/ee5062e7f37af59df896fad8328e6202.jpg);
-  background-repeat: repeat;
-  background-size: cover;
-}
+
 .seccion:hover{
   animation: seccion 1s ease-in-out linear;
   
