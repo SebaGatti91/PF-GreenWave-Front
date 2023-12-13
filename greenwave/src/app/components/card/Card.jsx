@@ -92,7 +92,7 @@ const Card = ({
   };
 
   const handleAddToCart = () => {
-    addToCart({ id, name, image, price, rating, stock, userId: user?.email});
+    addToCart({ id, name, image, price, rating, stock, userId: user?.email });
     setAddedToCart(true);
   };
 
@@ -132,7 +132,7 @@ const Card = ({
           >
             {
               <img
-                src="/images/rubishBeen.png"
+                src="/images/borrar.png"
                 alt="rubishBeen"
                 className="w-7 h-7"
               />
