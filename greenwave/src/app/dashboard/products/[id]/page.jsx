@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchProductById, pauseProduct } from "../../../lib/data";
+import { fetchProductById, approveProduct } from "../../../lib/data";
 import { updateProduct } from "../../../lib/data";
 import Link from "next/link";
 import Image from "next/image";
@@ -138,9 +138,9 @@ const ProductProfile = ({ params }) => {
     fetchProductData();
   }, [productId]);
 
-  const handlePause = async (productId) => {
+  const handleApprove = async (productId) => {
     try {
-      await pauseProduct(productId);
+      await approveProduct(productId);
       const updatedProduct = await fetchProductById(productId);
       setProductView(updatedProduct);
 
@@ -197,21 +197,24 @@ const ProductProfile = ({ params }) => {
             <strong>Status:</strong>{" "}
             <span
               className={`${
-                productView.paused ? "text-red-500" : " text-green-500"
+                productView.approved === false
+                  ? "text-red-500"
+                  : " text-green-500"
               } font-bold`}
             >
-              {productView.paused ? "Paused" : "Active"}
+              {productView.approved === false ? "Not approve" : "Approve"}
+              {console.log(productView.approved)}
             </span>
           </p>
           <button
             className={`${
-              productView.paused
+              productView.approved === false
                 ? "bg-green-500 text-white"
                 : "bg-red-500 text-white"
             } px-4 py-2 rounded mt-2`}
-            onClick={() => handlePause(productView.id)}
+            onClick={() => handleApprove(productView.id)}
           >
-            {productView.paused ? "Active" : "Pause"}
+            {productView.approved === false ? "Approve" : "Not approve"}
           </button>
         </div>
       </div>

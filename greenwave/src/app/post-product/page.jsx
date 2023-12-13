@@ -137,7 +137,8 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   router.push(`/profile/`);
                   return Swal.fire({
                     icon: "success",
-                    title: "Product edited Successfully",
+                    title:
+                      "Product edited Successfully, it will be pending to approve",
                     confirmButtonColor: "#426F66",
                     text: "Your product has been successfully edited.",
                   });
