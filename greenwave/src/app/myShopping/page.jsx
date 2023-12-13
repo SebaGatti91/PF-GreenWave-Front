@@ -52,7 +52,7 @@ const myShopping = () => {
           myShopping?.map((purchase) => (
             <div
               key={purchase.id}
-              className=" flex flex-col lg:flex-rowjustify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5"
+              className=" flex flex-col lg:flex-row justify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5"
               style={{
                 backgroundColor: "#D1D7BF",
                 border: "1px solid gray",
