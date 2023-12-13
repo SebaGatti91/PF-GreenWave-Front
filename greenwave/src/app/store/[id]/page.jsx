@@ -329,7 +329,7 @@ export default function Detail({ params }) {
 
                 {/* Modal de edición */}
                 {isEditing && (
-                  <div className="fixed top-0 bottom-0 w-9/12 flex items-center justify-center m-4	">
+                  <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10/12 md:w-2/3 lg:w-1/2 xl:w-1/3">
                     <div className="bg-white p-3 rounded-lg">
                       <PostProduct initialValues={product} isOff={false} />
 
