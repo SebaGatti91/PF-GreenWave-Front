@@ -67,6 +67,7 @@ export default function Detail({ params }) {
             unit_price: product.price,
             quantity: 1,
             currency_id: "ARS",
+            userId: user.email
           },
         ],
       });
