@@ -121,7 +121,7 @@ export default function Detail({ params }) {
 
   console.log(product);
   if (!product) {
-    return null;
+    return <div>loading...</div>;
   }
 
   if (loading) {
@@ -322,7 +322,7 @@ export default function Detail({ params }) {
         </div>
         <div>
           <div className="flex">
-            <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
+            <ReviewList rating={product?.rating} reviewedBy={product?.Reviews} />
             {/* <button onClick={handlepost} className="elemento">
             add a review
           </button> */}

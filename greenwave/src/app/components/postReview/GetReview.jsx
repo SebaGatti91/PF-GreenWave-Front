@@ -5,7 +5,7 @@ import "./reviews.css";
 
 function ReviewList({ rating, reviewedBy }) {
   const [expandedComments, setExpandedComments] = useState([]);
-  const [filterRate, setFilterRate] = useState('0')
+  const [filterRate, setFilterRate] = useState('')
 
   if (!rating || !reviewedBy) {
     return <div>Cargando...</div>;
@@ -23,7 +23,12 @@ function ReviewList({ rating, reviewedBy }) {
   const handleSelect = (e) =>{
     setFilterRate(e.target.value)
   }
-  let reviewsFiltradas = reviewedBy.filter(review => review.rating == filterRate);
+  let reviewsFiltradas
+  if(filterRate === ''){
+    reviewsFiltradas = reviewedBy 
+  }else{
+   reviewsFiltradas = reviewedBy.filter(review => review.rating == filterRate);
+  }
   let usersLength = 0;
   const ratingCounts = [0, 0, 0, 0, 0];
   reviewedBy.forEach((review) => {
@@ -74,8 +79,8 @@ function ReviewList({ rating, reviewedBy }) {
         </select>
       </label>
       </div>
-      <div className="flex flex-wrap" style={{
-       maxHeight: '650px', overflowY: 'scroll'  
+      <div className="scroll flex flex-wrap" style={{
+       maxHeight: '450px', overflowY: 'auto', display: 'none'
       }
       }>
       {reviewsFiltradas.map((review) => {
