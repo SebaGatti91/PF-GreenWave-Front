@@ -1,0 +1,42 @@
+@media all and (min-width: 320px) {
+    @keyframes slideIn {
+        from {
+            top: -100px;
+            /* Ajusta según sea necesario, valor para la posición inicial fuera de la pantalla */
+        }
+
+        to {
+            top: 86px;
+            /* Valor final para la posición abierta */
+        }
+    }
+
+    .mobile-menu {
+        position: absolute;
+        top: 86px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        transition: top 0.3s ease-in-out;
+        animation: slideIn 0.6s ease-in-out;
+    }
+
+    .imagen {
+        width: 10vw;
+        padding: 0.5em;
+        padding-left: 0.2em;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    .imagen {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+}

@@ -1,7 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../components/cart/cartContext";
 import { useState, useEffect, useContext } from "react";
@@ -12,6 +11,7 @@ import Skeleton from "./Skeleton";
 import { deleteProduct } from "../../lib/data";
 import { GlobalUser } from "../../components/users/globalUsers";
 import ReviewList from "../../components/postReview/GetReview";
+import Image from "next/image";
 export default function Detail({ params }) {
   const BackUrl = process.env.BACK;
 
@@ -105,8 +105,7 @@ export default function Detail({ params }) {
       price: product.price,
       rating: product.rating,
       stock: product.stock,
-      userId: user?.email
-
+      userId: user?.email,
     });
     setAddedToCart(true);
   };
@@ -122,7 +121,7 @@ export default function Detail({ params }) {
 
   console.log(product);
   if (!product) {
-    return null;
+    return <div>loading...</div>;
   }
 
   if (loading) {
@@ -141,36 +140,52 @@ export default function Detail({ params }) {
                 STORE
               </button>
             </Link>
-            <img
+            <Image
               src={activeImg || product?.image[0]}
               alt=""
               className="w-full h-full aspect-square object-cover rounded-xl"
+              height={500}
+              width={500}
             />
             <div className="flex flex-row justify-between h-24">
-              <img
+              <Image
                 src={product?.image[0]}
                 alt=""
                 className="w-20 h-24 lg:w-28 lg:h-28 rounded-md cursor-pointer"
                 onClick={() => setActiveImg(product?.image[0])}
+                height={500}
+                width={500}
               />
-              <img
-                src={product?.image[1]}
-                alt=""
-                className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-                onClick={() => setActiveImg(product?.image[1])}
-              />
-              <img
-                src={product?.image[2]}
-                alt=""
-                className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-                onClick={() => setActiveImg(product?.image[2])}
-              />
-              <img
-                src={product?.image[3]}
-                alt=""
-                className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-                onClick={() => setActiveImg(product?.image[3])}
-              />
+              {product.image[1] && product.image[2] && product.image[3] ? (
+                <div>
+                  <Image
+                    src={product?.image[1]}
+                    alt=""
+                    className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                    onClick={() => setActiveImg(product?.image[1])}
+                    height={500}
+                    width={500}
+                  />
+                  <Image
+                    src={product?.image[2]}
+                    alt=""
+                    className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                    onClick={() => setActiveImg(product?.image[2])}
+                    height={500}
+                    width={500}
+                  />
+                  <Image
+                    src={product?.image[3]}
+                    alt=""
+                    className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                    onClick={() => setActiveImg(product?.image[3])}
+                    height={500}
+                    width={500}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="flex flex-col gap-4">
@@ -220,24 +235,29 @@ export default function Detail({ params }) {
               className={`m-2 rounded-lg ${
                 product.stock > 0 ? "bg-green-500" : "bg-red-500"
               }`}
-              style={{ border: "1px solid #718096" }}
+              style={{
+                maxWidth: "90px",
+                margin: "0 auto",
+                border: "1px solid #718096",
+                padding: "7px",
+              }}
             >
               Stock: {product.stock}
             </p>
 
             <div>
               <div className="flex flex-col items-center text-center p-3 ml-3">
-                {product.stock !== 0 &&
+                {product.stock > 0 &&
                 product.paused !== true &&
                 !foundUserProduct ? (
                   <div>
                     <div className="flex justify-center items-center">
-                      <button
+                      {/* <button
                         onClick={handleBuy}
                         className="bg-green-800 text-white font-semibold m-2 p-1 px-16 rounded-md h-full"
                       >
                         Buy now
-                      </button>
+                      </button> */}
 
                       <div className="flex justify-start items-start">
                         {addedToCart ? (
@@ -248,7 +268,7 @@ export default function Detail({ params }) {
                             >
                               {
                                 <img
-                                  src="/images/rubishBeen.png"
+                                  src="/images/borrar.png"
                                   alt="rubishBeen"
                                   className="w-7 h-7"
                                 />
@@ -318,7 +338,10 @@ export default function Detail({ params }) {
         </div>
         <div>
           <div className="flex">
-            <ReviewList rating={product.rating} reviewedBy={product.Reviews} />
+            <ReviewList
+              rating={product?.rating}
+              reviewedBy={product?.Reviews}
+            />
             {/* <button onClick={handlepost} className="elemento">
             add a review
           </button> */}

@@ -39,12 +39,23 @@ export const banUser = async (userId) => {
   }
 };
 
+export const approveProduct = async (productId) => {
+  try {
+    const url = `${BackUrl}/products/approve/${productId}`;
+    const response = await axios.put(url);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error al pausar product", error);
+    throw error;
+  }
+};
 export const pauseProduct = async (productId) => {
   try {
     const url = `${BackUrl}/products/pause/${productId}`;
     const response = await axios.put(url);
 
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error al pausar product", error);
     throw error;
@@ -74,7 +85,7 @@ export const createUser = async (user) => {
     await axios.post(url, user);
   } catch (error) {
     console.error("Error al crear el usuario en el backend", error);
-    // Consider setting a more specific error message or logging details
+   
   }
 };
 
@@ -202,8 +213,9 @@ export const fetchDonation = async (form, resetForm) => {
     if (response.status === 200) {
       return Swal.fire({
         icon: "success",
-        title: "Product edited Successfully",
-        text: "Your product has been successfully edited.",
+        title: "Donation form submitted!",
+        confirmButtonColor: "#426F66",
+        text: "We will contact you by e-mail with the steps to follow",
       });
     }
   } catch (error) {
@@ -215,15 +227,15 @@ export const fetchDonation = async (form, resetForm) => {
 export const updateProduct = async (productId, updatedData) => {
   try {
     const response = await fetch(`${BackUrl}/products/${productId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedData),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to update product');
+      throw new Error("Failed to update product");
     }
 
     const result = await response.json();
@@ -235,10 +247,10 @@ export const updateProduct = async (productId, updatedData) => {
 
 export const fetchFeedback = async (cart) => {
   try {
-  const url =`${BackUrl}/feedback`;
-  await axios.post(url, cart);
-  }catch (error) {
+    const url = `${BackUrl}/feedback`;
+    await axios.post(url, cart);
+  } catch (error) {
     console.error("Error fetching user data:", error);
     throw error;
   }
-}
+};

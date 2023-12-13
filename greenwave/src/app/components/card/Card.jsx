@@ -92,7 +92,7 @@ const Card = ({
   };
 
   const handleAddToCart = () => {
-    addToCart({ id, name, image, price, rating, stock, userId: user?.email});
+    addToCart({ id, name, image, price, rating, stock, userId: user?.email });
     setAddedToCart(true);
   };
 
@@ -101,8 +101,7 @@ const Card = ({
   };
 
   const renderAddToCartButton = () => (
-    <div className="py-2">
-      <p className="text-center"> {state.rate}</p>
+    <div className="py-2 mb-5">
       <button
         onClick={handleAddToCart}
         className="p-1 m-2 rounded-lg mr-2 bg-hover hover:bg-boton flex justify-center"
@@ -125,7 +124,7 @@ const Card = ({
     }
     return (
       <div key={item.id} className="flex flex-col justify-center">
-        <p className="text-center py-1">{state.rate}</p>
+        
         <div className="flex justify-center flex-row items-center py-2 mb-2">
           <button
             className="bg-red-500 hover:bg-red-700 p-1 rounded-md"
@@ -133,7 +132,7 @@ const Card = ({
           >
             {
               <img
-                src="/images/rubishBeen.png"
+                src="/images/borrar.png"
                 alt="rubishBeen"
                 className="w-7 h-7"
               />
@@ -173,7 +172,7 @@ const Card = ({
     return (
       <div
         className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col"
-        style={{ height: "360px" }}
+        style={{ height: "380px", width: '300px' }}
       >
         <div className="relative flex-grow">
           <div className="absolute top-0 right-0 m-2">
@@ -195,12 +194,12 @@ const Card = ({
               height={200}
               width={150}
               style={{ height: "200px", border: "1px solid gray" }}
-              className="w-80 h-60 rounded-md border-sky-950"
+              className="w-80 h-60 rounded-t-lg border-sky-950"
             />
           </Link>
         </div>
 
-        <div className="flex-shrink-0 mt-2 flex flex-col items-center">
+        <div className="flex-shrink-0 mt-2 flex flex-col items-center mb-5">
           <h3 className="text-center font-bold">{name}</h3>
           <h3 className="text-green-600 text-center">USD {price}</h3>
 

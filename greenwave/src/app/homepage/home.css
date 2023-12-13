@@ -94,3 +94,16 @@
     transform: none;
 }
 }
+
+@media(max-width:400px){
+  .cardBody p{
+    font-size: 13px;
+    text-align: center;
+    line-height: 18px;
+  }
+
+  .cardBody h1{
+    font-size: 19px;
+    margin: 5px;
+  }
+}

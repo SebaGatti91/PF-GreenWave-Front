@@ -32,12 +32,14 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold m-2 text-center">
+      <h2
+        className="font-bold text-center text-2xl py-5 mb-6 shadow-2xl mt-5"
+        style={{ width: "80%", marginInline: "auto" }}
+      >
         {initialValues && initialValues.id
           ? "Edit Product"
           : "Publish your product"}
       </h2>
-
       <Formik
         initialValues={{
           name: initialValues ? initialValues.name : "",
@@ -73,9 +75,9 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           //validations for description
           if (!values.description) {
             errors.description = "Please enter a product description";
-          } else if (!/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/.test(values.description)) {
+          } else if (!/^[\w\s.,;-]{30,250}$/.test(values.description)) {
             errors.description =
-              "Must contain only letters and up to 500 characters";
+              "Must contain only letters, commas, periods, hyphens, and be between 30 and 250 characters";
           }
 
           //validation for image
@@ -98,25 +100,25 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
         onSubmit={async (values, { resetForm }) => {
           try {
             setLoading(true);
-        
+
             if (file) {
               let arr = [];
-        
+
               for (let i = 0; i < file.length; i++) {
                 const formData = new FormData();
                 formData.append("image", file[i]);
                 values.userId = user.id;
-        
+
                 // Carga la nueva imagen en Cloudinary
                 const cloudinaryResponse = await fetch("/api/upload", {
                   method: "POST",
                   body: formData,
                 });
-        
+
                 const cloudinaryData = await cloudinaryResponse.json();
                 arr.push(cloudinaryData.url);
               }
-        
+
               values.image = arr;
             }
 
@@ -135,7 +137,9 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   router.push(`/profile/`);
                   return Swal.fire({
                     icon: "success",
-                    title: "Product edited Successfully",
+                    title:
+                      "Product edited Successfully, it will be pending to approve",
+                    confirmButtonColor: "#426F66",
                     text: "Your product has been successfully edited.",
                   });
                 }
@@ -166,10 +170,10 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           errors,
           touched,
         }) => (
-          <div className="flex">
+          <div className="flex flex-col md:flex-row md:m-3 pb-3">
             <form
               onSubmit={handleSubmit}
-              className="w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
+              className="w-5/6 lg:w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
               encType="multipart/form-data"
             >
               <div className="mb-4 w-full">
@@ -317,7 +321,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               )}
             </form>
             {isOff && (
-              <div className="w-2/5 bg-lime-200">
+              <div className="w-2/5 bg-lime-200 hidden lg:block">
                 <img
                   src="./images/recicle.jpg"
                   alt=""
