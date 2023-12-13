@@ -12,7 +12,7 @@ export const Footer = () => {
       <div className="m-3 flex justify-between pie">
         <div className="flex flex-row justify-start items-center">
           <img
-            src="/images/ubicacion (1).png"
+            src="/images/ubicacion.png"
             alt="ubication"
             style={{ width: "22px", height: "22px" }}
           />
