@@ -16,7 +16,9 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
   const router = useRouter();
   const [file, setFile] = useState(null);
   const [materials, setMaterials] = useState([]);
-  const [selectMats, setSelectMats] = useState(initialValues.materials || []);
+  const [selectMats, setSelectMats] = useState(
+    Array.isArray(initialValues.materials) ? initialValues.materials : []
+  );
   const { user } = useContext(GlobalUser);
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -33,12 +35,19 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
   const handleMaterials = (event) => {
     const selectMat = event.target.value;
-
-    if (selectMats.length >= 3 || selectMats.includes(selectMat)) return;
-
+  
+    if (selectMats.length > 3 || selectMats.includes(selectMat)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'You can select up to 3 materials.',
+        confirmButtonColor: '#426F66',
+      });
+      return;
+    }
+  
     setSelectMats((prevSelectMats) => {
       const updatedSelectMats = [...prevSelectMats, selectMat];
-      console.log("SelectMats:", updatedSelectMats);
       return updatedSelectMats;
     });
   };
@@ -62,7 +71,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           name: initialValues ? initialValues.name : "",
           price: initialValues ? initialValues.price : "",
           stock: initialValues ? initialValues.stock : "",
-          materials: selectMats,
+          materials: selectMats ? initialValues.materials: [],
           description: initialValues ? initialValues.description : "",
           image: initialValues ? initialValues.image : "",
         }}
@@ -145,6 +154,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
             if (method === "PUT") {
               try {
+                values.materials = selectMats;
                 const response = await axios.put(
                   `${BackUrl}/products/${initialValues.id}`,
                   values
