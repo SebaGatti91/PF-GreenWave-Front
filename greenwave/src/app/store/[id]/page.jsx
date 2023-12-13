@@ -160,7 +160,7 @@ export default function Detail({ params }) {
               {product.image[1] !== null ||
               product.image[2] !== null ||
               product.image[3] !== null ? (
-                <div>
+                <>
                   {product.image[1] && (
                     <Image
                       src={product?.image[1]}
@@ -191,7 +191,7 @@ export default function Detail({ params }) {
                       width={500}
                     />
                   )}
-                </div>
+                </>
               ) : null}
             </div>
           </div>
@@ -236,7 +236,12 @@ export default function Detail({ params }) {
               </span>
               <h1 className="text-3xl font-bold">{product.name}</h1>
             </div>
-            <p className="text-gray-600">{product.description}</p>
+            <p
+              className="text-gray-600"
+              style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
+            >
+              {product.description}
+            </p>
             <h4 className="text-lg font-semibold">${product.price}</h4>
             <p
               className={`m-2 rounded-lg ${
