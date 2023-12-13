@@ -23,18 +23,18 @@ const Profile = () => {
     setIsEditing(false);
   };
   return (
-    <div className="flex flex-row">
+    <div className="mx-auto flex flex-col sm:flex-row ">
       <div>
         <LeftMenu />
       </div>
-      <div className="mr-5 w-4/5" style={{ marginInline: "auto" }}>
+      <div className="w-4/5" style={{ marginInline: "auto" }}>
         <h1
-          className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
+          className="font-bold  text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
           style={{ width: "100%", marginInline: "auto" }}
         >
           Profile
         </h1>
-        <div className="flex justify-center items-center relative">
+        <div className="flex justify-center items-center relative m-3">
           <div className="card">
             <div className="cardImage">
               <img src="/images/hero.png"></img>
@@ -56,7 +56,7 @@ const Profile = () => {
             </div>
           </div>
           {isEditing && (
-            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/2">
+            <div className=" fixed top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/2">
               <FormUser closeModal={closeModal} />
             </div>
           )}

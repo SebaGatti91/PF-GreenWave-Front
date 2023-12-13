@@ -12,11 +12,13 @@ export default function Donation() {
   const { user } = useContext(GlobalUser);
 
   return (
-    <div className="flex flex-row">
-      <div>
+   <div className="flex flex-col sm:flex-row">
+    <div>
         <LeftMenu />
       </div>
-      <div className="mr-5 w-4/5" style={{ marginInline: "auto" }}>
+
+     <div className="mx-auto flex flex-col justify-center items-center sm:flex-row">
+      <div className="mr-5 w-4/5 m-3" style={{ marginInline: "auto" }}>
         <h1
           className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
           style={{ width: "100%", marginInline: "auto" }}
@@ -113,10 +115,11 @@ export default function Donation() {
             <div className="flex">
               <form
                 onSubmit={handleSubmit}
-                className="w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
+                className="lg:w-full flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
                 encType="multipart/form-data"
               >
-                <div className="mb-4 w-full">
+               <div className="flex gap-3">
+               <div className="mb-4 w-full">
                   <label htmlFor="nameMaterial" className="font-semibold mb-2">
                     Material name
                   </label>
@@ -156,6 +159,7 @@ export default function Donation() {
                     </div>
                   )}
                 </div>
+               </div>
 
                 <div className="mb-4 flex flex-col w-full">
                   <label htmlFor="description" className="font-semibold mb-2">
@@ -211,41 +215,45 @@ export default function Donation() {
                     </div>
                   )}
                 </div>
-                <div className="mb-4 flex flex-col w-full">
+                <div className="flex gap-3">
+                <div className="mb-4 w-full">
                   <label htmlFor="postalCode" className="font-semibold mb-2">
                     Postal Code
                   </label>
-                  <textarea
-                    name="postalCode"
+                  <input
+                    type="text"
                     value={values.postalCode}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="5501"
+                    name="postalCode"
+                    placeholder="5000"
                     className="w-full px-3 py-2 border border-gray-300 rounded"
-                  ></textarea>
+                  />
                   {touched.postalCode && errors.postalCode && (
                     <div className="font-medium text-xs text-orange-700">
                       {errors.postalCode}
                     </div>
                   )}
                 </div>
-                <div className="mb-4 flex flex-col w-full">
+                <div className="mb-4 w-full">
                   <label htmlFor="phone" className="font-semibold mb-2">
                     Phone number
                   </label>
-                  <textarea
-                    name="phone"
+                  <input
+                    type="text"
                     value={values.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="45831195462"
+                    name="phone"
+                    placeholder="48511008"
                     className="w-full px-3 py-2 border border-gray-300 rounded"
-                  ></textarea>
+                  />
                   {touched.phone && errors.phone && (
                     <div className="font-medium text-xs text-orange-700">
                       {errors.phone}
                     </div>
                   )}
+                </div>
                 </div>
                 <button
                   type="submit"
@@ -260,5 +268,6 @@ export default function Donation() {
         </Formik>
       </div>
     </div>
+   </div>
   );
 }

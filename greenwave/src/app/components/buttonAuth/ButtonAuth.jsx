@@ -80,11 +80,11 @@ export default function ButtonAuth() {
             />
             {menuVisible && (
               <div
-                className="mt-5 right-0 w-40 space-y-2 absolute"
+                className="mt-4 right-0 w-40 space-y-2 absolute"
                 style={{
                   background:
                   "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
-                  zIndex: 1 
+                  zIndex: 1000
                 }}
               >
                 <div className="flex flex-col" style={{border: '1px solid gray'}}>

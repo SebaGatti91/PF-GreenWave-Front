@@ -168,32 +168,21 @@ const Store = () => {
           className="flex flex-wrap gap-6 justify-center items-center mb-3"
           style={{ marginTop: "30px" }}
         >
-          {currentProducts && currentProducts.length !== 0 ? (
-            currentProducts.map((product) => (
-              <div
-                key={product.id}
-                // className="hover:transform hover:scale-105 transition-transform duration-300"
-              >
-                <Card
-                  id={product.id}
-                  name={product.name}
-                  image={product.image}
-                  price={product.price}
-                  rating={product.rating}
-                  stock={product.stock}
-                />
-              </div>
-            ))
-          ) : (
-            <Image
-              className=" rounded-md ml-80"
-              src={"/images/store.png"}
-              alt={"store"}
-              height={500}
-              width={500}
-              style={{ width: "320px", height: "320px", marginInline: "auto" }}
-            />
-          )}
+          {currentProducts.map((product) => (
+            <div
+              key={product.id}
+              className="hover:transform hover:scale-105 transition-transform duration-500"
+              
+            >
+              <Card
+                id={product.id}
+                name={product.name}
+                image={product.image}
+                price={product.price}
+                stock={product.stock}
+              />
+            </div>
+          ))}
         </div>
         {products.length ? (
           <div>

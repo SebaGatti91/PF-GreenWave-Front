@@ -7,6 +7,7 @@ import { CartContext } from "../../components/cart/cartContext";
 import Link from "next/link";
 import Image from "next/image";
 import { GlobalUser } from "../../components/users/globalUsers";
+import './page.css'
 
 const Cart = () => {
   const BackUrl = process.env.BACK;
@@ -109,12 +110,12 @@ const Cart = () => {
             Cart Items
           </h1>
 
-          <div className="flex flex-col lg:flex-row justify-evenly min-h-full">
-            <div className="m-12 rounded-lg w-1/2">
+          <div className="flex flex-col lg:flex-row justify-evenly min-h-full apartado">
+            <div className="m-12 rounded-lg w-1/2 padre">
               {cart.map((product) => (
                 <div
                   key={product.id}
-                  className="flex flex-row justify-between mb-10 shadow-2xl rounded-lg pb-5"
+                  className="flex flex-row justify-between mb-10 shadow-2xl rounded-lg pb-5 producto"
                   style={{
                     backgroundColor: "#D1D7BF",
                     border: "1px solid gray",
@@ -122,7 +123,7 @@ const Cart = () => {
                 >
                   {console.log(product)}
                   {console.log(cart)}
-                  <div className="flex flex-row">
+                  <div className="flex flex-row producto">
                     <Link
                       href={`/store/${product.id}`}
                       className="flex items-center"
@@ -140,16 +141,17 @@ const Cart = () => {
                           marginLeft: "20px",
                           border: "2px solid gray",
                         }}
+                        id="pic"
                       />
                     </Link>
                     <div className="flex flex-col text-start p-4">
-                      <h3 className="font-bold py-1">{product.name}</h3>
+                      <h3 className="font-bold py-1 nombre">{product.name}</h3>
                       <h3 className="text-green-600 py-1">
                         USD {product.price}
                       </h3>
                     </div>
                   </div>
-                  <div className="flex justify-center flex-row items-center py-2 mb-2 mt-24">
+                  <div className="flex justify-center flex-row items-center py-2 mb-2 mt-24 botones">
                     <button
                       className="bg-red-500 hover:bg-red-700 p-1 rounded-md"
                       onClick={() => handleRemoveFromCart(product.id)}
@@ -190,7 +192,7 @@ const Cart = () => {
             </div>
 
             <div
-              className="lg:w-1/4 w-1/2 m-12 py-2 rounded-xl shadow-2xl pb-3"
+              className="lg:w-1/4 w-1/2 m-12 py-2 rounded-xl shadow-2xl pb-3 contador"
               style={{
                 backgroundColor: "#D1D7BF",
                 height: "40%",
