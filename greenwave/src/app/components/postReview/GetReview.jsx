@@ -40,62 +40,64 @@ function ReviewList({ rating, reviewedBy }) {
   return (
     <div className="flex flex-col ml-20 rounded-lg w-full ">
       <div>
-      <div className="flex flex-box items-center  w-full">
-        <div className="flex flex-col justify-center items-center w-1/3">
-          <p className="rate">{rating}</p>
-          <StarRatings
-            rating={parseFloat(rating)}
-            starRatedColor="green"
-            numberOfStars={5}
-            name="averageRating"
-            starEmptyColor="white"
-          />
-          <h5 className="mt-4">{usersLength} reseñas</h5>
-        </div>
-        <div className="flex flex-col w-1/2 mt-10 ">
-          {ratingCounts.map((count, index) => {
-            return (
-              <div key={index}>
-                <p>{1 + index}⭐</p>
-                <div className="progress-bar">
-                  <div
-                    className="filler"
-                    style={{ width: (count / reviewedBy.length) * 100 + "%" }}
-                  ></div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <label>
-        <select name="reviews" onChange={handleSelect}>
-          <option value=''>all ratings</option>
-          <option value='5'>5 Stars</option>
-          <option value='4'>4 Stars</option>
-          <option value='3'>3 Stars</option>
-          <option value='2'>2 Stars</option>
-          <option value='1'>1 Stars</option>
-        </select>
-      </label>
-      </div>
-      <div className="scroll flex flex-wrap" style={{
+  <div className="flex flex-col md:flex-row items-center w-full">
+    <div className="flex flex-col justify-center items-center w-full md:w-1/3">
+      <p className="rate">{rating}</p>
+      <StarRatings
+        rating={parseFloat(rating)}
+        starRatedColor="green"
+        numberOfStars={5}
+        name="averageRating"
+        starEmptyColor="white"
+      />
+      <h5 className="mt-4">{usersLength} reviews</h5>
+    </div>
+    <div className="flex flex-col w-full md:w-1/2 mt-10 ">
+      {ratingCounts.map((count, index) => {
+        return (
+          <div key={index}>
+            <p>{1 + index}⭐</p>
+            <div className="progress-bar">
+              <div
+                className="filler"
+                style={{ width: (count / reviewedBy.length) * 100 + "%" }}
+              ></div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+  <label>
+    <select name="reviews" onChange={handleSelect}>
+      <option value=''>all ratings</option>
+      <option value='5'>5 Stars</option>
+      <option value='4'>4 Stars</option>
+      <option value='3'>3 Stars</option>
+      <option value='2'>2 Stars</option>
+      <option value='1'>1 Stars</option>
+    </select>
+  </label>
+</div>
+
+<div className="scroll flex flex-wrap" style={{
        maxHeight: '450px', overflowY: 'auto', display: 'none'
       }
       }>
+        <div className="flex flex-wrap md:justify-left">
       {reviewsFiltradas.map((review) => {
         const created = review.createdAt.slice(0, 10).split('-').reverse().join('-');
         const isCommentExpanded = expandedComments.includes(review.id);
         const RandomUser = users[Math.floor(Math.random()* users.length)]
         return (
-          <div key={review.id} className="w-1/3 p-2">
-            <div className="bg-white rounded-lg mt-2 p-4">
+          <div key={review.id} className="w-full ml-[-10px] p-2 md:w-1/3 ">
+            <div className="bg-white rounded-lg mt-2 p-4 h-full">
               <div className="flex flex-col">
                 <label className="flex justify-left">
                   <img src={review.image || "https://i.pinimg.com/564x/4b/2d/35/4b2d35ecc28064419c2c0b59ad2e3cc2.jpg"} alt="user" className="rounded-full overflow-hidden w-10 h-10 mr-5" />
                   <h5>{review.username || `${RandomUser} anónimo`}</h5>
                 </label>
-                <label className="flex ml-14 w-fulljustify-between">
+                <label className="flex ml-14 w-full justify-between">
                   <StarRatings
                     rating={review.rating}
                     starRatedColor="yellow"
@@ -120,6 +122,7 @@ function ReviewList({ rating, reviewedBy }) {
           </div>
         );
       })}
+      </div>
     </div>
     </div>
   );
