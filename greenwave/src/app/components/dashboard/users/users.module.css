@@ -104,6 +104,15 @@
   color: var(--textDashboard);
 }
 
+.table td {
+  font-size: 16px;
+}
+
+.table .columnHeader {
+  font-size: 20px;
+  font: bold; 
+}
+
 .button:disabled,
 .buttonBottom:disabled {
   opacity: 0.5; /* Reduce la opacidad para indicar que el botón está deshabilitado */

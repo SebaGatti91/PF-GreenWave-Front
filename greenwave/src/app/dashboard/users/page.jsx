@@ -64,12 +64,11 @@ const UsersPage = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <td>User</td>
-            <td>Status</td>
-            <td>Username</td>
-            <td>Email</td>
-            <td>Credits</td>
-            <td>Rol</td>
+            <td className={styles.columnHeader}>User</td>
+            <td className={styles.columnHeader}>Status</td>
+            <td className={styles.columnHeader}>Username</td>
+            <td className={styles.columnHeader}>Email</td>
+            <td className={styles.columnHeader}>Rol</td>
           </tr>
         </thead>
         <tbody>
@@ -95,7 +94,6 @@ const UsersPage = () => {
               </td>
               <td>{user.username}</td>
               <td>{user.email}</td>
-              <td>{user.credits}</td>
               <td
                 className={`${styles.rol} ${
                   user.admin ? styles.admin : styles.client
