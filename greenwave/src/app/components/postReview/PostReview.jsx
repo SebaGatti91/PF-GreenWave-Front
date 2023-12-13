@@ -59,20 +59,20 @@ function ReviewForm({ productId, closeModal }) {
     >
       {({ errors, touched }) => (
         <Form
-          className=" flex flex-col rounded-lg justify-center items-start  max-w-lg mx-auto my-1 p-4"
+          className=" flex flex-col rounded-lg justify-center items-center  max-w-lg mx-auto my-1 p-4"
           style={{ backgroundColor: "ButtonFace" }}
         >
           <div className="mb-4 w-full">
           <div className="flex justify-end items-end">
           <button
                   style={{ border: "1px solid gray" }}
-                  className=" bg-transparent hover:bg-red-700 text-black px-2 rounded"
+                  className=" bg-transparent hover:bg-red-700 hover:text-white text-black px-2 rounded"
                   onClick={closeModal}
                 >
                   X
                 </button>
           </div>
-            <label className="font-semibold mb-2 flex justify-center items-center">
+            <label className="font-semibold flex justify-center items-center">
               Rating: 
               <StarRatings
                 rating={rating}
@@ -83,10 +83,10 @@ function ReviewForm({ productId, closeModal }) {
               />
             </label>
           </div>
-          <div className="mb-4 w-full "></div>
-          <label className="font-semibold mb-2">
+          <div className=" w-full "></div>
+          <label className="font-semibold mb-2 w-full">
           Commentary:
-            <Field type="textarea" name="comment" className="border border-gray-400 rounded-lg w-full" />
+            <Field type="textarea" name="comment" className="border mt-1 border-gray-400 rounded-lg w-full" />
             {errors.comment && touched.comment ? (
               <div>{errors.comment}</div>
             ) : null}
