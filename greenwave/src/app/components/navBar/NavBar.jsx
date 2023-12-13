@@ -30,7 +30,7 @@ const LogoSection = () => {
           height={30}
           width={30}
         />
-        <p>{user?.address ? user?.address : "Insert adress"}</p>
+        <p>{user?.address ? user?.address : "Insert address"}</p>
       </Link>
     </div>
   );

@@ -56,7 +56,7 @@ const Profile = () => {
             </div>
           </div>
           {isEditing && (
-            <div className=" fixed top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-1/2">
+            <div className=" fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10/12 md:w-2/3 lg:w-1/2 xl:w-1/3">
               <FormUser closeModal={closeModal} />
             </div>
           )}
