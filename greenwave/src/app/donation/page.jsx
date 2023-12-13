@@ -6,6 +6,8 @@ import { useContext } from "react";
 import { fetchDonation } from "../lib/data";
 import { GlobalUser } from "../components/users/globalUsers";
 import LeftMenu from "../components/leftMenu/LeftMenu";
+import './donation.css'
+
 export default function Donation() {
   const router = useRouter();
 
@@ -112,7 +114,7 @@ export default function Donation() {
             errors,
             touched,
           }) => (
-            <div className="flex">
+            <div className="flex mb-5">
               <form
                 onSubmit={handleSubmit}
                 className="lg:w-full flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
@@ -258,7 +260,8 @@ export default function Donation() {
                 <button
                   type="submit"
                   // disabled={errors}
-                  className={`w-full py-2 px-4 rounded hover:bg-green-700 `}
+                  className={`w-full py-2 px-4 rounded hover:bg-green-700`}
+                  style={{border: '2px solid #d1d5db'}}
                 >
                   Donate
                 </button>
