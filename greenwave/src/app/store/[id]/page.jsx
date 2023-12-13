@@ -84,6 +84,7 @@ export default function Detail({ params }) {
 
   const handleBuy = async () => {
     if (userAut) {
+      handleAddToCart();
       const id = await createPreference();
       if (id) setPreferenceId(id);
     } else {
