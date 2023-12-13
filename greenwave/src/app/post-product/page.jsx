@@ -104,17 +104,17 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
             if (file) {
               let arr = [];
 
-              for (let i = 0; i < file.length; i++) {
+              for (let i = 0; i < Math.min(file.length, 4); i++) {
                 const formData = new FormData();
                 formData.append("image", file[i]);
                 values.userId = user.id;
-
+            
                 // Carga la nueva imagen en Cloudinary
                 const cloudinaryResponse = await fetch("/api/upload", {
                   method: "POST",
                   body: formData,
                 });
-
+            
                 const cloudinaryData = await cloudinaryResponse.json();
                 arr.push(cloudinaryData.url);
               }
@@ -282,7 +282,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               </div>
               <div className="mb-4 w-full">
                 <label htmlFor="image" className="font-semibold mb-2">
-                  Upload your image:
+                Upload up to 4 images:
                 </label>
                 <input
                   type="file"
