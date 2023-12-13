@@ -49,7 +49,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={ `${styles.container} flex justify-center`}>
+    <div className={ `${styles.container} flex justify-center items-center h-full`}>
      
       <div className=' flex-grow flex p-2  h-[450px] mt-12 max-w-[300px] justify-around mb-12 pb-10 pl-[50px] bg-neutral-400 items-center shadow-2xl  rounded-xl'
         >
