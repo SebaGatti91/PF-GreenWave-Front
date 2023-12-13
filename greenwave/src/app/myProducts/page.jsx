@@ -93,11 +93,10 @@ const MyProducts = () => {
             >
               <div className="">
                 <div
-                  className={`mr-9 5 rounded-lg ${
-                    product.paused === true
+                  className={`mr-9 5 rounded-lg ${product.paused === true
                       ? "hover:bg-green-500"
                       : "hover:bg-red-500"
-                  }`}
+                    }`}
                 >
                   {product && product.approved === true ? (
                     product.paused === true ? (
@@ -117,9 +116,8 @@ const MyProducts = () => {
                 </div>
 
                 <h3
-                  className={`m-7 px-2 text-center rounded-lg ${
-                    product.paused === false ? "bg-green-500" : "bg-red-500"
-                  }`}
+                  className={`m-7 px-2 text-center rounded-lg ${product.paused === false ? "bg-green-500" : "bg-red-500"
+                    }`}
                 >
                   {product.approved === true
                     ? product.paused === true
@@ -157,7 +155,10 @@ const MyProducts = () => {
                   >
                     $ {product.price}
                   </h3>
-                  <p className="py-1 w-full mb-3">
+                  <p
+                    className="text-gray-600"
+                    style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
+                  >
                     {product.description}
                   </p>
 
