@@ -3,8 +3,8 @@
     "id": "1",
     "name": "Martin",
     "lastName": "Bueno",
-    "profession": "Developer",
-    "image": "",
+    "profession": "Full Stack Developer",
+    "image": "/images/martin.png",
     "socialMedia": {
       "linkedin": "https://www.linkedin.com/in/martin-bueno-martinez-724447284/",
       "github": "https://github.com/MBuenoMartinez"
@@ -14,8 +14,8 @@
     "id": "2",
     "name": "Sebastian",
     "lastName": "Gatti",
-    "profession": "Developer",
-    "image": "",
+    "profession": "Full Stack Developer",
+    "image": "/images/sebastian.png",
     "socialMedia": {
       "linkedin": "https://www.linkedin.com/in/sebastiangatti/",
       "github": "https://github.com/SebaGatti91"
@@ -24,9 +24,9 @@
   {
     "id": "3",
     "name": "Tomas",
-    "lastName": "Silbert",
-    "profession": "Developer",
-    "image": "",
+    "lastName": "Silbergleit",
+    "profession": "Full Stack Developer",
+    "image": "/images/tomas.png",
     "socialMedia": {
       "linkedin": "https://www.linkedin.com/in/tomas-silbergleit-87b650288/",
       "github": "https://github.com/TomasSilber"
@@ -36,8 +36,8 @@
     "id": "4",
     "name": "Lucas",
     "lastName": "Delgado",
-    "profession": "Developer",
-    "image": "",
+    "profession": "Full Stack Developer",
+    "image": "/images/lucas.png",
     "socialMedia": {
       "linkedin": "https://www.linkedin.com/in/lucas-delgado-77b582165/",
       "github": "https://github.com/MLucasDelgado"
@@ -47,8 +47,8 @@
     "id": "5",
     "name": "Nadir",
     "lastName": "Ulmi",
-    "profession": "Developer",
-    "image": "",
+    "profession": "Full Stack Developer",
+    "image": "/images/nadir.png",
     "socialMedia": {
       "linkedin": "https://www.linkedin.com/in/nadir-yamila-ulmi-38b017227/",
       "github": "https://github.com/nadirulmi"
@@ -58,8 +58,8 @@
     "id": "6",
     "name": "Miguel",
     "lastName": "Cipriano",
-    "profession": "Developer",
-    "image": "",
+    "profession": "Full Stack Developer",
+    "image": "/images/miguel.png",
     "socialMedia": {
       "linkedin": "https://www.linkedin.com/in/miguelangelcipriano/",
       "github": "https://github.com/MIGUELANGELCIPRIANO"
@@ -69,8 +69,8 @@
     "id": "7",
     "name": "Omar",
     "lastName": "Florez",
-    "profession": " Full Stack Developer",
-    "image": "https://i.pinimg.com/736x/74/fd/58/74fd58e5501e09c72e6f603acb36f573.jpg",
+    "profession": " Full Stack Full Stack Developer",
+    "image": "/images/omar.png",
     "socialMedia": {
       "linkedin": "https://www.linkedin.com/in/sneider-florez-403a47278",
       "github": "https://github.com/D-OmarFlorez"
@@ -80,8 +80,8 @@
     "id": "8",
     "name": "Emerson",
     "lastName": "Montes",
-    "profession": "Developer",
-    "image": "",
+    "profession": "Full Stack Developer",
+    "image": "/images/emerson.png",
     "socialMedia": {
       "linkedin": "https://www.linkedin.com/in/emerson-montes-422037262/",
       "github": "https://github.com/EmerMontes"
