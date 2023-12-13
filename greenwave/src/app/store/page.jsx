@@ -125,11 +125,10 @@ const Store = () => {
             type="text"
             placeholder="Search..."
             style={{
-              borderRadius: "1em 0 0 1em",
               width: "200px",
               border: "1px solid gray",
             }}
-            className="text-black px-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-center"
+            className="text-black px-2 border rounded-l-lg focus:outline-none focus:ring focus:border-blue-300 text-center"
             value={filterValueName}
             onChange={handleFilterName}
           />
@@ -137,14 +136,13 @@ const Store = () => {
             type="button"
             onClick={handleSearch}
             style={{
-              borderRadius: "0 1em 1em 0",
               padding: "1.5px",
               borderLeft: "1px solid gray",
               paddingRight: "10px",
               paddingLeft: "5px",
               border: "1px solid gray",
             }}
-            className="bg-white text-white rounded-r focus:outline-none focus:ring focus:border-blue-300"
+            className="bg-white text-white rounded-r-lg focus:outline-none focus:ring focus:border-blue-300"
           >
             &#128269;
           </button>
@@ -165,7 +163,7 @@ const Store = () => {
         style={{ marginInline: "auto", width: "100%" }}
       >
         <div
-          className="flex flex-wrap gap-6 justify-center items-center mb-3"
+          className="flex flex-wrap gap-3 lg:gap-12 justify-center items-center mb-3"
           style={{ marginTop: "30px" }}
         >
           {currentProducts.map((product) => (
