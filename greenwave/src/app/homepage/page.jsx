@@ -24,7 +24,7 @@ export default function Home() {
             ecological sustainability. On our platform, you will have the
             opportunity to earn money by delivering recyclable products, while
             at the same time you will be able to explore and purchase crafts
-            made from recycled materials. We We are committed to promoting an
+            made from recycled materials. We are committed to promoting an
             eco-friendly lifestyle, rewarding your efforts to contribute to the
             well-being of the planet.
           </p>
