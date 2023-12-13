@@ -253,12 +253,12 @@ export default function Detail({ params }) {
                 !foundUserProduct ? (
                   <div>
                     <div className="flex justify-center items-center">
-                      {/* <button
+                      <button
                         onClick={handleBuy}
                         className="bg-green-800 text-white font-semibold m-2 p-1 px-16 rounded-md h-full"
                       >
                         Buy now
-                      </button> */}
+                      </button>
 
                       <div className="flex justify-start items-start">
                         {addedToCart ? (
