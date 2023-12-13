@@ -1,29 +1,33 @@
-// "use client";
+"use client";
 import SideBar from "../components/dashboard/sideBar/SideBar";
 import NavBar from "../components/dashboard/navBar/NavBar";
 import styles from "../components/dashboard/dashboard.module.css";
-import { useContext } from "react";
-// import { GlobalUser } from "../components/users/globalUsers";
-// import { useRouter } from "next/navigation";
+import { GlobalUser } from "../components/users/globalUsers";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect } from "react";
 const Layout = ({ children }) => {
-  // const { user } = useContext(GlobalUser);
-  // const router = useRouter();
+  const { user } = useContext(GlobalUser);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user.admin === false) {
+      return router.push("/404page");
+    }
+  }, []);
   return (
-    <div className={styles.container}>
-      <div className={styles.menu}>
-        <SideBar />
-      </div>
-      <div className={styles.content}>
-        <NavBar />
-        {children}
-      </div>
-    </div>
-    // <>
-    //   {user?.admin === true ? (
-    //   ) : (
-    //     router.push("/404page")
-    //   )}
-    // </>
+    <>
+      {user.admin === true ? (
+        <div className={styles.container}>
+          <div className={styles.menu}>
+            <SideBar />
+          </div>
+          <div className={styles.content}>
+            <NavBar />
+            {children}
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 };
 
