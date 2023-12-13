@@ -201,7 +201,7 @@ const Card = ({
 
         <div className="flex-shrink-0 mt-2 flex flex-col items-center mb-5">
           <h3 className="text-center font-bold">{name}</h3>
-          <h3 className="text-green-600 text-center">USD {price}</h3>
+          <h3 className="text-green-600 text-left text-lg mt-2"><span className="mr-1">USD</span> ${price}</h3>
 
           {cartControlers
             ? cart
