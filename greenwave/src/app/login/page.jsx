@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState("");
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(session);
+  const frontURL = process.env.FRONT
   // Utiliza un estado para rastrear si ya se ha ejecutado la lógica de creación de usuario
   const [userCreation, setUserCreation] = useState(false);
 
@@ -27,8 +27,9 @@ const LoginPage = () => {
         email,
         password,
         redirect: false,
+        callbackUrl: frontURL + "/homepage",
       });
-
+  
       if (responseNextAuth?.error) {
         // Establece manualmente el mensaje de error deseado
         setErrors("Error de inicio de sesión");
@@ -37,9 +38,11 @@ const LoginPage = () => {
         setErrors(""); // Limpiar errores
       }
     } else {
-      // Si el proveedor es otro, realiza el inicio de sesión normal
-      const responseNextAuth = await signIn(providerId, { redirect: false });
-
+      const responseNextAuth = await signIn(providerId, {
+        redirect: false,
+        callbackUrl: frontURL + "/homepage", 
+      });
+  
       if (responseNextAuth?.error) {
         setErrors(responseNextAuth.error.split(","));
       } else {
