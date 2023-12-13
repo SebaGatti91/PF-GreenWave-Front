@@ -67,7 +67,7 @@ export default function Detail({ params }) {
             unit_price: product.price,
             quantity: 1,
             currency_id: "ARS",
-            userId: user.email
+            userId: user.email,
           },
         ],
       });
@@ -157,38 +157,42 @@ export default function Detail({ params }) {
                 height={500}
                 width={500}
               />
-              {product.image[1] !== "" &&
-              product.image[2] !== "" &&
-              product.image[3] !== "" ? (
+              {product.image[1] !== null ||
+              product.image[2] !== null ||
+              product.image[3] !== null ? (
                 <div>
-                  <Image
-                    src={product?.image[1]}
-                    alt=""
-                    className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-                    onClick={() => setActiveImg(product?.image[1])}
-                    height={500}
-                    width={500}
-                  />
-                  <Image
-                    src={product?.image[2]}
-                    alt=""
-                    className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-                    onClick={() => setActiveImg(product?.image[2])}
-                    height={500}
-                    width={500}
-                  />
-                  <Image
-                    src={product?.image[3]}
-                    alt=""
-                    className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
-                    onClick={() => setActiveImg(product?.image[3])}
-                    height={500}
-                    width={500}
-                  />
+                  {product.image[1] && (
+                    <Image
+                      src={product?.image[1]}
+                      alt=""
+                      className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                      onClick={() => setActiveImg(product?.image[1])}
+                      height={500}
+                      width={500}
+                    />
+                  )}
+                  {product.image[2] && (
+                    <Image
+                      src={product?.image[2]}
+                      alt=""
+                      className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                      onClick={() => setActiveImg(product?.image[2])}
+                      height={500}
+                      width={500}
+                    />
+                  )}
+                  {product.image[3] && (
+                    <Image
+                      src={product?.image[3]}
+                      alt=""
+                      className="w-20 h-24 lg:w-28 lg:h-28 md:w-14 rounded-md cursor-pointer"
+                      onClick={() => setActiveImg(product?.image[3])}
+                      height={500}
+                      width={500}
+                    />
+                  )}
                 </div>
-              ) : (
-                ""
-              )}
+              ) : null}
             </div>
           </div>
           <div className="flex flex-col gap-4">
