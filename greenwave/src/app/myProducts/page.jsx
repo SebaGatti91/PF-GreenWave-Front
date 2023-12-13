@@ -161,7 +161,7 @@ const MyProducts = () => {
                   >
                     $ {product.price}
                   </h3>
-                  <p className="py-1 w-full" style={{ height: "80px" }}>
+                  <p className="py-1 w-full text-justify" style={{ height: "100px" }}>
                     {product.description}
                   </p>
 
