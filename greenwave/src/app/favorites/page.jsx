@@ -47,11 +47,11 @@ const Favorites = () => {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="mx-auto flex flex-col sm:flex-row">
       <div>
         <LeftMenu />
       </div>
-      <div className="mr-5 w-4/5" style={{ marginInline: "auto" }}>
+      <div className=" w-4/5" style={{ marginInline: "auto" }}>
         <h1
           className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
           style={{ width: "100%", marginInline: "auto" }}
@@ -80,7 +80,7 @@ const Favorites = () => {
           favorites.map((favorite) => (
             <div
               key={favorite.id}
-              className="relative flex flex-row justify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5 hover:transform hover:scale-105 transition-transform duration-300"
+              className="relative flex flex-row justify-between mb-7 mt-5 shadow-2xl rounded-lg pb-5"
               style={{
                 backgroundColor: "#D1D7BF",
                 border: "1px solid gray",
@@ -97,7 +97,7 @@ const Favorites = () => {
               >
                 {favorite.fav ? "🤍" : "💚"}
               </button>
-              <div className="flex flex-row">
+              <div className="flex flex-col  lg:flex-row">
                 <Image
                   className="w-60 h-40 rounded-md text-center"
                   src={favorite.image[0]}
@@ -105,7 +105,6 @@ const Favorites = () => {
                   height={150}
                   width={150}
                   style={{
-                    maxWidth: "200px",
                     height: "150px",
                     marginTop: "20px",
                     marginLeft: "20px",
@@ -128,7 +127,7 @@ const Favorites = () => {
                   >
                     $ {favorite.price}
                   </h3>
-                  <p className="py-1 w-full" style={{ height: "80px" }}>
+                  <p className="py-1 w-full" >
                     {favorite.description}
                   </p>
                   <Link
@@ -136,7 +135,7 @@ const Favorites = () => {
                     className="flex justify-start w-full"
                   >
                     <button
-                      className="rounded-lg bg-button hover:bg-hover-clear"
+                      className="rounded-lg mt-2 bg-button hover:bg-hover-clear"
                       style={{
                         width: "80px",
                       }}

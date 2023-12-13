@@ -13,7 +13,25 @@
   margin-top: 10%;
   transform: translateX(50%);
 }
-
+@media only screen and (max-width: 600px){
+  .logo{
+    width: 50px;
+  transform: translateX(30px)
+  }
+  .description{
+    display: none;
+  }
+  .button{
+    height: 40px;
+    width: 90px;
+  }
+}
+.scroll{
+  overflow: auto;
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
 .box {
   position: relative;
   width: 100%;
@@ -37,7 +55,7 @@ video {
 
 .content {
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
@@ -47,7 +65,7 @@ video {
 .title {
   font-size: 3rem;
   font-weight: bold;
-  color: aquamarine;
+  color: rgb(57, 120, 99);
 }
 
 .description {

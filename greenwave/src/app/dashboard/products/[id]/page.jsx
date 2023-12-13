@@ -18,7 +18,7 @@ const EditProductForm = ({ product, onUpdate }) => {
     // Actualizar el estado inicial de formData cuando cambie el producto
     setFormData({
       name: product.name,
-      image: product.image,
+      image: product.image[0],
       stock: product.stock,
       price: product.price,
       description: product.description,
@@ -175,7 +175,11 @@ const ProductProfile = ({ params }) => {
       <div className="flex gap-8 mt-8">
         <div className="flex flex-col items-center">
           <Image
-            src={productView.image || "/images/noavatar.png"}
+            src={
+              productView && productView.image && productView.image.length > 0
+                ? productView.image[0]
+                : ""
+            }
             alt=""
             width={150}
             height={150}

@@ -8,7 +8,7 @@ import { CartContext } from "../cart/cartContext";
 import { useContext, useState } from "react";
 import Image from "next/image";
 import { GlobalUser } from "../users/globalUsers";
-import './NavBar.css'
+import "./NavBar.css";
 
 const LogoSection = () => {
   const { user } = useContext(GlobalUser);
@@ -44,7 +44,6 @@ const SearchSection = ({ pathname }) => (
 
 const NavigationLinks = ({ session, totalItems, isMenuOpen }) => (
   <section id="contenedor-menu" className="flex gap-10 items-center">
-
     <div className="flex flex-row gap-10 items-center">
       <Link
         className="text-xl hover:rounded-lg hover:text-black px-2 hover:transform hover:scale-110 transition-transform duration-300 "
@@ -113,6 +112,7 @@ const NavigationLinks = ({ session, totalItems, isMenuOpen }) => (
             style={{ width: "25px", height: "25px" }}
           />
           <div
+            suppressHydrationWarning
             style={{
               backgroundColor: "white",
               color: "green",
@@ -133,11 +133,10 @@ const NavBar = () => {
   const pathname = usePathname();
   const { data: session } = useSession();
   const { cart } = useContext(CartContext);
-  const totalItems = cart.reduce((acc, product) => {
+  const totalItems = cart?.reduce((acc, product) => {
     const count = typeof product.count === "number" ? product.count : 0;
     return acc + count;
   }, 0);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -145,15 +144,20 @@ const NavBar = () => {
   };
 
   return (
-    <div className="py-2" style={{
-      background:
-        "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
-    }}>
+    <div
+      className="py-2"
+      style={{
+        background:
+          "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
+      }}
+    >
       {/* Menú móvil para pantallas pequeñas */}
       <nav className="py-3 items-center text-white flex justify-between w-full relative md:hidden">
         <div className="flex items-center gap-10">
           <img
-            src={isMenuOpen ? "/images/cerrar_menu.png" : "/images/burger_menu.png"}
+            src={
+              isMenuOpen ? "/images/cerrar_menu.png" : "/images/burger_menu.png"
+            }
             alt="menu"
             className="imagen ml-7"
             onClick={toggleMenu}
@@ -180,12 +184,13 @@ const NavBar = () => {
 
       {/* Contenido del menú móvil */}
       {isMenuOpen && (
-        <div className="mobile-menu flex flex-col"  // Actualiza esta línea
+        <div
+          className="mobile-menu flex flex-col" // Actualiza esta línea
           style={{
             background:
               "linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051)",
-          }}>
-
+          }}
+        >
           <LogoSection />
 
           <div className="flex flex-col justify-center items-center gap-10 mt-5 mb-5">
