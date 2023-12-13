@@ -4,11 +4,11 @@ import { usePathname } from "next/navigation";
 const LeftMenu = () => {
   const pathname = usePathname();
   return (
-    <div className="flex h-full justify-left">
-      <ul className="flex flex-col p-4 pb-7 bg-hover w-200">
+    <div className="flex flex-col sm:flex-row  h-full justify-left">
+      <ul className="flex flex-col p-0 lg:p-4 pb-0 lg:pb-7 bg-hover w-200">
         {pathname !== "/profile" && (
           <li
-            className="mb-10 pb-6 bg-hover"
+            className="mb-0 lg:mb-10 text-center pb-0 lg:pb-6 bg-hover"
             style={{
               borderBottom: "1px solid gray",
               width: "100%",
@@ -24,7 +24,7 @@ const LeftMenu = () => {
 
         {pathname !== "/post-product" && (
           <li
-            className="mb-10 pb-6 bg-hover"
+            className="mb-10 pb-6 bg-hover sm:block hidden"
             style={{
               borderBottom: "1px solid gray",
               width: "100%",
@@ -33,14 +33,14 @@ const LeftMenu = () => {
             <Button
               link={"/post-product"}
               text={"Sell a product"}
-              className={"hover:bg-clear p-2 rounded-md"}
+              className={"hover:bg-clear p-2 rounded-md sm:block hidden"}
             />
           </li>
         )}
 
         {pathname !== "/favorites" && (
           <li
-            className="mb-10 text-center pb-6 bg-hover"
+            className="mb-10 text-center pb-6 bg-hover sm:block hidden"
             style={{
               borderBottom: "1px solid gray",
               width: "100%",
@@ -56,7 +56,7 @@ const LeftMenu = () => {
 
         {pathname !== "/myShopping" && (
           <li
-            className="mb-10 text-center pb-6 bg-hover"
+            className="mb-0 lg:mb-10 text-center pb-0 lg:pb-6 bg-hover"
             style={{
               borderBottom: "1px solid gray",
               width: "100%",
@@ -72,7 +72,7 @@ const LeftMenu = () => {
 
         {pathname !== "/myProducts" && (
           <li
-            className="mb-10 text-center pb-6 bg-hover"
+            className="mb-0 lg:mb-10 text-center pb-0 lg:pb-6 bg-hover"
             style={{
               borderBottom: "1px solid gray",
               width: "100%",
@@ -88,7 +88,7 @@ const LeftMenu = () => {
 
         {pathname !== "/" && (
           <li
-            className="mb-10 text-center pb-6 bg-hover"
+            className="mb-10 text-center pb-6 bg-hover sm:block hidden"
             style={{
               borderBottom: "1px solid gray",
               width: "100%",
@@ -97,14 +97,14 @@ const LeftMenu = () => {
             <Button
               link={"/"}
               text={"Revenues"}
-              className={"hover:bg-clear p-2 rounded-md"}
+              className={"hover:bg-clear p-2 rounded-md sm:block hidden"}
             />
           </li>
         )}
 
         {pathname !== "/donation" && (
           <li
-            className="mb-10 text-center pb-6 bg-hover"
+            className="mb-0 lg:mb-10 text-center pb-0 lg:pb-6 bg-hover"
             style={{
               borderBottom: "1px solid gray",
               width: "100%",

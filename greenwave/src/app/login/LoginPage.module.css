@@ -5,13 +5,11 @@
 .container {
   width:100%;
   position:relative;
-  background-image: url(https://th.bing.com/th/id/OIG.x9f1P6ph4HoQdqzI0.Ph?w=1024&h=1024&rs=1&pid=ImgDetMain);
+  background-image: url(https://www.manosverdes.co/wp-content/uploads/2020/09/huella-ecologica-imagen-destacada.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: fixed;
-  /* z-index: -1; */
   background-color: aqua;
-  /* background: linear-gradient(to right top, #527e7b, #4a7771, #426f66, #3b685c, #356051); */
 }
 
 .title {

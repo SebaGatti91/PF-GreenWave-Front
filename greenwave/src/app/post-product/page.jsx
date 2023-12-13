@@ -169,10 +169,10 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           errors,
           touched,
         }) => (
-          <div className="flex">
+          <div className="flex flex-col md:flex-row md:m-3 pb-3">
             <form
               onSubmit={handleSubmit}
-              className="w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
+              className="w-5/6 lg:w-3/5 flex flex-col rounded justify-center items-start bg-white max-w-lg mx-auto my-1 p-4"
               encType="multipart/form-data"
             >
               <div className="mb-4 w-full">
@@ -320,7 +320,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               )}
             </form>
             {isOff && (
-              <div className="w-2/5 bg-lime-200">
+              <div className="w-2/5 bg-lime-200 hidden lg:block">
                 <img
                   src="./images/recicle.jpg"
                   alt=""
