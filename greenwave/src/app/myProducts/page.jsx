@@ -181,21 +181,23 @@ const MyProducts = () => {
           ))
         ) : (
           <div>
+            <div className="flex flex-col justify-center items-center ">
+            <Button
+              link={"/store"}
+              text={"Start shopping"}
+              className={
+                "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 relative rounded-lg m-5 px-5 py-2 text-lg "
+              }
+            />
             <Image
-              className=" rounded-md ml-80"
-              src={"/images/myProducts.png"}
+              className=" rounded-md"
+              src={"/images/myShoppings.png"}
               alt={"myProducts"}
               height={500}
               width={500}
-              style={{ width: "320px", height: "320px", marginInline: "auto" }}
+              style={{ width: "620px", height: "620px", marginInline: "auto"}}
             />
-            <Button
-              link={"/post-product"}
-              text={"Sell your product"}
-              className={
-                "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 rounded-lg m-5 px-5 py-2 text-lg"
-              }
-            />
+            </div>
           </div>
         )}
       </div>
