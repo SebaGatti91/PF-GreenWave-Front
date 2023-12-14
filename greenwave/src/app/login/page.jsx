@@ -9,8 +9,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState("");
   const router = useRouter();
   const { data: session } = useSession();
-  const frontURL = process.env.FRONT
-  // Utiliza un estado para rastrear si ya se ha ejecutado la lógica de creación de usuario
+
   const [userCreation, setUserCreation] = useState(false);
 
   useEffect(() => {
@@ -27,9 +26,8 @@ const LoginPage = () => {
         email,
         password,
         redirect: false,
-        callbackUrl: frontURL + "/homepage",
       });
-  
+
       if (responseNextAuth?.error) {
         // Establece manualmente el mensaje de error deseado
         setErrors("Error de inicio de sesión");
@@ -38,11 +36,9 @@ const LoginPage = () => {
         setErrors(""); // Limpiar errores
       }
     } else {
-      const responseNextAuth = await signIn(providerId, {
-        redirect: false,
-        callbackUrl: frontURL + "/homepage", 
-      });
-  
+      // Si el proveedor es otro, realiza el inicio de sesión normal
+      const responseNextAuth = await signIn(providerId, { redirect: false });
+
       if (responseNextAuth?.error) {
         setErrors(responseNextAuth.error.split(","));
       } else {
@@ -54,7 +50,7 @@ const LoginPage = () => {
   return (
     <div className={ `${styles.container} flex justify-center items-center h-full`}>
      
-      <div className=' flex-grow flex p-2  h-[450px] mt-12 max-w-[350px] justify-around mb-12 pl-[50px] bg-neutral-400 items-center shadow-lg shadow-lime-900 rounded-xl'
+      <div className=' flex-grow flex p-2  h-[450px] mt-12 max-w-[300px] justify-around mb-12 pb-10 pl-[50px] bg-neutral-400 items-center shadow-2xl  rounded-xl'
         >
           
         <div className="text-center mr-10">

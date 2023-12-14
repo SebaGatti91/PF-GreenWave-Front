@@ -11,6 +11,7 @@ export default function FormUser({ closeModal }) {
   const { user, setUser } = useContext(GlobalUser);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const BackUrl = process.env.BACK;
 
   return (
     <div>
@@ -93,7 +94,7 @@ export default function FormUser({ closeModal }) {
               }
 
               const response = await axios.put(
-                `http://localhost:3001/users/update/${user.id}`,
+                `${BackUrl}/users/update/${user.id}`,
                 values
               );
 
