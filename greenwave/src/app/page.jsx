@@ -53,7 +53,6 @@ export default function Splash() {
                 src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"
               ></img>
               <h1 className="title  md:text-4x1">Green wave</h1>
-              <p className="description  ">Cherish nature, recycle today for a better tomorrow</p>
               <Link href='/homepage'>
                 <button
                   className='button items-center justify-center text-xl border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
@@ -90,7 +89,7 @@ export default function Splash() {
                 Awareness Through Recycling
               </h1>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 In recent years, recycling has emerged as a simple yet powerful
                 way for every individual to impact the health of our planet. By
                 reusing materials, we reduce the demand for new resources and
@@ -98,7 +97,7 @@ export default function Splash() {
                 oceans.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 But recycling is more than just a practice - it's a mindset.
                 It's about recognizing the value in our resources and making a
                 conscious effort to extend their lifecycle. It's a small step
@@ -129,14 +128,14 @@ export default function Splash() {
                 Supporting Non-Profit Organizations
               </h1>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 There are countless non-profit organizations dedicated to
                 protecting the environment and combating climate change. These
                 organizations conduct research, advocate for policy changes, and
                 work on the ground to protect our ecosystems.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 By supporting these organizations, we can contribute to their
                 efforts and help amplify their impact. Whether it's through
                 donations, volunteering, or simply spreading the word about
@@ -156,7 +155,7 @@ export default function Splash() {
                 The Importance of Protecting Our Environment
               </h1>
 
-              <p className="py-6 px-16 ">
+              <p className="py-3 px-16 ">
                 Imagine a plastic bag floating in the ocean. It may seem
                 insignificant in the grand scheme of things, but it represents a
                 much larger issue. That plastic bag could end up in the stomach
@@ -164,7 +163,7 @@ export default function Splash() {
                 that contaminate our water and food.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 This is just one example of why it's crucial to protect our
                 environment. Our actions have far-reaching consequences, and
                 it's our responsibility to minimize our impact. By making
@@ -177,41 +176,6 @@ export default function Splash() {
               style={{ width: "40%" }}
               src="https://i.pinimg.com/564x/1d/74/18/1d7418c65e30dcc84014a93c76c4f2d7.jpg"
               alt="plastic iceberg"
-            />
-          </article>
-        </section>
-        <section className="flex justify-center mt-12 pb-10 ">
-          <article
-            className="text-black flex shadow-2xl articulo overflow-hidden text-justify"
-            style={{ width: "90%", height: "60vh", backgroundColor: "#C0C8A7" }}
-          >
-            <section className="scroll ">
-              <h1 className="font-bold text-center px-2 pt-20 text-xl">
-               Greenwave Project
-              </h1>
-
-              <p className="py-6 px-16">
-              "Originating from a diverse programming bootcamp, our team of seven individuals started as strangers,
-               interacting timidly in the online chat. As time progressed, we virtually came together to do pair programming, 
-               merging diverse skills: some excelled in styles and design, others in logic and data manipulation, 
-               and some shone in the rapid assimilation of new technologies.
-
-
-              </p>
-
-              <p className="py-6 px-16">
-              Day after day, we consolidated our collaboration and faced the challenge of the final project together.
-               From that experience, GreenWave was born, a company dedicated to the sale of recycled art. 
-               With a positive attitude and willingness to learn, our team of junior full-stack developers worked 
-               diligently to bring a beautiful website to life. Thus, from our diverse strengths, 
-               we managed to build something unique with care and passion."
-              </p>
-            </section>
-            <img
-              className="hover:transform hover:scale-110 transition-transform duration-300 "
-              style={{ width: "42%", height: '90%' }}
-              src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"
-              alt="Team Greenwave"
             />
           </article>
         </section>

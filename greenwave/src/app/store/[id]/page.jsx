@@ -263,10 +263,10 @@ export default function Detail({ params }) {
                 product.paused !== true &&
                 !foundUserProduct ? (
                   <div>
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center botones">
                       <button
                         onClick={handleBuy}
-                        className="bg-green-800 text-white font-semibold m-2 p-1 px-16 rounded-md h-full"
+                        className="bg-green-800 hover:bg-green-700 text-white font-semibold m-2 p-1 px-16 rounded-md h-full"
                       >
                         Buy now
                       </button>
@@ -311,9 +311,9 @@ export default function Detail({ params }) {
                             </button>
                           </>
                         ) : (
-                          <div className="flex flex-row items-center">
+                          <div className="flex flex-row items-center carrito">
                             <button
-                              className="hover:text-green-900 bg-transparent text-black px-3 py-1 rounded-md border border-solid border-gray-500 hover:border-green-900"
+                              className="bg-green-800 hover:bg-green-700 bg-transparent text-black px-3 py-1 rounded-md border border-solid border-gray-500"
                               onClick={handleAddToCart}
                             >
                               🛒 Add to cart

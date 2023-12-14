@@ -9,6 +9,7 @@ import LeftMenu from "../components/leftMenu/LeftMenu";
 import { pauseProduct } from "../lib/data";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import './product.css'
 
 const MyProducts = () => {
   const { user } = useContext(GlobalUser);
@@ -68,6 +69,10 @@ const MyProducts = () => {
     }
   };
 
+  const NodeletedProducts = userProducts.filter(
+    (product) => product.deleted !== true
+  );
+
   return (
     <div className="flex flex-col sm:flex-row">
       <div>
@@ -81,11 +86,11 @@ const MyProducts = () => {
           My Products
         </h1>
 
-        {userProducts && userProducts.length !== 0 ? (
-          userProducts?.map((product) => (
+        {NodeletedProducts && NodeletedProducts.length !== 0 ? (
+          NodeletedProducts?.map((product) => (
             <div
               key={product.id}
-              className="flex flex-col lg:flex-row justify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5"
+              className="flex flex-col lg:flex-row justify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5 bloque"
               style={{
                 backgroundColor: "#D1D7BF",
                 border: "1px solid gray",
@@ -94,19 +99,19 @@ const MyProducts = () => {
               <div className="">
                 <div
                   className={`mr-9 5 rounded-lg ${product.paused === true
-                      ? "hover:bg-green-500"
+                      ? "hover:bg-green-500" 
                       : "hover:bg-red-500"
                     }`}
                 >
                   {product && product.approved === true ? (
                     product.paused === true ? (
-                      <div className="">
+                      <div>
                         <button onClick={() => handleActive(product.id)}>
                           Active
                         </button>
                       </div>
                     ) : (
-                      <div>
+                      <div className="bg-red-500 text-white rounded-lg text-center mt-2 px-5 pausado">
                         <button onClick={() => handlePause(product.id)}>
                           Pause
                         </button>
@@ -116,7 +121,7 @@ const MyProducts = () => {
                 </div>
 
                 <h3
-                  className={`m-7 px-2 text-center rounded-lg ${product.paused === false ? "bg-green-500" : "bg-red-500"
+                  className={`mt-2 px-4 text-center rounded-lg ${product.paused === false ? "bg-green-500" : "bg-red-500 text-white"
                     }`}
                 >
                   {product.approved === true
@@ -139,9 +144,9 @@ const MyProducts = () => {
                     border: "2px solid gray",
                   }}
                 />
-                <div className="flex flex-col  p-4">
+                <div className="flex flex-col justify-start items-start  p-4">
                   <h3
-                    className="font-bold py-1 text-center text-lg"
+                    className="font-bold py-1 text-left text-lg"
                     style={{ width: "100%", textShadow: "1px 1px gray" }}
                   >
                     {product.name}
@@ -156,7 +161,7 @@ const MyProducts = () => {
                     $ {product.price}
                   </h3>
                   <p
-                    className="text-gray-600"
+                    className="text-gray-600 pb-6"
                     style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
                   >
                     {product.description}
@@ -164,7 +169,7 @@ const MyProducts = () => {
 
                   <Link
                     href={`/store/${product.id}`}
-                    className="flex justify-start w-full"
+                    className="flex justify-start w-full boton"
                   >
                     <button
                       className="rounded-lg bg-button hover:bg-hover-clear"
@@ -183,19 +188,19 @@ const MyProducts = () => {
           <div>
             <div className="flex flex-col justify-center items-center ">
             <Button
-              link={"/store"}
-              text={"Start shopping"}
+              link={"/post-product"}
+              text={"Publish a product"}
               className={
                 "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 relative rounded-lg m-5 px-5 py-2 text-lg "
               }
             />
             <Image
               className=" rounded-md"
-              src={"/images/myShoppings.png"}
+              src={"/images/myProducts.png"}
               alt={"myProducts"}
               height={500}
               width={500}
-              style={{ width: "620px", height: "620px", marginInline: "auto"}}
+              style={{ width: "300px", height: "300px", marginInline: "auto"}}
             />
             </div>
           </div>
