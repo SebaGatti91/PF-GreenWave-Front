@@ -10,16 +10,16 @@ const DropDownMenu = ({
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
-    const fetchMaterials = async () => {
+    const fetchMaterialsDb = async () => {
       try {
-        const materials = await fetchMaterials();
-        setMaterials(materials);
+        const materialsDb = await fetchMaterials();
+        setMaterials(materialsDb);
       } catch (error) {
         console.error("Error fetching materials:", error);
       }
     };
 
-    fetchMaterials();
+    fetchMaterialsDb();
   }, []);
 
   return (
@@ -41,7 +41,8 @@ const DropDownMenu = ({
             }}
           >
             <option value="Materials">All Materials</option>
-            {materials.map((material) => (
+            {console.log(materials)}
+            {materials?.map((material) => (
               <option
                 className="text-center"
                 key={material.id}
