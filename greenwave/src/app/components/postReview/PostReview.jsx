@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useContext } from "react";
 import { Formik, Field, Form } from "formik";
 import axios from "axios";
@@ -7,12 +8,13 @@ import * as Yup from "yup";
 import Filter from "bad-words";
 import Swal from "sweetalert2";
 import "../../../../public/estilos/buycart.css";
-
+import { useRouter } from "next/navigation";
 function ReviewForm({ productId, closeModal }) {
   const Backurl = process.env.BACK;
   const { user } = useContext(GlobalUser);
   const [rating, setRating] = useState(0);
   const filter = new Filter();
+  const router = useRouter();
 
   const changeRating = (newRating) => {
     setRating(newRating);
@@ -29,8 +31,9 @@ function ReviewForm({ productId, closeModal }) {
       const response = await axios.post(`${Backurl}/reviews`, reviewData);
 
       if (response.status === 200) {
+        router.push(`/profile/`);
         return Swal.fire({
-          icon: "Great",
+          icon: "success",
           title: "Review",
           text: "Thanks for your Review",
         });

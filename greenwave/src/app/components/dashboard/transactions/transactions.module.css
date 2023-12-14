@@ -5,6 +5,7 @@
 }
 
 .title{
+  font-size: 20px;
   margin-bottom: 20px;
   font-weight: 200;
   color: var(--textSoft);
@@ -50,4 +51,25 @@
 
 .cancelled{
   background-color: #f7737375;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #2e374a;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  color: var(--textDashboard);
+}
+
+.button:disabled,
+.buttonBottom:disabled {
+  opacity: 0.5; /* Reduce la opacidad para indicar que el botón está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor a 'not-allowed' cuando el botón está deshabilitado */
 }
