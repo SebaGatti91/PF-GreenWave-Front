@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { fetchMaterials } from "../../lib/data";
 const DropDownMenu = ({
   handleMaterials,
   handleFilter,
@@ -11,8 +12,8 @@ const DropDownMenu = ({
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/materials");
-        setMaterials(response.data);
+        const materials = await fetchMaterials();
+        setMaterials(materials);
       } catch (error) {
         console.error("Error fetching materials:", error);
       }
@@ -22,23 +23,30 @@ const DropDownMenu = ({
   }, []);
 
   return (
-    <div
-      className="flex flex-col justify-evenly mb-4 pb-8"
-    >
-      <div className="pb-2 bg-hover" >
+    <div className="flex flex-col justify-evenly mb-4 pb-8">
+      <div className="pb-2 bg-hover">
         <div className="flex flex-col">
-
-          <h3 className="text-left  font-semibold text-base pl-8 pt-6 pb-3 sm:block hidden">Materials</h3>
+          <h3 className="text-left  font-semibold text-base pl-8 pt-6 pb-3 sm:block hidden">
+            Materials
+          </h3>
           <select
             id="selectedMaterial"
             name="selectedMaterial"
             onChange={handleMaterials}
             className="text-center pl-4 py-1 rounded-lg bg-white hover:cursor-pointer"
-            style={{ marginInline: 'auto', width: '80%', border: '1px solid gray' }}
+            style={{
+              marginInline: "auto",
+              width: "80%",
+              border: "1px solid gray",
+            }}
           >
             <option value="Materials">All Materials</option>
             {materials.map((material) => (
-              <option className="text-center" key={material.id} value={material.name}>
+              <option
+                className="text-center"
+                key={material.id}
+                value={material.name}
+              >
                 {material.name}
               </option>
             ))}
@@ -62,28 +70,52 @@ const DropDownMenu = ({
       </div> */}
 
       <div className="pb-2 bg-hover">
-        <h3 className="text-left font-semibold text-base pl-8 mt-6 mb-3 sm:block hidden">Alphabetical Order</h3>
+        <h3 className="text-left font-semibold text-base pl-8 mt-6 mb-3 sm:block hidden">
+          Alphabetical Order
+        </h3>
         <select
           onChange={handleOrder}
           className="flex justify-center rounded-lg bg-white hover:cursor-pointer pl-4 py-1"
-          style={{ marginInline: 'auto', width: '80%', border: '1px solid gray' }}
+          style={{
+            marginInline: "auto",
+            width: "80%",
+            border: "1px solid gray",
+          }}
         >
-          <option value="Alfabetico" className="text-center">Alphabetical</option>
-          <option value="nameAsc" className="text-center">Ascending</option>
-          <option value="nameDesc" className="text-center">Descending</option>
+          <option value="Alfabetico" className="text-center">
+            Alphabetical
+          </option>
+          <option value="nameAsc" className="text-center">
+            Ascending
+          </option>
+          <option value="nameDesc" className="text-center">
+            Descending
+          </option>
         </select>
       </div>
 
-      <div className="pb-5 bg-hover" >
-        <h3 className="text-left font-semibold text-base pl-8 mt-6 mb-3 sm:block hidden">Order by price</h3>
+      <div className="pb-5 bg-hover">
+        <h3 className="text-left font-semibold text-base pl-8 mt-6 mb-3 sm:block hidden">
+          Order by price
+        </h3>
         <select
           onChange={handleOrder}
           className="flex justify-center rounded-lg bg-white hover:cursor-pointer pl-4 py-1"
-          style={{ marginInline: 'auto', width: '80%', border: '1px solid gray' }}
+          style={{
+            marginInline: "auto",
+            width: "80%",
+            border: "1px solid gray",
+          }}
         >
-          <option className="text-center" value="Price">Price</option>
-          <option className="text-center" value="priceAsc">Ascending</option>
-          <option className="text-center" value="priceDesc">Descending</option>
+          <option className="text-center" value="Price">
+            Price
+          </option>
+          <option className="text-center" value="priceAsc">
+            Ascending
+          </option>
+          <option className="text-center" value="priceDesc">
+            Descending
+          </option>
         </select>
       </div>
 
@@ -91,7 +123,7 @@ const DropDownMenu = ({
         <button
           onClick={handleClearFilters}
           className="mt-3 py-1 px-2 text-lime-50 hover:text-black bg-clear hover:bg-hover-clear hover:cursor-pointer rounded-xl"
-          style={{ width: "130px", listStyle: "none", marginInline: 'auto' }}
+          style={{ width: "130px", listStyle: "none", marginInline: "auto" }}
         >
           Clear Filters
         </button>
