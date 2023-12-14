@@ -63,18 +63,18 @@ const Favorites = () => {
            <div className="flex flex-col justify-center items-center ">
             <Button
               link={"/store"}
-              text={"Start shopping"}
+              text={"Add to Favorites"}
               className={
                 "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 relative rounded-lg m-5 px-5 py-2 text-lg "
               }
             />
             <Image
               className=" rounded-md"
-              src={"/images/myShoppings.png"}
+              src={"/images/favorites.png"}
               alt={"myProducts"}
-              height={500}
-              width={500}
-              style={{ width: "620px", height: "620px", marginInline: "auto"}}
+              height={250}
+              width={250}
+              style={{ width: "300px", height: "300px", marginInline: "auto"}}
             />
             </div>
           </div>

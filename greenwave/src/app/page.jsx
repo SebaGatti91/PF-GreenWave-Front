@@ -94,7 +94,7 @@ export default function Splash() {
                 Awareness Through Recycling
               </h1>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 In recent years, recycling has emerged as a simple yet powerful
                 way for every individual to impact the health of our planet. By
                 reusing materials, we reduce the demand for new resources and
@@ -102,7 +102,7 @@ export default function Splash() {
                 oceans.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 But recycling is more than just a practice - it's a mindset.
                 It's about recognizing the value in our resources and making a
                 conscious effort to extend their lifecycle. It's a small step
@@ -133,14 +133,14 @@ export default function Splash() {
                 Supporting Non-Profit Organizations
               </h1>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 There are countless non-profit organizations dedicated to
                 protecting the environment and combating climate change. These
                 organizations conduct research, advocate for policy changes, and
                 work on the ground to protect our ecosystems.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 By supporting these organizations, we can contribute to their
                 efforts and help amplify their impact. Whether it's through
                 donations, volunteering, or simply spreading the word about
@@ -160,7 +160,7 @@ export default function Splash() {
                 The Importance of Protecting Our Environment
               </h1>
 
-              <p className="py-6 px-16 ">
+              <p className="py-3 px-16 ">
                 Imagine a plastic bag floating in the ocean. It may seem
                 insignificant in the grand scheme of things, but it represents a
                 much larger issue. That plastic bag could end up in the stomach
@@ -168,7 +168,7 @@ export default function Splash() {
                 that contaminate our water and food.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 This is just one example of why it's crucial to protect our
                 environment. Our actions have far-reaching consequences, and
                 it's our responsibility to minimize our impact. By making

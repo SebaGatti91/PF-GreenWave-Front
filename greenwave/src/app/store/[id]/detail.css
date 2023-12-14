@@ -5,4 +5,26 @@
       justify-content: center;
       align-items: center;
     }
+
+    .pequeño{
+      width: 80% !important;
+      margin-inline: auto !important;
+    }
+
+    .botones{
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .carrito{
+      width: 100%;
+      padding: 0 20px !important;
+    }
+}
+
+@media all and (min-width: 1024px){
+  .pequeño{
+    width: 80% !important;
+    margin-inline: auto !important;
+  }
 }

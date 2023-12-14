@@ -29,7 +29,10 @@ const ProductsPage = () => {
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -44,7 +47,10 @@ const ProductsPage = () => {
   };
 
   const filteredProducts = products.filter(handleSearch);
-  const paginatedProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const paginatedProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   return (
     <div className={styles.container}>
@@ -64,12 +70,12 @@ const ProductsPage = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <td>Image</td>
-            <td>Status</td>
-            <td>Name</td>
-            <td>Price</td>
-            <td>Stock</td>
-            <td>Rating</td>
+            <td className={styles.productColumn}>Image</td>
+            <td className={styles.productColumn}>Status</td>
+            <td className={styles.productColumn}>Name</td>
+            <td className={styles.productColumn}>Price</td>
+            <td className={styles.productColumn}>Stock</td>
+            <td className={styles.productColumn}>Rating</td>
           </tr>
         </thead>
         <tbody>
