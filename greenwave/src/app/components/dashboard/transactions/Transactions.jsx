@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./transactions.module.css";
 import React, { useState, useEffect } from "react";
 import { fetchUsers } from "../../../lib/data";
+import { MdSearch } from "react-icons/md";
 
 const Transactions = () => {
   const [users, setUsers] = useState([]);
@@ -34,7 +35,10 @@ const Transactions = () => {
     );
   };
 
-  //lógica de paginación
+  // Filter users based on search term
+  const filteredUsers = users.filter(handleSearch);
+
+  // lógica de paginación
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const paginatedUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
@@ -55,7 +59,7 @@ const Transactions = () => {
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
-            setCurrentPage(1); // Restablece la página cuando cambia el término de búsqueda
+            setCurrentPage(1); // Reinicia la página cuando cambia el término de búsqueda
           }}
           className={styles.input}
         />
@@ -72,7 +76,7 @@ const Transactions = () => {
           </tr>
         </thead>
         <tbody>
-          {users?.slice(indexOfFirstUser, indexOfLastUser).map((user) =>
+          {paginatedUsers.map((user) =>
             user.purchases && user.purchases.length > 0
               ? user.purchases.map((purchase) => (
                   <tr key={`${user.id}-${purchase.Product.id}`}>
@@ -109,7 +113,7 @@ const Transactions = () => {
         <span>Página {currentPage}</span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={indexOfLastUser >= users.length}
+          disabled={indexOfLastUser >= filteredUsers.length}
         >
           Siguiente
         </button>
