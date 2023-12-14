@@ -29,7 +29,6 @@ const LoginPage = () => {
         redirect: false,
         callbackUrl: frontURL + "/homepage",
       });
-  
       if (responseNextAuth?.error) {
         // Establece manualmente el mensaje de error deseado
         setErrors("Error de inicio de sesión");
@@ -50,6 +49,7 @@ const LoginPage = () => {
       }
     }
   };
+
 
   return (
     <div className={ `${styles.container} flex justify-center items-center h-full`}>
