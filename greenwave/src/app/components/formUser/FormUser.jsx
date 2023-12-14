@@ -93,7 +93,7 @@ export default function FormUser({ closeModal }) {
               }
 
               const response = await axios.put(
-                `http://localhost:3001/users/update/${user.id}`,
+                `${BACK}/users/update/${user.id}`,
                 values
               );
 
