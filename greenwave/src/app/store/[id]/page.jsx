@@ -121,10 +121,6 @@ export default function Detail({ params }) {
     loadProductDetail(params.id);
   }, [params.id]);
 
-  if (!product) {
-    return <div>loading...</div>;
-  }
-
   if (loading) {
     return <Skeleton />;
   } else {
