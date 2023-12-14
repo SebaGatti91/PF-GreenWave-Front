@@ -22,8 +22,6 @@ const Transactions = () => {
     fetchUsersData();
   }, [users]);
 
-  console.log(users);
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Transactions by Users</h2>
@@ -39,30 +37,30 @@ const Transactions = () => {
           </tr>
         </thead>
         <tbody>
-          {users?.map((user) => (
-            user.purchases && user.purchases.length > 0 ? (
-              user.purchases.map((purchase) => (
-                <tr key={`${user.id}-${purchase.Product.id}`}>
-                  <td>
-                    <div className={styles.user}>
-                      <Image
-                        src={user.image ? user.image : "/images/noavatar.png"}
-                        alt=""
-                        width={40}
-                        height={40}
-                        className={styles.userImage}
-                      />
-                    </div>
-                  </td>
-                  <td>{user.username}</td>
-                  <td>{purchase.Product.name}</td>
-                  <td>{purchase.quantity}</td>
-                  <td>${purchase.Product.price}</td>
-                  <td>${purchase.Product.price * purchase.quantity}</td>
-                </tr>
-              ))
-            ) : null
-          ))}
+          {users?.map((user) =>
+            user.purchases && user.purchases.length > 0
+              ? user.purchases.map((purchase) => (
+                  <tr key={`${user.id}-${purchase.Product.id}`}>
+                    <td>
+                      <div className={styles.user}>
+                        <Image
+                          src={user.image ? user.image : "/images/noavatar.png"}
+                          alt=""
+                          width={40}
+                          height={40}
+                          className={styles.userImage}
+                        />
+                      </div>
+                    </td>
+                    <td>{user.username}</td>
+                    <td>{purchase.Product.name}</td>
+                    <td>{purchase.quantity}</td>
+                    <td>${purchase.Product.price}</td>
+                    <td>${purchase.Product.price * purchase.quantity}</td>
+                  </tr>
+                ))
+              : null
+          )}
         </tbody>
       </table>
     </div>

@@ -44,7 +44,6 @@ export const CartProvider = ({ children }) => {
   };
 
   const countDownCart = (productId) => {
-    console.log(productId);
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === productId && item.count > 1

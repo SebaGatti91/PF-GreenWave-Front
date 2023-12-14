@@ -122,8 +122,6 @@ const Cart = () => {
                     border: "1px solid gray",
                   }}
                 >
-                  {console.log(product)}
-                  {console.log(cart)}
                   <div className="flex flex-row producto">
                     <Link
                       href={`/store/${product.id}`}
@@ -148,7 +146,7 @@ const Cart = () => {
                     <div className="flex flex-col text-start p-4">
                       <h3 className="font-bold py-1 nombre">{product.name}</h3>
                       <h3 className="text-green-600 py-1">
-                        USD <span className="ml-1">${product.price}</span> 
+                        USD <span className="ml-1">${product.price}</span>
                       </h3>
                     </div>
                   </div>
