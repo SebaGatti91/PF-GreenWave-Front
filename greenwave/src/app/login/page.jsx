@@ -10,7 +10,6 @@ const LoginPage = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-
   const [userCreation, setUserCreation] = useState(false);
 
   useEffect(() => {
