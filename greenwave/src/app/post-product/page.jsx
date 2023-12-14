@@ -35,17 +35,17 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
   const handleMaterials = (event) => {
     const selectMat = event.target.value;
-  
+
     if (selectMats.length > 3 || selectMats.includes(selectMat)) {
       Swal.fire({
-        icon: 'warning',
-        title: 'Oops...',
-        text: 'You can select up to 3 materials.',
-        confirmButtonColor: '#426F66',
+        icon: "warning",
+        title: "Oops...",
+        text: "You can select up to 3 materials.",
+        confirmButtonColor: "#426F66",
       });
       return;
     }
-  
+
     setSelectMats((prevSelectMats) => {
       const updatedSelectMats = [...prevSelectMats, selectMat];
       return updatedSelectMats;
@@ -71,7 +71,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           name: initialValues ? initialValues.name : "",
           price: initialValues ? initialValues.price : "",
           stock: initialValues ? initialValues.stock : "",
-          materials: selectMats ? initialValues.materials: [],
+          materials: selectMats ? initialValues.materials : [],
           description: initialValues ? initialValues.description : "",
           image: initialValues ? initialValues.image : "",
         }}
@@ -165,10 +165,9 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                   router.push(`/profile/`);
                   return Swal.fire({
                     icon: "success",
-                    title:
-                      "Product edited Successfully, it will be pending to approve",
+                    title: "Product edited Successfully",
                     confirmButtonColor: "#426F66",
-                    text: "Your product has been successfully edited.",
+                    text: "It will be pending to approve.",
                   });
                 }
               } catch (error) {
