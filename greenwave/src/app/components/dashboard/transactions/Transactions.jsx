@@ -7,8 +7,8 @@ import { MdSearch } from "react-icons/md";
 
 const Transactions = () => {
   const [users, setUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5;
 
   useEffect(() => {
@@ -26,6 +26,11 @@ const Transactions = () => {
     fetchUsersData();
   }, [users]);
 
+  // Cambiar de página
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   const handleSearch = (user) => {
     const normalizedSearchTerm = searchTerm.toLowerCase();
     return (
@@ -42,11 +47,6 @@ const Transactions = () => {
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const paginatedUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
-
-  // Cambiar de página
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
 
   return (
     <div className={styles.container}>
@@ -105,6 +105,7 @@ const Transactions = () => {
       {/* Agregar botones de paginación */}
       <div>
         <button
+         className={styles.buttonBottom}
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
@@ -112,6 +113,7 @@ const Transactions = () => {
         </button>
         <span>Página {currentPage}</span>
         <button
+         className={styles.buttonBottom}
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={indexOfLastUser >= filteredUsers.length}
         >
