@@ -48,7 +48,7 @@ const LeftMenu = () => {
           >
             <Button
               link={"/favorites"}
-              text={"My favorites"}
+              text={"Favorites"}
               className={"hover:bg-clear p-2 rounded-md"}
             />
           </li>
@@ -64,7 +64,7 @@ const LeftMenu = () => {
           >
             <Button
               link={"/myShopping"}
-              text={"My shopping"}
+              text={"Shopping"}
               className={"hover:bg-clear p-2 rounded-md"}
             />
           </li>
