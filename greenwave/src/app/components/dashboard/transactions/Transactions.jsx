@@ -8,28 +8,19 @@ import { MdSearch } from "react-icons/md";
 const Transactions = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 5;
 
   useEffect(() => {
     const fetchUsersData = async () => {
       try {
-        if (users.length === 0) {
-          const fetchedUsers = await fetchUsers();
-          setUsers(fetchedUsers);
-        }
+        const fetchedUsers = await fetchUsers();
+        setUsers(fetchedUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
 
     fetchUsersData();
-  }, [users]);
-
-  // Cambiar de página
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
+  }, []); // Solo se ejecuta una vez al montar la página
 
   const handleSearch = (user) => {
     const normalizedSearchTerm = searchTerm.toLowerCase();
@@ -40,13 +31,8 @@ const Transactions = () => {
     );
   };
 
-  // Filter users based on search term
+  // Filtrar usuarios basados en el término de búsqueda
   const filteredUsers = users.filter(handleSearch);
-
-  // lógica de paginación
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const paginatedUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   return (
     <div className={styles.container}>
@@ -59,7 +45,6 @@ const Transactions = () => {
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
-            setCurrentPage(1); // Reinicia la página cuando cambia el término de búsqueda
           }}
           className={styles.input}
         />
@@ -76,7 +61,7 @@ const Transactions = () => {
           </tr>
         </thead>
         <tbody>
-          {paginatedUsers.map((user) =>
+          {filteredUsers.map((user) =>
             user.purchases && user.purchases.length > 0
               ? user.purchases.map((purchase) => (
                   <tr key={`${user.id}-${purchase.Product.id}`}>
@@ -102,24 +87,6 @@ const Transactions = () => {
           )}
         </tbody>
       </table>
-      {/* Agregar botones de paginación */}
-      <div>
-        <button
-         className={styles.buttonBottom}
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Anterior
-        </button>
-        <span>Página {currentPage}</span>
-        <button
-         className={styles.buttonBottom}
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={indexOfLastUser >= filteredUsers.length}
-        >
-          Siguiente
-        </button>
-      </div>
     </div>
   );
 };
