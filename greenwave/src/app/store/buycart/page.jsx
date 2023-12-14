@@ -7,7 +7,7 @@ import { CartContext } from "../../components/cart/cartContext";
 import Link from "next/link";
 import Image from "next/image";
 import { GlobalUser } from "../../components/users/globalUsers";
-import './page.css'
+import "./page.css";
 
 const Cart = () => {
   const BackUrl = process.env.BACK;
@@ -55,11 +55,12 @@ const Cart = () => {
   };
 
   const handleBuy = async () => {
-    if (userAut) {
+    if (userAut && user.address !== null) {
       const id = await createPreference();
       if (id) setPreferenceId(id);
+      return router.push("/login");
     } else {
-      router.push("/login");
+      return router.push("/profile");
     }
   };
 
