@@ -9,6 +9,8 @@ import Link from "next/link";
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 8; // Número de usuarios por página
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +27,10 @@ const UsersPage = () => {
     fetchData();
   }, [users]);
 
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   const handleSearch = (user) => {
     const normalizedSearchTerm = searchTerm.toLowerCase();
     return (
@@ -36,6 +42,10 @@ const UsersPage = () => {
   // Filter users based on search term
   const filteredUsers = users.filter(handleSearch);
 
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const paginatedUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
   return (
     <div className={styles.container}>
       <div className={styles.search}>
@@ -44,7 +54,10 @@ const UsersPage = () => {
           type="text"
           placeholder="Search by email "
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1); // Reset page when the search term changes
+          }}
           className={styles.input}
         />
       </div>
@@ -59,7 +72,7 @@ const UsersPage = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.map((user) => (
+          {paginatedUsers.map((user) => (
             <tr key={user.id}>
               <td>
                 <div className={styles.user}>
@@ -101,6 +114,23 @@ const UsersPage = () => {
           ))}
         </tbody>
       </table>
+      <div>
+        <button
+          className={styles.buttonBottom}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </button>
+        <span>Página {currentPage}</span>
+        <button
+          className={styles.buttonBottom}
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={indexOfLastUser >= filteredUsers.length}
+        >
+          Siguiente
+        </button>
+      </div>
     </div>
   );
 };
