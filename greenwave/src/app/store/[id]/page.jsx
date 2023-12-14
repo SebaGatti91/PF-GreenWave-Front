@@ -84,6 +84,7 @@ export default function Detail({ params }) {
 
   const handleBuy = async () => {
     if (userAut) {
+      handleAddToCart();
       const id = await createPreference();
       if (id) setPreferenceId(id);
     } else {
@@ -120,7 +121,6 @@ export default function Detail({ params }) {
     loadProductDetail(params.id);
   }, [params.id]);
 
-  console.log(product);
   if (!product) {
     return <div>loading...</div>;
   }

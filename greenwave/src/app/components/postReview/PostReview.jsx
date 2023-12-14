@@ -35,7 +35,6 @@ function ReviewForm({ productId, closeModal }) {
           text: "Thanks for your Review",
         });
       } else {
-        console.log("Error when creating the revision");
       }
     } catch (error) {
       console.error("Error when making the POST request:", error);
@@ -44,7 +43,10 @@ function ReviewForm({ productId, closeModal }) {
 
   const validationSchema = Yup.object().shape({
     comment: Yup.string()
-      .min(2, "The comment is very short - it must be at least 2 characters long.")
+      .min(
+        2,
+        "The comment is very short - it must be at least 2 characters long."
+      )
       .max(
         300,
         "The comment is very long - it should be no longer than 300 characters."
@@ -63,17 +65,17 @@ function ReviewForm({ productId, closeModal }) {
           style={{ backgroundColor: "ButtonFace" }}
         >
           <div className="mb-4 w-full">
-          <div className="flex justify-end items-end">
-          <button
-                  style={{ border: "1px solid gray" }}
-                  className=" bg-transparent hover:bg-red-700 hover:text-white text-black px-2 rounded"
-                  onClick={closeModal}
-                >
-                  X
-                </button>
-          </div>
+            <div className="flex justify-end items-end">
+              <button
+                style={{ border: "1px solid gray" }}
+                className=" bg-transparent hover:bg-red-700 hover:text-white text-black px-2 rounded"
+                onClick={closeModal}
+              >
+                X
+              </button>
+            </div>
             <label className="font-semibold flex justify-center items-center">
-              Rating: 
+              Rating:
               <StarRatings
                 rating={rating}
                 starRatedColor="green"
@@ -85,8 +87,12 @@ function ReviewForm({ productId, closeModal }) {
           </div>
           <div className=" w-full "></div>
           <label className="font-semibold mb-2 w-full">
-          Commentary:
-            <Field type="textarea" name="comment" className="border mt-1 border-gray-400 rounded-lg w-full" />
+            Commentary:
+            <Field
+              type="textarea"
+              name="comment"
+              className="border mt-1 border-gray-400 rounded-lg w-full"
+            />
             {errors.comment && touched.comment ? (
               <div>{errors.comment}</div>
             ) : null}

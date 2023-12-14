@@ -11,7 +11,6 @@ export default function FormUser({ closeModal }) {
   const { user, setUser } = useContext(GlobalUser);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log(user);
 
   return (
     <div>
@@ -44,31 +43,37 @@ export default function FormUser({ closeModal }) {
           // Validation for phone
           if (values.phone) {
             if (!/^(\+|\d)[0-9]{7,16}$/.test(values.phone)) {
-              errors.phone = "Invalid phone number format. Please enter a valid phone number.";
+              errors.phone =
+                "Invalid phone number format. Please enter a valid phone number.";
             }
           }
 
           // Validation for postalcode
           if (values.postalCode) {
             if (!/^\d{1,9}(-\d{0,8})?$/.test(values.postalCode)) {
-              errors.postalCode = "Must contain up to 9 digits and an optional hyphen";
+              errors.postalCode =
+                "Must contain up to 9 digits and an optional hyphen";
             }
           }
 
           // Validation for adress
           if (values.address) {
-            if (!/^[\w\s-]+ \d+$/.test(values.address)){
-              errors.address = "Invalid address format. Please enter a valid address.";
+            if (!/^[\w\s-]+ \d+$/.test(values.address)) {
+              errors.address =
+                "Invalid address format. Please enter a valid address.";
             }
           }
-          
-          
-          
 
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          if (values.username || values.image || values.phone || values.postalCode || values.address) {
+          if (
+            values.username ||
+            values.image ||
+            values.phone ||
+            values.postalCode ||
+            values.address
+          ) {
             try {
               setLoading(true);
               const formData = new FormData();
@@ -173,46 +178,46 @@ export default function FormUser({ closeModal }) {
               )}
             </div>
             <div className="flex gap-3">
-                <div className="mb-4 w-full">
-                  <label htmlFor="phone" className="font-semibold mb-2">
-                    Phone
-                  </label>
-                  <input
-                    type="text"
-                    value={values.phone}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    name="phone"
-                    placeholder="48511008"
-                    className="w-full px-3 py-2 border border-gray-300 rounded"
-                  />
-                  {touched.phone && errors.phone && (
-                    <div className="font-medium text-xs text-orange-700">
-                      {errors.phone}
-                    </div>
-                  )}
-                </div>
-                <div className="mb-4 w-full">
-                  <label htmlFor="postalCode" className="mb-2 font-semibold">
-                    Postal code:
-                  </label>
-                  <input
-                    type="text"
-                    value={values.postalCode}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    name="postalCode"
-                    placeholder="5000"
-                    className="w-full px-3 py-2 border border-gray-300 rounded"
-                  />
-                  {touched.postalCode && errors.postalCode && (
-                    <div className="font-medium text-xs text-orange-700">
-                      {errors.postalCode}
-                    </div>
-                  )}
-                </div>
+              <div className="mb-4 w-full">
+                <label htmlFor="phone" className="font-semibold mb-2">
+                  Phone
+                </label>
+                <input
+                  type="text"
+                  value={values.phone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="phone"
+                  placeholder="48511008"
+                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                />
+                {touched.phone && errors.phone && (
+                  <div className="font-medium text-xs text-orange-700">
+                    {errors.phone}
+                  </div>
+                )}
               </div>
               <div className="mb-4 w-full">
+                <label htmlFor="postalCode" className="mb-2 font-semibold">
+                  Postal code:
+                </label>
+                <input
+                  type="text"
+                  value={values.postalCode}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="postalCode"
+                  placeholder="5000"
+                  className="w-full px-3 py-2 border border-gray-300 rounded"
+                />
+                {touched.postalCode && errors.postalCode && (
+                  <div className="font-medium text-xs text-orange-700">
+                    {errors.postalCode}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="mb-4 w-full">
               <label htmlFor="address" className="font-semibold mb-2">
                 Address:
               </label>

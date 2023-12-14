@@ -9,7 +9,6 @@ export const materialsApi = async () => {
 };
 
 export const submitForm = async (values) => {
-  console.log(values)
   try {
     const response = await axios.post(`${BackUrl}/products`, values);
     if (response.status === 200) {
