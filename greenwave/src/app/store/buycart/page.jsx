@@ -7,7 +7,7 @@ import { CartContext } from "../../components/cart/cartContext";
 import Link from "next/link";
 import Image from "next/image";
 import { GlobalUser } from "../../components/users/globalUsers";
-import './page.css'
+import "./page.css";
 
 const Cart = () => {
   const BackUrl = process.env.BACK;
@@ -55,11 +55,12 @@ const Cart = () => {
   };
 
   const handleBuy = async () => {
-    if (userAut) {
+    if (userAut && user.address !== null) {
       const id = await createPreference();
       if (id) setPreferenceId(id);
+      return router.push("/login");
     } else {
-      router.push("/login");
+      return router.push("/profile");
     }
   };
 
@@ -121,8 +122,6 @@ const Cart = () => {
                     border: "1px solid gray",
                   }}
                 >
-                  {console.log(product)}
-                  {console.log(cart)}
                   <div className="flex flex-row producto">
                     <Link
                       href={`/store/${product.id}`}
@@ -147,7 +146,7 @@ const Cart = () => {
                     <div className="flex flex-col text-start p-4">
                       <h3 className="font-bold py-1 nombre">{product.name}</h3>
                       <h3 className="text-green-600 py-1">
-                        USD {product.price}
+                        USD <span className="ml-1">${product.price}</span>
                       </h3>
                     </div>
                   </div>

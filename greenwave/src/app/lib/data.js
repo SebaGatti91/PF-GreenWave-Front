@@ -85,7 +85,6 @@ export const createUser = async (user) => {
     await axios.post(url, user);
   } catch (error) {
     console.error("Error al crear el usuario en el backend", error);
-   
   }
 };
 
@@ -148,7 +147,6 @@ export const fetchGetFavorites = async (userId) => {
 };
 
 export const deleteProduct = async (id) => {
-  console.log(id);
   const result = await Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",

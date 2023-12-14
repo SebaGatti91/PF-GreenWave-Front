@@ -17,7 +17,7 @@ const LeftMenu = () => {
             <Button
               link={"/profile"}
               text={"Profile"}
-              className={"hover:bg-clear p-2 rounded-md ml-5"}
+              className={"hover:bg-clear p-2 rounded-md"}
             />
           </li>
         )}
@@ -82,22 +82,6 @@ const LeftMenu = () => {
               link={"/myProducts"}
               text={"My products"}
               className={"hover:bg-clear p-2 rounded-md"}
-            />
-          </li>
-        )}
-
-        {pathname !== "/" && (
-          <li
-            className="mb-10 text-center pb-6 bg-hover sm:block hidden"
-            style={{
-              borderBottom: "1px solid gray",
-              width: "100%",
-            }}
-          >
-            <Button
-              link={"/"}
-              text={"Revenues"}
-              className={"hover:bg-clear p-2 rounded-md sm:block hidden"}
             />
           </li>
         )}

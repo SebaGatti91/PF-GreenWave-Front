@@ -4,8 +4,10 @@ require("dotenv").config();
 const nextConfig = {
   images: {
     domains: [
-      "",
-      'res.cloudinary.com',
+      "lh3.googleusercontent.com",
+      "s.gravatar.com",
+      "cdn.auth0.com",
+      "res.cloudinary.com",
       "i.imgur.com",
       "i.pinimg.com",
       "www.kienyke.com",
@@ -15,7 +17,7 @@ const nextConfig = {
       "m.media-amazon.com",
       "www.serzen.mx",
       "th.bing.com",
-      "reqres.in"
+      "reqres.in",
     ],
   },
 };
@@ -24,13 +26,13 @@ module.exports = {
   ...nextConfig,
   env: {
     FRONT: process.env.FRONT,
-    BACK: process.env.BACK
+    BACK: process.env.BACK,
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.module.rules.push({
         test: /\.mp4$/,
-        use: 'file-loader?name=videos/[name].[ext]',
+        use: "file-loader?name=videos/[name].[ext]",
       });
     }
     return config;

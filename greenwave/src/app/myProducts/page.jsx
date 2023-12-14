@@ -9,6 +9,7 @@ import LeftMenu from "../components/leftMenu/LeftMenu";
 import { pauseProduct } from "../lib/data";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import './product.css'
 
 const MyProducts = () => {
   const { user } = useContext(GlobalUser);
@@ -68,12 +69,16 @@ const MyProducts = () => {
     }
   };
 
+  const NodeletedProducts = userProducts.filter(
+    (product) => product.deleted !== true
+  );
+
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col sm:flex-row">
       <div>
         <LeftMenu />
       </div>
-      <div className="mr-5 w-4/5" style={{ marginInline: "auto" }}>
+      <div className=" w-4/5" style={{ marginInline: "auto" }}>
         <h1
           className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
           style={{ width: "100%", marginInline: "auto" }}
@@ -81,24 +86,22 @@ const MyProducts = () => {
           My Products
         </h1>
 
-        {userProducts && userProducts.length !== 0 ? (
-          userProducts?.map((product) => (
+        {NodeletedProducts && NodeletedProducts.length !== 0 ? (
+          NodeletedProducts?.map((product) => (
             <div
               key={product.id}
-              className="relative flex flex-row justify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5 hover:transform hover:scale-105 transition-transform duration-300"
+              className="flex flex-col lg:flex-row justify-between mb-10 mt-5 shadow-2xl rounded-lg pb-5 bloque"
               style={{
                 backgroundColor: "#D1D7BF",
                 border: "1px solid gray",
               }}
             >
-              <div className="absolute top-10 right-0 ">
+              <div className="">
                 <div
-                  className={`mr-9 5 rounded-lg ${
-                    product.paused === true
-                      ? "hover:bg-green-500"
+                  className={`mr-9 5 rounded-lg ${product.paused === true
+                      ? "hover:bg-green-500" 
                       : "hover:bg-red-500"
-                  }`}
-                  style={{ border: "1px solid #718096" }}
+                    }`}
                 >
                   {product && product.approved === true ? (
                     product.paused === true ? (
@@ -108,7 +111,7 @@ const MyProducts = () => {
                         </button>
                       </div>
                     ) : (
-                      <div>
+                      <div className="bg-red-500 text-white rounded-lg text-center mt-2 px-5 pausado">
                         <button onClick={() => handlePause(product.id)}>
                           Pause
                         </button>
@@ -118,10 +121,8 @@ const MyProducts = () => {
                 </div>
 
                 <h3
-                  className={`absolute bottom-0 right-0 m-7 px-2 rounded-lg ${
-                    product.paused === false ? "bg-green-500" : "bg-red-500"
-                  }`}
-                  style={{ border: "1px solid #718096" }}
+                  className={`mt-2 px-4 text-center rounded-lg ${product.paused === false ? "bg-green-500" : "bg-red-500 text-white"
+                    }`}
                 >
                   {product.approved === true
                     ? product.paused === true
@@ -130,7 +131,7 @@ const MyProducts = () => {
                     : "Pending"}
                 </h3>
               </div>
-              <div className="flex flex-row">
+              <div className="flex flex-col justify-center items-center sm:flex-row">
                 <Image
                   className="w-60 h-40 rounded-md"
                   src={product.image[0]}
@@ -138,14 +139,12 @@ const MyProducts = () => {
                   height={150}
                   width={150}
                   style={{
-                    maxWidth: "200px",
                     height: "150px",
                     marginTop: "20px",
-                    marginLeft: "20px",
                     border: "2px solid gray",
                   }}
                 />
-                <div className="flex flex-col text-start p-4">
+                <div className="flex flex-col justify-start items-start  p-4">
                   <h3
                     className="font-bold py-1 text-left text-lg"
                     style={{ width: "100%", textShadow: "1px 1px gray" }}
@@ -161,13 +160,16 @@ const MyProducts = () => {
                   >
                     $ {product.price}
                   </h3>
-                  <p className="py-1 w-full" style={{ height: "80px" }}>
+                  <p
+                    className="text-gray-600 pb-6"
+                    style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
+                  >
                     {product.description}
                   </p>
 
                   <Link
                     href={`/store/${product.id}`}
-                    className="flex justify-start w-full"
+                    className="flex justify-start w-full boton"
                   >
                     <button
                       className="rounded-lg bg-button hover:bg-hover-clear"
@@ -184,21 +186,23 @@ const MyProducts = () => {
           ))
         ) : (
           <div>
+            <div className="flex flex-col justify-center items-center ">
+            <Button
+              link={"/post-product"}
+              text={"Publish a product"}
+              className={
+                "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 relative rounded-lg m-5 px-5 py-2 text-lg "
+              }
+            />
             <Image
-              className=" rounded-md ml-80"
+              className=" rounded-md"
               src={"/images/myProducts.png"}
               alt={"myProducts"}
               height={500}
               width={500}
-              style={{ width: "320px", height: "320px", marginInline: "auto" }}
+              style={{ width: "300px", height: "300px", marginInline: "auto"}}
             />
-            <Button
-              link={"/post-product"}
-              text={"Sell your product"}
-              className={
-                "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 rounded-lg m-5 px-5 py-2 text-lg"
-              }
-            />
+            </div>
           </div>
         )}
       </div>

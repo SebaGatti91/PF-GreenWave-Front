@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import "../../public/estilos/splash.css";
 import Head from "next/head";
-import Link from 'next/link';
+import Link from "next/link";
 export default function Splash() {
   useEffect(() => {
     const arrow = document.querySelector(".flecha");
@@ -39,7 +39,7 @@ export default function Splash() {
           autoPlay="autoplay"
           loop={true}
           muted={true}
-          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+          style={{ objectFit: "cover", width: "100%", height: "100%" }}
         />
 
         <Head>
@@ -49,21 +49,26 @@ export default function Splash() {
           <main className="flex flex-row md:w-1/2   ">
             <div className="content">
               <img
-                className="logo  "
+                className="logo"
                 src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"
               ></img>
               <h1 className="title  md:text-4x1">Green wave</h1>
-              <p className="description  ">Cherish nature, recycle today for a better tomorrow</p>
-              <Link href='/homepage'>
+              <p className="description  ">
+                Cherish nature, recycle today for a better tomorrow
+              </p>
+              <Link href="/homepage">
                 <button
                   className='button items-center justify-center text-xl border border-teal-800 bg-gradient-to-b from-teal-500 to-teal-800 hover:from-teal-800 hover:to-teal-800 text-white font-bold py-2 px-4 rounded" '
                   href="/homepage"
                 >
-                  Entrar
+                  Start
                 </button>
               </Link>
 
-              <div className="flex justify-center" style={{ marginTop: '50px' }}>
+              <div
+                className="flex justify-center"
+                style={{ marginTop: "50px" }}
+              >
                 <a href="#section" className="flecha">
                   ↓
                 </a>
@@ -73,16 +78,15 @@ export default function Splash() {
         </div>
       </div>
       <div className="seccion" id="section">
-      <h2
-            className="font-bold text-center text-2xl py-5 mb-10 mt-10 shadow-2xl"
-            style={{ width: "90%", marginInline: "auto" }}
-          >
-            Information
-          </h2>
+        <h2
+          className="font-bold text-center text-2xl py-5 mb-10 mt-10 shadow-2xl"
+          style={{ width: "90%", marginInline: "auto" }}
+        >
+          Information
+        </h2>
         <section className="flex justify-center mt-12 pb-10 ">
-          
           <article
-            className="text-black flex shadow-2xl articulo overflow-hidden"
+            className="text-black flex shadow-2xl articulo overflow-hidden text-justify"
             style={{ width: "90%", height: "60vh", backgroundColor: "#C0C8A7" }}
           >
             <section className="scroll">
@@ -90,7 +94,7 @@ export default function Splash() {
                 Awareness Through Recycling
               </h1>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 In recent years, recycling has emerged as a simple yet powerful
                 way for every individual to impact the health of our planet. By
                 reusing materials, we reduce the demand for new resources and
@@ -98,7 +102,7 @@ export default function Splash() {
                 oceans.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 But recycling is more than just a practice - it's a mindset.
                 It's about recognizing the value in our resources and making a
                 conscious effort to extend their lifecycle. It's a small step
@@ -115,7 +119,7 @@ export default function Splash() {
         </section>
         <section className="flex justify-center mt-12 pb-10">
           <article
-            className="text-black flex shadow-2xl articulo overflow-hidden scroll-y"
+            className="text-black flex shadow-2xl articulo overflow-hidden text-justify "
             style={{ width: "90%", height: "60vh", backgroundColor: "#C0C8A7" }}
           >
             <img
@@ -129,14 +133,14 @@ export default function Splash() {
                 Supporting Non-Profit Organizations
               </h1>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 There are countless non-profit organizations dedicated to
                 protecting the environment and combating climate change. These
                 organizations conduct research, advocate for policy changes, and
                 work on the ground to protect our ecosystems.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 By supporting these organizations, we can contribute to their
                 efforts and help amplify their impact. Whether it's through
                 donations, volunteering, or simply spreading the word about
@@ -148,15 +152,15 @@ export default function Splash() {
 
         <section className="flex justify-center mt-12 pb-10 ">
           <article
-            className="text-black flex shadow-2xl articulo overflow-hidden"
+            className="text-black flex shadow-2xl articulo overflow-hidden text-justify"
             style={{ width: "90%", height: "60vh", backgroundColor: "#C0C8A7" }}
           >
-            <section className="scroll">
+            <section>
               <h1 className="font-bold text-center px-2 pt-20 text-xl">
                 The Importance of Protecting Our Environment
               </h1>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16 ">
                 Imagine a plastic bag floating in the ocean. It may seem
                 insignificant in the grand scheme of things, but it represents a
                 much larger issue. That plastic bag could end up in the stomach
@@ -164,7 +168,7 @@ export default function Splash() {
                 that contaminate our water and food.
               </p>
 
-              <p className="py-6 px-16">
+              <p className="py-3 px-16">
                 This is just one example of why it's crucial to protect our
                 environment. Our actions have far-reaching consequences, and
                 it's our responsibility to minimize our impact. By making
@@ -182,35 +186,36 @@ export default function Splash() {
         </section>
         <section className="flex justify-center mt-12 pb-10 ">
           <article
-            className="text-black flex shadow-2xl overflow-hidden"
-            style={{ width: "90%", height: "60vh", backgroundColor: "#D1D7BF" }}
+            className="text-black flex shadow-2xl articulo overflow-hidden text-justify"
+            style={{ width: "90%", height: "60vh", backgroundColor: "#C0C8A7" }}
           >
-            <section className="scroll">
+            <section className="scroll ">
               <h1 className="font-bold text-center px-2 pt-20 text-xl">
-              Proyecto Greenwave
+                Greenwave Project
               </h1>
 
               <p className="py-6 px-16">
-              "Originarios de un variado bootcamp de programación, nuestro equipo de siete individuos
-               comenzó como desconocidos, interactuando tímidamente en el chat en línea.
-                A medida que el tiempo avanzaba, nos unimos virtualmente para realizar pair programming, 
-                fusionando habilidades diversas: algunos destacaban en estilos y diseño, otros en lógica y manipulación de datos, 
-                y algunos brillaban en la rápida asimilación de nuevas tecnologías.
-
-
+                "Originating from a diverse programming bootcamp, our team of
+                seven individuals started as strangers, interacting timidly in
+                the online chat. As time progressed, we virtually came together
+                to do pair programming, merging diverse skills: some excelled in
+                styles and design, others in logic and data manipulation, and
+                some shone in the rapid assimilation of new technologies.
               </p>
 
               <p className="py-6 px-16">
-              Día tras día, consolidamos nuestra colaboración y enfrentamos juntos el desafío del proyecto final.
-               De esa experiencia nació GreenWave, una empresa dedicada a la venta de arte reciclado.
-                Con actitud positiva y disposición para aprender, nuestro equipo de desarrolladores full-stack juniors
-                 se esforzó con dedicación para dar vida a una hermosa página web. Así, desde nuestras diversas fortalezas, 
-                 logramos construir algo único con esmero y pasión."
+                Day after day, we consolidated our collaboration and faced the
+                challenge of the final project together. From that experience,
+                GreenWave was born, a company dedicated to the sale of recycled
+                art. With a positive attitude and willingness to learn, our team
+                of junior full-stack developers worked diligently to bring a
+                beautiful website to life. Thus, from our diverse strengths, we
+                managed to build something unique with care and passion."
               </p>
             </section>
             <img
               className="hover:transform hover:scale-110 transition-transform duration-300 "
-              style={{ width: "40%" }}
+              style={{ width: "42%", height: "90%" }}
               src="https://cdn.discordapp.com/attachments/1172286566689939527/1174431523320107088/Green_Wave_sin_fondo.png?ex=6570cc17&is=655e5717&hm=b82a3ecfa4899ee08ae2282e06f3db7f031aabe4b1870a7690e0a92d1d18748b&"
               alt="Team Greenwave"
             />

@@ -26,8 +26,6 @@ const UserProfile = ({ params }) => {
       await banUser(userId);
       const updatedUser = await fetchUserById(userId);
       setUserView(updatedUser);
-
-      console.log(`Usuario con ID ${userId} baneado con éxito.`);
     } catch (error) {
       console.error(`Error al borrar/banear usuario con ID ${userId}:`, error);
     }
@@ -38,8 +36,6 @@ const UserProfile = ({ params }) => {
       await setAdminUser(userId);
       const updatedUser = await fetchUserById(userId);
       setUserView(updatedUser);
-
-      console.log(`Usuario con ID ${userId} baneado con éxito.`);
     } catch (error) {
       console.error(`Error al borrar/banear usuario con ID ${userId}:`, error);
     }

@@ -143,8 +143,6 @@ const ProductProfile = ({ params }) => {
       await approveProduct(productId);
       const updatedProduct = await fetchProductById(productId);
       setProductView(updatedProduct);
-
-      console.log(`Product with ID ${productId} paused successfully.`);
     } catch (error) {
       console.error(`Error pausing product with ID ${productId}:`, error);
     }
@@ -155,8 +153,6 @@ const ProductProfile = ({ params }) => {
       await updateProduct(productView.id, updatedData);
       const updatedProduct = await fetchProductById(productView.id);
       setProductView(updatedProduct);
-
-      console.log(`Product with ID ${productView.id} updated successfully.`);
     } catch (error) {
       console.error(`Error updating product with ID ${productView.id}:`, error);
     }
@@ -203,7 +199,6 @@ const ProductProfile = ({ params }) => {
               } font-bold`}
             >
               {productView.approved === false ? "Not approve" : "Approve"}
-              {console.log(productView.approved)}
             </span>
           </p>
           <button

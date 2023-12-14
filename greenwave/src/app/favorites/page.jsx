@@ -60,21 +60,23 @@ const Favorites = () => {
         </h1>
         {favorites && favorites.length === 0 ? (
           <div>
+           <div className="flex flex-col justify-center items-center ">
+            <Button
+              link={"/store"}
+              text={"Add to Favorites"}
+              className={
+                "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 relative rounded-lg m-5 px-5 py-2 text-lg "
+              }
+            />
             <Image
               className=" rounded-md"
               src={"/images/favorites.png"}
-              alt={"myFavorites"}
-              height={500}
-              width={500}
-              style={{ width: "320px", height: "320px", marginInline: "auto" }}
+              alt={"myProducts"}
+              height={250}
+              width={250}
+              style={{ width: "300px", height: "300px", marginInline: "auto"}}
             />
-            <Button
-              link={"/store"}
-              text={"Add favorites"}
-              className={
-                " bg-lime-800 hover:bg-lime-700 text-black-50 rounded-lg m-5 px-5 py-2 text-lg"
-              }
-            />
+            </div>
           </div>
         ) : (
           favorites.map((favorite) => (

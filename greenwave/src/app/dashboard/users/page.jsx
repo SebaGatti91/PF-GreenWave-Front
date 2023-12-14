@@ -2,7 +2,7 @@
 import { MdSearch } from "react-icons/md";
 import React, { useState, useEffect } from "react";
 import styles from "../../components/dashboard/users/users.module.css";
-import { fetchUsers} from "../../lib/data";
+import { fetchUsers } from "../../lib/data";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,7 +15,6 @@ const UsersPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Verifica si ya tienes los usuarios en el estado local antes de realizar una nueva solicitud
         if (users.length === 0) {
           const fetchedUsers = await fetchUsers();
           setUsers(fetchedUsers);
@@ -27,10 +26,6 @@ const UsersPage = () => {
 
     fetchData();
   }, [users]);
-
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -44,7 +39,12 @@ const UsersPage = () => {
     );
   };
 
-  const filteredUsers = currentUsers.filter(handleSearch);
+  // Filter users based on search term
+  const filteredUsers = users.filter(handleSearch);
+
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const paginatedUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   return (
     <div className={styles.container}>
@@ -54,23 +54,25 @@ const UsersPage = () => {
           type="text"
           placeholder="Search by email "
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1); // Reset page when the search term changes
+          }}
           className={styles.input}
         />
       </div>
       <table className={styles.table}>
         <thead>
           <tr>
-            <td>User</td>
-            <td>Status</td>
-            <td>Username</td>
-            <td>Email</td>
-            <td>Credits</td>
-            <td>Rol</td>      
+            <td className={styles.columnHeader}>User</td>
+            <td className={styles.columnHeader}>Status</td>
+            <td className={styles.columnHeader}>Username</td>
+            <td className={styles.columnHeader}>Email</td>
+            <td className={styles.columnHeader}>Rol</td>
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.map((user) => (
+          {paginatedUsers.map((user) => (
             <tr key={user.id}>
               <td>
                 <div className={styles.user}>
@@ -92,7 +94,6 @@ const UsersPage = () => {
               </td>
               <td>{user.username}</td>
               <td>{user.email}</td>
-              <td>{user.credits}</td>
               <td
                 className={`${styles.rol} ${
                   user.admin ? styles.admin : styles.client
@@ -125,7 +126,7 @@ const UsersPage = () => {
         <button
           className={styles.buttonBottom}
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={indexOfLastUser >= users.length}
+          disabled={indexOfLastUser >= filteredUsers.length}
         >
           Siguiente
         </button>
