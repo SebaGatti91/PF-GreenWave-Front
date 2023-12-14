@@ -16,6 +16,9 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
   const router = useRouter();
   const [file, setFile] = useState(null);
   const [materials, setMaterials] = useState([]);
+  const [selectMats, setSelectMats] = useState(
+    Array.isArray(initialValues.materials) ? initialValues.materials : []
+  );
   const { user } = useContext(GlobalUser);
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -29,6 +32,29 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
     fetchMaterials();
   }, []);
+
+  const handleMaterials = (event) => {
+    const selectMat = event.target.value;
+  
+    if (selectMats.length > 3 || selectMats.includes(selectMat)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: 'You can select up to 3 materials.',
+        confirmButtonColor: '#426F66',
+      });
+      return;
+    }
+  
+    setSelectMats((prevSelectMats) => {
+      const updatedSelectMats = [...prevSelectMats, selectMat];
+      return updatedSelectMats;
+    });
+  };
+
+  const handleRemoveMaterials = (selectMat) => {
+    setSelectMats(selectMats.filter((mat) => mat !== selectMat));
+  };
 
   return (
     <div>
@@ -45,7 +71,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
           name: initialValues ? initialValues.name : "",
           price: initialValues ? initialValues.price : "",
           stock: initialValues ? initialValues.stock : "",
-          materials: initialValues ? initialValues.materials : "",
+          materials: selectMats ? initialValues.materials: [],
           description: initialValues ? initialValues.description : "",
           image: initialValues ? initialValues.image : "",
         }}
@@ -104,7 +130,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
             if (file) {
               let arr = [];
 
-              for (let i = 0; i < file.length; i++) {
+              for (let i = 0; i < Math.min(file.length, 4); i++) {
                 const formData = new FormData();
                 formData.append("image", file[i]);
                 values.userId = user.id;
@@ -124,9 +150,11 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
 
             // Cambia el método de la solicitud según si es una edición o una publicación
             const method = initialValues && initialValues.id ? "PUT" : "POST";
+            values.materials = selectMats;
 
             if (method === "PUT") {
               try {
+                values.materials = selectMats;
                 const response = await axios.put(
                   `${BackUrl}/products/${initialValues.id}`,
                   values
@@ -244,11 +272,15 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                 </label>
                 <select
                   name="materials"
-                  onChange={handleChange}
+                  value={selectMats}
+                  onChange={(event) => {
+                    handleChange(event);
+                    handleMaterials(event);
+                  }}
                   onBlur={handleBlur}
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 >
-                  <option value={values.materials} selected disabled>
+                  <option value="" selected disabled>
                     Select Material
                   </option>
                   {materials.map((material) => (
@@ -262,6 +294,23 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
                     {errors.materials}
                   </div>
                 )}
+              </div>
+              <div className="flex flex-wrap justify-center items-center">
+                {selectMats.map((selectMat, index) => (
+                  <div
+                    key={index}
+                    className="p-1 m-2 border border-gray-500 rounded-lg bg-transparent flex items-center"
+                  >
+                    <span className="mr-2">{selectMat}</span>
+                    <button
+                      type="button"
+                      className="border rounded-lg px-2 bg-red-700 text-white"
+                      onClick={() => handleRemoveMaterials(selectMat)}
+                    >
+                      x
+                    </button>
+                  </div>
+                ))}
               </div>
               <div className="mb-4 flex flex-col w-full">
                 <label htmlFor="description" className="font-semibold mb-2">
@@ -283,7 +332,7 @@ export default function PostProduct({ initialValues = {}, isOff = true }) {
               </div>
               <div className="mb-4 w-full">
                 <label htmlFor="image" className="font-semibold mb-2">
-                  Upload your image:
+                  Upload up to 4 images:
                 </label>
                 <input
                   type="file"

@@ -8,7 +8,7 @@ import Filter from "bad-words";
 import Swal from "sweetalert2";
 import "../../../../public/estilos/buycart.css";
 
-function ReviewForm({ productId }) {
+function ReviewForm({ productId, closeModal }) {
   const Backurl = process.env.BACK;
   const { user } = useContext(GlobalUser);
   const [rating, setRating] = useState(0);
@@ -35,19 +35,21 @@ function ReviewForm({ productId }) {
           text: "Thanks for your Review",
         });
       } else {
-        console.log("Error al crear la revisión");
       }
     } catch (error) {
-      console.error("Error al hacer la petición POST:", error);
+      console.error("Error when making the POST request:", error);
     }
   };
 
   const validationSchema = Yup.object().shape({
     comment: Yup.string()
-      .min(2, "El comentario es muy corto - debe tener al menos 2 caracteres.")
+      .min(
+        2,
+        "The comment is very short - it must be at least 2 characters long."
+      )
       .max(
         300,
-        "El comentario es muy largo - no debe tener más de 300 caracteres."
+        "The comment is very long - it should be no longer than 300 characters."
       ),
   });
 
@@ -59,11 +61,20 @@ function ReviewForm({ productId }) {
     >
       {({ errors, touched }) => (
         <Form
-          className="w-3/5 flex flex-col rounded justify-center items-start  max-w-lg mx-auto my-1 p-4"
+          className=" flex flex-col rounded-lg justify-center items-center  max-w-lg mx-auto my-1 p-4"
           style={{ backgroundColor: "ButtonFace" }}
         >
           <div className="mb-4 w-full">
-            <label className="font-semibold mb-2">
+            <div className="flex justify-end items-end">
+              <button
+                style={{ border: "1px solid gray" }}
+                className=" bg-transparent hover:bg-red-700 hover:text-white text-black px-2 rounded"
+                onClick={closeModal}
+              >
+                X
+              </button>
+            </div>
+            <label className="font-semibold flex justify-center items-center">
               Rating:
               <StarRatings
                 rating={rating}
@@ -74,10 +85,14 @@ function ReviewForm({ productId }) {
               />
             </label>
           </div>
-          <div className="mb-4 w-full"></div>
-          <label className="font-semibold mb-2">
-            Comentario:
-            <Field type="textarea" name="comment" />
+          <div className=" w-full "></div>
+          <label className="font-semibold mb-2 w-full">
+            Commentary:
+            <Field
+              type="textarea"
+              name="comment"
+              className="border mt-1 border-gray-400 rounded-lg w-full"
+            />
             {errors.comment && touched.comment ? (
               <div>{errors.comment}</div>
             ) : null}
@@ -85,10 +100,10 @@ function ReviewForm({ productId }) {
           <div className="mt-4">
             <button
               type="submit"
-              className="elemento"
-              style={{ height: "40px", backgroundColor: "ButtonFace" }}
+              className="px-2 bg-lime-700 rounded-lg  text-white"
+              style={{ height: "30px", backgroundColor: "ButtonFace" }}
             >
-              Enviar revisión
+              Send review
             </button>
           </div>
         </Form>

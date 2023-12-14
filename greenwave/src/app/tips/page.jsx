@@ -11,7 +11,7 @@ const Tips = () => {
           marginInline: "auto",
         }}
       >
-        TIP'S FOR HOME
+        TIPS FOR HOME
       </h1>
 
       <section className="flex justify-center mt-12 pb-10 responsive">
@@ -35,7 +35,7 @@ const Tips = () => {
             </p>
           </section>
           <img
-            className="hover:transform hover:scale-110 transition-transform duration-300 rounded-2xl"
+            className="rounded-2xl"
             style={{ width: "40%" }}
             src="/images/sillon.jpg"
             alt=""
@@ -49,7 +49,7 @@ const Tips = () => {
           style={{ width: "82%", height: "60vh", backgroundColor: "#D1D7BF" }}
         >
           <img
-            className="hover:transform hover:scale-110 transition-transform duration-300 rounded-2xl"
+            className="rounded-2xl"
             style={{ width: "65%" }}
             src="/images/palets.jpg"
             alt=""
@@ -68,7 +68,7 @@ const Tips = () => {
             <p className="py-6 px-16 text-lg">
               There are countless things that can be done with them, from a
               table, benches for the garden, hang one on the wall and use it as
-              a shelf or as a vertical planter...
+              a shelf or as a vertical planter.
             </p>
           </section>
         </article>
@@ -92,7 +92,7 @@ const Tips = () => {
             </p>
           </section>
           <img
-            className="hover:transform hover:scale-110 transition-transform duration-300 rounded-lg"
+            className="rounded-lg"
             style={{ width: "40%" }}
             src="/images/vidrio.webp"
             alt=""
@@ -106,7 +106,7 @@ const Tips = () => {
           style={{ width: "82%", height: "60vh", backgroundColor: "#D1D7BF" }}
         >
           <img
-            className="hover:transform hover:scale-110 transition-transform duration-300 rounded-2xl"
+            className="rounded-2xl"
             style={{ width: "65%" }}
             src="/images/vases.jpg"
             alt=""
@@ -127,7 +127,7 @@ const Tips = () => {
             <p className="py-6 px-16 text-lg">
               There are countless things that can be done with them, from a
               table, benches for the garden, hang one on the wall and use it as
-              a shelf or as a vertical planter...
+              a shelf or as a vertical planter.
             </p>
           </section>
         </article>

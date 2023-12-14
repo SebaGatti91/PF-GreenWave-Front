@@ -15,11 +15,10 @@ const About = () => {
           className="w-full"
         />
       </div>
-      <h1 className="text-3xl font-bold mb-6">About team</h1>
 
       <div className="flex flex-wrap justify-center">
         <h2
-          className="font-bold text-center text-2xl py-5 mb-10 mt-5 shadow-2xl"
+          className="font-bold text-center text-3xl py-5 mb-10 mt-5 shadow-2xl"
           style={{ width: "82%", marginInline: "auto" }}
         >
           About Team
@@ -53,7 +52,7 @@ const About = () => {
                 </a>
                 <a href={member.socialMedia.github} target="_blank">
                   <Image
-                    src="/images/github.png"
+                    src="/images/githubBlack.png"
                     alt="githubImage"
                     width={40}
                     height={40}
