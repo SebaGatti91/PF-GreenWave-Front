@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router"; // Cambiado de "next/navigation" a "next/router"
+import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import styles from "./LoginPage.module.css";
 import { createUser } from "../lib/data";
@@ -49,8 +49,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={`${styles.container} flex justify-center items-center h-full`}>
-      <div className=' flex-grow flex p-2  h-[450px] mt-12 max-w-[350px] justify-around mb-12 pl-[50px] bg-neutral-400 items-center shadow-lg shadow-lime-900 rounded-xl'>
+    <div className={ `${styles.container} flex justify-center items-center h-full`}>
+     
+      <div className=' flex-grow flex p-2  h-[450px] mt-12 max-w-[350px] justify-around mb-12 pl-[50px] bg-neutral-400 items-center shadow-lg shadow-lime-900 rounded-xl'
+        >
+          
         <div className="text-center mr-10">
           <h1 className={styles.title}>Login</h1>
           <div>
@@ -63,7 +66,7 @@ const LoginPage = () => {
                 alt="google"
                 style={{ width: "22px", height: "22px", marginRight: '16px' }}
               />
-              Sign in with Email
+              Sign in with Email    
             </button>
           </div>
           {errors && (
@@ -75,6 +78,7 @@ const LoginPage = () => {
               </ul>
             </div>
           )}
+
           <p className={styles.orText}>Other methods</p>
           <div className={styles.providers}>
             <button
@@ -110,6 +114,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+
   );
 };
 
