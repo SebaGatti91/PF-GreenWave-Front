@@ -14,17 +14,15 @@ const Transactions = () => {
   useEffect(() => {
     const fetchUsersData = async () => {
       try {
-        if (users.length === 0) {
-          const fetchedUsers = await fetchUsers();
-          setUsers(fetchedUsers);
-        }
+        const fetchedUsers = await fetchUsers();
+        setUsers(fetchedUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
 
     fetchUsersData();
-  }, [users]);
+  }, []); // Solo se ejecuta una vez al montar la página
 
   // Cambiar de página
   const handlePageChange = (newPage) => {
@@ -40,10 +38,10 @@ const Transactions = () => {
     );
   };
 
-  // Filter users based on search term
+  // Filtrar usuarios basados en el término de búsqueda
   const filteredUsers = users.filter(handleSearch);
 
-  // lógica de paginación
+  // Lógica de paginación
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const paginatedUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
@@ -102,10 +100,9 @@ const Transactions = () => {
           )}
         </tbody>
       </table>
-      {/* Agregar botones de paginación */}
       <div>
         <button
-         className={styles.buttonBottom}
+          className={styles.buttonBottom}
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
@@ -113,7 +110,7 @@ const Transactions = () => {
         </button>
         <span>Página {currentPage}</span>
         <button
-         className={styles.buttonBottom}
+          className={styles.buttonBottom}
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={indexOfLastUser >= filteredUsers.length}
         >
