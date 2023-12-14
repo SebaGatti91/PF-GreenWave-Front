@@ -3,9 +3,13 @@ import Image from "next/image";
 import styles from "./transactions.module.css";
 import React, { useState, useEffect } from "react";
 import { fetchUsers } from "../../../lib/data";
+import { MdSearch } from "react-icons/md";
 
 const Transactions = () => {
   const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const usersPerPage = 5;
 
   useEffect(() => {
     const fetchUsersData = async () => {
@@ -22,9 +26,44 @@ const Transactions = () => {
     fetchUsersData();
   }, [users]);
 
+  const handleSearch = (user) => {
+    const normalizedSearchTerm = searchTerm.toLowerCase();
+    return (
+      user.email.toLowerCase().includes(normalizedSearchTerm) ||
+      user.id.toString().includes(normalizedSearchTerm) ||
+      user.username.toLowerCase().includes(normalizedSearchTerm)
+    );
+  };
+
+  // Filter users based on search term
+  const filteredUsers = users.filter(handleSearch);
+
+  // lógica de paginación
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const paginatedUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Cambiar de página
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Transactions by Users</h2>
+      <div className={styles.search}>
+        <MdSearch />
+        <input
+          type="text"
+          placeholder="Search by email or username"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1); // Reinicia la página cuando cambia el término de búsqueda
+          }}
+          className={styles.input}
+        />
+      </div>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -37,7 +76,7 @@ const Transactions = () => {
           </tr>
         </thead>
         <tbody>
-          {users?.map((user) =>
+          {paginatedUsers.map((user) =>
             user.purchases && user.purchases.length > 0
               ? user.purchases.map((purchase) => (
                   <tr key={`${user.id}-${purchase.Product.id}`}>
@@ -63,6 +102,22 @@ const Transactions = () => {
           )}
         </tbody>
       </table>
+      {/* Agregar botones de paginación */}
+      <div>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </button>
+        <span>Página {currentPage}</span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={indexOfLastUser >= filteredUsers.length}
+        >
+          Siguiente
+        </button>
+      </div>
     </div>
   );
 };
