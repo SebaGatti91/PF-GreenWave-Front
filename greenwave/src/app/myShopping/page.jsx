@@ -146,7 +146,7 @@ const myShopping = () => {
               alt={"myProducts"}
               height={500}
               width={500}
-              style={{ width: "620px", height: "620px", marginInline: "auto"}}
+              style={{ width: "300px", height: "300px", marginInline: "auto"}}
             />
             </div>
           </div>
