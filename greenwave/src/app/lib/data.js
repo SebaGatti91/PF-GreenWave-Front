@@ -252,3 +252,14 @@ export const fetchFeedback = async (cart) => {
     throw error;
   }
 };
+export const fetchMaterials = async () => {
+  try {
+    const url = `${BackUrl}/materials`;
+    const response = await axios.get(url);
+    const { data } = response;
+    return data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
