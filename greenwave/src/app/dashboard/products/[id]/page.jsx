@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchProductById, approveProduct } from "../../../lib/data";
+import { fetchProductById, pauseProduct } from "../../../lib/data";
 import { updateProduct } from "../../../lib/data";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,7 +18,7 @@ const EditProductForm = ({ product, onUpdate }) => {
     // Actualizar el estado inicial de formData cuando cambie el producto
     setFormData({
       name: product.name,
-      image: product.image[0],
+      image: product.image,
       stock: product.stock,
       price: product.price,
       description: product.description,
@@ -138,11 +138,13 @@ const ProductProfile = ({ params }) => {
     fetchProductData();
   }, [productId]);
 
-  const handleApprove = async (productId) => {
+  const handlePause = async (productId) => {
     try {
-      await approveProduct(productId);
+      await pauseProduct(productId);
       const updatedProduct = await fetchProductById(productId);
       setProductView(updatedProduct);
+
+      console.log(`Product with ID ${productId} paused successfully.`);
     } catch (error) {
       console.error(`Error pausing product with ID ${productId}:`, error);
     }
@@ -153,6 +155,8 @@ const ProductProfile = ({ params }) => {
       await updateProduct(productView.id, updatedData);
       const updatedProduct = await fetchProductById(productView.id);
       setProductView(updatedProduct);
+
+      console.log(`Product with ID ${productView.id} updated successfully.`);
     } catch (error) {
       console.error(`Error updating product with ID ${productView.id}:`, error);
     }
@@ -171,11 +175,7 @@ const ProductProfile = ({ params }) => {
       <div className="flex gap-8 mt-8">
         <div className="flex flex-col items-center">
           <Image
-            src={
-              productView && productView.image && productView.image.length > 0
-                ? productView.image[0]
-                : ""
-            }
+            src={productView.image || "/images/noavatar.png"}
             alt=""
             width={150}
             height={150}
@@ -193,23 +193,21 @@ const ProductProfile = ({ params }) => {
             <strong>Status:</strong>{" "}
             <span
               className={`${
-                productView.approved === false
-                  ? "text-red-500"
-                  : " text-green-500"
+                productView.paused ? "text-red-500" : " text-green-500"
               } font-bold`}
             >
-              {productView.approved === false ? "Not approve" : "Approve"}
+              {productView.paused ? "Paused" : "Active"}
             </span>
           </p>
           <button
             className={`${
-              productView.approved === false
+              productView.paused
                 ? "bg-green-500 text-white"
                 : "bg-red-500 text-white"
             } px-4 py-2 rounded mt-2`}
-            onClick={() => handleApprove(productView.id)}
+            onClick={() => handlePause(productView.id)}
           >
-            {productView.approved === false ? "Approve" : "Not approve"}
+            {productView.paused ? "Active" : "Pause"}
           </button>
         </div>
       </div>
