@@ -45,37 +45,53 @@ const Revenues = () => {
       <div>
         <LeftMenu />
       </div>
-      <div className=" w-4/5" style={{ marginInline: "auto" }}>
+      <div className="lg:w-full m-2 lg:m-5" style={{ marginInline: "auto" }}>
         <h1
           className="font-bold text-center text-3xl py-5 mb-6 shadow-2xl mt-5"
           style={{ width: "100%", marginInline: "auto" }}
         >
           Revenues
         </h1>
-        <h2>Total revenues: ${revenue}</h2>
+        <h2 className="text-center text-xl lg:text-2xl">
+          Total revenues:
+          <span className="text-green-700 font-bold"> ${revenue}</span>
+        </h2>
+
         {soldProducts && soldProducts.length > 0 ? (
-          <table>
+          <table className="m-5 mx-auto w-full shadow-2xl">
             <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
+              <tr  style={{background: "#9CA88A"}}>
+                <th className="p-4 border-4 border-green-800 ">Name</th>
+                <th className="p-4 border-4 border-green-800 ">
+                  Quantity
+                </th>
+                <th className="p-4 border-4 border-green-800">Price</th>
+                <th className="p-4 border-4 border-green-800">Total</th>
               </tr>
             </thead>
             <tbody>
               {soldProducts?.map((soldProduct) => (
-                <tr key={soldProduct.id}>
-                  <td>{soldProduct.name}</td>
-                  <td>{soldProduct.quantity}</td>
-                  <td>${soldProduct.price}</td>
-                  <td>${soldProduct.price * soldProduct.quantity}</td>
+                <tr key={soldProduct.id} style={{background: "#D7DCD0"}}>
+                  <td className="p-4 border-4 border-green-800 rounded text-center">
+                    {soldProduct.name}
+                  </td>
+                  <td className="p-4 border-4 border-green-800 rounded text-center">
+                    {soldProduct.quantity}
+                  </td>
+                  <td className="p-4 border-4 border-green-800 rounded text-center">
+                    ${soldProduct.price}
+                  </td>
+                  <td className="p-4 border-4 border-green-800 rounded text-center">
+                    ${soldProduct.price * soldProduct.quantity}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
-          <p>No sold products</p>
+          <p className="text-orange-800 font-bold text-center mt-3 mb-3">
+            No sold products yet
+          </p>
         )}
       </div>
     </div>
