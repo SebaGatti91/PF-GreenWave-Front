@@ -69,7 +69,7 @@ const MyProducts = () => {
     }
   };
 
-  const NodeletedProducts = userProducts.filter(
+  const NodeletedProducts = userProducts?.filter(
     (product) => product.deleted !== true
   );
 
