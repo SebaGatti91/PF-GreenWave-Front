@@ -15,7 +15,7 @@ const EditProductForm = ({ product }) => {
     // Actualizar el estado inicial de formData cuando cambie el producto
     setFormData({
       name: product.name,
-      image: product.image[0],
+      // image: Array.isArray(product.image) ? product.image : [product.image],
       stock: product.stock,
       price: product.price,
       description: product.description,
@@ -48,7 +48,7 @@ const EditProductForm = ({ product }) => {
           style={{ backgroundColor: "white", color: "black" }}
         />
       </div>
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <label htmlFor="image" className="block text-sm font-medium text-white">
           Image
         </label>
@@ -61,7 +61,7 @@ const EditProductForm = ({ product }) => {
           className="mt-1 p-2 border border-gray-300 rounded-md w-full"
           style={{ backgroundColor: "white", color: "black" }}
         />
-      </div>
+      </div> */}
       <div className="mt-4">
         <label htmlFor="stock" className="block text-sm font-medium text-white">
           Stock
@@ -200,14 +200,14 @@ const ProductProfile = ({ params }) => {
           </button>
         </div>
       </div>
-      <div className="mt-8">
+      {/* <div className="mt-8">
         {productView.userId === null && (
           <>
             <h2 className="text-2xl font-bold text-white">Edit Product</h2>
             <EditProductForm product={productView} />
           </>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
