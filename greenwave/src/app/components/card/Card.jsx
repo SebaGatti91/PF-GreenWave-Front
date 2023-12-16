@@ -171,8 +171,8 @@ const Card = ({
   } else {
     return (
       <div
-        className="bg-white shadow-2xl rounded-md m-3 max-w-xs flex flex-col"
-        style={{ height: "380px", width: '300px' }}
+        className=" shadow-2xl rounded-md m-3 max-w-xs flex flex-col"
+        style={{ height: "380px", width: '300px', backgroundColor: "#EDEFE6" }}
       >
         <div className="relative flex-grow">
           <div className="absolute top-0 right-0 m-2">
@@ -193,7 +193,7 @@ const Card = ({
               alt={name}
               height={200}
               width={150}
-              style={{ height: "200px", border: "1px solid gray" }}
+              style={{ height: "200px" }}
               className="w-80 h-60 rounded-t-lg border-sky-950"
             />
           </Link>
