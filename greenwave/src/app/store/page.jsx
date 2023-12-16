@@ -168,7 +168,8 @@ const Store = () => {
           className="flex flex-wrap gap-3 lg:gap-12 justify-center items-center mb-3"
           style={{ marginTop: "30px" }}
         >
-          {currentProducts && currentProducts.length !== 0 ? (
+
+          {currentProducts.length !== 0 && products.length !== 0 ? (
             currentProducts.map((product) => (
               <div
                 key={product.id}
@@ -195,13 +196,11 @@ const Store = () => {
             />
           )}
         </div>
-        {products.length ? (
+        {products.length !== 0? (
           <div>
             <Pagination
               currentPage={currentPage}
-              totalPages={Math.ceil(
-                totalFilteredProducts.length / productsPerPage
-              )}
+              totalPages={Math.ceil(filteredProductsByStockOrPoused.length / productsPerPage)}
               onPageChange={paginate}
             />
           </div>
