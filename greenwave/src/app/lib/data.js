@@ -222,22 +222,38 @@ export const fetchDonation = async (form, resetForm) => {
   }
 };
 
+// export const updateProduct = async (productId, updatedData) => {
+//   try {
+//     const response = await fetch(`${BackUrl}/products/${productId}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(updatedData),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error("Failed to update product");
+//     }
+
+//     const result = await response.json();
+//     return result;
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// };
+
 export const updateProduct = async (productId, updatedData) => {
   try {
-    const response = await fetch(`${BackUrl}/products/${productId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    });
+    const url = `${BackUrl}/products/${productId}`;
+    const response = await axios.put(url, updatedData);
 
     if (!response.ok) {
       throw new Error("Failed to update product");
     }
 
-    const result = await response.json();
-    return result;
+    const { data } = response;
+    return data;
   } catch (error) {
     throw new Error(error.message);
   }

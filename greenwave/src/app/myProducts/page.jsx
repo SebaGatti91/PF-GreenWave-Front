@@ -9,7 +9,7 @@ import LeftMenu from "../components/leftMenu/LeftMenu";
 import { pauseProduct } from "../lib/data";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import './product.css'
+import "./product.css";
 
 const MyProducts = () => {
   const { user } = useContext(GlobalUser);
@@ -18,7 +18,7 @@ const MyProducts = () => {
   useEffect(() => {
     const userProductsData = async () => {
       try {
-        const userProductsData = await fetchUserProducts(user?.email);
+        const userProductsData = await fetchUserProducts(user?.id);
         setUserProducts(userProductsData);
       } catch (error) {
         console.error("Error fetching userProducts:", error);
@@ -98,10 +98,11 @@ const MyProducts = () => {
             >
               <div className="">
                 <div
-                  className={`mr-9 5 rounded-lg ${product.paused === true
-                      ? "hover:bg-green-500" 
+                  className={`mr-9 5 rounded-lg ${
+                    product.paused === true
+                      ? "hover:bg-green-500"
                       : "hover:bg-red-500"
-                    }`}
+                  }`}
                 >
                   {product && product.approved === true ? (
                     product.paused === true ? (
@@ -121,8 +122,11 @@ const MyProducts = () => {
                 </div>
 
                 <h3
-                  className={`mt-2 px-4 text-center rounded-lg ${product.paused === false ? "bg-green-500" : "bg-red-500 text-white"
-                    }`}
+                  className={`mt-2 px-4 text-center rounded-lg ${
+                    product.paused === false
+                      ? "bg-green-500"
+                      : "bg-red-500 text-white"
+                  }`}
                 >
                   {product.approved === true
                     ? product.paused === true
@@ -162,7 +166,10 @@ const MyProducts = () => {
                   </h3>
                   <p
                     className="text-gray-600 pb-6"
-                    style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
+                    style={{
+                      overflowWrap: "break-word",
+                      wordWrap: "break-word",
+                    }}
                   >
                     {product.description}
                   </p>
@@ -187,21 +194,25 @@ const MyProducts = () => {
         ) : (
           <div>
             <div className="flex flex-col justify-center items-center ">
-            <Button
-              link={"/post-product"}
-              text={"Publish a product"}
-              className={
-                "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 relative rounded-lg m-5 px-5 py-2 text-lg "
-              }
-            />
-            <Image
-              className=" rounded-md"
-              src={"/images/myProducts.png"}
-              alt={"myProducts"}
-              height={500}
-              width={500}
-              style={{ width: "300px", height: "300px", marginInline: "auto"}}
-            />
+              <Button
+                link={"/post-product"}
+                text={"Publish a product"}
+                className={
+                  "p-2 bg-lime-800 hover:bg-lime-700 text-black-50 relative rounded-lg m-5 px-5 py-2 text-lg "
+                }
+              />
+              <Image
+                className=" rounded-md"
+                src={"/images/myProducts.png"}
+                alt={"myProducts"}
+                height={500}
+                width={500}
+                style={{
+                  width: "300px",
+                  height: "300px",
+                  marginInline: "auto",
+                }}
+              />
             </div>
           </div>
         )}
