@@ -71,8 +71,8 @@ function ReviewList({ rating, reviewedBy }) {
             })}
           </div>
         </div>
-        <label>
-          <select name="reviews" onChange={handleSelect}>
+        <label className="block text-gray-700 text-sm font-bold mb-2 cursor-pointer">
+          <select name="reviews" className=" border p-1 rounded-md focus:outline-none cursor-pointer  shadow shadow-green-600  " onChange={handleSelect}>
             <option value=''>all ratings</option>
             <option value='5'>5 Stars</option>
             <option value='4'>4 Stars</option>
