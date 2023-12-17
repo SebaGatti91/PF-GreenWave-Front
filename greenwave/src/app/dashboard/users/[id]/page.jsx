@@ -1,18 +1,34 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchUserById, banUser, setAdminUser } from "../../../lib/data";
+import {
+  fetchUserById,
+  banUser,
+  setAdminUser,
+  fetchGetFavorites,
+  fetchPurchases,
+  fetchUserProducts,
+} from "../../../lib/data";
 import Link from "next/link";
 import Image from "next/image";
 
 const UserProfile = ({ params }) => {
-  const [userView, setUserView] = useState([]);
+  const [userData, setUserData] = useState([]);
+  const [userProducts, setUserProducts] = useState([]);
+  const [userPurchases, setUserPurchases] = useState([]);
+  const [userFavorites, setUserFavorites] = useState([]);
   const userId = params.id;
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const fetchedUser = await fetchUserById(userId);
-        setUserView(fetchedUser);
+        const fetchedUserFavorites = await fetchGetFavorites(userId);
+        const fetchedUserPurchases = await fetchPurchases(userId);
+        const fetchedUserProducts = await fetchUserProducts(userId);
+        setUserData(fetchedUser);
+        setUserFavorites(fetchedUserFavorites);
+        setUserPurchases(fetchedUserPurchases);
+        setUserProducts(fetchedUserProducts);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -25,7 +41,7 @@ const UserProfile = ({ params }) => {
     try {
       await banUser(userId);
       const updatedUser = await fetchUserById(userId);
-      setUserView(updatedUser);
+      setUserData(updatedUser);
     } catch (error) {
       console.error(`Error al borrar/banear usuario con ID ${userId}:`, error);
     }
@@ -35,7 +51,7 @@ const UserProfile = ({ params }) => {
     try {
       await setAdminUser(userId);
       const updatedUser = await fetchUserById(userId);
-      setUserView(updatedUser);
+      setUserData(updatedUser);
     } catch (error) {
       console.error(`Error al borrar/banear usuario con ID ${userId}:`, error);
     }
@@ -54,57 +70,57 @@ const UserProfile = ({ params }) => {
       <div className="flex gap-8 mt-8">
         <div className="flex flex-col items-center">
           <Image
-            src={userView.image || "/images/noavatar.png"}
+            src={userData.image || "/images/imageDefault.png"}
             alt=""
             width={150}
             height={150}
             className="rounded-full"
           />
-          <h2 className="text-2xl font-bold mt-4">ID: {userView.id}</h2>
-          <p>Email: {userView.email}</p>
-          <p>Username: {userView.username}</p>
+          <h2 className="text-2xl font-bold mt-4">ID: {userData.id}</h2>
+          <p>Email: {userData.email}</p>
+          <p>Username: {userData.username}</p>
         </div>
         <div className="flex flex-col">
           <p className="mt-4">
             <strong>Status:</strong>{" "}
             <span
               className={`${
-                userView.status ? "text-green-500" : "text-red-500"
+                userData.status ? "text-green-500" : "text-red-500"
               } font-bold`}
             >
-              {userView.status ? "Active" : "Banned"}
+              {userData.status ? "Active" : "Banned"}
             </span>
           </p>
           <button
             className={`${
-              userView.status
+              userData.status
                 ? "bg-red-500 text-white"
                 : "bg-green-500 text-white"
             } px-4 py-2 rounded mt-2`}
-            onClick={() => handleDelete(userView.id)}
-            disabled={userView.admin}
+            onClick={() => handleDelete(userData.id)}
+            disabled={userData.admin}
           >
-            {userView.status ? "Ban" : "Unban"}
+            {userData.status ? "Ban" : "Unban"}
           </button>
           <p className="mt-4">
             <strong>Admin:</strong>{" "}
             <span
               className={`${
-                userView.admin ? "text-green-500" : "text-red-500"
+                userData.admin ? "text-green-500" : "text-red-500"
               } font-bold`}
             >
-              {userView.admin ? "Yes" : "No"}
+              {userData.admin ? "Yes" : "No"}
             </span>
           </p>
           <button
             className={`${
-              userView.admin
+              userData.admin
                 ? "bg-red-500 text-white"
                 : "bg-green-500 text-white"
             } px-4 py-2 rounded mt-2`}
-            onClick={() => handleAdminChange(userView.id)}
+            onClick={() => handleAdminChange(userData.id)}
           >
-            {userView.admin ? "Remove Admin" : "Make Admin"}
+            {userData.admin ? "Remove Admin" : "Make Admin"}
           </button>
         </div>
       </div>
@@ -121,22 +137,22 @@ const UserProfile = ({ params }) => {
             </tr>
           </thead>
           <tbody>
-            {userView && userView.purchased && userView.purchased.length > 0 ? (
-              userView.purchased.map((product) => (
+            {userPurchases && userPurchases && userPurchases.length > 0 ? (
+              userPurchases.map((product) => (
                 <tr key={product.id}>
                   <td className="border px-4 py-2">
                     <Image
-                      src={product.Product.image || "/images/noaproduct.png"}
+                      src={product.image[0] || "/images/noaproduct.png"}
                       alt=""
                       width={40}
                       height={40}
                       className="rounded"
                     />
                   </td>
-                  <td className="border px-4 py-2">{product.Product.name}</td>
-                  <td className="border px-4 py-2">${product.Product.price}</td>
-                  <td className="border px-4 py-2">{product.Product.stock}</td>
-                  <td className="border px-4 py-2">{product.Product.rating}</td>
+                  <td className="border px-4 py-2">{product.name}</td>
+                  <td className="border px-4 py-2">${product.price}</td>
+                  <td className="border px-4 py-2">{product.stock}</td>
+                  <td className="border px-4 py-2">{product.rating}</td>
                 </tr>
               ))
             ) : (
@@ -162,22 +178,22 @@ const UserProfile = ({ params }) => {
             </tr>
           </thead>
           <tbody>
-            {userView && userView.favorites && userView.favorites.length > 0 ? (
-              userView.favorites.map((product) => (
+            {userData && userFavorites && userFavorites.length > 0 ? (
+              userFavorites.map((product) => (
                 <tr key={product.id}>
                   <td className="border px-4 py-2">
                     <Image
-                      src={product.Product.image || "/images/noaproduct.png"}
+                      src={product.image[0] || "/images/noaproduct.png"}
                       alt=""
                       width={40}
                       height={40}
                       className="rounded"
                     />
                   </td>
-                  <td className="border px-4 py-2">{product.Product.name}</td>
-                  <td className="border px-4 py-2">${product.Product.price}</td>
-                  <td className="border px-4 py-2">{product.Product.stock}</td>
-                  <td className="border px-4 py-2">{product.Product.rating}</td>
+                  <td className="border px-4 py-2">{product.name}</td>
+                  <td className="border px-4 py-2">${product.price}</td>
+                  <td className="border px-4 py-2">{product.stock}</td>
+                  <td className="border px-4 py-2">{product.rating}</td>
                 </tr>
               ))
             ) : (
@@ -203,12 +219,12 @@ const UserProfile = ({ params }) => {
             </tr>
           </thead>
           <tbody>
-            {userView && userView.posted && userView.posted.length > 0 ? (
-              userView.posted.map((product) => (
+            {userData && userProducts && userProducts.length > 0 ? (
+              userProducts.map((product) => (
                 <tr key={product.id}>
                   <td className="border px-4 py-2">
                     <Image
-                      src={product.image || "/images/noaproduct.png"}
+                      src={product.image[0] || "/images/noaproduct.png"}
                       alt=""
                       width={40}
                       height={40}

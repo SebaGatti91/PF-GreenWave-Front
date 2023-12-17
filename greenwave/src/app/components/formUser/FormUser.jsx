@@ -20,6 +20,8 @@ export default function FormUser({ closeModal }) {
           username: "",
           image: "",
           phone: "",
+          country: "",
+          city: "",
           address: "",
           postalCode: "",
         }}
@@ -49,6 +51,20 @@ export default function FormUser({ closeModal }) {
             }
           }
 
+          if (
+            values.country &&
+            !/^[a-zA-ZñÑ\sáéíóúÁÉÍÓÚ]{3,12}$/.test(values.country)
+          ) {
+            errors.country = "Can only contain from 3 to 12 letters";
+          }
+
+          if (
+            values.city &&
+            !/^[a-zA-ZñÑ\sáéíóúÁÉÍÓÚ]{3,12}$/.test(values.city)
+          ) {
+            errors.city = "Can only contain from 3 to 12 letters";
+          }
+
           // Validation for postalcode
           if (values.postalCode) {
             if (!/^\d{1,9}(-\d{0,8})?$/.test(values.postalCode)) {
@@ -72,6 +88,8 @@ export default function FormUser({ closeModal }) {
             values.username ||
             values.image ||
             values.phone ||
+            values.country ||
+            values.city ||
             values.postalCode ||
             values.address
           ) {
@@ -114,6 +132,12 @@ export default function FormUser({ closeModal }) {
 
                 if (values.phone) {
                   userUpdate.push(`phone`);
+                }
+                if (values.country) {
+                  userUpdate.push(`country`);
+                }
+                if (values.city) {
+                  userUpdate.push(`city`);
                 }
 
                 let message = `Your ${userUpdate.join(", ")} has been updated`;
@@ -177,24 +201,58 @@ export default function FormUser({ closeModal }) {
                   {errors.username}
                 </div>
               )}
+              <label htmlFor="phone" className="font-semibold mb-2">
+                Phone:
+              </label>
+              <input
+                type="text"
+                name="phone"
+                value={values.phone}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="48511008"
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              ></input>
+              {touched.phone && errors.phone && (
+                <div className="font-medium text-xs text-orange-700">
+                  {errors.phone}
+                </div>
+              )}
+              <label htmlFor="country" className="font-semibold mb-2">
+                County:
+              </label>
+              <input
+                type="text"
+                name="country"
+                value={values.country}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Argentina"
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+              ></input>
+              {touched.country && errors.country && (
+                <div className="font-medium text-xs text-orange-700">
+                  {errors.country}
+                </div>
+              )}
             </div>
             <div className="flex gap-3">
               <div className="mb-4 w-full">
-                <label htmlFor="phone" className="font-semibold mb-2">
-                  Phone
+                <label htmlFor="city" className="font-semibold mb-2">
+                  City:
                 </label>
                 <input
                   type="text"
-                  value={values.phone}
+                  value={values.city}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  name="phone"
-                  placeholder="48511008"
+                  name="city"
+                  placeholder="Buenos Aires"
                   className="w-full px-3 py-2 border border-gray-300 rounded"
                 />
-                {touched.phone && errors.phone && (
+                {touched.city && errors.city && (
                   <div className="font-medium text-xs text-orange-700">
-                    {errors.phone}
+                    {errors.city}
                   </div>
                 )}
               </div>

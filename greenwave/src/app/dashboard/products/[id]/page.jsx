@@ -1,24 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchProductById, pauseProduct } from "../../../lib/data";
-import { updateProduct } from "../../../lib/data";
+import {
+  fetchProductById,
+  approveProduct,
+  updateProduct,
+} from "../../../lib/data";
 import Link from "next/link";
 import Image from "next/image";
 
-const EditProductForm = ({ product, onUpdate }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    image: "",
-    stock: 0,
-    price: 0,
-    description: "",
-  });
+const EditProductForm = ({ product }) => {
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     // Actualizar el estado inicial de formData cuando cambie el producto
     setFormData({
       name: product.name,
-      image: product.image,
+      // image: Array.isArray(product.image) ? product.image : [product.image],
       stock: product.stock,
       price: product.price,
       description: product.description,
@@ -32,7 +29,7 @@ const EditProductForm = ({ product, onUpdate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate(formData);
+    updateProduct(product.id, formData);
   };
 
   return (
@@ -51,7 +48,7 @@ const EditProductForm = ({ product, onUpdate }) => {
           style={{ backgroundColor: "white", color: "black" }}
         />
       </div>
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <label htmlFor="image" className="block text-sm font-medium text-white">
           Image
         </label>
@@ -64,7 +61,7 @@ const EditProductForm = ({ product, onUpdate }) => {
           className="mt-1 p-2 border border-gray-300 rounded-md w-full"
           style={{ backgroundColor: "white", color: "black" }}
         />
-      </div>
+      </div> */}
       <div className="mt-4">
         <label htmlFor="stock" className="block text-sm font-medium text-white">
           Stock
@@ -138,27 +135,13 @@ const ProductProfile = ({ params }) => {
     fetchProductData();
   }, [productId]);
 
-  const handlePause = async (productId) => {
+  const handleApprove = async (productId) => {
     try {
-      await pauseProduct(productId);
+      await approveProduct(productId);
       const updatedProduct = await fetchProductById(productId);
       setProductView(updatedProduct);
-
-      console.log(`Product with ID ${productId} paused successfully.`);
     } catch (error) {
       console.error(`Error pausing product with ID ${productId}:`, error);
-    }
-  };
-
-  const handleUpdate = async (updatedData) => {
-    try {
-      await updateProduct(productView.id, updatedData);
-      const updatedProduct = await fetchProductById(productView.id);
-      setProductView(updatedProduct);
-
-      console.log(`Product with ID ${productView.id} updated successfully.`);
-    } catch (error) {
-      console.error(`Error updating product with ID ${productView.id}:`, error);
     }
   };
 
@@ -175,7 +158,11 @@ const ProductProfile = ({ params }) => {
       <div className="flex gap-8 mt-8">
         <div className="flex flex-col items-center">
           <Image
-            src={productView.image || "/images/noavatar.png"}
+            src={
+              productView && productView.image && productView.image.length > 0
+                ? productView.image[0]
+                : "/images/imageDefault.png"
+            }
             alt=""
             width={150}
             height={150}
@@ -193,32 +180,34 @@ const ProductProfile = ({ params }) => {
             <strong>Status:</strong>{" "}
             <span
               className={`${
-                productView.paused ? "text-red-500" : " text-green-500"
+                productView.approved === false
+                  ? "text-red-500"
+                  : " text-green-500"
               } font-bold`}
             >
-              {productView.paused ? "Paused" : "Active"}
+              {productView.approved === false ? "Not approve" : "Approve"}
             </span>
           </p>
           <button
             className={`${
-              productView.paused
+              productView.approved === false
                 ? "bg-green-500 text-white"
                 : "bg-red-500 text-white"
             } px-4 py-2 rounded mt-2`}
-            onClick={() => handlePause(productView.id)}
+            onClick={() => handleApprove(productView.id)}
           >
-            {productView.paused ? "Active" : "Pause"}
+            {productView.approved === false ? "Approve" : "Not approve"}
           </button>
         </div>
       </div>
-      <div className="mt-8">
+      {/* <div className="mt-8">
         {productView.userId === null && (
           <>
             <h2 className="text-2xl font-bold text-white">Edit Product</h2>
-            <EditProductForm product={productView} onUpdate={handleUpdate} />
+            <EditProductForm product={productView} />
           </>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

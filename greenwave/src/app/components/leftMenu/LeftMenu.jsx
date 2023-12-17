@@ -85,6 +85,21 @@ const LeftMenu = () => {
             />
           </li>
         )}
+        {pathname !== "/revenues" && (
+          <li
+            className="mb-0 lg:mb-10 text-center pb-0 lg:pb-6 bg-hover"
+            style={{
+              borderBottom: "1px solid gray",
+              width: "100%",
+            }}
+          >
+            <Button
+              link={"/revenues"}
+              text={"Revenues"}
+              className={"hover:bg-clear p-2 rounded-md"}
+            />
+          </li>
+        )}
 
         {pathname !== "/donation" && (
           <li
