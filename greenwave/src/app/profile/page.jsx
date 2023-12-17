@@ -9,7 +9,6 @@ import LeftMenu from "../components/leftMenu/LeftMenu";
 import "./profile.css";
 import { useSession } from "next-auth/react";
 
-
 const Profile = () => {
   const { user, setUser } = useContext(GlobalUser);
   const [isEditing, setIsEditing] = useState(false);
@@ -45,6 +44,8 @@ const Profile = () => {
             <div className="cardContent">
               <h3>Hello {user?.username}!</h3>
               <p>Phone number: {user?.phone}</p>
+              <p>County: {user?.country}</p>
+              <p>City: {user?.city}</p>
               <p>Address: {user?.address}</p>
               <p>Postal code: {user?.postalCode}</p>
               <button
